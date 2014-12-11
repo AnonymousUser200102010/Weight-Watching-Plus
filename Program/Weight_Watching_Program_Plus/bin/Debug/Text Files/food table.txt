@@ -1,0 +1,180 @@
+Ice Cream Bar
+hamburger bun
+chicken patty
+banquet pot pie
+iceberg lettuce
+snack artist tortilla chip
+western family drink mix
+la Victoria salsa
+simply lemonade
+Florida's natural orange juice w/ pulp
+papa murphies papa's stuffed pizza
+western family mayonnaise
+Johnsonville beddar with cheddar brat/sausage
+mashed potatoes
+eclair (generic)
+cheese danish
+simply limeade
+chicken top ramen
+chunk white albacore in water
+super one white bread
+chicken cannelloni
+delimax beef & cheese taquitos
+Red Baron (classic crust) supreme pizza
+red baron (classic crust) sausage & pepperoni pizza
+breyers blasts (reese's)
+Cherry lane egg
+del monte tomato ketchup
+red baron (classic crust) special deluxe supreme
+McChicken
+7up
+outshine fruit bar (pineapple)
+outshine fruit bar (strawberry)
+old orchard apple cherry fruit juice
+banana
+Johnsonville stadium brat
+McDouble
+Safeway boston cream pie
+Safeway Gourmet Cinnamon Roll
+Jimmy Dean original sausage patties
+Snack artist sausage and pepperoni pockets
+beef top ramen
+Darigold half&half ultra pasturized
+beef & bean chimichangas
+Lucerne vanilla ice cream
+-------------------------------------------------------------------------
+1
+1
+1
+1
+1
+8
+1
+2
+8
+8
+0.25
+1
+1
+1
+1
+1
+8
+1
+1
+1
+1
+2
+0.2
+0.25
+0.5
+1
+1
+0.2
+1
+12
+1
+1
+8
+1
+1
+1
+76
+5
+2
+6
+1
+2
+1
+0.5
+-------------------------------------------------------------------------
+100
+140
+200
+430
+7
+140
+80
+10
+120
+110
+500
+100
+200
+237
+250
+250
+120
+380
+100
+70
+230
+190
+310
+390
+170
+70
+15
+300
+360
+140
+80
+70
+90
+25
+220
+380
+200
+553
+200
+210
+380
+40
+300
+130
+-------------------------------------------------------------------------
+bar
+bun
+patty
+pie
+generous pinch
+chip
+gallon
+tablespoon
+fluid ounce
+fluid ounce
+total pizza
+tablespoon
+sausage
+cup
+eclair
+danish
+fluid ounce
+packet
+can
+slice
+cannelloni
+taquito
+total pizza
+total pizza
+cup
+egg
+tablespoon
+total pizza
+McChicken
+fluid ounce
+bar
+bar
+fluid ounce
+ounce
+link
+McDouble
+gram
+ounce
+pattie
+roll
+packet
+tablespoon
+chimichanga
+cup
+-------------------------------------------------------------------------
