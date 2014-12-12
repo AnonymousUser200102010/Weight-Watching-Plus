@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Weight_Watching_Program_Plus\Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Weight_Watching_Program_Plus\MainForm.cs">
     <Files>
-      <File FileName="Weight_Watching_Program_Plus\Program.cs" Line="58" Column="58" />
+      <File FileName="Weight_Watching_Program_Plus\Program.cs" Line="38" Column="38" />
+      <File FileName="Weight_Watching_Program_Plus\MainForm.cs" Line="38" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

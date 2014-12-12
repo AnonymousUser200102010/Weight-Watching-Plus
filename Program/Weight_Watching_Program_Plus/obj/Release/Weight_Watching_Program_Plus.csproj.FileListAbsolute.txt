@@ -1,0 +1,6 @@
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Release\Weight_Watching_Program_Plus.exe.config
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Release\Weight_Watching_Program_Plus.exe
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\Weight_Watching_Program_Plus.csprojResolveAssemblyReference.cache
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\Weight_Watching_Program_Plus.MainForm.resources
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\Weight_Watching_Program_Plus.csproj.GenerateResource.Cache
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\Weight_Watching_Program_Plus.exe

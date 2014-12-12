@@ -12,71 +12,66 @@ namespace Weight_Watching_Program_Plus
 	/// <summary>
 	/// Class with program entry point.
 	/// </summary>
+	
+	public static class GlobalVariables
+	{
+		public static Dictionary<int, string> foodNameList = new Dictionary<int, string> ();
+		public static Dictionary<int, float> servingSizeList = new Dictionary<int, float> ();
+		public static Dictionary<int, float> caloriesPerServingList = new Dictionary<int, float> ();
+		public static Dictionary<int, string> definersList = new Dictionary<int, string> ();
+		public static Dictionary<int, bool> ignoreList = new Dictionary<int, bool> ();
+		
+		public static int numentries;
+		public static int selectedListItem;
+		
+		public static bool exactSearch = false;
+		public static bool addItem = false;
+		public static bool allowLastActionInAnEvent = false;
+		
+		public static DateTime nowDate = DateTime.Now;
+		public static DateTime dateReset;
+		
+		public static float calories;
+		public static float totalCaloriesPerDay = 2140f;
+		
+		public static readonly string registryAppenedValue = "SOFTWARE\\Wow6432Node\\";
+		public static string registryMainValue = "Weight Watching Program+";
+		
+		public static Boolean isDebugMode = false;
+		
+		public static Form mainForm;
+	}
+
 	internal sealed class Program
 	{
 		/// <summary>
 		/// Program entry point.
 		/// </summary>
+		
 		[STAThread]
 		private static void Main (string[] args)
 		{
+			#if DEBUG
+			GlobalVariables.registryMainValue = GlobalVariables.registryMainValue + "~debug";
+			#endif
+			
 			Application.EnableVisualStyles ();
 			Application.SetCompatibleTextRenderingDefault (false);
 			if (!Directory.Exists ("Text Files")) {
 				Directory.CreateDirectory ("Text Files");
 			}
 			if (File.Exists ("Text Files\\food table.txt")) {
-				Logic.logicMain ();
 				if (!File.Exists ("Text Files\\food table.bku")) {
 					File.Copy ("Text Files\\food table.txt", "Text Files\\food table.bku");
 				} else {
 					File.Delete ("Text Files\\food table.bku");
 					File.Copy ("Text Files\\food table.txt", "Text Files\\food table.bku");
 				}
+				Storage.readRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
+				Functions.checkDateValidity (GlobalVariables.nowDate, GlobalVariables.dateReset, Storage.checkRegistryValues (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue));
 				Application.Run (new MainForm ());
 			} else {
 				File.WriteAllText ("Error.Program.cs.dmp", "You need a food table.txt! Put a food table.txt in the text files folder!");
-			}
-		}
-
-		public static class Logic
-		{
-			
-			private static readonly DateTime Date = DateTime.Now;
-			private static DateTime Rollover_Date = new DateTime ();
-
-			public static void logicMain ()
-			{
-				bool First_Program_Use = false;
-				string regappend = "SOFTWARE\\Wow6432Node\\";
-				string reg = "Weight Watching Program+";
-				float Total_Calories_Per_Day = 2140f;
-				if (Registry.LocalMachine.OpenSubKey (regappend + reg) == null) {
-					Registry.LocalMachine.CreateSubKey (regappend + reg);
-					using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey (regappend + reg, true)) {
-						tempKey.SetValue ("Calories Left for the Day", Total_Calories_Per_Day.ToString (), RegistryValueKind.String);
-						tempKey.SetValue ("Last Used Date", Date.AddDays (1).ToString ("yyyy MMMMM dd hh:mm:ss tt"), RegistryValueKind.String);
-						First_Program_Use = true;
-					}
-				}
-				DateTime.TryParseExact (getRolloverDate (Date, reg, regappend), new string[] { "yyyy MMMMM dd hh:mm:ss tt" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out Rollover_Date);
-				if (DateTime.Compare (Date, Rollover_Date) == 1 || First_Program_Use == true) {
-					if (Registry.LocalMachine.OpenSubKey (regappend + reg) == null) {
-						Registry.LocalMachine.CreateSubKey (regappend + reg);
-					}
-					using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey (regappend + reg, true)) {
-						tempKey.SetValue ("Calories Left for the Day", Total_Calories_Per_Day.ToString (), RegistryValueKind.String);
-						tempKey.SetValue ("Last Used Date", Date.AddDays (1).ToString ("yyyy MMMMM dd hh:mm:ss tt"), RegistryValueKind.String);
-					}
-				}
-			}
-
-			private static string getRolloverDate (DateTime Date, string reg, string regappend)
-			{
-				using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey (regappend + reg, true)) {
-					string temp = tempKey.GetValue ("Last Used Date").ToString ();
-					return temp;
-				}
 			}
 		}
 	}

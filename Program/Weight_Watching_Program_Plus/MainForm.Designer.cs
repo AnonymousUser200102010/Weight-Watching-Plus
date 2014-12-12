@@ -44,6 +44,7 @@ namespace Weight_Watching_Program_Plus
 		private System.Windows.Forms.Button manualZeroOutButton;
 		private System.Windows.Forms.Button manualResetButton;
 		private System.Windows.Forms.Button manualSubmitButton;
+		private System.Windows.Forms.Button refreshCaloriesTimeButton;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -76,6 +77,7 @@ namespace Weight_Watching_Program_Plus
 			this.planTab = new System.Windows.Forms.TabPage();
 			this.label1 = new System.Windows.Forms.Label();
 			this.FoodListPage = new System.Windows.Forms.TabPage();
+			this.refreshCaloriesTimeButton = new System.Windows.Forms.Button();
 			this.newItemCheckbox = new System.Windows.Forms.CheckBox();
 			this.timeRadioButton = new System.Windows.Forms.RadioButton();
 			this.calorieRadioButton = new System.Windows.Forms.RadioButton();
@@ -216,6 +218,7 @@ namespace Weight_Watching_Program_Plus
 			// FoodListPage
 			// 
 			this.FoodListPage.BackColor = System.Drawing.SystemColors.Control;
+			this.FoodListPage.Controls.Add(this.refreshCaloriesTimeButton);
 			this.FoodListPage.Controls.Add(this.newItemCheckbox);
 			this.FoodListPage.Controls.Add(this.timeRadioButton);
 			this.FoodListPage.Controls.Add(this.calorieRadioButton);
@@ -251,6 +254,17 @@ namespace Weight_Watching_Program_Plus
 			this.FoodListPage.TabIndex = 0;
 			this.FoodListPage.Text = "Food List";
 			this.FoodListPage.ToolTipText = "The main menu of the program containing a food list and editing service, //TBD//";
+			// 
+			// refreshCaloriesTimeButton
+			// 
+			this.refreshCaloriesTimeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("refreshCaloriesTimeButton.BackgroundImage")));
+			this.refreshCaloriesTimeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.refreshCaloriesTimeButton.Location = new System.Drawing.Point(756, 10);
+			this.refreshCaloriesTimeButton.Name = "refreshCaloriesTimeButton";
+			this.refreshCaloriesTimeButton.Size = new System.Drawing.Size(32, 27);
+			this.refreshCaloriesTimeButton.TabIndex = 35;
+			this.refreshCaloriesTimeButton.UseVisualStyleBackColor = true;
+			this.refreshCaloriesTimeButton.Click += new System.EventHandler(this.RefreshCaloriesTimeButtonClick);
 			// 
 			// newItemCheckbox
 			// 
@@ -432,7 +446,7 @@ namespace Weight_Watching_Program_Plus
 			this.caloriesLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.caloriesLabel.Location = new System.Drawing.Point(73, 5);
 			this.caloriesLabel.Name = "caloriesLabel";
-			this.caloriesLabel.Size = new System.Drawing.Size(701, 37);
+			this.caloriesLabel.Size = new System.Drawing.Size(677, 37);
 			this.caloriesLabel.TabIndex = 15;
 			this.caloriesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 

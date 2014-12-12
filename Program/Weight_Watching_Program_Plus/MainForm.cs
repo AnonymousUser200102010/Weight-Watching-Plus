@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Globalization;
@@ -9,8 +10,6 @@ using System.IO;
 
 namespace Weight_Watching_Program_Plus
 {
-	//Total_Calories_Per_Day = 2140;
-	
 	/// <summary>
 	/// Main Window and all tabs.
 	/// </summary>
@@ -24,8 +23,10 @@ namespace Weight_Watching_Program_Plus
 			InitializeComponent ();
 			
 			//
-			Functions.InitializeForms(foodList,calorieRadioButton,caloriesLabel,Seperator1,Seperator2,howManyServingsLabel,searchBar,deleteSelectedFoodItemButton,
-			                          clearSearchBarButton,foodNameEditBox,definerEditBox,servingSizeEditBox,caloriesPerServingEditBox, manualCalorieEditBox);
+			GlobalVariables.mainForm = this;
+			Functions.InitializeForms (foodList, calorieRadioButton, caloriesLabel, Seperator1, Seperator2, howManyServingsLabel, searchBar, deleteSelectedFoodItemButton,
+				clearSearchBarButton, foodNameEditBox, definerEditBox, servingSizeEditBox, caloriesPerServingEditBox, manualCalorieEditBox);
+			
 			//
 		}
 
@@ -125,7 +126,7 @@ namespace Weight_Watching_Program_Plus
 			if (safetosubtract == true) {
 				GlobalVariables.calories = GlobalVariables.calories - tempcalories;
 			}
-			Storage.writeRegistry (GlobalVariables.regappend, "Weight Watching Program+");
+			Storage.writeRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
 			Font tempfont = new Font ("Microsoft Sans Serif", 12f, FontStyle.Bold);
 			caloriesLabel.Font = tempfont;
 			caloriesLabel.Text = "Calories Left For The Day: " + GlobalVariables.calories.ToString ();
@@ -141,7 +142,7 @@ namespace Weight_Watching_Program_Plus
 			} else {
 				GlobalVariables.calories = GlobalVariables.calories + tempcalories;
 			}
-			Storage.writeRegistry (GlobalVariables.regappend, "Weight Watching Program+");
+			Storage.writeRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
 			Font tempfont = new Font ("Microsoft Sans Serif", 12f, FontStyle.Bold);
 			caloriesLabel.Font = tempfont;
 			caloriesLabel.Text = "Calories Left For The Day: " + GlobalVariables.calories.ToString ();
@@ -166,23 +167,18 @@ namespace Weight_Watching_Program_Plus
 
 		void CalorieRadioButtonCheckedChanged (object sender, EventArgs e)
 		{
-			Font tempfont = new Font ("Microsoft Sans Serif", 12f, FontStyle.Bold);
-			caloriesLabel.Font = tempfont;
 			caloriesLabel.Text = "Calories Left For The Day: " + GlobalVariables.calories.ToString ();
-			caloriesLabel.TextAlign = ContentAlignment.MiddleCenter;
 		}
 
 		void TimeRadioButtonCheckedChanged (object sender, EventArgs e)
 		{
-			Font tempfont = new Font ("Microsoft Sans Serif", 12f, FontStyle.Bold);
-			caloriesLabel.Font = tempfont;
+			Functions.checkDateValidity (GlobalVariables.nowDate, GlobalVariables.dateReset, Storage.checkRegistryValues (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue));
 			caloriesLabel.Text = "Calories will reset on " + GlobalVariables.dateReset.ToString ("MMMM dd") + " at " + GlobalVariables.dateReset.ToString ("hh:mm tt");
-			caloriesLabel.TextAlign = ContentAlignment.MiddleCenter;
 		}
 
 		void NewItemCheckboxCheckedChanged (object sender, EventArgs e)
 		{
-			Functions.dumpFoodPropertiesList (foodNameEditBox,servingSizeEditBox,caloriesPerServingEditBox,definerEditBox);
+			Functions.dumpFoodPropertiesList (foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox);
 			if (newItemCheckbox.Checked == true) {
 				GlobalVariables.addItem = true;
 				foodPropertiesButton.Text = "Add this new food item";
@@ -191,54 +187,75 @@ namespace Weight_Watching_Program_Plus
 				foodPropertiesButton.Text = "Set Food Item Properties";
 			}
 		}
-		
+
 		void resetCaloriesButtonClicked (object sender, EventArgs e)
 		{
-			manualCalorieEditBox.Value = 2140;
+			manualCalorieEditBox.Value = (decimal)GlobalVariables.totalCaloriesPerDay;
 		}
+
 		void zeroOutCaloriesButtonClicked (object sender, EventArgs e)
 		{
 			manualCalorieEditBox.Value = 0;
 		}
+
 		void manualSubmitButtonClicked (object sender, EventArgs e)
 		{
 			GlobalVariables.calories = (float)manualCalorieEditBox.Value;
-			Storage.writeRegistry(GlobalVariables.regappend,"Weight Watching Program+");
-			if(calorieRadioButton.Checked == true){
-				caloriesLabel.Text = "Calories Left For The Day: " + GlobalVariables.calories.ToString ();
+			Storage.writeRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
+			caloriesLabel.Text = Functions.radioButtonStringSwitch (timeRadioButton, calorieRadioButton, caloriesLabel);
+		}
+
+		void RefreshCaloriesTimeButtonClick (object sender, EventArgs e)
+		{
+			if (GlobalVariables.mainForm != null) {
+				GlobalVariables.mainForm.Cursor = Cursors.WaitCursor;
+			}
+			Functions.checkDateValidity (GlobalVariables.nowDate, GlobalVariables.dateReset, Storage.checkRegistryValues (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue));
+			caloriesLabel.Text = Functions.radioButtonStringSwitch (timeRadioButton, calorieRadioButton, caloriesLabel);
+			if (GlobalVariables.mainForm != null) {
+				GlobalVariables.mainForm.Cursor = Cursors.Arrow;
 			}
 		}
-	}
-
-	public static class GlobalVariables
-	{
-		public static Dictionary<int, string> foodNameList = new Dictionary<int, string> ();
-		public static Dictionary<int, float> servingSizeList = new Dictionary<int, float> ();
-		public static Dictionary<int, float> caloriesPerServingList = new Dictionary<int, float> ();
-		public static Dictionary<int, string> definersList = new Dictionary<int, string> ();
-		public static Dictionary<int, bool> ignoreList = new Dictionary<int, bool> ();
-		public static int numentries;
-		public static int selectedListItem;
-		
-		public static bool exactSearch = false;
-		public static bool addItem = false;
-		
-		public static DateTime dateReset;
-		
-		public static float calories;
-		
-		public static readonly string regappend = "SOFTWARE\\Wow6432Node\\";
 	}
 
 	public static class Functions
 	{
 		
+		public static void checkDateValidity (DateTime dateToCompareTo, DateTime dateToCheck, bool firstProgramUse)
+		{
+			Storage.readRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
+			if (DateTime.Compare (dateToCompareTo, dateToCheck) != -1 || firstProgramUse == true) {
+				if (Registry.LocalMachine.OpenSubKey (GlobalVariables.registryAppenedValue + GlobalVariables.registryMainValue) == null) {
+					Registry.LocalMachine.CreateSubKey (GlobalVariables.registryAppenedValue + GlobalVariables.registryMainValue);
+				}
+				using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey (GlobalVariables.registryAppenedValue + GlobalVariables.registryMainValue, true)) {
+					tempKey.SetValue ("Calories Left for the Day", GlobalVariables.totalCaloriesPerDay.ToString (), RegistryValueKind.String);
+					tempKey.SetValue ("Last Used Date", GlobalVariables.nowDate.AddDays (1).ToString ("yyyy MMMMM dd hh:mm:ss tt"), RegistryValueKind.String);
+				}
+			}
+		}
+
+		public static string radioButtonStringSwitch (RadioButton timeRadioButton, RadioButton calorieRadioButton,
+		                                             Label caloriesLabel)
+		{
+			string returnvalue = null;
+			if (timeRadioButton.Checked == true) {
+				returnvalue = "Calories will reset on " + GlobalVariables.dateReset.ToString ("MMMM dd") + " at " + GlobalVariables.dateReset.ToString ("hh:mm tt");
+			} else if (calorieRadioButton.Checked == true) {
+				returnvalue = "Calories Left For The Day: " + GlobalVariables.calories.ToString ();
+			}
+			return returnvalue;
+		}
+		
 		//		General functions
 		
-		public static void InitializeForms(ListBox foodList, RadioButton calorieRadioButton, Label caloriesLabel, Label Seperator1, 
+		public static void InitializeForms (ListBox foodList, RadioButton calorieRadioButton, Label caloriesLabel, Label Seperator1, 
 		                                   Label Seperator2, Label howManyServingsLabel, TextBox searchBar, Button deleteSelectedFoodItemButton,
-		                                  Button clearSearchBarButton, TextBox foodNameEditBox, TextBox definerEditBox, NumericUpDown servingSizeEditBox,
-		                                 NumericUpDown caloriesPerServingEditBox, NumericUpDown manualCalorieEditBox){
+		                                   Button clearSearchBarButton, TextBox foodNameEditBox, TextBox definerEditBox, NumericUpDown servingSizeEditBox,
+		                                   NumericUpDown caloriesPerServingEditBox, NumericUpDown manualCalorieEditBox)
+		{
+			 
+			GlobalVariables.mainForm.Text = GlobalVariables.registryMainValue;
 			calorieRadioButton.Checked = true;
 			caloriesLabel.BorderStyle = BorderStyle.Fixed3D;
 			Seperator1.AutoSize = false;
@@ -263,16 +280,15 @@ namespace Weight_Watching_Program_Plus
 			definerEditBox.TextAlign = HorizontalAlignment.Center;
 			caloriesPerServingEditBox.Text = GlobalVariables.caloriesPerServingList [0].ToString ();
 			caloriesPerServingEditBox.TextAlign = HorizontalAlignment.Center;
-			Storage.readRegistry (GlobalVariables.regappend, "Weight Watching Program+");
 			Font tempfont = new Font ("Microsoft Sans Serif", 12f, FontStyle.Bold);
 			caloriesLabel.Font = tempfont;
 			caloriesLabel.Text = "Calories Left For The Day: " + GlobalVariables.calories.ToString ();
 			caloriesLabel.TextAlign = ContentAlignment.MiddleCenter;
-			manualCalorieEditBox.Value = decimal.Parse(GlobalVariables.calories.ToString());
+			manualCalorieEditBox.Value = decimal.Parse (GlobalVariables.calories.ToString ());
 		}
-		
+
 		public static void dumpFoodPropertiesList (TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, 
-		                                 NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox)
+		                                           NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox)
 		{
 			foodNameEditBox.Clear ();
 			servingSizeEditBox.Value = 0;
@@ -296,7 +312,7 @@ namespace Weight_Watching_Program_Plus
 		}
 
 		public static void foodPropertiesSwitch (ListBox foodList, TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, 
-		                                        NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox, CheckBox newItemCheckbox)
+		                                         NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox, CheckBox newItemCheckbox)
 		{
 			if (GlobalVariables.addItem == false) {
 				GlobalVariables.foodNameList [GlobalVariables.selectedListItem] = foodNameEditBox.Text;
@@ -326,7 +342,7 @@ namespace Weight_Watching_Program_Plus
 		public static float modifyCalories (NumericUpDown userServingInputTextBox)
 		{
 			float tempcalories = 0f;
-			Storage.readRegistry (GlobalVariables.regappend, "Weight Watching Program+");
+			Storage.readRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
 			tempcalories = GlobalVariables.caloriesPerServingList [GlobalVariables.selectedListItem] * float.Parse (userServingInputTextBox.Text) / GlobalVariables.servingSizeList [GlobalVariables.selectedListItem];
 			return tempcalories;
 		}
@@ -336,13 +352,13 @@ namespace Weight_Watching_Program_Plus
 			for (int i = offset; i < foodList.Items.Count; i++) {
 				if (exactSearch == true) {
 					if (foodList.Items [i].ToString ().Equals (stringToFind, StringComparison.CurrentCultureIgnoreCase) == true &&
-					   !foodList.Items [i].ToString ().Equals (stringToAvoid, StringComparison.CurrentCultureIgnoreCase)) {
+					    !foodList.Items [i].ToString ().Equals (stringToAvoid, StringComparison.CurrentCultureIgnoreCase)) {
 						foodList.SelectedIndex = i;
 						break;
 					}
 				} else {
 					if (foodList.Items [i].ToString ().Contains (stringToFind, StringComparison.CurrentCultureIgnoreCase) == true &&
-					   !foodList.Items [i].ToString ().Equals (stringToAvoid, StringComparison.CurrentCultureIgnoreCase)) {
+					    !foodList.Items [i].ToString ().Equals (stringToAvoid, StringComparison.CurrentCultureIgnoreCase)) {
 						foodList.SelectedIndex = i;
 						break;
 					}
@@ -356,7 +372,7 @@ namespace Weight_Watching_Program_Plus
 		}
 	}
 
-	public class Storage
+	public static class Storage
 	{
 		
 		//		Functions that relate to storage
@@ -459,6 +475,18 @@ namespace Weight_Watching_Program_Plus
 			}
 		}
 
-		
+		public static bool checkRegistryValues (string appendedRegistryValue, string registyValue)
+		{
+			if (Registry.LocalMachine.OpenSubKey (appendedRegistryValue + registyValue) == null) {
+				Registry.LocalMachine.CreateSubKey (appendedRegistryValue + registyValue);
+				using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey (appendedRegistryValue + registyValue, true)) {
+					tempKey.SetValue ("Calories Left for the Day", GlobalVariables.totalCaloriesPerDay.ToString (), RegistryValueKind.String);
+					tempKey.SetValue ("Last Used Date", GlobalVariables.nowDate.AddDays (1).ToString ("yyyy MMMMM dd hh:mm:ss tt"), RegistryValueKind.String);
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }
