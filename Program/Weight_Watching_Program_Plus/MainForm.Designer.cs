@@ -45,6 +45,7 @@ namespace Weight_Watching_Program_Plus
 		private System.Windows.Forms.Button manualResetButton;
 		private System.Windows.Forms.Button manualSubmitButton;
 		private System.Windows.Forms.Button refreshCaloriesTimeButton;
+		private System.Windows.Forms.TreeView planningFoodTree;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -75,6 +76,7 @@ namespace Weight_Watching_Program_Plus
 			this.label2 = new System.Windows.Forms.Label();
 			this.manualCalorieEditBox = new System.Windows.Forms.NumericUpDown();
 			this.planTab = new System.Windows.Forms.TabPage();
+			this.planningFoodTree = new System.Windows.Forms.TreeView();
 			this.label1 = new System.Windows.Forms.Label();
 			this.FoodListPage = new System.Windows.Forms.TabPage();
 			this.refreshCaloriesTimeButton = new System.Windows.Forms.Button();
@@ -196,6 +198,7 @@ namespace Weight_Watching_Program_Plus
 			// 
 			// planTab
 			// 
+			this.planTab.Controls.Add(this.planningFoodTree);
 			this.planTab.Controls.Add(this.label1);
 			this.planTab.Location = new System.Drawing.Point(4, 28);
 			this.planTab.Name = "planTab";
@@ -205,12 +208,19 @@ namespace Weight_Watching_Program_Plus
 			this.planTab.Text = "Plan a Meal";
 			this.planTab.UseVisualStyleBackColor = true;
 			// 
+			// planningFoodTree
+			// 
+			this.planningFoodTree.Location = new System.Drawing.Point(0, 0);
+			this.planningFoodTree.Name = "planningFoodTree";
+			this.planningFoodTree.Size = new System.Drawing.Size(360, 507);
+			this.planningFoodTree.TabIndex = 1;
+			// 
 			// label1
 			// 
-			this.label1.Font = new System.Drawing.Font("Bookman Old Style", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(0, 3);
+			this.label1.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(360, 3);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(795, 504);
+			this.label1.Size = new System.Drawing.Size(435, 504);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "UNFINISHED";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -252,7 +262,7 @@ namespace Weight_Watching_Program_Plus
 			this.FoodListPage.Padding = new System.Windows.Forms.Padding(3);
 			this.FoodListPage.Size = new System.Drawing.Size(795, 507);
 			this.FoodListPage.TabIndex = 0;
-			this.FoodListPage.Text = "Food List";
+			this.FoodListPage.Text = "Main";
 			this.FoodListPage.ToolTipText = "The main menu of the program containing a food list and editing service, //TBD//";
 			// 
 			// refreshCaloriesTimeButton

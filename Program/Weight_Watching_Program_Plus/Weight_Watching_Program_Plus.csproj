@@ -23,7 +23,7 @@
     <StartupObject>Weight_Watching_Program_Plus.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <ApplicationIcon>..\wwp.ico</ApplicationIcon>
+    <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
