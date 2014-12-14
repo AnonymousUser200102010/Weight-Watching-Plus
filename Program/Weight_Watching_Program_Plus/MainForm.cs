@@ -322,6 +322,12 @@ namespace Weight_Watching_Program_Plus
 			List<string> foodNameList;
 			foodNameList = Enumerable.ToList (GlobalVariables.foodNameList.Values);
 			foodList.DataSource = foodNameList;
+			Storage.writeFoodTable ("Text Files\\", "food.table", new string[] { 
+				null,
+				null,
+				null,
+				null
+			});
 		}
 
 		public static void foodPropertiesSwitch (ListBox foodList, TextBox foodNameEditBox, NumericUpDown servingSizeEditBox,
@@ -451,12 +457,14 @@ namespace Weight_Watching_Program_Plus
 					}
 					sr.Close ();
 				}
-				File.Delete (directory + "food table.txt");
 			}
 		}
 
 		public static void writeFoodTable (string directory, string file, string[] addString)
 		{
+			if (File.Exists (directory + "food table.txt")) {
+				File.Delete (directory + "food table.txt");
+			}
 			string finalstring = null;
 			const string seperator = "-------------------------------------------------------------------------\n";
 			for (int i = 0; i < GlobalVariables.foodNameList.Count; i++) {

@@ -65,26 +65,24 @@ namespace Weight_Watching_Program_Plus
 			const string textFilesfoodtable = "Text Files\\food.table";
 			const string textFilesfoodTabletxt = "Text Files\\food table.txt";
 			const string textFilesfoodbku = "Text Files\\food.bku";
-			if (File.Exists (textFilesfoodtable)) {
-				if (!File.Exists (textFilesfoodbku)) {
-					File.Copy (textFilesfoodtable, textFilesfoodbku);
+			if (!File.Exists (textFilesfoodtable)) {
+				if (File.Exists (textFilesfoodTabletxt)) {
+					File.WriteAllText (textFilesfoodtable, null);
 				} else {
-					File.Delete (textFilesfoodbku);
-					File.Copy (textFilesfoodtable, textFilesfoodbku);
-				}
-				Storage.readRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
-				Functions.checkDateValidity (GlobalVariables.nowDate, GlobalVariables.dateReset, Storage.checkRegistryValues (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue));
-				Application.Run (new MainForm ());
-			} else if (File.Exists (textFilesfoodTabletxt)) {;
-				if (!File.Exists (textFilesfoodbku)) {
-					File.Copy (textFilesfoodTabletxt, textFilesfoodbku);
-				} else {
-					File.Delete (textFilesfoodbku);
-					File.Copy (textFilesfoodTabletxt, textFilesfoodbku);
+					File.WriteAllText ("Error.Program.cs.dmp", "You need a food.table! Put a food.table file in the text files folder!");
+					return;
 				}
 			} else {
-				File.WriteAllText ("Error.Program.cs.dmp", "You need a food.table! Put a food.table file in the text files folder!");
+				if (!File.Exists (textFilesfoodbku)) {
+					File.Copy (textFilesfoodtable, textFilesfoodbku);
+				} else {
+					File.Delete (textFilesfoodbku);
+					File.Copy (textFilesfoodtable, textFilesfoodbku);
+				}
 			}
+			Storage.readRegistry (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
+			Functions.checkDateValidity (GlobalVariables.nowDate, GlobalVariables.dateReset, Storage.checkRegistryValues (GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue));
+			Application.Run (new MainForm ());
 		}
 	}
 }
