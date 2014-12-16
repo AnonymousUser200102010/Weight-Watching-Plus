@@ -1,5 +1,5 @@
 ﻿
-namespace Weight_Watching_Program_Plus
+namespace WeightWatchingProgramPlus
 {
 	partial class MainForm
 	{
@@ -25,8 +25,8 @@ namespace Weight_Watching_Program_Plus
 		private System.Windows.Forms.Label caloriesLabel;
 		private System.Windows.Forms.Button deleteSelectedFoodItemButton;
 		private System.Windows.Forms.NumericUpDown servingSizeEditBox;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button addCaloriesButtonMain;
+		private System.Windows.Forms.Button subtractCaloriesButton;
 		private System.Windows.Forms.Label howManyServingsLabel;
 		private System.Windows.Forms.TabPage manualTab;
 		private System.Windows.Forms.NumericUpDown caloriesPerServingEditBox;
@@ -91,8 +91,8 @@ namespace Weight_Watching_Program_Plus
 			this.caloriesPerServingEditBox = new System.Windows.Forms.NumericUpDown();
 			this.howManyServingsLabel = new System.Windows.Forms.Label();
 			this.servingSizeEditBox = new System.Windows.Forms.NumericUpDown();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
+			this.addCaloriesButtonMain = new System.Windows.Forms.Button();
+			this.subtractCaloriesButton = new System.Windows.Forms.Button();
 			this.deleteSelectedFoodItemButton = new System.Windows.Forms.Button();
 			this.caloriesLabel = new System.Windows.Forms.Label();
 			this.clearSearchBarButton = new System.Windows.Forms.Button();
@@ -143,7 +143,7 @@ namespace Weight_Watching_Program_Plus
 			this.manualZeroOutButton.TabIndex = 4;
 			this.manualZeroOutButton.Text = "Zero Out Calories";
 			this.manualZeroOutButton.UseVisualStyleBackColor = true;
-			this.manualZeroOutButton.Click += new System.EventHandler(this.zeroOutCaloriesButtonClicked);
+			this.manualZeroOutButton.Click += new System.EventHandler(this.ZeroOutCaloriesButtonClicked);
 			// 
 			// manualResetButton
 			// 
@@ -153,7 +153,7 @@ namespace Weight_Watching_Program_Plus
 			this.manualResetButton.TabIndex = 3;
 			this.manualResetButton.Text = "Reset Calories To Default";
 			this.manualResetButton.UseVisualStyleBackColor = true;
-			this.manualResetButton.Click += new System.EventHandler(this.resetCaloriesButtonClicked);
+			this.manualResetButton.Click += new System.EventHandler(this.ResetCaloriesButtonClicked);
 			// 
 			// manualSubmitButton
 			// 
@@ -164,7 +164,7 @@ namespace Weight_Watching_Program_Plus
 			this.manualSubmitButton.TabIndex = 2;
 			this.manualSubmitButton.Text = "Submit";
 			this.manualSubmitButton.UseVisualStyleBackColor = true;
-			this.manualSubmitButton.Click += new System.EventHandler(this.manualSubmitButtonClicked);
+			this.manualSubmitButton.Click += new System.EventHandler(this.ManualSubmitButtonClicked);
 			// 
 			// label2
 			// 
@@ -240,8 +240,8 @@ namespace Weight_Watching_Program_Plus
 			this.FoodListPage.Controls.Add(this.caloriesPerServingEditBox);
 			this.FoodListPage.Controls.Add(this.howManyServingsLabel);
 			this.FoodListPage.Controls.Add(this.servingSizeEditBox);
-			this.FoodListPage.Controls.Add(this.button3);
-			this.FoodListPage.Controls.Add(this.button2);
+			this.FoodListPage.Controls.Add(this.addCaloriesButtonMain);
+			this.FoodListPage.Controls.Add(this.subtractCaloriesButton);
 			this.FoodListPage.Controls.Add(this.deleteSelectedFoodItemButton);
 			this.FoodListPage.Controls.Add(this.caloriesLabel);
 			this.FoodListPage.Controls.Add(this.clearSearchBarButton);
@@ -331,7 +331,7 @@ namespace Weight_Watching_Program_Plus
 			this.nextSearchButton.TabIndex = 30;
 			this.nextSearchButton.Text = "Next";
 			this.nextSearchButton.UseVisualStyleBackColor = true;
-			this.nextSearchButton.Click += new System.EventHandler(this.findNextSearchItem);
+			this.nextSearchButton.Click += new System.EventHandler(this.FindNextSearchItem);
 			// 
 			// Seperator2
 			// 
@@ -415,29 +415,29 @@ namespace Weight_Watching_Program_Plus
 			this.servingSizeEditBox.Size = new System.Drawing.Size(168, 26);
 			this.servingSizeEditBox.TabIndex = 20;
 			// 
-			// button3
+			// addCaloriesButtonMain
 			// 
-			this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button3.ForeColor = System.Drawing.SystemColors.HotTrack;
-			this.button3.Location = new System.Drawing.Point(13, 461);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(776, 43);
-			this.button3.TabIndex = 18;
-			this.button3.Text = "Add selected item\'s calories to your daily calorie allowance";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.addCalories);
+			this.addCaloriesButtonMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.addCaloriesButtonMain.ForeColor = System.Drawing.SystemColors.HotTrack;
+			this.addCaloriesButtonMain.Location = new System.Drawing.Point(13, 461);
+			this.addCaloriesButtonMain.Name = "addCaloriesButtonMain";
+			this.addCaloriesButtonMain.Size = new System.Drawing.Size(776, 43);
+			this.addCaloriesButtonMain.TabIndex = 18;
+			this.addCaloriesButtonMain.Text = "Add selected item\'s calories to your daily calorie allowance";
+			this.addCaloriesButtonMain.UseVisualStyleBackColor = true;
+			this.addCaloriesButtonMain.Click += new System.EventHandler(this.AddCalories);
 			// 
-			// button2
+			// subtractCaloriesButton
 			// 
-			this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button2.Location = new System.Drawing.Point(13, 394);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(776, 43);
-			this.button2.TabIndex = 17;
-			this.button2.Text = "Subtract selected food item from your daily calorie allowance";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.subtractCalories);
+			this.subtractCaloriesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.subtractCaloriesButton.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.subtractCaloriesButton.Location = new System.Drawing.Point(13, 394);
+			this.subtractCaloriesButton.Name = "subtractCaloriesButton";
+			this.subtractCaloriesButton.Size = new System.Drawing.Size(776, 43);
+			this.subtractCaloriesButton.TabIndex = 17;
+			this.subtractCaloriesButton.Text = "Subtract selected food item from your daily calorie allowance";
+			this.subtractCaloriesButton.UseVisualStyleBackColor = true;
+			this.subtractCaloriesButton.Click += new System.EventHandler(this.SubtractCalories);
 			// 
 			// deleteSelectedFoodItemButton
 			// 
@@ -448,7 +448,7 @@ namespace Weight_Watching_Program_Plus
 			this.deleteSelectedFoodItemButton.TabIndex = 16;
 			this.deleteSelectedFoodItemButton.Text = "Delete Selected Food Item";
 			this.deleteSelectedFoodItemButton.UseVisualStyleBackColor = true;
-			this.deleteSelectedFoodItemButton.Click += new System.EventHandler(this.deleteFoodItemFromTable);
+			this.deleteSelectedFoodItemButton.Click += new System.EventHandler(this.DeleteFoodItemFromTable);
 			// 
 			// caloriesLabel
 			// 
@@ -469,7 +469,7 @@ namespace Weight_Watching_Program_Plus
 			this.clearSearchBarButton.TabIndex = 14;
 			this.clearSearchBarButton.Text = "Clear";
 			this.clearSearchBarButton.UseVisualStyleBackColor = true;
-			this.clearSearchBarButton.Click += new System.EventHandler(this.clearSearchBarButtonClicked);
+			this.clearSearchBarButton.Click += new System.EventHandler(this.ClearSearchBarButtonClicked);
 			// 
 			// foodPropertiesButton
 			// 
@@ -480,7 +480,7 @@ namespace Weight_Watching_Program_Plus
 			this.foodPropertiesButton.TabIndex = 13;
 			this.foodPropertiesButton.Text = "Set Food Item Properties";
 			this.foodPropertiesButton.UseVisualStyleBackColor = true;
-			this.foodPropertiesButton.Click += new System.EventHandler(this.setFoodPropertiesButtonClicked);
+			this.foodPropertiesButton.Click += new System.EventHandler(this.SetFoodPropertiesButtonClicked);
 			// 
 			// definerLabel
 			// 
@@ -557,7 +557,7 @@ namespace Weight_Watching_Program_Plus
 			this.searchBar.Text = "Click Here to Search the Food List";
 			this.searchBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.searchBar.TextChanged += new System.EventHandler(this.SearchBarTextChanged);
-			this.searchBar.Enter += new System.EventHandler(this.searchBarFocusGranted);
+			this.searchBar.Enter += new System.EventHandler(this.SearchBarFocusGranted);
 			// 
 			// foodListLabel
 			// 
@@ -578,9 +578,9 @@ namespace Weight_Watching_Program_Plus
 			this.foodList.Name = "foodList";
 			this.foodList.Size = new System.Drawing.Size(414, 132);
 			this.foodList.TabIndex = 0;
-			this.foodList.SelectedIndexChanged += new System.EventHandler(this.foodListSelectedIndexChanged);
-			this.foodList.Enter += new System.EventHandler(this.foodListEnterFocus);
-			this.foodList.Leave += new System.EventHandler(this.foodListLeaveFocus);
+			this.foodList.SelectedIndexChanged += new System.EventHandler(this.FoodListSelectedIndexChanged);
+			this.foodList.Enter += new System.EventHandler(this.FoodListEnterFocus);
+			this.foodList.Leave += new System.EventHandler(this.FoodListLeaveFocus);
 			// 
 			// tabsMenu
 			// 

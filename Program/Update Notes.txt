@@ -1,0 +1,10 @@
+Update 3:
+
+Highlights:
+-- Update notes started
+-- Midnight snacking penalty added
+-- Isolated Global Variables to it's own file, hopefully with greater reliability.
+-- Set validators for the "foodPropertiesSwitch" function which makes sure there is a value in each text box/numeric_up_down else it stops the user.
+-- Added rudimentary error handler for message boxes. Moved to it's own file and I plan to add to it later.
+-- Validation class added...A new class for use with functions whose primary purpose is verification and validation, but who don't have a more pressing function.
+-- A myriad of structural, practical and readability fixes.
