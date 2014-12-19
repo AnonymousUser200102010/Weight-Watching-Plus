@@ -177,7 +177,10 @@ namespace WeightWatchingProgramPlus
             if (safetosubtract)
             {
                 FoodRelated.Calories = FoodRelated.Calories - tempcalories;
-                manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
+                if(FoodRelated.Calories >= 0)
+                {
+                	manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
+                }
             }
             Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, false);
             Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel, Functions);
@@ -199,7 +202,10 @@ namespace WeightWatchingProgramPlus
             else
             {
                 FoodRelated.Calories = FoodRelated.Calories + tempcalories;
-                manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
+                if(FoodRelated.Calories >= 0)
+                {
+                	manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
+                }
             }
             Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, false);
             Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel, Functions);
@@ -412,10 +418,17 @@ namespace WeightWatchingProgramPlus
             caloriesPerServingEditBox.Text = FoodRelated.CaloriesPerServingList [0].ToString(CultureInfo.InvariantCulture);
             caloriesPerServingEditBox.TextAlign = center;
             Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel, this);
-            manualCalorieEditBox.Value = decimal.Parse(
-                FoodRelated.Calories.ToString(CultureInfo.CurrentCulture),
-                CultureInfo.CurrentCulture
-            );
+            if(FoodRelated.Calories >= 0)
+            {
+            	manualCalorieEditBox.Value = decimal.Parse(
+	                FoodRelated.Calories.ToString(CultureInfo.CurrentCulture),
+	                CultureInfo.CurrentCulture
+	            );
+            } 
+            else 
+            {
+            	manualCalorieEditBox.Value = 0;
+            }
         }
 
         internal void DumpFoodPropertiesList (TextBox foodNameEditBox, NumericUpDown servingSizeEditBox,
