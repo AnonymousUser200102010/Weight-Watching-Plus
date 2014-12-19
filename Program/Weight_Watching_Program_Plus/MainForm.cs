@@ -54,7 +54,7 @@ namespace WeightWatchingProgramPlus
         {
             if (!string.IsNullOrWhiteSpace(searchBar.Text) && !Equals(searchBar.Text, " "))
             {
-                Functions.Find(0, searchBar.Text, null, GlobalVariables.ExactSearch, foodList);
+                Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, foodList);
                 return;
             }
             foodList.ClearSelected();
@@ -177,11 +177,11 @@ namespace WeightWatchingProgramPlus
             if (safetosubtract)
             {
                 FoodRelated.Calories = FoodRelated.Calories - tempcalories;
+                manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
             }
             Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, false);
             Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel, Functions);
-            userServingInputTextBox.Value = 1;
-			
+            this.Storage.WriteFoodEaten("Text Files\\", "Food Diary.txt", WriteToFileCheckBox, userServingInputTextBox, false);
         }
 
         protected internal void AddCalories (object sender, EventArgs e)
@@ -199,10 +199,11 @@ namespace WeightWatchingProgramPlus
             else
             {
                 FoodRelated.Calories = FoodRelated.Calories + tempcalories;
+                manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
             }
             Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, false);
             Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel, Functions);
-            userServingInputTextBox.Value = 1;
+            this.Storage.WriteFoodEaten("Text Files\\", "Food Diary.txt", WriteToFileCheckBox, userServingInputTextBox, true);
         }
 
         protected internal void FindNextSearchItem (object sender, EventArgs e)
@@ -213,7 +214,7 @@ namespace WeightWatchingProgramPlus
             }
             if (GlobalVariables.SelectedListItem >= foodList.Items.Count - 1)
             {
-                Functions.Find(0, searchBar.Text, null, GlobalVariables.ExactSearch, foodList);
+            	Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, foodList);
             }
             else
             {
@@ -221,15 +222,10 @@ namespace WeightWatchingProgramPlus
                     GlobalVariables.SelectedListItem,
                     searchBar.Text,
                     FoodRelated.FoodNameList [GlobalVariables.SelectedListItem],
-                    GlobalVariables.ExactSearch,
+                    exactSearchCheckBox.Checked,
                     foodList
                 );
             }
-        }
-
-        protected internal void ExactSearchCheckBoxCheckedChanged (object sender, EventArgs e)
-        {
-            GlobalVariables.ExactSearch = exactSearchCheckBox.Checked;
         }
 
         protected internal void CalorieRadioButtonCheckedChanged (object sender, EventArgs e)
@@ -259,7 +255,6 @@ namespace WeightWatchingProgramPlus
                 caloriesPerServingEditBox,
                 definerEditBox
             );
-            GlobalVariables.AddItem = newItemCheckbox.Checked;
             foodPropertiesButton.Text = newItemCheckbox.Checked ? "Add this new food item" : "Set Food Item Properties";
         }
 
@@ -306,13 +301,6 @@ namespace WeightWatchingProgramPlus
             Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
             if (!Equals(DateTime.Compare(dateToCompareTo, dateToCheck), -1) || firstProgramUse)
             {
-                if (Equals(
-                        Registry.LocalMachine.OpenSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue),
-                        null
-                    ))
-                {
-                    Registry.LocalMachine.CreateSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue);
-                }
                 Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, true);
             }
         }
@@ -485,7 +473,7 @@ namespace WeightWatchingProgramPlus
                 this.ErrorHandler.ErrorMessageBox("Please set a definer value!", definerEditBox, 0, true);
                 return;
             }
-            if (!GlobalVariables.AddItem)
+            if (!newItemCheckbox.Checked)
             {
                 FoodRelated.FoodNameList [GlobalVariables.SelectedListItem] = foodNameEditBox.Text;
                 FoodRelated.ServingSizeList [GlobalVariables.SelectedListItem] = float.Parse(
@@ -727,14 +715,45 @@ namespace WeightWatchingProgramPlus
         internal void ReadRegistry (string appendedRegistryValue, string registyValue)
         {
             DateTime tempdate = new DateTime ();
+            if (Equals(
+                    Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue),
+                    null
+                ))
+            {
+                Registry.LocalMachine.CreateSubKey(appendedRegistryValue + registyValue);
+            }
             using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue, true))
             {
-                string temp = tempKey.GetValue("Calories Left for the Day").ToString();
-                FoodRelated.Calories = float.Parse(temp, CultureInfo.InvariantCulture);
-                DateTime.TryParseExact(tempKey.GetValue("Last Used Date").ToString(), new [] {
-                    "yyyy MMMMM dd hh:mm:ss tt"
-                }, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempdate);
-                GlobalVariables.DateReset = tempdate;
+            	if(appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
+            	{
+            		string temp = null;
+            		if(tempKey.GetValue("Calories Left for the Day") != null)
+            		{
+            			temp = tempKey.GetValue("Calories Left for the Day").ToString();
+            		}
+            		else
+            		{
+            			tempKey.SetValue("Calories Left for the Day", FoodRelated.TotalCaloriesPerDay);
+            			temp = FoodRelated.TotalCaloriesPerDay.ToString();
+            		}
+	                FoodRelated.Calories = float.Parse(temp, CultureInfo.InvariantCulture);
+	                if(tempKey.GetValue("Last Used Date") != null)
+            		{
+            			DateTime.TryParseExact(tempKey.GetValue("Last Used Date").ToString(), new [] {
+		                    "yyyy MMMMM dd hh:mm:ss tt"
+		                }, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempdate);
+            		}
+            		else
+            		{
+            			tempKey.SetValue("Last Used Date", GlobalVariables.NowDate);
+            			tempdate = GlobalVariables.NowDate;
+            		}
+	                GlobalVariables.DateReset = tempdate;
+            	} 
+            	else if (registyValue.Equals(GlobalVariables.RegistryMainValue + "Diary"))
+            	{
+            		
+            	}
             }
         }
 
@@ -747,7 +766,10 @@ namespace WeightWatchingProgramPlus
                                                  true
                                              ))
                 {
-                    tempKey.SetValue("Calories Left for the Day", FoodRelated.Calories);
+            		if(appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
+            		{
+            			tempKey.SetValue("Calories Left for the Day", FoodRelated.Calories);
+            		} 
                 }
             }
             else
@@ -798,6 +820,77 @@ namespace WeightWatchingProgramPlus
                 );
             }
             return true;
+        }
+        
+        internal void WriteFoodEaten(string directory, string file, CheckBox WriteToFile, NumericUpDown userServingInputTextBox, bool add)
+        {
+        	
+        	string finalstring = null;
+        	const string seperator = "-";
+        	
+        	if(WriteToFile.Checked)
+        	{
+        		DateTime Now = DateTime.Now;
+        		
+        		float tempserval = float.Parse(userServingInputTextBox.Text, CultureInfo.CurrentCulture) / FoodRelated.ServingSizeList[GlobalVariables.SelectedListItem];
+        		
+        		float temptolval = FoodRelated.ServingSizeList[GlobalVariables.SelectedListItem] * tempserval;
+        		
+				if (Math.Floor (temptolval) <= 0) {
+					temptolval = (float)Math.Round (temptolval, 1);
+				} else {
+					temptolval = (float)Math.Floor (temptolval);
+				}
+        		
+        		finalstring += "At " + Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture) + " (on: " + Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
+				
+        		if(add)
+        		{
+        			finalstring += ") You added back to your calorie count: " + userServingInputTextBox.Value + " ";
+        		} 
+        		else
+        		{
+        			finalstring += ") You ate: " + userServingInputTextBox.Value + " ";
+        		}
+        		
+        		finalstring += FoodRelated.DefinersList[GlobalVariables.SelectedListItem];
+        		
+				if (userServingInputTextBox.Value > 1) {
+        			finalstring +=  "s";
+				}
+        		
+        		float tempcalval = FoodRelated.CaloriesPerServingList [GlobalVariables.SelectedListItem] * float.Parse(
+                                  userServingInputTextBox.Text,
+                                  CultureInfo.CurrentCulture
+                                 ) / FoodRelated.ServingSizeList [GlobalVariables.SelectedListItem];
+        		
+        		finalstring += " (of: '" + FoodRelated.FoodNameList[GlobalVariables.SelectedListItem] + "').\n" + "Which is " + tempserval + " servings, or " + Math.Round(tempcalval, 4, MidpointRounding.AwayFromZero) + " calories of '" + FoodRelated.FoodNameList[GlobalVariables.SelectedListItem] + "'. You had " + FoodRelated.Calories + " calories left for the day.\n" + seperator + "\n";
+        		if(File.Exists(directory + file))
+	        	{
+	        		using (StreamReader sr = new StreamReader (directory + file))
+	                {
+	        			string line;
+	                    while (!string.IsNullOrEmpty((line = sr.ReadLine())))
+	                    {
+							if (line.Contains(seperator, StringComparison.CurrentCultureIgnoreCase))
+							{
+								finalstring += "\n" + seperator + "\n";
+							}
+							else
+							{
+								finalstring += line;
+							}
+	                    }
+	                    sr.Close();
+	                }
+	        		File.Delete(directory + file);
+	        		File.WriteAllText(directory + file, finalstring);
+	        	}
+        	}
+        	
+        	ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue + "\\Diary");
+        	
+        	userServingInputTextBox.Value = 1;
         }
     }
 }

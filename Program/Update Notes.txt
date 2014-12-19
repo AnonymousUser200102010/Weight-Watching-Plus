@@ -1,5 +1,6 @@
 Update 4:
 -- FxCop installed and used to update and optimize code.
+-- Diary feature implemented, making food tracking 1/3rd complete.
 
 Update 3:
 

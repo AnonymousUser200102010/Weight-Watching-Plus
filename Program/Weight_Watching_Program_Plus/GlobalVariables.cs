@@ -46,13 +46,10 @@ namespace WeightWatchingProgramPlus
         public static string RegistryAppendedValue { get; private set; }
 
         public const string WeightWatchingProgram = "Weight Watching Program+";
+        
         public static string RegistryMainValue { get; set; }
 
         public static int SelectedListItem { get; set; }
-
-        public static bool ExactSearch { get; set; }
-
-        public static bool AddItem { get; set; }
 
         public static Form MainForm { get; set; }
 

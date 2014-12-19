@@ -46,6 +46,8 @@ namespace WeightWatchingProgramPlus
 		private System.Windows.Forms.Button manualSubmitButton;
 		private System.Windows.Forms.Button refreshCaloriesTimeButton;
 		private System.Windows.Forms.TreeView planningFoodTree;
+		private System.Windows.Forms.CheckBox RecordFoodCheckBox;
+		private System.Windows.Forms.CheckBox WriteToFileCheckBox;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -79,6 +81,8 @@ namespace WeightWatchingProgramPlus
 			this.planningFoodTree = new System.Windows.Forms.TreeView();
 			this.label1 = new System.Windows.Forms.Label();
 			this.FoodListPage = new System.Windows.Forms.TabPage();
+			this.WriteToFileCheckBox = new System.Windows.Forms.CheckBox();
+			this.RecordFoodCheckBox = new System.Windows.Forms.CheckBox();
 			this.refreshCaloriesTimeButton = new System.Windows.Forms.Button();
 			this.newItemCheckbox = new System.Windows.Forms.CheckBox();
 			this.timeRadioButton = new System.Windows.Forms.RadioButton();
@@ -195,11 +199,16 @@ namespace WeightWatchingProgramPlus
 			100,
 			0,
 			0,
-			-2147483648});
+			0});
 			this.manualCalorieEditBox.Name = "manualCalorieEditBox";
 			this.manualCalorieEditBox.Size = new System.Drawing.Size(288, 52);
 			this.manualCalorieEditBox.TabIndex = 0;
 			this.manualCalorieEditBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.manualCalorieEditBox.Value = new decimal(new int[] {
+			100,
+			0,
+			0,
+			0});
 			// 
 			// planTab
 			// 
@@ -233,6 +242,8 @@ namespace WeightWatchingProgramPlus
 			// FoodListPage
 			// 
 			this.FoodListPage.BackColor = System.Drawing.SystemColors.Control;
+			this.FoodListPage.Controls.Add(this.WriteToFileCheckBox);
+			this.FoodListPage.Controls.Add(this.RecordFoodCheckBox);
 			this.FoodListPage.Controls.Add(this.refreshCaloriesTimeButton);
 			this.FoodListPage.Controls.Add(this.newItemCheckbox);
 			this.FoodListPage.Controls.Add(this.timeRadioButton);
@@ -269,6 +280,34 @@ namespace WeightWatchingProgramPlus
 			this.FoodListPage.TabIndex = 0;
 			this.FoodListPage.Text = "Main";
 			this.FoodListPage.ToolTipText = "The main menu of the program containing a food list and editing service, //TBD//";
+			// 
+			// WriteToFileCheckBox
+			// 
+			this.WriteToFileCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+			this.WriteToFileCheckBox.Checked = true;
+			this.WriteToFileCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.WriteToFileCheckBox.Enabled = false;
+			this.WriteToFileCheckBox.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WriteToFileCheckBox.Location = new System.Drawing.Point(691, 348);
+			this.WriteToFileCheckBox.Name = "WriteToFileCheckBox";
+			this.WriteToFileCheckBox.Size = new System.Drawing.Size(96, 26);
+			this.WriteToFileCheckBox.TabIndex = 37;
+			this.WriteToFileCheckBox.Text = "Write to File?";
+			this.WriteToFileCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// RecordFoodCheckBox
+			// 
+			this.RecordFoodCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+			this.RecordFoodCheckBox.Checked = true;
+			this.RecordFoodCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.RecordFoodCheckBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.RecordFoodCheckBox.Location = new System.Drawing.Point(691, 317);
+			this.RecordFoodCheckBox.Name = "RecordFoodCheckBox";
+			this.RecordFoodCheckBox.Size = new System.Drawing.Size(97, 25);
+			this.RecordFoodCheckBox.TabIndex = 36;
+			this.RecordFoodCheckBox.Text = "Record?";
+			this.RecordFoodCheckBox.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.RecordFoodCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// refreshCaloriesTimeButton
 			// 
@@ -325,7 +364,6 @@ namespace WeightWatchingProgramPlus
 			this.exactSearchCheckBox.TabIndex = 31;
 			this.exactSearchCheckBox.Text = "Exact";
 			this.exactSearchCheckBox.UseVisualStyleBackColor = true;
-			this.exactSearchCheckBox.CheckedChanged += new System.EventHandler(this.ExactSearchCheckBoxCheckedChanged);
 			// 
 			// nextSearchButton
 			// 
