@@ -17,14 +17,15 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
     <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
-    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunCodeAnalysis>True</RunCodeAnalysis>
     <SourceAnalysisOverrideSettingsFile>%Appdata%\Roaming\ICSharpCode\SharpDevelop5\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <StartupObject>WeightWatchingProgramPlus.Program</StartupObject>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
+    <DelaySign>False</DelaySign>
+    <UICulture>en-US</UICulture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
@@ -68,7 +69,7 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
-    <AssemblyOriginatorKeyFile>Weight_Watching_Program_Plus.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

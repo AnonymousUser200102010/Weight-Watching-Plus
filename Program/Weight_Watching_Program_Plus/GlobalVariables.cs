@@ -14,26 +14,24 @@ namespace WeightWatchingProgramPlus
     {
         //Variabled directly linked to food or the creation of the food table.
 		
-        public static Dictionary<int, string> foodNameList { get; set; }
+        public static Dictionary<int, string> FoodNameList { get; set; }
 
-        public static Dictionary<int, float> servingSizeList { get; set; }
+        public static Dictionary<int, float> ServingSizeList { get; set; }
 
-        public static Dictionary<int, float> caloriesPerServingList { get; set; }
+        public static Dictionary<int, float> CaloriesPerServingList { get; set; }
 
-        public static Dictionary<int, string> definersList { get; set; }
+        public static Dictionary<int, string> DefinersList { get; set; }
 
-        public static float totalCaloriesPerDay { get; private set; }
+        public static readonly float TotalCaloriesPerDay = 2140f;
 
         public static float Calories { get; set; }
 
         static FoodRelated ()
         {
-            foodNameList = new Dictionary<int, string> ();
-            servingSizeList = new Dictionary<int, float> ();
-            caloriesPerServingList = new Dictionary<int, float> ();
-            definersList = new Dictionary<int, string> ();
-            totalCaloriesPerDay = 2140f;
-            //Do this for all your properties
+            FoodNameList = new Dictionary<int, string> ();
+            ServingSizeList = new Dictionary<int, float> ();
+            CaloriesPerServingList = new Dictionary<int, float> ();
+            DefinersList = new Dictionary<int, string> ();
         }
     }
 
@@ -41,14 +39,14 @@ namespace WeightWatchingProgramPlus
     {
         //Misc global variables
 		
-        public static DateTime nowDate { get; private set; }
+        public static DateTime NowDate { get; private set; }
 
-        public static DateTime dateReset;
+        public static DateTime DateReset { get; set; }
 
-        public static string registryAppenedValue { get; private set; }
+        public static string RegistryAppendedValue { get; private set; }
 
-        public const string weightWatchingProgram = "Weight Watching Program+";
-        public static string registryMainValue = weightWatchingProgram;
+        public const string WeightWatchingProgram = "Weight Watching Program+";
+        public static string RegistryMainValue { get; set; }
 
         public static int SelectedListItem { get; set; }
 
@@ -56,12 +54,13 @@ namespace WeightWatchingProgramPlus
 
         public static bool AddItem { get; set; }
 
-        public static Form mainForm { get; set; }
+        public static Form MainForm { get; set; }
 
         static GlobalVariables ()
         {
-            nowDate = DateTime.Now;
-            registryAppenedValue = "SOFTWARE\\Wow6432Node\\";
+            NowDate = DateTime.Now;
+            RegistryAppendedValue = "SOFTWARE\\Wow6432Node\\";
+            RegistryMainValue = WeightWatchingProgram;
         }
     }
 }

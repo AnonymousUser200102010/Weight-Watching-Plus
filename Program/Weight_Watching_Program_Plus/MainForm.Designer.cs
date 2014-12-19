@@ -191,6 +191,11 @@ namespace WeightWatchingProgramPlus
 			434162106,
 			542,
 			0});
+			this.manualCalorieEditBox.Minimum = new decimal(new int[] {
+			100,
+			0,
+			0,
+			-2147483648});
 			this.manualCalorieEditBox.Name = "manualCalorieEditBox";
 			this.manualCalorieEditBox.Size = new System.Drawing.Size(288, 52);
 			this.manualCalorieEditBox.TabIndex = 0;

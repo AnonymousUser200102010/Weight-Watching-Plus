@@ -1,3 +1,6 @@
+Update 4:
+-- FxCop installed and used to update and optimize code.
+
 Update 3:
 
 Highlights:

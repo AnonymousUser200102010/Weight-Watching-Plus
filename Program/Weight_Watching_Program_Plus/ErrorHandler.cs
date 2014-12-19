@@ -6,44 +6,27 @@ namespace WeightWatchingProgramPlus
 {
 	public class ErrorHandler
 	{
-		 readonly string[] title = {
+		
+		readonly string[] title = {
 			"Error: ValueIsNull",
 			"You're overeating."
 		};
-
-		public  string[] Title
-		{
-			get
-			{
-				return title;
-			}
-		}
-
-		 readonly MessageBoxButtons[] messageBoxButton = {
+		
+		readonly MessageBoxButtons[] messageBoxButton = {
 			MessageBoxButtons.OK,
 			MessageBoxButtons.OK
 		};
-
-		public  MessageBoxButtons[] MessageBoxButton
+		
+		readonly MessageBoxIcon[] messageBoxIcon = {
+			MessageBoxIcon.Error,
+			MessageBoxIcon.Information
+		};
+		
+		public  void ErrorMessageBox (string message, Control controlItem, int errorCode, bool hasAdditionalActions)
 		{
-			get
-			{
-				return messageBoxButton;
-			}
-		}
-
-		public  void errorMessageBox (string message, Control controlItem, int errorCode, bool hasAdditionalActions)
-		{
-			MessageBoxIcon[] messageBoxIcon = {
-				MessageBoxIcon.Error,
-				MessageBoxIcon.Information
-			};
-			DialogResult dialogResult = MessageBox.Show (message, title [errorCode], messageBoxButton [errorCode], messageBoxIcon [errorCode]);
-			switch (hasAdditionalActions)
-			{
-				default:
-					controlItem.Select ();
-					break;
+			DialogResult dialogResult = MessageBox.Show (message, this.title [errorCode], this.messageBoxButton [errorCode], this.messageBoxIcon [errorCode], MessageBoxDefaultButton.Button1);
+			if(hasAdditionalActions){
+				controlItem.Select();
 			}
 		}
 	}

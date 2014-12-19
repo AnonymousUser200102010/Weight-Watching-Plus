@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,24 +8,23 @@ namespace WeightWatchingProgramPlus
 {
 	internal sealed class Program
 	{
+		
 		/// <summary>
 		/// Program entry point.
 		/// </summary>
 		/// 
 		
 		[STAThread]
-		static void Main ()
+		private static void Main()
 		{
 			Storage Storage = new Storage();
-			Functions Functions = new Functions ();
-        	ErrorHandler ErrorHandler = new ErrorHandler ();
 			
 			#if DEBUG
-			GlobalVariables.registryMainValue = string.Format("{0}~debug", GlobalVariables.registryMainValue);
+			GlobalVariables.RegistryMainValue = string.Format(CultureInfo.InvariantCulture, "{0}~debug", GlobalVariables.RegistryMainValue);
 			#endif
 			
 			const string seperator = "-------------------------------------------------------------------------\n";
-			var explaination = string.Format("The food.table file is a converted food list.txt file. This new file has greater readability and reliability than the old method, which required iterating through a full list before continuing to another. Obviously this has the potential to break and cause problems.\nThe new format is like so:\n-------------------------------------------------------------------------\nName of food\nServing size of food\nCalories per serving of food\ndefiner of food\n{0}", seperator);
+			var explaination = string.Format(CultureInfo.InvariantCulture, "The food.table file is a converted food list.txt file. This new file has greater readability and reliability than the old method, which required iterating through a full list before continuing to another. Obviously this has the potential to break and cause problems.\nThe new format is like so:\n-------------------------------------------------------------------------\nName of food\nServing size of food\nCalories per serving of food\ndefiner of food\n{0}", seperator);
 			
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -61,8 +61,8 @@ namespace WeightWatchingProgramPlus
 					File.Copy(textFilesfoodtable, textFilesfoodbku);
 				}
 			}
-			Storage.ReadRegistry(GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue);
-			Validation.CheckDateValidity(GlobalVariables.nowDate, GlobalVariables.dateReset, Storage.CheckRegistryValues(GlobalVariables.registryAppenedValue, GlobalVariables.registryMainValue), Storage);
+			Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			Validation.CheckDateValidity(GlobalVariables.NowDate, GlobalVariables.DateReset, Storage.CheckRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue), Storage);
 			Application.Run(new MainForm ());
 		}
 	}

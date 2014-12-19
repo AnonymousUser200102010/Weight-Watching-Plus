@@ -2,6 +2,7 @@
 
 using System;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -9,11 +10,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Weight_Watching_Program_Plus")]
+[assembly: AssemblyTitle("Weight Watching Program Plus")]
 [assembly: AssemblyDescription("A program used mainly for dieting and tracking calorie intake.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Weight_Watching_Program_Plus")]
+[assembly: AssemblyProduct("WeightWatchingProgramPlus")]
 [assembly: AssemblyCopyright("Copyright 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,6 +22,8 @@ using System.Runtime.InteropServices;
 // This sets the default COM visibility of types in the assembly to invisible.
 // If you need to expose a type to COM, use [ComVisible(true)] on that type.
 [assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
+[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
 // The assembly version has following format :
 //
