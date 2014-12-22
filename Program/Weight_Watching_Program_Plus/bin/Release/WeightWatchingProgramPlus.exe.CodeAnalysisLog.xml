@@ -12,7 +12,7 @@
          <Members>
           <Member Name="#ErrorMessageBox(System.String,System.Windows.Forms.Control,System.Int32,System.Boolean)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'ErrorHandler.ErrorMessageBox(string, Control, int, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -23,35 +23,35 @@
          <Members>
           <Member Name="#.cctor()" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="90" Level="CriticalWarning">Initialize all static fields in 'FoodRelated' when those fields are declared and remove the explicit static constructor.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CaloriesPerServingList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.CaloriesPerServingList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#DefinersList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.DefinersList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#FoodNameList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.FoodNameList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ServingSizeList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.ServingSizeList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
@@ -62,28 +62,28 @@
          <Members>
           <Member Name="#DumpFoodPropertiesList(System.Windows.Forms.TextBox,System.Windows.Forms.NumericUpDown,System.Windows.Forms.NumericUpDown,System.Windows.Forms.TextBox)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.DumpFoodPropertiesList(TextBox, NumericUpDown, NumericUpDown, TextBox)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Find(System.Int32,System.String,System.String,System.Boolean,System.Windows.Forms.ListBox)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.Find(int, string, string, bool, ListBox)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ModifyCalories(System.Windows.Forms.NumericUpDown,System.Boolean)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'Functions.ModifyCalories(NumericUpDown, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteToObject(System.Windows.Forms.Label,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.WriteToObject(Label, int)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
@@ -94,7 +94,7 @@
          <Members>
           <Member Name="#SubtractCalories(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="FamilyOrAssembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'MainForm.SubtractCalories(object, EventArgs)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -105,48 +105,48 @@
          <Members>
           <Member Name="#CheckRegistryValues(System.String,System.String)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.CheckRegistryValues(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ReadFoodTable(System.String,System.String)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.ReadFoodTable(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ReadRegistry(System.String,System.String)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message Id="System.DateTime.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message Id="System.DateTime.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Name="TryParse" Certainty="95" Level="Warning">'Storage.ReadRegistry(string, string)' calls 'DateTime.TryParseExact(string, string[], IFormatProvider, DateTimeStyles, out DateTime)' but does not explicitly check whether the conversion succeeded. Either use the return value in a conditional statement or verify that the call site expects that the out argument will be set to the default value when the conversion fails.</Issue>
             </Message>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.ReadRegistry(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
-            <Message Id="System.Single.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message Id="System.Single.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error">Because the behavior of 'float.ToString()' could vary based on the current user's locale settings, replace this call in 'Storage.ReadRegistry(string, string)' with a call to 'float.ToString(IFormatProvider)'. If the result of 'float.ToString(IFormatProvider)' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteFoodEaten(System.String,System.String,System.Windows.Forms.CheckBox,System.Windows.Forms.CheckBox,System.Windows.Forms.NumericUpDown,System.Boolean)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteFoodEaten(string, string, CheckBox, CheckBox, NumericUpDown, bool)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteFoodTable(System.String,System.String,System.String[])" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteFoodTable(string, string, string[])' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteRegistry(System.String,System.String,System.Boolean)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:50:36Z" FixCategory="NonBreaking">
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:54:38Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Warning">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteRegistry(string, string, bool)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>

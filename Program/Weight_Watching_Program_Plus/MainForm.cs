@@ -141,10 +141,10 @@ namespace WeightWatchingProgramPlus
             if (safetosubtract)
             {
                 FoodRelated.Calories -= tempcalories;
+                Storage.WriteFoodEaten("Text Files\\", "Food Diary.txt", WriteToFileCheckBox, RecordFoodCheckBox, userServingInputTextBox, false);
                 if (FoodRelated.Calories >= 0)
                 {
                     manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
-                    Storage.WriteFoodEaten("Text Files\\", "Food Diary.txt", WriteToFileCheckBox, RecordFoodCheckBox, userServingInputTextBox, false);
                 }
             }
             Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, false);
@@ -161,10 +161,10 @@ namespace WeightWatchingProgramPlus
             else
             {
                 FoodRelated.Calories = FoodRelated.Calories + tempcalories;
+                Storage.WriteFoodEaten("Text Files\\", "Food Diary.txt", WriteToFileCheckBox, RecordFoodCheckBox, userServingInputTextBox, true);
                 if (FoodRelated.Calories >= 0)
                 {
                     manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
-                    Storage.WriteFoodEaten("Text Files\\", "Food Diary.txt", WriteToFileCheckBox, RecordFoodCheckBox, userServingInputTextBox, true);
                 }
             }
             Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, false);
