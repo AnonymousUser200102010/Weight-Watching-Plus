@@ -1,8 +1,0 @@
-The food.table file is a converted food list.txt file. This new file has greater readability and reliability than the old method, which required iterating through a full list before continuing to another. Obviously this has the potential to break and cause problems.
-The new format is like so:
--------------------------------------------------------------------------
-Name of food
-Serving size of food
-Calories per serving of food
-definer of food
--------------------------------------------------------------------------

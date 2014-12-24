@@ -1,7 +1,23 @@
 Update 4:
--- FxCop installed and used to update and optimize code.
--- Diary feature implemented, making food tracking 1/3rd complete.
 
+Highlights
+-- FxCop installed and used to update and optimize code.
+-- Folder tree restructuring.
+
+Developer Exclusive Highlights
+-- Regions added where appropriate for easier traversal of code. (May not be fully completed as of this update)
+-- Serious readability restructuring.
+
+Features:
+-- Diary feature implemented, making food tracking 1/3rd complete.
+-- Officially removed food table.txt to food.table conversion support. I don't feel it is required any longer. But if you must convert, I've supplied a converter. I don't know if it works, but it should.
+
+Assets:
+-- UniversalHandlersLibrary added. This library contains code for message to file and error to file support, as well as the custom contains method.
+
+Bug Fixes:
+-- Diary would not catalogue negative values. This, as well as a few aesthetic features, has been fixed.
+------------------------------------------------------
 Update 3:
 
 Highlights:

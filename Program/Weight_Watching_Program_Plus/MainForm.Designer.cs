@@ -354,9 +354,11 @@ namespace WeightWatchingProgramPlus
 			this.exactSearchCheckBox.TabIndex = 31;
 			this.exactSearchCheckBox.Text = "Exact";
 			this.exactSearchCheckBox.UseVisualStyleBackColor = true;
+			this.exactSearchCheckBox.Click += new System.EventHandler(this.FoodListFocusChanged);
 			// 
 			// nextSearchButton
 			// 
+			this.nextSearchButton.Enabled = false;
 			this.nextSearchButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.nextSearchButton.Location = new System.Drawing.Point(313, 240);
 			this.nextSearchButton.Name = "nextSearchButton";
@@ -458,7 +460,7 @@ namespace WeightWatchingProgramPlus
 			this.addCaloriesButtonMain.TabIndex = 18;
 			this.addCaloriesButtonMain.Text = "Add selected item\'s calories to your daily calorie allowance";
 			this.addCaloriesButtonMain.UseVisualStyleBackColor = true;
-			this.addCaloriesButtonMain.Click += new System.EventHandler(this.AddCalories);
+			this.addCaloriesButtonMain.Click += new System.EventHandler(this.ModifyCalories);
 			// 
 			// subtractCaloriesButton
 			// 
@@ -470,10 +472,11 @@ namespace WeightWatchingProgramPlus
 			this.subtractCaloriesButton.TabIndex = 17;
 			this.subtractCaloriesButton.Text = "Subtract selected food item from your daily calorie allowance";
 			this.subtractCaloriesButton.UseVisualStyleBackColor = true;
-			this.subtractCaloriesButton.Click += new System.EventHandler(this.SubtractCalories);
+			this.subtractCaloriesButton.Click += new System.EventHandler(this.ModifyCalories);
 			// 
 			// deleteSelectedFoodItemButton
 			// 
+			this.deleteSelectedFoodItemButton.Enabled = false;
 			this.deleteSelectedFoodItemButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.deleteSelectedFoodItemButton.Location = new System.Drawing.Point(14, 215);
 			this.deleteSelectedFoodItemButton.Name = "deleteSelectedFoodItemButton";
@@ -495,6 +498,7 @@ namespace WeightWatchingProgramPlus
 			// 
 			// clearSearchBarButton
 			// 
+			this.clearSearchBarButton.Enabled = false;
 			this.clearSearchBarButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.clearSearchBarButton.Location = new System.Drawing.Point(373, 241);
 			this.clearSearchBarButton.Name = "clearSearchBarButton";
@@ -502,7 +506,7 @@ namespace WeightWatchingProgramPlus
 			this.clearSearchBarButton.TabIndex = 14;
 			this.clearSearchBarButton.Text = "Clear";
 			this.clearSearchBarButton.UseVisualStyleBackColor = true;
-			this.clearSearchBarButton.Click += new System.EventHandler(this.ClearSearchBarButtonClicked);
+			this.clearSearchBarButton.Click += new System.EventHandler(this.ClearSearchBar);
 			// 
 			// foodPropertiesButton
 			// 
@@ -591,6 +595,7 @@ namespace WeightWatchingProgramPlus
 			this.searchBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.searchBar.TextChanged += new System.EventHandler(this.SearchBarTextChanged);
 			this.searchBar.Enter += new System.EventHandler(this.SearchBarFocusGranted);
+			this.searchBar.Leave += new System.EventHandler(this.ClearSearchBar);
 			// 
 			// foodListLabel
 			// 
@@ -612,8 +617,8 @@ namespace WeightWatchingProgramPlus
 			this.foodList.Size = new System.Drawing.Size(414, 132);
 			this.foodList.TabIndex = 0;
 			this.foodList.SelectedIndexChanged += new System.EventHandler(this.FoodListSelectedIndexChanged);
-			this.foodList.Enter += new System.EventHandler(this.FoodListEnterFocus);
-			this.foodList.Leave += new System.EventHandler(this.FoodListLeaveFocus);
+			this.foodList.Enter += new System.EventHandler(this.FoodListFocusChanged);
+			this.foodList.Leave += new System.EventHandler(this.FoodListFocusChanged);
 			// 
 			// tabsMenu
 			// 

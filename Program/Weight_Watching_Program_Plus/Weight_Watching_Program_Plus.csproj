@@ -26,6 +26,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>False</DelaySign>
     <UICulture>en-US</UICulture>
+    <ReferencePath>C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Libraries\</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
@@ -81,6 +82,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="UniversalHandlersLibrary">
+      <HintPath>..\Libraries\UniversalHandlersLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorHandler.cs" />

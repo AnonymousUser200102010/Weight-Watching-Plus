@@ -12,8 +12,8 @@
          <Members>
           <Member Name="#ErrorMessageBox(System.String,System.Windows.Forms.Control,System.Int32,System.Boolean)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="ErrorHandler.cs" Line="27">Change 'ErrorHandler.ErrorMessageBox(string, Control, int, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="ErrorHandler.cs" Line="30">Change 'ErrorHandler.ErrorMessageBox(string, Control, int, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -23,35 +23,35 @@
          <Members>
           <Member Name="#.cctor()" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
+            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
              <Issue Certainty="90" Level="CriticalWarning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="GlobalVariables.cs" Line="25">Initialize all static fields in 'FoodRelated' when those fields are declared and remove the explicit static constructor.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CaloriesPerServingList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.CaloriesPerServingList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#DefinersList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.DefinersList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#FoodNameList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.FoodNameList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ServingSizeList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.ServingSizeList' to be read-only by removing the property setter.</Issue>
             </Message>
            </Messages>
@@ -62,29 +62,29 @@
          <Members>
           <Member Name="#DumpFoodPropertiesList(System.Windows.Forms.TextBox,System.Windows.Forms.NumericUpDown,System.Windows.Forms.NumericUpDown,System.Windows.Forms.TextBox)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="345">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.DumpFoodPropertiesList(TextBox, NumericUpDown, NumericUpDown, TextBox)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="373">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.DumpFoodPropertiesList(TextBox, NumericUpDown, NumericUpDown, TextBox)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Find(System.Int32,System.String,System.String,System.Boolean,System.Windows.Forms.ListBox)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="447">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.Find(int, string, string, bool, ListBox)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="475">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.Find(int, string, string, bool, ListBox)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ModifyCalories(System.Windows.Forms.NumericUpDown,System.Boolean)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="431">Change 'Functions.ModifyCalories(NumericUpDown, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="459">Change 'Functions.ModifyCalories(NumericUpDown, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteToObject(System.Windows.Forms.Label,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="275">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.WriteToObject(Label, int)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="305">The 'this' parameter (or 'Me' in Visual Basic) of 'Functions.WriteToObject(Label, int)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -92,10 +92,10 @@
         </Type>
         <Type Name="MainForm" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
          <Members>
-          <Member Name="#SubtractCalories(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="FamilyOrAssembly" ExternallyVisible="False">
+          <Member Name="#ModifyCalories(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="FamilyOrAssembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="129">Change 'MainForm.SubtractCalories(object, EventArgs)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
+            <Message Id="UniversalHandlersLibrary.UniversalHandlersLibrary.Contains(System.String,System.String,System.StringComparison)" TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Name="StringComparison" Certainty="75" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="219">'MainForm.ModifyCalories(object, EventArgs)' passes 'StringComparison.InvariantCultureIgnoreCase' as the 'StringComparison' parameter to 'UniversalHandlersLibrary.Contains(this string, string, StringComparison)'. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -105,49 +105,59 @@
          <Members>
           <Member Name="#CheckRegistryValues(System.String,System.String)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="650">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.CheckRegistryValues(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="623">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.CheckRegistryValues(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ReadFoodTable(System.String,System.String)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="479">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.ReadFoodTable(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="506">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.ReadFoodTable(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            </Message>
+            <Message Id="System.String.Format(System.String,System.Object,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="545">Because the behavior of 'string.Format(string, object, object)' could vary based on the current user's locale settings, replace this call in 'Storage.ReadFoodTable(string, string)' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ReadRegistry(System.String,System.String)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message Id="System.DateTime.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Name="TryParse" Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="608">'Storage.ReadRegistry(string, string)' calls 'DateTime.TryParseExact(string, string[], IFormatProvider, DateTimeStyles, out DateTime)' but does not explicitly check whether the conversion succeeded. Either use the return value in a conditional statement or verify that the call site expects that the out argument will be set to the default value when the conversion fails.</Issue>
+            <Message Id="System.DateTime.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Name="TryParse" Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="592">'Storage.ReadRegistry(string, string)' calls 'DateTime.TryParseExact(string, string[], IFormatProvider, DateTimeStyles, out DateTime)' but does not explicitly check whether the conversion succeeded. Either use the return value in a conditional statement or verify that the call site expects that the out argument will be set to the default value when the conversion fails.</Issue>
             </Message>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="586">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.ReadRegistry(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="574">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.ReadRegistry(string, string)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
-            <Message Id="System.Single.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="603">Because the behavior of 'float.ToString()' could vary based on the current user's locale settings, replace this call in 'Storage.ReadRegistry(string, string)' with a call to 'float.ToString(IFormatProvider)'. If the result of 'float.ToString(IFormatProvider)' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
+            <Message Id="UniversalHandlersLibrary.UniversalHandlersLibrary.Contains(System.String,System.String,System.StringComparison)" TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Name="StringComparison" Certainty="75" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="597">'Storage.ReadRegistry(string, string)' passes 'StringComparison.InvariantCultureIgnoreCase' as the 'StringComparison' parameter to 'UniversalHandlersLibrary.Contains(this string, string, StringComparison)'. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteFoodEaten(System.String,System.String,System.Windows.Forms.CheckBox,System.Windows.Forms.CheckBox,System.Windows.Forms.NumericUpDown,System.Boolean)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="666">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteFoodEaten(string, string, CheckBox, CheckBox, NumericUpDown, bool)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="639">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteFoodEaten(string, string, CheckBox, CheckBox, NumericUpDown, bool)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            </Message>
+            <Message Id="System.String.Format(System.String,System.Object[])" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="683">Because the behavior of 'string.Format(string, params object[])' could vary based on the current user's locale settings, replace this call in 'Storage.WriteFoodEaten(string, string, CheckBox, CheckBox, NumericUpDown, bool)' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="687">Because the behavior of 'string.Format(string, params object[])' could vary based on the current user's locale settings, replace this call in 'Storage.WriteFoodEaten(string, string, CheckBox, CheckBox, NumericUpDown, bool)' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteFoodTable(System.String,System.String,System.String[])" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="559">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteFoodTable(string, string, string[])' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="551">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteFoodTable(string, string, string[])' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            </Message>
+            <Message Id="System.String.Format(System.String,System.Object,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="557">Because the behavior of 'string.Format(string, object, object)' could vary based on the current user's locale settings, replace this call in 'Storage.WriteFoodTable(string, string, string[])' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#WriteRegistry(System.String,System.String,System.Boolean)" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-22 07:49:15Z" FixCategory="NonBreaking">
-             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="628">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteRegistry(string, string, bool)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2014-12-24 22:51:42Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="606">The 'this' parameter (or 'Me' in Visual Basic) of 'Storage.WriteRegistry(string, string, bool)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -219,6 +229,16 @@
    <Url>http://msdn.microsoft.com/library/ms182191(VS.100).aspx</Url>
    <Email>[none]</Email>
    <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="globalizationrules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309">
+   <Name>Use ordinal StringComparison</Name>
+   <Description>For non-linguistic comparisons, StringComparison.Ordinal or StringComparison.OrdinalIgnoreCase should be used instead of the linguistically-sensitive StringComparison.InvariantCulture.</Description>
+   <Resolution Name="StringComparison">{0} passes '{1}' as the 'StringComparison' parameter to {2}. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb385972(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Error</MessageLevel>
    <File Name="globalizationrules.dll" Version="10.0.0.0" />
   </Rule>
  </Rules>

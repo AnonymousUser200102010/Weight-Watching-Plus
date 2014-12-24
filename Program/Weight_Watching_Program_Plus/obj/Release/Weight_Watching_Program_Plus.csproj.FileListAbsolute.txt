@@ -4,3 +4,4 @@ C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus
 C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\WeightWatchingProgramPlus.MainForm.resources
 C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\Weight_Watching_Program_Plus.csproj.GenerateResource.Cache
 C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\obj\Release\WeightWatchingProgramPlus.exe
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Release\UniversalHandlersLibrary.dll

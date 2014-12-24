@@ -1,0 +1,9 @@
+At 02:52:15 PM (on: December 24, 2014) You added back to your calorie count: 1 bar (of: 'ice cream bar').
+Which is 1 servings, or 150 calories of 'ice cream bar'. You had 300 calories left for the day.
+-
+At 02:52:15 PM (on: December 24, 2014) You added back to your calorie count: 1 bar (of: 'ice cream bar').
+Which is 1 servings, or 150 calories of 'ice cream bar'. You had 150 calories left for the day.
+-
+At 02:52:14 PM (on: December 24, 2014) You added back to your calorie count: 1 bar (of: 'ice cream bar').
+Which is 1 servings, or 150 calories of 'ice cream bar'. You had 0 calories left for the day.
+-
