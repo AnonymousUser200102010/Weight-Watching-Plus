@@ -1,22 +1,31 @@
 Update 4:
 
-Highlights
+Highlights:
 -- FxCop installed and used to update and optimize code.
 -- Folder tree restructuring.
-
-Developer Exclusive Highlights
+-- Modification class added...A new class with functions whose primary purpose is modification and creation, but who don't have a more pressing primary function.
 -- Regions added where appropriate for easier traversal of code. (May not be fully completed as of this update)
 -- Serious readability restructuring.
+-- ErrorHandler class name changed to PopupHandler, as it does not handle only errors and always uses popups.
+-- Switched from dictionaries to tuples as my main form of data management. It's easier to read and in general easier to code than having 4 different libraries instead of one variable with 4 values.
+-- Using nested IList for now until I am better acquainted with lists and tuples. I do plan to change it later on.
 
 Features:
 -- Diary feature implemented, making food tracking 1/3rd complete.
 -- Officially removed food table.txt to food.table conversion support. I don't feel it is required any longer. But if you must convert, I've supplied a converter. I don't know if it works, but it should.
+-- Automatic sorting support added for: Food List-box
+-- Automatic sorting support added for: food.table
 
 Assets:
 -- UniversalHandlersLibrary added. This library contains code for message to file and error to file support, as well as the custom contains method.
 
 Bug Fixes:
 -- Diary would not catalogue negative values. This, as well as a few aesthetic features, has been fixed.
+-- Fixed a bug in the next button with regards to search that appeared in the 3.5 update (maybe earlier).
+-- Applied a sloppy fix to a persistent bug in the refresh button which required three (sometimes more) presses before it actually refreshed. I'll attempt to apply a real fix sometime in the future.
+
+Notes:
+Due to the crossover to tuple, there may be a ton of bugs, holes, or nested loops in the code. Just be aware of this in the future.
 ------------------------------------------------------
 Update 3:
 

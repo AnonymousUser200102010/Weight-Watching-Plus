@@ -13,7 +13,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
     <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
@@ -87,7 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorHandler.cs" />
+    <Compile Include="PopupHandler.cs" />
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">

@@ -25,8 +25,6 @@ namespace WeightWatchingProgramPlus
 		{
 			try
 			{
-				Storage Storage = new Storage ();
-			
 				#if DEBUG
 				GlobalVariables.RegistryMainValue = string.Format(CultureInfo.InvariantCulture, "{0}~debug", GlobalVariables.RegistryMainValue);
 				#endif
@@ -44,7 +42,7 @@ namespace WeightWatchingProgramPlus
 				findFoodTable("Files\\Text\\food.table", "Files\\Text\\food table.txt", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt");
 	            
 				Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
-				Validation.CheckDateValidity(GlobalVariables.NowDate, GlobalVariables.DateReset, Storage.CheckRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue), Storage);
+				Validation.CheckDateValidity(GlobalVariables.NowDate, GlobalVariables.DateReset, Storage.CheckRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue));
 				Application.Run(new MainForm ());
 			}
 			catch (Exception e)
