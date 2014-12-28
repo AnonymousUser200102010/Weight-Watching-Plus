@@ -1,3 +1,16 @@
+Update 5:
+
+Highlights:
+-- new item functionality has been improved. Before it allowed a work-around to the "NoIdentical" error by modifying after creating. This has been fixed.
+-- Registry system revamped. Hopefully with more accurate and efficient results. So far so good, though.
+
+Features:
+-- Implemented rudimentary argument support.
+
+Bug Fix:
+-- Fixed a bug with the newly implemented "NoIdentical" error on adding an item (which unintentionally stopped property setting).
+-- Fixed the persistent bug mentioned in the last update.
+
 Update 4:
 
 Highlights:

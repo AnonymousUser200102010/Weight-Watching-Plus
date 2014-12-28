@@ -7,7 +7,3 @@ Serving size of food
 Calories per serving of food
 definer of food
 -------------------------------------------------------------------------
-
-You're allowed to use all normal characters, upper and lower case; numbers and letters
-You're also allowed to use all special characters. A word of warning, however, the program seems to have trouble processing them in conjunction with other characters, so it's best to steer clear of them if you can.
-

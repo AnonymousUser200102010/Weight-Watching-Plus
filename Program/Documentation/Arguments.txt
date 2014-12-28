@@ -1,0 +1,5 @@
+Current arguements and what they do:
+
+"clearcache" -- clears all files excluding food.table, food.bku, and any Error.dmp before starting the program. This does not prevent them from being made again.
+
+"noexplaination" -- prevents a food.table explaination.txt from being created if one does not already exist. It does not delete this file.

@@ -12,7 +12,9 @@ namespace WeightWatchingProgramPlus
 	
     public static class FoodRelated
     {
+    	
         //Variabled directly linked to food or the creation of the food table.
+        
         public static IList<Tuple<string, float, float, string>> CombinedFoodList { get; set; }
         #region Tuple Structure
        	//Name of food
@@ -27,17 +29,16 @@ namespace WeightWatchingProgramPlus
         
         static FoodRelated()
         {
+        	
         	CombinedFoodList = new List<Tuple<string, float, float, string>>();
+        	
         }
+        
     }
 
     public static class GlobalVariables
     {
         //Misc global variables
-		
-        public static DateTime NowDate { get; private set; }
-
-        public static DateTime DateReset { get; set; }
 
         public static string RegistryAppendedValue { get; private set; }
 
@@ -51,10 +52,13 @@ namespace WeightWatchingProgramPlus
 
         static GlobalVariables ()
         {
-            NowDate = DateTime.Now;
+            
             RegistryAppendedValue = "SOFTWARE\\Wow6432Node\\";
+            
             RegistryMainValue = WeightWatchingProgram;
+            
         }
+        
     }
 }
 
