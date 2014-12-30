@@ -10,6 +10,7 @@ Features:
 Bug Fix:
 -- Fixed a bug with the newly implemented "NoIdentical" error on adding an item (which unintentionally stopped property setting).
 -- Fixed the persistent bug mentioned in the last update.
+-- Manual tab would never update it's value with the actual calorie count. This has been fixed.
 
 Update 4:
 

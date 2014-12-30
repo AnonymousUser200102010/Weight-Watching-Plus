@@ -12,17 +12,17 @@
          <Members>
           <Member Name="#.cctor()" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2014-12-28 04:14:11Z" FixCategory="NonBreaking">
+            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2014-12-30 00:18:02Z" FixCategory="NonBreaking">
              <Issue Certainty="90" Level="CriticalWarning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="GlobalVariables.cs" Line="26">Initialize all static fields in 'FoodRelated' when those fields are declared and remove the explicit static constructor.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CombinedFoodList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-28 04:14:11Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2014-12-30 00:18:02Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.CombinedFoodList' to be read-only by removing the property setter.</Issue>
             </Message>
-            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2014-12-28 04:14:11Z" FixCategory="Breaking">
+            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2014-12-30 00:18:02Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalError">Consider a design where 'FoodRelated.CombinedFoodList' doesn't nest generic type 'IList&lt;Tuple&lt;string, float, float, string&gt;&gt;'.</Issue>
             </Message>
            </Messages>
@@ -33,7 +33,7 @@
          <Members>
           <Member Name="#ErrorMessageBox(System.String,System.Windows.Forms.Control,System.Int32,System.Boolean)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-28 04:14:11Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2014-12-30 00:18:02Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="PopupHandler.cs" Line="36">Change 'PopupHandler.ErrorMessageBox(string, Control, int, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -44,8 +44,8 @@
          <Members>
           <Member Name="#ReadRegistry(System.String,System.String)" Kind="Method" Static="True" Accessibility="Assembly" ExternallyVisible="False">
            <Messages>
-            <Message Id="UniversalHandlersLibrary.UniversalHandlersLibrary.Contains(System.String,System.String,System.StringComparison)" TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309" Status="Active" Created="2014-12-28 04:14:11Z" FixCategory="NonBreaking">
-             <Issue Name="StringComparison" Certainty="75" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="808">'Storage.ReadRegistry(string, string)' passes 'StringComparison.InvariantCultureIgnoreCase' as the 'StringComparison' parameter to 'UniversalHandlersLibrary.Contains(this string, string, StringComparison)'. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Issue>
+            <Message Id="UniversalHandlersLibrary.UniversalHandlersLibrary.Contains(System.String,System.String,System.StringComparison)" TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309" Status="Active" Created="2014-12-30 00:18:02Z" FixCategory="NonBreaking">
+             <Issue Name="StringComparison" Certainty="75" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="827">'Storage.ReadRegistry(string, string)' passes 'StringComparison.InvariantCultureIgnoreCase' as the 'StringComparison' parameter to 'UniversalHandlersLibrary.Contains(this string, string, StringComparison)'. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -55,8 +55,8 @@
          <Members>
           <Member Name="#AlreadyExists(System.String,System.Windows.Forms.CheckBox)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message Id="System.String.Equals(System.String,System.StringComparison)" TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309" Status="Active" Created="2014-12-28 04:14:11Z" FixCategory="NonBreaking">
-             <Issue Name="StringComparison" Certainty="75" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="474">'Validation.AlreadyExists(string, CheckBox)' passes 'StringComparison.InvariantCultureIgnoreCase' as the 'StringComparison' parameter to 'string.Equals(string, StringComparison)'. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Issue>
+            <Message Id="System.String.Equals(System.String,System.StringComparison)" TypeName="UseOrdinalStringComparison" Category="Microsoft.Globalization" CheckId="CA1309" Status="Active" Created="2014-12-30 00:18:02Z" FixCategory="NonBreaking">
+             <Issue Name="StringComparison" Certainty="75" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="MainForm.cs" Line="479">'Validation.AlreadyExists(string, CheckBox)' passes 'StringComparison.InvariantCultureIgnoreCase' as the 'StringComparison' parameter to 'string.Equals(string, StringComparison)'. To perform a non-linguistic comparison, specify 'StringComparison.Ordinal' or 'StringComparison.OrdinalIgnoreCase' instead.</Issue>
             </Message>
            </Messages>
           </Member>

@@ -1,3 +1,9 @@
+At 04:18:22 PM (on: December 29, 2014) You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 23.33334 calories left for the day.
+-
+At 04:18:21 PM (on: December 29, 2014) You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66667 calories left for the day.
+-
 At 08:12:30 PM (on: December 27, 2014) You added back to your calorie count: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
 -

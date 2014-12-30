@@ -121,13 +121,13 @@ namespace WeightWatchingProgramPlus
 			this.foodList = new System.Windows.Forms.ListBox();
 			this.tabsMenu = new System.Windows.Forms.TabControl();
 			this.additionalOptionsTab = new System.Windows.Forms.TabPage();
+			this.label3 = new System.Windows.Forms.Label();
 			this.AmPmComboBox = new System.Windows.Forms.ComboBox();
 			this.Seperator5 = new System.Windows.Forms.Label();
 			this.Seperator4 = new System.Windows.Forms.Label();
 			this.HourEditBox = new System.Windows.Forms.NumericUpDown();
 			this.seperator3 = new System.Windows.Forms.Label();
 			this.resetCaloriesManualCheckBox = new System.Windows.Forms.CheckBox();
-			this.label3 = new System.Windows.Forms.Label();
 			this.manualTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).BeginInit();
 			this.planTab.SuspendLayout();
@@ -657,6 +657,7 @@ namespace WeightWatchingProgramPlus
 			this.tabsMenu.Size = new System.Drawing.Size(803, 539);
 			this.tabsMenu.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
 			this.tabsMenu.TabIndex = 30;
+			this.tabsMenu.SelectedIndexChanged += new System.EventHandler(this.ChangedTab);
 			// 
 			// additionalOptionsTab
 			// 
@@ -674,6 +675,16 @@ namespace WeightWatchingProgramPlus
 			this.additionalOptionsTab.TabIndex = 3;
 			this.additionalOptionsTab.Text = "Additional Options";
 			this.additionalOptionsTab.UseVisualStyleBackColor = true;
+			// 
+			// label3
+			// 
+			this.label3.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(0, 1);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(795, 504);
+			this.label3.TabIndex = 35;
+			this.label3.Text = "UNFINISHED";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// AmPmComboBox
 			// 
@@ -730,16 +741,6 @@ namespace WeightWatchingProgramPlus
 			this.resetCaloriesManualCheckBox.Text = "Reset Calories At a Specific Time";
 			this.resetCaloriesManualCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.resetCaloriesManualCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// label3
-			// 
-			this.label3.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(0, 1);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(795, 504);
-			this.label3.TabIndex = 35;
-			this.label3.Text = "UNFINISHED";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// MainForm
 			// 

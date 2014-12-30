@@ -40,8 +40,13 @@ namespace WeightWatchingProgramPlus
 			
 			//
 		}
+		
+		void ChangedTab(object sender, EventArgs e)
+		{
+			manualCalorieEditBox.Value = (decimal)FoodRelated.Calories;
+		}
 
-		#region Main Forms
+		#region Main Tab
 
 		#region Search Bar
 
@@ -349,7 +354,7 @@ namespace WeightWatchingProgramPlus
 
 		#endregion
 
-		#region Edit Your Calories Manual Forms
+		#region Edit Your Calories Manual Tab
 
 			protected internal void NewItemCheckboxCheckedChanged (object sender, EventArgs e)
 			{
@@ -427,7 +432,7 @@ namespace WeightWatchingProgramPlus
 			}
 		}
 
-		internal static bool CheckEditBoxesHaveValidEntries (TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox, CheckBox newItemCheckbox, PopupHandler PopupHandler)
+		internal static bool EditBoxesHaveValidEntries (TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox, CheckBox newItemCheckbox, PopupHandler PopupHandler)
 		{
 			
 			if (AlreadyExists(foodNameEditBox.Text, newItemCheckbox))
@@ -507,6 +512,7 @@ namespace WeightWatchingProgramPlus
 			
 			if (hour >= 12 && hour <= 3 && amPMDefiner.Equals("am", StringComparison.CurrentCultureIgnoreCase))
 			{
+				
 				float midSnackPenalty = tempFloat / 10;
 				
 				if (midSnackPenalty <= 10)
@@ -531,6 +537,7 @@ namespace WeightWatchingProgramPlus
 				}
 				
 				return tempFloat - midSnackPenalty;
+				
 			}
 			
 			return tempFloat;
@@ -550,7 +557,7 @@ namespace WeightWatchingProgramPlus
 			{
 				
 				string.Format(CultureInfo.InvariantCulture, "Calories Left For The Day: {0}", FoodRelated.Calories),
-				string.Format(CultureInfo.InvariantCulture, "Calories will reset on {0:MMMM dd} at {0:hh:mm tt}", Storage.ReturnResetDate(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue))
+				string.Format(CultureInfo.InvariantCulture, "Calories will reset on {0:MMMM dd} at {0:hh:mm tt}", Storage.GetResetDate(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue))
 					
 			};
 			
@@ -582,7 +589,8 @@ namespace WeightWatchingProgramPlus
 
 		internal void FoodPropertiesSwitch (ListBox foodList, TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox, CheckBox newItemCheckbox)
 		{
-			if (!Validation.CheckEditBoxesHaveValidEntries(foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox, newItemCheckbox, this.PopupHandler))
+			
+			if (!Validation.EditBoxesHaveValidEntries(foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox, newItemCheckbox, this.PopupHandler))
 			{
 				
 				return;
@@ -678,8 +686,19 @@ namespace WeightWatchingProgramPlus
 						
 						if (line.Contains("-", StringComparison.CurrentCultureIgnoreCase))
 						{
+							float[] tupleItemFloat = {
+								0f,
+								0f
+							};
 							
-							FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string> (combined [0], float.Parse(combined [1], CultureInfo.InvariantCulture), float.Parse(combined [2], CultureInfo.InvariantCulture), combined [3]));
+							if(!float.TryParse(combined[1], NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[0]) || !float.TryParse(combined[2], NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[1]))
+							{
+								
+								Errors.Handler(Errors.premadeExceptions("tupleItemFloat", "ReadFoodTable", 0), true, 524288, true);
+								
+							}
+							
+							FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string> (combined [0], tupleItemFloat[0], tupleItemFloat[1], combined [3]));
 							
 							position++;
 							
@@ -785,7 +804,16 @@ namespace WeightWatchingProgramPlus
 						
 					}
 					
-					FoodRelated.Calories = float.Parse(tempKey.GetValue("Calories Left for the Day").ToString(), CultureInfo.InvariantCulture);
+					float tempfloat = 0f;
+					
+					if(!float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempfloat))
+					{
+						
+						Errors.Handler(Errors.premadeExceptions("Calories Left for the Day", "Registry", 0), true, 524288, true);
+						
+					}
+					
+					FoodRelated.Calories = tempfloat;
 					
 					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Last Used Date")))
 					{
@@ -794,16 +822,7 @@ namespace WeightWatchingProgramPlus
 						
 					}
 					
-					DateTime tempdate = new DateTime ();
-					
-					if (!DateTime.TryParseExact(tempKey.GetValue("Last Used Date").ToString(), new [] { "yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempdate))
-					{
-						
-						Errors.Handler(new FormatException ("Last Used Date: Registry: Arguement failed to produce a valid result."), true, 524288, true);
-						
-					}
-					
-					Validation.CheckDateValidity(tempdate);
+					Validation.CheckDateValidity(GetResetDate(appendedRegistryValue, registyValue));
 				}
 				else if (registyValue.Contains("Diary", StringComparison.InvariantCultureIgnoreCase))
 				{
@@ -837,7 +856,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		internal static DateTime ReturnResetDate(string appendedRegistryValue, string registryValue)
+		internal static DateTime GetResetDate(string appendedRegistryValue, string registryValue)
 		{
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
@@ -848,7 +867,7 @@ namespace WeightWatchingProgramPlus
 				if (!DateTime.TryParseExact(tempKey.GetValue("Last Used Date").ToString(), new [] { "yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempdate))
 				{
 					
-					Errors.Handler(new FormatException ("Last Used Date: Registry: Arguement failed to produce a valid result."), true, 524288, true);
+					Errors.Handler(Errors.premadeExceptions("Last Used Date", "Registry", 0), true, 524288, true);
 					
 				}
 				
