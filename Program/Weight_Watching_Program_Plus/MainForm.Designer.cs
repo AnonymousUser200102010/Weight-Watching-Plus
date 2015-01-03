@@ -28,13 +28,10 @@ namespace WeightWatchingProgramPlus
 		private System.Windows.Forms.Button addCaloriesButtonMain;
 		private System.Windows.Forms.Button subtractCaloriesButton;
 		private System.Windows.Forms.Label howManyServingsLabel;
-		private System.Windows.Forms.TabPage manualTab;
 		private System.Windows.Forms.NumericUpDown caloriesPerServingEditBox;
 		private System.Windows.Forms.NumericUpDown userServingInputTextBox;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label Seperator1;
-		private System.Windows.Forms.Label Seperator2;
+		private System.Windows.Forms.Label ManualFoodLabel;
 		private System.Windows.Forms.Button nextSearchButton;
 		private System.Windows.Forms.CheckBox exactSearchCheckBox;
 		private System.Windows.Forms.RadioButton timeRadioButton;
@@ -51,11 +48,12 @@ namespace WeightWatchingProgramPlus
 		private System.Windows.Forms.TabPage additionalOptionsTab;
 		private System.Windows.Forms.Label seperator3;
 		private System.Windows.Forms.CheckBox resetCaloriesManualCheckBox;
-		private System.Windows.Forms.Label Seperator4;
-		private System.Windows.Forms.NumericUpDown HourEditBox;
 		private System.Windows.Forms.Label Seperator5;
-		private System.Windows.Forms.ComboBox AmPmComboBox;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.DateTimePicker exactResetDatetimePicker;
+		private System.Windows.Forms.TabControl MainSubTabControl;
+		private System.Windows.Forms.TabPage AddSubButton;
+		private System.Windows.Forms.TabPage ManualButton;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -79,32 +77,32 @@ namespace WeightWatchingProgramPlus
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.manualTab = new System.Windows.Forms.TabPage();
-			this.manualZeroOutButton = new System.Windows.Forms.Button();
-			this.manualResetButton = new System.Windows.Forms.Button();
-			this.manualSubmitButton = new System.Windows.Forms.Button();
-			this.label2 = new System.Windows.Forms.Label();
-			this.manualCalorieEditBox = new System.Windows.Forms.NumericUpDown();
 			this.planTab = new System.Windows.Forms.TabPage();
 			this.planningFoodTree = new System.Windows.Forms.TreeView();
 			this.label1 = new System.Windows.Forms.Label();
 			this.FoodListPage = new System.Windows.Forms.TabPage();
+			this.MainSubTabControl = new System.Windows.Forms.TabControl();
+			this.AddSubButton = new System.Windows.Forms.TabPage();
 			this.WriteToFileCheckBox = new System.Windows.Forms.CheckBox();
 			this.RecordFoodCheckBox = new System.Windows.Forms.CheckBox();
+			this.userServingInputTextBox = new System.Windows.Forms.NumericUpDown();
+			this.howManyServingsLabel = new System.Windows.Forms.Label();
+			this.addCaloriesButtonMain = new System.Windows.Forms.Button();
+			this.subtractCaloriesButton = new System.Windows.Forms.Button();
+			this.ManualButton = new System.Windows.Forms.TabPage();
+			this.manualZeroOutButton = new System.Windows.Forms.Button();
+			this.manualResetButton = new System.Windows.Forms.Button();
+			this.manualSubmitButton = new System.Windows.Forms.Button();
+			this.ManualFoodLabel = new System.Windows.Forms.Label();
+			this.manualCalorieEditBox = new System.Windows.Forms.NumericUpDown();
 			this.refreshCaloriesTimeButton = new System.Windows.Forms.Button();
 			this.newItemCheckbox = new System.Windows.Forms.CheckBox();
 			this.timeRadioButton = new System.Windows.Forms.RadioButton();
 			this.calorieRadioButton = new System.Windows.Forms.RadioButton();
 			this.exactSearchCheckBox = new System.Windows.Forms.CheckBox();
 			this.nextSearchButton = new System.Windows.Forms.Button();
-			this.Seperator2 = new System.Windows.Forms.Label();
-			this.Seperator1 = new System.Windows.Forms.Label();
-			this.userServingInputTextBox = new System.Windows.Forms.NumericUpDown();
 			this.caloriesPerServingEditBox = new System.Windows.Forms.NumericUpDown();
-			this.howManyServingsLabel = new System.Windows.Forms.Label();
 			this.servingSizeEditBox = new System.Windows.Forms.NumericUpDown();
-			this.addCaloriesButtonMain = new System.Windows.Forms.Button();
-			this.subtractCaloriesButton = new System.Windows.Forms.Button();
 			this.deleteSelectedFoodItemButton = new System.Windows.Forms.Button();
 			this.caloriesLabel = new System.Windows.Forms.Label();
 			this.clearSearchBarButton = new System.Windows.Forms.Button();
@@ -121,102 +119,23 @@ namespace WeightWatchingProgramPlus
 			this.foodList = new System.Windows.Forms.ListBox();
 			this.tabsMenu = new System.Windows.Forms.TabControl();
 			this.additionalOptionsTab = new System.Windows.Forms.TabPage();
+			this.exactResetDatetimePicker = new System.Windows.Forms.DateTimePicker();
 			this.label3 = new System.Windows.Forms.Label();
-			this.AmPmComboBox = new System.Windows.Forms.ComboBox();
 			this.Seperator5 = new System.Windows.Forms.Label();
-			this.Seperator4 = new System.Windows.Forms.Label();
-			this.HourEditBox = new System.Windows.Forms.NumericUpDown();
 			this.seperator3 = new System.Windows.Forms.Label();
 			this.resetCaloriesManualCheckBox = new System.Windows.Forms.CheckBox();
-			this.manualTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).BeginInit();
 			this.planTab.SuspendLayout();
 			this.FoodListPage.SuspendLayout();
+			this.MainSubTabControl.SuspendLayout();
+			this.AddSubButton.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.userServingInputTextBox)).BeginInit();
+			this.ManualButton.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.caloriesPerServingEditBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.servingSizeEditBox)).BeginInit();
 			this.tabsMenu.SuspendLayout();
 			this.additionalOptionsTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.HourEditBox)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// manualTab
-			// 
-			this.manualTab.AccessibleRole = System.Windows.Forms.AccessibleRole.WhiteSpace;
-			this.manualTab.CausesValidation = false;
-			this.manualTab.Controls.Add(this.manualZeroOutButton);
-			this.manualTab.Controls.Add(this.manualResetButton);
-			this.manualTab.Controls.Add(this.manualSubmitButton);
-			this.manualTab.Controls.Add(this.label2);
-			this.manualTab.Controls.Add(this.manualCalorieEditBox);
-			this.manualTab.Location = new System.Drawing.Point(4, 28);
-			this.manualTab.Name = "manualTab";
-			this.manualTab.Padding = new System.Windows.Forms.Padding(3);
-			this.manualTab.Size = new System.Drawing.Size(795, 507);
-			this.manualTab.TabIndex = 2;
-			this.manualTab.Text = "Edit Your Daily Calorie Allowance";
-			this.manualTab.UseVisualStyleBackColor = true;
-			// 
-			// manualZeroOutButton
-			// 
-			this.manualZeroOutButton.Location = new System.Drawing.Point(387, 251);
-			this.manualZeroOutButton.Name = "manualZeroOutButton";
-			this.manualZeroOutButton.Size = new System.Drawing.Size(147, 40);
-			this.manualZeroOutButton.TabIndex = 4;
-			this.manualZeroOutButton.Text = "Zero Out Calories";
-			this.manualZeroOutButton.UseVisualStyleBackColor = true;
-			this.manualZeroOutButton.Click += new System.EventHandler(this.ZeroOutCaloriesButtonClicked);
-			// 
-			// manualResetButton
-			// 
-			this.manualResetButton.Location = new System.Drawing.Point(246, 251);
-			this.manualResetButton.Name = "manualResetButton";
-			this.manualResetButton.Size = new System.Drawing.Size(142, 40);
-			this.manualResetButton.TabIndex = 3;
-			this.manualResetButton.Text = "Reset Calories To Default";
-			this.manualResetButton.UseVisualStyleBackColor = true;
-			this.manualResetButton.Click += new System.EventHandler(this.ResetCaloriesButtonClicked);
-			// 
-			// manualSubmitButton
-			// 
-			this.manualSubmitButton.Font = new System.Drawing.Font("Bookman Old Style", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.manualSubmitButton.Location = new System.Drawing.Point(246, 291);
-			this.manualSubmitButton.Name = "manualSubmitButton";
-			this.manualSubmitButton.Size = new System.Drawing.Size(288, 42);
-			this.manualSubmitButton.TabIndex = 2;
-			this.manualSubmitButton.Text = "Submit";
-			this.manualSubmitButton.UseVisualStyleBackColor = true;
-			this.manualSubmitButton.Click += new System.EventHandler(this.ManualSubmitButtonClicked);
-			// 
-			// label2
-			// 
-			this.label2.Font = new System.Drawing.Font("Bookman Old Style", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(246, 150);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(288, 44);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "CALORIES";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// manualCalorieEditBox
-			// 
-			this.manualCalorieEditBox.DecimalPlaces = 3;
-			this.manualCalorieEditBox.Font = new System.Drawing.Font("Book Antiqua", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.manualCalorieEditBox.Increment = new decimal(new int[] {
-			1,
-			0,
-			0,
-			196608});
-			this.manualCalorieEditBox.Location = new System.Drawing.Point(246, 197);
-			this.manualCalorieEditBox.Maximum = new decimal(new int[] {
-			0,
-			434162106,
-			542,
-			0});
-			this.manualCalorieEditBox.Name = "manualCalorieEditBox";
-			this.manualCalorieEditBox.Size = new System.Drawing.Size(288, 52);
-			this.manualCalorieEditBox.TabIndex = 0;
-			this.manualCalorieEditBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// planTab
 			// 
@@ -250,22 +169,15 @@ namespace WeightWatchingProgramPlus
 			// FoodListPage
 			// 
 			this.FoodListPage.BackColor = System.Drawing.SystemColors.Control;
-			this.FoodListPage.Controls.Add(this.WriteToFileCheckBox);
-			this.FoodListPage.Controls.Add(this.RecordFoodCheckBox);
+			this.FoodListPage.Controls.Add(this.MainSubTabControl);
 			this.FoodListPage.Controls.Add(this.refreshCaloriesTimeButton);
 			this.FoodListPage.Controls.Add(this.newItemCheckbox);
 			this.FoodListPage.Controls.Add(this.timeRadioButton);
 			this.FoodListPage.Controls.Add(this.calorieRadioButton);
 			this.FoodListPage.Controls.Add(this.exactSearchCheckBox);
 			this.FoodListPage.Controls.Add(this.nextSearchButton);
-			this.FoodListPage.Controls.Add(this.Seperator2);
-			this.FoodListPage.Controls.Add(this.Seperator1);
-			this.FoodListPage.Controls.Add(this.userServingInputTextBox);
 			this.FoodListPage.Controls.Add(this.caloriesPerServingEditBox);
-			this.FoodListPage.Controls.Add(this.howManyServingsLabel);
 			this.FoodListPage.Controls.Add(this.servingSizeEditBox);
-			this.FoodListPage.Controls.Add(this.addCaloriesButtonMain);
-			this.FoodListPage.Controls.Add(this.subtractCaloriesButton);
 			this.FoodListPage.Controls.Add(this.deleteSelectedFoodItemButton);
 			this.FoodListPage.Controls.Add(this.caloriesLabel);
 			this.FoodListPage.Controls.Add(this.clearSearchBarButton);
@@ -289,6 +201,35 @@ namespace WeightWatchingProgramPlus
 			this.FoodListPage.Text = "Main";
 			this.FoodListPage.ToolTipText = "The main menu of the program containing a food list and editing service, //TBD//";
 			// 
+			// MainSubTabControl
+			// 
+			this.MainSubTabControl.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+			this.MainSubTabControl.Controls.Add(this.AddSubButton);
+			this.MainSubTabControl.Controls.Add(this.ManualButton);
+			this.MainSubTabControl.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.MainSubTabControl.Location = new System.Drawing.Point(0, 283);
+			this.MainSubTabControl.Name = "MainSubTabControl";
+			this.MainSubTabControl.SelectedIndex = 0;
+			this.MainSubTabControl.Size = new System.Drawing.Size(792, 228);
+			this.MainSubTabControl.TabIndex = 21;
+			// 
+			// AddSubButton
+			// 
+			this.AddSubButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.AddSubButton.Controls.Add(this.WriteToFileCheckBox);
+			this.AddSubButton.Controls.Add(this.RecordFoodCheckBox);
+			this.AddSubButton.Controls.Add(this.userServingInputTextBox);
+			this.AddSubButton.Controls.Add(this.howManyServingsLabel);
+			this.AddSubButton.Controls.Add(this.addCaloriesButtonMain);
+			this.AddSubButton.Controls.Add(this.subtractCaloriesButton);
+			this.AddSubButton.Location = new System.Drawing.Point(4, 27);
+			this.AddSubButton.Name = "AddSubButton";
+			this.AddSubButton.Padding = new System.Windows.Forms.Padding(3);
+			this.AddSubButton.Size = new System.Drawing.Size(784, 197);
+			this.AddSubButton.TabIndex = 0;
+			this.AddSubButton.Text = "Add/Subtract";
+			this.AddSubButton.UseVisualStyleBackColor = true;
+			// 
 			// WriteToFileCheckBox
 			// 
 			this.WriteToFileCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
@@ -296,10 +237,10 @@ namespace WeightWatchingProgramPlus
 			this.WriteToFileCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.WriteToFileCheckBox.Enabled = false;
 			this.WriteToFileCheckBox.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.WriteToFileCheckBox.Location = new System.Drawing.Point(691, 348);
+			this.WriteToFileCheckBox.Location = new System.Drawing.Point(679, 70);
 			this.WriteToFileCheckBox.Name = "WriteToFileCheckBox";
 			this.WriteToFileCheckBox.Size = new System.Drawing.Size(96, 26);
-			this.WriteToFileCheckBox.TabIndex = 15;
+			this.WriteToFileCheckBox.TabIndex = 26;
 			this.WriteToFileCheckBox.Text = "Write to File?";
 			this.WriteToFileCheckBox.UseVisualStyleBackColor = true;
 			// 
@@ -309,13 +250,156 @@ namespace WeightWatchingProgramPlus
 			this.RecordFoodCheckBox.Checked = true;
 			this.RecordFoodCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.RecordFoodCheckBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.RecordFoodCheckBox.Location = new System.Drawing.Point(691, 317);
+			this.RecordFoodCheckBox.Location = new System.Drawing.Point(679, 39);
 			this.RecordFoodCheckBox.Name = "RecordFoodCheckBox";
 			this.RecordFoodCheckBox.Size = new System.Drawing.Size(97, 25);
-			this.RecordFoodCheckBox.TabIndex = 14;
+			this.RecordFoodCheckBox.TabIndex = 25;
 			this.RecordFoodCheckBox.Text = "Record?";
 			this.RecordFoodCheckBox.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.RecordFoodCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// userServingInputTextBox
+			// 
+			this.userServingInputTextBox.DecimalPlaces = 9;
+			this.userServingInputTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.userServingInputTextBox.Increment = new decimal(new int[] {
+			1,
+			0,
+			0,
+			196608});
+			this.userServingInputTextBox.Location = new System.Drawing.Point(98, 50);
+			this.userServingInputTextBox.Maximum = new decimal(new int[] {
+			0,
+			902409669,
+			54,
+			0});
+			this.userServingInputTextBox.Minimum = new decimal(new int[] {
+			1,
+			0,
+			0,
+			655360});
+			this.userServingInputTextBox.Name = "userServingInputTextBox";
+			this.userServingInputTextBox.Size = new System.Drawing.Size(575, 35);
+			this.userServingInputTextBox.TabIndex = 24;
+			this.userServingInputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.userServingInputTextBox.Value = new decimal(new int[] {
+			1,
+			0,
+			0,
+			0});
+			// 
+			// howManyServingsLabel
+			// 
+			this.howManyServingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.howManyServingsLabel.Location = new System.Drawing.Point(98, 3);
+			this.howManyServingsLabel.Name = "howManyServingsLabel";
+			this.howManyServingsLabel.Size = new System.Drawing.Size(575, 33);
+			this.howManyServingsLabel.TabIndex = 29;
+			this.howManyServingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// addCaloriesButtonMain
+			// 
+			this.addCaloriesButtonMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.addCaloriesButtonMain.ForeColor = System.Drawing.SystemColors.HotTrack;
+			this.addCaloriesButtonMain.Location = new System.Drawing.Point(6, 158);
+			this.addCaloriesButtonMain.Name = "addCaloriesButtonMain";
+			this.addCaloriesButtonMain.Size = new System.Drawing.Size(770, 33);
+			this.addCaloriesButtonMain.TabIndex = 28;
+			this.addCaloriesButtonMain.Text = "Add selected item\'s calories to your daily calorie allowance";
+			this.addCaloriesButtonMain.UseVisualStyleBackColor = true;
+			this.addCaloriesButtonMain.Click += new System.EventHandler(this.ModifyCalories);
+			// 
+			// subtractCaloriesButton
+			// 
+			this.subtractCaloriesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.subtractCaloriesButton.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.subtractCaloriesButton.Location = new System.Drawing.Point(6, 107);
+			this.subtractCaloriesButton.Name = "subtractCaloriesButton";
+			this.subtractCaloriesButton.Size = new System.Drawing.Size(770, 36);
+			this.subtractCaloriesButton.TabIndex = 27;
+			this.subtractCaloriesButton.Text = "Subtract selected food item from your daily calorie allowance";
+			this.subtractCaloriesButton.UseVisualStyleBackColor = true;
+			this.subtractCaloriesButton.Click += new System.EventHandler(this.ModifyCalories);
+			// 
+			// ManualButton
+			// 
+			this.ManualButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.ManualButton.Controls.Add(this.manualZeroOutButton);
+			this.ManualButton.Controls.Add(this.manualResetButton);
+			this.ManualButton.Controls.Add(this.manualSubmitButton);
+			this.ManualButton.Controls.Add(this.ManualFoodLabel);
+			this.ManualButton.Controls.Add(this.manualCalorieEditBox);
+			this.ManualButton.Location = new System.Drawing.Point(4, 27);
+			this.ManualButton.Name = "ManualButton";
+			this.ManualButton.Padding = new System.Windows.Forms.Padding(3);
+			this.ManualButton.Size = new System.Drawing.Size(784, 197);
+			this.ManualButton.TabIndex = 1;
+			this.ManualButton.Text = "Manual";
+			this.ManualButton.UseVisualStyleBackColor = true;
+			// 
+			// manualZeroOutButton
+			// 
+			this.manualZeroOutButton.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.manualZeroOutButton.Location = new System.Drawing.Point(401, 112);
+			this.manualZeroOutButton.Name = "manualZeroOutButton";
+			this.manualZeroOutButton.Size = new System.Drawing.Size(377, 40);
+			this.manualZeroOutButton.TabIndex = 9;
+			this.manualZeroOutButton.Text = "Zero Out Calories";
+			this.manualZeroOutButton.UseVisualStyleBackColor = true;
+			this.manualZeroOutButton.Click += new System.EventHandler(this.ZeroOutCaloriesButtonClicked);
+			// 
+			// manualResetButton
+			// 
+			this.manualResetButton.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.manualResetButton.Location = new System.Drawing.Point(6, 112);
+			this.manualResetButton.Name = "manualResetButton";
+			this.manualResetButton.Size = new System.Drawing.Size(389, 40);
+			this.manualResetButton.TabIndex = 8;
+			this.manualResetButton.Text = "Reset Calories To Default";
+			this.manualResetButton.UseVisualStyleBackColor = true;
+			this.manualResetButton.Click += new System.EventHandler(this.ResetCaloriesButtonClicked);
+			// 
+			// manualSubmitButton
+			// 
+			this.manualSubmitButton.Font = new System.Drawing.Font("Bookman Old Style", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.manualSubmitButton.Location = new System.Drawing.Point(6, 158);
+			this.manualSubmitButton.Name = "manualSubmitButton";
+			this.manualSubmitButton.Size = new System.Drawing.Size(772, 33);
+			this.manualSubmitButton.TabIndex = 7;
+			this.manualSubmitButton.Text = "Submit";
+			this.manualSubmitButton.UseVisualStyleBackColor = true;
+			this.manualSubmitButton.Click += new System.EventHandler(this.ManualSubmitButtonClicked);
+			// 
+			// ManualFoodLabel
+			// 
+			this.ManualFoodLabel.Font = new System.Drawing.Font("Bookman Old Style", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ManualFoodLabel.Location = new System.Drawing.Point(6, 3);
+			this.ManualFoodLabel.Name = "ManualFoodLabel";
+			this.ManualFoodLabel.Size = new System.Drawing.Size(772, 48);
+			this.ManualFoodLabel.TabIndex = 6;
+			this.ManualFoodLabel.Text = "Enter the amount of calories you want to set your daily allowance to in the box b" +
+	"elow";
+			this.ManualFoodLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// manualCalorieEditBox
+			// 
+			this.manualCalorieEditBox.DecimalPlaces = 3;
+			this.manualCalorieEditBox.Font = new System.Drawing.Font("Book Antiqua", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.manualCalorieEditBox.Increment = new decimal(new int[] {
+			1,
+			0,
+			0,
+			196608});
+			this.manualCalorieEditBox.Location = new System.Drawing.Point(6, 54);
+			this.manualCalorieEditBox.Maximum = new decimal(new int[] {
+			0,
+			434162106,
+			542,
+			0});
+			this.manualCalorieEditBox.Name = "manualCalorieEditBox";
+			this.manualCalorieEditBox.Size = new System.Drawing.Size(772, 52);
+			this.manualCalorieEditBox.TabIndex = 5;
+			this.manualCalorieEditBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// refreshCaloriesTimeButton
 			// 
@@ -387,51 +471,6 @@ namespace WeightWatchingProgramPlus
 			this.nextSearchButton.UseVisualStyleBackColor = true;
 			this.nextSearchButton.Click += new System.EventHandler(this.FindNextSearchItem);
 			// 
-			// Seperator2
-			// 
-			this.Seperator2.Location = new System.Drawing.Point(3, 272);
-			this.Seperator2.Name = "Seperator2";
-			this.Seperator2.Size = new System.Drawing.Size(785, 8);
-			this.Seperator2.TabIndex = 0;
-			this.Seperator2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// Seperator1
-			// 
-			this.Seperator1.Location = new System.Drawing.Point(433, 42);
-			this.Seperator1.Name = "Seperator1";
-			this.Seperator1.Size = new System.Drawing.Size(10, 230);
-			this.Seperator1.TabIndex = 0;
-			// 
-			// userServingInputTextBox
-			// 
-			this.userServingInputTextBox.DecimalPlaces = 9;
-			this.userServingInputTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.userServingInputTextBox.Increment = new decimal(new int[] {
-			1,
-			0,
-			0,
-			196608});
-			this.userServingInputTextBox.Location = new System.Drawing.Point(111, 329);
-			this.userServingInputTextBox.Maximum = new decimal(new int[] {
-			0,
-			902409669,
-			54,
-			0});
-			this.userServingInputTextBox.Minimum = new decimal(new int[] {
-			1,
-			0,
-			0,
-			655360});
-			this.userServingInputTextBox.Name = "userServingInputTextBox";
-			this.userServingInputTextBox.Size = new System.Drawing.Size(575, 35);
-			this.userServingInputTextBox.TabIndex = 13;
-			this.userServingInputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.userServingInputTextBox.Value = new decimal(new int[] {
-			1,
-			0,
-			0,
-			0});
-			// 
 			// caloriesPerServingEditBox
 			// 
 			this.caloriesPerServingEditBox.DecimalPlaces = 2;
@@ -446,15 +485,6 @@ namespace WeightWatchingProgramPlus
 			this.caloriesPerServingEditBox.Size = new System.Drawing.Size(156, 26);
 			this.caloriesPerServingEditBox.TabIndex = 9;
 			// 
-			// howManyServingsLabel
-			// 
-			this.howManyServingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.howManyServingsLabel.Location = new System.Drawing.Point(111, 276);
-			this.howManyServingsLabel.Name = "howManyServingsLabel";
-			this.howManyServingsLabel.Size = new System.Drawing.Size(575, 33);
-			this.howManyServingsLabel.TabIndex = 23;
-			this.howManyServingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
 			// servingSizeEditBox
 			// 
 			this.servingSizeEditBox.DecimalPlaces = 2;
@@ -468,30 +498,6 @@ namespace WeightWatchingProgramPlus
 			this.servingSizeEditBox.Name = "servingSizeEditBox";
 			this.servingSizeEditBox.Size = new System.Drawing.Size(168, 26);
 			this.servingSizeEditBox.TabIndex = 8;
-			// 
-			// addCaloriesButtonMain
-			// 
-			this.addCaloriesButtonMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.addCaloriesButtonMain.ForeColor = System.Drawing.SystemColors.HotTrack;
-			this.addCaloriesButtonMain.Location = new System.Drawing.Point(13, 461);
-			this.addCaloriesButtonMain.Name = "addCaloriesButtonMain";
-			this.addCaloriesButtonMain.Size = new System.Drawing.Size(776, 43);
-			this.addCaloriesButtonMain.TabIndex = 17;
-			this.addCaloriesButtonMain.Text = "Add selected item\'s calories to your daily calorie allowance";
-			this.addCaloriesButtonMain.UseVisualStyleBackColor = true;
-			this.addCaloriesButtonMain.Click += new System.EventHandler(this.ModifyCalories);
-			// 
-			// subtractCaloriesButton
-			// 
-			this.subtractCaloriesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.subtractCaloriesButton.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.subtractCaloriesButton.Location = new System.Drawing.Point(13, 394);
-			this.subtractCaloriesButton.Name = "subtractCaloriesButton";
-			this.subtractCaloriesButton.Size = new System.Drawing.Size(776, 43);
-			this.subtractCaloriesButton.TabIndex = 16;
-			this.subtractCaloriesButton.Text = "Subtract selected food item from your daily calorie allowance";
-			this.subtractCaloriesButton.UseVisualStyleBackColor = true;
-			this.subtractCaloriesButton.Click += new System.EventHandler(this.ModifyCalories);
 			// 
 			// deleteSelectedFoodItemButton
 			// 
@@ -645,7 +651,6 @@ namespace WeightWatchingProgramPlus
 			this.tabsMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
 			this.tabsMenu.Controls.Add(this.FoodListPage);
 			this.tabsMenu.Controls.Add(this.planTab);
-			this.tabsMenu.Controls.Add(this.manualTab);
 			this.tabsMenu.Controls.Add(this.additionalOptionsTab);
 			this.tabsMenu.Font = new System.Drawing.Font("Bookman Old Style", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabsMenu.HotTrack = true;
@@ -661,11 +666,9 @@ namespace WeightWatchingProgramPlus
 			// 
 			// additionalOptionsTab
 			// 
+			this.additionalOptionsTab.Controls.Add(this.exactResetDatetimePicker);
 			this.additionalOptionsTab.Controls.Add(this.label3);
-			this.additionalOptionsTab.Controls.Add(this.AmPmComboBox);
 			this.additionalOptionsTab.Controls.Add(this.Seperator5);
-			this.additionalOptionsTab.Controls.Add(this.Seperator4);
-			this.additionalOptionsTab.Controls.Add(this.HourEditBox);
 			this.additionalOptionsTab.Controls.Add(this.seperator3);
 			this.additionalOptionsTab.Controls.Add(this.resetCaloriesManualCheckBox);
 			this.additionalOptionsTab.Location = new System.Drawing.Point(4, 28);
@@ -676,29 +679,26 @@ namespace WeightWatchingProgramPlus
 			this.additionalOptionsTab.Text = "Additional Options";
 			this.additionalOptionsTab.UseVisualStyleBackColor = true;
 			// 
+			// exactResetDatetimePicker
+			// 
+			this.exactResetDatetimePicker.CustomFormat = "MMMMM dd yyyy hh:mm:ss tt";
+			this.exactResetDatetimePicker.Enabled = false;
+			this.exactResetDatetimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.exactResetDatetimePicker.Location = new System.Drawing.Point(261, 14);
+			this.exactResetDatetimePicker.Name = "exactResetDatetimePicker";
+			this.exactResetDatetimePicker.Size = new System.Drawing.Size(270, 23);
+			this.exactResetDatetimePicker.TabIndex = 36;
+			this.exactResetDatetimePicker.ValueChanged += new System.EventHandler(this.ExactResetDatetimePickerValueChanged);
+			// 
 			// label3
 			// 
 			this.label3.Font = new System.Drawing.Font("Bookman Old Style", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(0, 1);
+			this.label3.Location = new System.Drawing.Point(0, 87);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(795, 504);
+			this.label3.Size = new System.Drawing.Size(795, 418);
 			this.label3.TabIndex = 35;
 			this.label3.Text = "UNFINISHED";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// AmPmComboBox
-			// 
-			this.AmPmComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.AmPmComboBox.FormattingEnabled = true;
-			this.AmPmComboBox.Items.AddRange(new object[] {
-			"AM",
-			"PM"});
-			this.AmPmComboBox.Location = new System.Drawing.Point(341, 14);
-			this.AmPmComboBox.MaxDropDownItems = 2;
-			this.AmPmComboBox.Name = "AmPmComboBox";
-			this.AmPmComboBox.Size = new System.Drawing.Size(49, 24);
-			this.AmPmComboBox.Sorted = true;
-			this.AmPmComboBox.TabIndex = 34;
 			// 
 			// Seperator5
 			// 
@@ -707,22 +707,6 @@ namespace WeightWatchingProgramPlus
 			this.Seperator5.Size = new System.Drawing.Size(783, 8);
 			this.Seperator5.TabIndex = 33;
 			this.Seperator5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// Seperator4
-			// 
-			this.Seperator4.Location = new System.Drawing.Point(396, 3);
-			this.Seperator4.Name = "Seperator4";
-			this.Seperator4.Size = new System.Drawing.Size(10, 47);
-			this.Seperator4.TabIndex = 32;
-			// 
-			// HourEditBox
-			// 
-			this.HourEditBox.Enabled = false;
-			this.HourEditBox.Location = new System.Drawing.Point(262, 14);
-			this.HourEditBox.Name = "HourEditBox";
-			this.HourEditBox.Size = new System.Drawing.Size(73, 23);
-			this.HourEditBox.TabIndex = 31;
-			this.HourEditBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// seperator3
 			// 
@@ -741,6 +725,7 @@ namespace WeightWatchingProgramPlus
 			this.resetCaloriesManualCheckBox.Text = "Reset Calories At a Specific Time";
 			this.resetCaloriesManualCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.resetCaloriesManualCheckBox.UseVisualStyleBackColor = true;
+			this.resetCaloriesManualCheckBox.CheckedChanged += new System.EventHandler(this.ResetCaloriesSpecificCheckBoxCheckStatusChanged);
 			// 
 			// MainForm
 			// 
@@ -757,17 +742,18 @@ namespace WeightWatchingProgramPlus
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Weight Watching Program";
-			this.manualTab.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).EndInit();
 			this.planTab.ResumeLayout(false);
 			this.FoodListPage.ResumeLayout(false);
 			this.FoodListPage.PerformLayout();
+			this.MainSubTabControl.ResumeLayout(false);
+			this.AddSubButton.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.userServingInputTextBox)).EndInit();
+			this.ManualButton.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.caloriesPerServingEditBox)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.servingSizeEditBox)).EndInit();
 			this.tabsMenu.ResumeLayout(false);
 			this.additionalOptionsTab.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.HourEditBox)).EndInit();
 			this.ResumeLayout(false);
 
 		}

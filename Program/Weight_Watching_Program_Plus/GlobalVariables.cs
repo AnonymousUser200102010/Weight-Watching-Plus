@@ -49,6 +49,8 @@ namespace WeightWatchingProgramPlus
         public static int SelectedListItem { get; set; }
 
         public static Form MainForm { get; set; }
+        
+        public static DateTimePicker ExactResetDateTimePicker { get; set; }
 
         static GlobalVariables ()
         {

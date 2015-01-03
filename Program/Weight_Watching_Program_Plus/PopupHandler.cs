@@ -9,10 +9,11 @@ namespace WeightWatchingProgramPlus
 		
 		readonly string[] title = {
 			"Error: ValueIsNull",
-			"You're overeating.",
-			"You're overeating.",
-			"Midnight Snacking Penalty.",
-			"Error: ValueIsIdentical"
+			"You're overeating",
+			"You're overeating",
+			"Midnight Snacking Penalty",
+			"Error: ValueIsIdentical",
+			"Confirm Deletion"
 		};
 		
 		readonly MessageBoxButtons[] messageBoxButton = {
@@ -20,7 +21,8 @@ namespace WeightWatchingProgramPlus
 			MessageBoxButtons.OK,
 			MessageBoxButtons.YesNo,
 			MessageBoxButtons.OKCancel,
-			MessageBoxButtons.OK
+			MessageBoxButtons.OK,
+			MessageBoxButtons.YesNo
 		};
 		
 		readonly MessageBoxIcon[] messageBoxIcon = {
@@ -28,7 +30,8 @@ namespace WeightWatchingProgramPlus
 			MessageBoxIcon.Information,
 			MessageBoxIcon.Warning,
 			MessageBoxIcon.Information,
-			MessageBoxIcon.Error
+			MessageBoxIcon.Error,
+			MessageBoxIcon.Warning
 		};
 		
 		public DialogResult ErrorMessageBox (string message, Control controlItem, int errorCode, bool hasAdditionalActions)

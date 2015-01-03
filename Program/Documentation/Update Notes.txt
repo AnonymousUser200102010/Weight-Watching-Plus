@@ -3,14 +3,19 @@ Update 5:
 Highlights:
 -- new item functionality has been improved. Before it allowed a work-around to the "NoIdentical" error by modifying after creating. This has been fixed.
 -- Registry system revamped. Hopefully with more accurate and efficient results. So far so good, though.
+-- GUI slimmed down. Add/Subtract and Manual are in a tab window together, among other things.
 
 Features:
 -- Implemented rudimentary argument support.
+-- Manual Reset Time implemented: this feature allows you to set the time the calories will reset, and it will remain at this value until you change it (not recommended for beginners!
+	-- Right now, the MRT resets to disabled every turn on and shut off. This is a sort of "fail-safe" for beginners. I am thinking of implementing it as persistent, however.
 
 Bug Fix:
 -- Fixed a bug with the newly implemented "NoIdentical" error on adding an item (which unintentionally stopped property setting).
 -- Fixed the persistent bug mentioned in the last update.
 -- Manual tab would never update it's value with the actual calorie count. This has been fixed.
+-- Search function would not return to the top of the food list upon reaching the last possible valid search entry. This has been fixed. The program would also crash when attempting to use the "exact" search function. This has also been fixed.
+-- Fixed a bug with the "Midnight Snacking Penalty" functionality that did not prompt the user, among other things.
 
 Update 4:
 
