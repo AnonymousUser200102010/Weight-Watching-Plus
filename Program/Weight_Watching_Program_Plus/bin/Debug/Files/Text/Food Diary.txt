@@ -1,354 +1,60 @@
-At 01:34:05 AM (on: January 03, 2015) You ate: 100 meals (of: 'Banquet meatloaf meal').
-Which is 100 servings, or 25000 calories of 'Banquet meatloaf meal'. You had 2140 calories left for the day.
+At 02:16:07 PM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:33:55 AM (on: January 03, 2015) You ate: 10.000000000 meals (of: 'Banquet meatloaf meal').
-Which is 10 servings, or 2500 calories of 'Banquet meatloaf meal'. You had 2140 calories left for the day.
+At 02:16:05 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 88.33334 calories left for the day.
 -
-At 01:31:39 AM (on: January 03, 2015) You added back to your calorie count: 1 packet (of: 'beef top ramen').
-Which is 1 servings, or 380 calories of 'beef top ramen'. You had 2140 calories left for the day.
+At 02:15:45 PM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:31:36 AM (on: January 03, 2015) You ate: 1 packet (of: 'beef top ramen').
-Which is 1 servings, or 380 calories of 'beef top ramen'. You had 1722 calories left for the day.
+At 02:15:44 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 88.33334 calories left for the day.
 -
-At 01:31:09 AM (on: January 03, 2015) You added back to your calorie count: 10 ounces (of: 'banana').
-Which is 10 servings, or 250 calories of 'banana'. You had 2140 calories left for the day.
+At 02:13:27 PM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:31:03 AM (on: January 03, 2015) You ate: 10 ounces (of: 'banana').
-Which is 10 servings, or 250 calories of 'banana'. You had 1865 calories left for the day.
+At 02:13:25 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 88.33334 calories left for the day.
 -
-At 01:30:36 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2140 calories left for the day.
+At 02:13:18 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:30:23 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2105 calories left for the day.
+At 02:13:15 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:30:15 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
+At 02:12:55 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:29:48 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2140 calories left for the day.
+At 02:11:46 PM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 100 calories left for the day.
 -
-At 01:29:45 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2140 calories left for the day.
+At 02:11:45 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 88.33334 calories left for the day.
 -
-At 01:28:09 AM (on: January 03, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
+At 02:10:32 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 10 calories left for the day.
+-
+At 02:09:48 PM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
 -
-At 01:26:40 AM (on: January 03, 2015) You added back to your calorie count: 15 ounces (of: 'banana').
-Which is 15 servings, or 375 calories of 'banana'. You had 2120 calories left for the day.
--
-At 01:26:36 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2105 calories left for the day.
--
-At 01:26:19 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
--
-At 01:24:33 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
+At 02:09:46 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
 -
-At 01:24:30 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
+At 02:09:17 PM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
 -
-At 01:23:48 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2120 calories left for the day.
--
-At 01:23:44 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2105 calories left for the day.
--
-At 01:22:28 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2125 calories left for the day.
--
-At 01:22:23 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:22:20 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:21:33 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2135 calories left for the day.
--
-At 01:21:30 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2120 calories left for the day.
--
-At 01:21:29 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2105 calories left for the day.
--
-At 01:20:48 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2120 calories left for the day.
--
-At 01:20:44 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2105 calories left for the day.
--
-At 01:19:56 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2140 calories left for the day.
--
-At 01:19:56 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2115 calories left for the day.
--
-At 01:19:55 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2090 calories left for the day.
--
-At 01:19:38 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 2115 calories left for the day.
--
-At 01:16:07 AM (on: January 03, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 75 calories left for the day.
--
-At 01:16:06 AM (on: January 03, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 25 calories left for the day.
--
-At 01:12:48 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:11:03 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
--
-At 01:09:02 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:07:17 AM (on: January 03, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:07:07 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:06:34 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:05:18 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 01:04:48 AM (on: January 03, 2015) You added back to your calorie count: 1 pie (of: 'banquet pot pie').
-Which is 1 servings, or 430 calories of 'banquet pot pie'. You had 2054 calories left for the day.
--
-At 01:04:31 AM (on: January 03, 2015) You ate: 1 pie (of: 'banquet pot pie').
-Which is 1 servings, or 430 calories of 'banquet pot pie'. You had 1667 calories left for the day.
--
-At 01:04:28 AM (on: January 03, 2015) You ate: 1 pie (of: 'banquet pot pie').
-Which is 1 servings, or 430 calories of 'banquet pot pie'. You had 2140 calories left for the day.
--
-At 01:03:56 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
--
-At 01:01:21 AM (on: January 03, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2120 calories left for the day.
--
-At 01:01:17 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
--
-At 01:01:14 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 12:59:22 AM (on: January 03, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 08:17:40 PM (on: January 01, 2015) You added back to your calorie count: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 0 calories left for the day.
--
-At 08:17:39 PM (on: January 01, 2015) You ate: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 60 calories left for the day.
--
-At 08:15:53 PM (on: January 01, 2015) You added back to your calorie count: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 0 calories left for the day.
--
-At 08:15:52 PM (on: January 01, 2015) You ate: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 60 calories left for the day.
--
-At 08:15:24 PM (on: January 01, 2015) You added back to your calorie count: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 0 calories left for the day.
--
-At 08:15:23 PM (on: January 01, 2015) You ate: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 60 calories left for the day.
--
-At 08:10:34 PM (on: January 01, 2015) You added back to your calorie count: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 0 calories left for the day.
--
-At 08:10:27 PM (on: January 01, 2015) You ate: 1 ounce (of: 'banana').
-Which is 1 servings, or 25 calories of 'banana'. You had 25 calories left for the day.
--
-At 08:07:51 PM (on: January 01, 2015) You added back to your calorie count: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 0 calories left for the day.
--
-At 08:07:51 PM (on: January 01, 2015) You ate: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 60 calories left for the day.
--
-At 08:07:49 PM (on: January 01, 2015) You added back to your calorie count: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 0 calories left for the day.
--
-At 08:07:48 PM (on: January 01, 2015) You ate: 1 bar (of: 'outshine fruit bars (grape)').
-Which is 1 servings, or 60 calories of 'outshine fruit bars (grape)'. You had 60 calories left for the day.
--
-At 08:03:46 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66666 calories left for the day.
--
-At 08:03:45 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
--
--
-At 08:03:42 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66666 calories left for the day.
--
-At 08:03:40 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
--
--
-At 08:03:38 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66667 calories left for the day.
--
-At 04:14:22 PM (on: January 01, 2015) You added back to your calorie count: 1 pie (of: 'banquet pot pie').
-Which is 1 servings, or 430 calories of 'banquet pot pie'. You had 0 calories left for the day.
--
-At 04:14:21 PM (on: January 01, 2015) You ate: 1 pie (of: 'banquet pot pie').
-Which is 1 servings, or 430 calories of 'banquet pot pie'. You had 430 calories left for the day.
--
-At 04:14:04 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2066.001 calories left for the day.
--
-At 04:14:03 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2077.668 calories left for the day.
--
-At 04:07:39 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 2066.001 calories left for the day.
--
-At 04:07:39 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 1816.001 calories left for the day.
--
-At 04:07:39 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 1566.001 calories left for the day.
--
-At 04:07:38 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 1316.001 calories left for the day.
--
-At 04:07:38 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 1066.001 calories left for the day.
--
-At 04:07:38 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 816.0013 calories left for the day.
--
-At 04:07:38 PM (on: January 01, 2015) You added back to your calorie count: 1 meal (of: 'Banquet meatloaf meal').
-Which is 1 servings, or 250 calories of 'Banquet meatloaf meal'. You had 566.0013 calories left for the day.
--
-At 04:07:33 PM (on: January 01, 2015) You ate: 100.000000000 fluid ounces (of: '7up').
-Which is 8.333333 servings, or 1166.6666 calories of '7up'. You had 316.0013 calories left for the day.
--
-At 04:07:26 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 1482.668 calories left for the day.
--
-At 04:07:26 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 1471.001 calories left for the day.
--
-At 04:07:25 PM (on: January 01, 2015) You added back to your calorie count: 100.000000000 fluid ounces (of: '7up').
-Which is 8.333333 servings, or 1166.6666 calories of '7up'. You had 1459.334 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 292.6671 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 281.0005 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 269.3338 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 257.6671 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 246.0004 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 234.3337 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 222.667 calories left for the day.
--
-At 04:07:21 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 211.0003 calories left for the day.
--
-At 04:07:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 199.3336 calories left for the day.
--
-At 04:07:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 187.6669 calories left for the day.
--
-At 04:07:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 176.0002 calories left for the day.
--
-At 04:07:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 164.3335 calories left for the day.
--
-At 04:07:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 152.6668 calories left for the day.
--
-At 04:07:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 141.0001 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 129.3334 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 117.6667 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 106 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 94.33334 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 82.66667 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 71.00001 calories left for the day.
--
-At 04:07:19 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 59.33334 calories left for the day.
--
-At 04:07:18 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 47.66667 calories left for the day.
--
-At 04:07:18 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 36 calories left for the day.
--
-At 04:07:18 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 24.33333 calories left for the day.
--
-At 04:07:18 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 12.66666 calories left for the day.
--
-At 04:07:17 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 0.9999971 calories left for the day.
--
-At 04:07:16 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 10.66667 calories left for the day.
--
-At 03:58:33 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66667 calories left for the day.
--
-At 03:58:32 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
--
--
-At 03:58:31 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66666 calories left for the day.
--
-At 03:58:28 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
--
--
-At 03:58:26 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66667 calories left for the day.
--
-At 03:58:25 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
--
--
-At 03:58:24 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66667 calories left for the day.
--
-At 03:58:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 23.33334 calories left for the day.
--
-At 03:58:20 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 11.66667 calories left for the day.
--
-At 03:56:17 PM (on: January 01, 2015) You added back to your calorie count: 1 fluid ounce (of: '7up').
-Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
--
-At 03:56:09 PM (on: January 01, 2015) You ate: 1 fluid ounce (of: '7up').
+At 02:09:16 PM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2128.333 calories left for the day.
+-
+At 01:03:38 AM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2096.667 calories left for the day.
+-
+At 01:03:34 AM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
+-
+At 12:42:23 AM (on: January 09, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 12:42:22 AM (on: January 09, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
 -

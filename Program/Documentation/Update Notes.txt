@@ -4,11 +4,15 @@ Highlights:
 -- new item functionality has been improved. Before it allowed a work-around to the "NoIdentical" error by modifying after creating. This has been fixed.
 -- Registry system revamped. Hopefully with more accurate and efficient results. So far so good, though.
 -- GUI slimmed down. Add/Subtract and Manual are in a tab window together, among other things.
+-- At this point in time, with special characters causing errors in completely unrelated functions, I am HIGHLY recommending avoiding ANY and ALL special characters. I don't know why it has such a hard time parsing them, but it does, so I'd avoid them like the plague if I were you.
 
 Features:
 -- Implemented rudimentary argument support.
 -- Manual Reset Time implemented: this feature allows you to set the time the calories will reset, and it will remain at this value until you change it (not recommended for beginners!
 	-- Right now, the MRT resets to disabled every turn on and shut off. This is a sort of "fail-safe" for beginners. I am thinking of implementing it as persistent, however.
+-- Under-eating/overeating benefit/subtraction added to ensure people who eat less can have a ... few slip-ups, and those who have persistent overeating habits are punished when the calories reset. For now, this will give the whole allowance. As I progress with the program, I will de research into this subject and hopefully make it more accurate and less arbitrary.
+-- Midnight Snacking Penalty is now referred to as the Eating Before Bed Penalty. If you eat within 8 hours of the reset time, you're punished. This strictly follows hour ONLY for the time being. I hope to fix it to be more accurate in the future.
+-- Default calorie numeric edit box added so you no longer have to fiddle with the code to set the default calorie allowance.
 
 Bug Fix:
 -- Fixed a bug with the newly implemented "NoIdentical" error on adding an item (which unintentionally stopped property setting).
@@ -16,6 +20,8 @@ Bug Fix:
 -- Manual tab would never update it's value with the actual calorie count. This has been fixed.
 -- Search function would not return to the top of the food list upon reaching the last possible valid search entry. This has been fixed. The program would also crash when attempting to use the "exact" search function. This has also been fixed.
 -- Fixed a bug with the "Midnight Snacking Penalty" functionality that did not prompt the user, among other things.
+-- Fixed a bug with the food table writer function which failed because a value was less than 1 and did not validate correctly thereafter.
+-- UniversalHandlersLibrary had a bug where it would crash when Messages.txt did not exist (and to a lesser extent, errors.dmp), this has been fixed.
 
 Update 4:
 

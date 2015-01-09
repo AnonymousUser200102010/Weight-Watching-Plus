@@ -10,19 +10,12 @@
        <Types>
         <Type Name="FoodRelated" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Members>
-          <Member Name="#.cctor()" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
-           <Messages>
-            <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Status="Active" Created="2015-01-03 09:36:59Z" FixCategory="NonBreaking">
-             <Issue Certainty="90" Level="CriticalWarning" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="GlobalVariables.cs" Line="26">Initialize all static fields in 'FoodRelated' when those fields are declared and remove the explicit static constructor.</Issue>
-            </Message>
-           </Messages>
-          </Member>
           <Member Name="#CombinedFoodList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2015-01-03 09:36:59Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2015-01-09 22:59:52Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.CombinedFoodList' to be read-only by removing the property setter.</Issue>
             </Message>
-            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2015-01-03 09:36:59Z" FixCategory="Breaking">
+            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2015-01-09 22:59:52Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalError">Consider a design where 'FoodRelated.CombinedFoodList' doesn't nest generic type 'IList&lt;Tuple&lt;string, float, float, string&gt;&gt;'.</Issue>
             </Message>
            </Messages>
@@ -33,7 +26,7 @@
          <Members>
           <Member Name="#ErrorMessageBox(System.String,System.Windows.Forms.Control,System.Int32,System.Boolean)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-01-03 09:36:59Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-01-09 22:59:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error" Path="c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus" File="PopupHandler.cs" Line="39">Change 'PopupHandler.ErrorMessageBox(string, Control, int, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -67,16 +60,6 @@
    <Email>[none]</Email>
    <MessageLevel Certainty="95">CriticalError</MessageLevel>
    <File Name="designrules.dll" Version="10.0.0.0" />
-  </Rule>
-  <Rule TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810">
-   <Name>Initialize reference type static fields inline</Name>
-   <Description>Static fields should be initialized when declared. Initializing static data in explicit static constructors results in less performant code.</Description>
-   <Resolution Name="Default">Initialize all static fields in {0} when those fields are declared and remove the explicit static constructor.</Resolution>
-   <Owner />
-   <Url>http://msdn.microsoft.com/library/ms182275(VS.100).aspx</Url>
-   <Email>[none]</Email>
-   <MessageLevel Certainty="90">CriticalWarning</MessageLevel>
-   <File Name="performancerules.dll" Version="10.0.0.0" />
   </Rule>
   <Rule TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300">
    <Name>Specify MessageBoxOptions</Name>

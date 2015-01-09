@@ -23,8 +23,6 @@ namespace WeightWatchingProgramPlus
        	//Definer
         #endregion
 
-        public static readonly float TotalCaloriesPerDay = 2140f;
-
         public static float Calories { get; set; }
         
         static FoodRelated()

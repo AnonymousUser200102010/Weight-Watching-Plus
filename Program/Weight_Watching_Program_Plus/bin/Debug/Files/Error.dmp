@@ -1,0 +1,6 @@
+January 09 12:17:32 AM:
+Could not find file 'Files\Messages.txt'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.get_Length()
+   at UniversalHandlersLibrary.Messages.Handler(String message, String nameOfAppWithoutExtension, Boolean prune, Int32 pruneCutOff)
+
