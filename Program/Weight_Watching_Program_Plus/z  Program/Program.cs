@@ -28,7 +28,7 @@ namespace WeightWatchingProgramPlus
 				
 				#if DEBUG
 				
-					GlobalVariables.RegistryMainValue = string.Format(CultureInfo.InvariantCulture, "{0}~debug", GlobalVariables.RegistryMainValue);
+				GlobalVariables.RegistryMainValue = string.Format(CultureInfo.InvariantCulture, "{0}~debug", GlobalVariables.RegistryMainValue);
 				
 				#endif
 				
@@ -85,13 +85,13 @@ namespace WeightWatchingProgramPlus
 					else
 					{
 						
-						Errors.Handler(new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue."), true, 524288, true);
+						Errors.Handler(new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue."), true, true, 524288);
 						
 					}
 					
 				}
 				
-				findFoodTable("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt", explain);
+				findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt", explain);
 
 				Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 				
@@ -99,7 +99,7 @@ namespace WeightWatchingProgramPlus
 			catch (Exception e)
 			{
 				
-				Errors.Handler(e, true, 524288, true);
+				Errors.Handler(e, true, true, 524288);
 				
 			}
 			finally
@@ -110,7 +110,23 @@ namespace WeightWatchingProgramPlus
 			}
 		}
 
-		public static void findFoodTable (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
+		/// <summary>
+		/// Looks for any and all text files and verifies if they exist.
+		/// </summary>
+		/// <param name="textFilesfoodtable">
+		/// Path to the food.table text file.
+		/// </param>
+		/// <param name="textFilesfoodbku">
+		/// Path to the food.bku (food.table backup) text file.
+		/// </param>
+		/// <param name="textFilesfoodtableExplainationtxt">
+		/// Path to the explaination file which should include all usage warnings.
+		/// </param>
+		/// <param name="explain">
+		/// Toggles the creation of the explaination file on and off.
+		/// </param>
+
+		public static void findTextFiles (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
 		{
 			
 			if (!File.Exists(textFilesfoodtable))
@@ -119,7 +135,7 @@ namespace WeightWatchingProgramPlus
 				if (!File.Exists(textFilesfoodbku))
 				{
 					
-					Errors.Handler(new ArgumentNullException (textFilesfoodtable, "program.cs: You need a food.table! Put a food.table file in the Files\\Text\\ folder!"), true, 524288, true);
+					Errors.Handler(new ArgumentNullException (textFilesfoodtable, "program.cs: You need a food.table! Put a food.table file in the Files\\Text\\ folder!"), true, true, 524288);
 					
 					return;
 					

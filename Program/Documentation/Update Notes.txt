@@ -5,12 +5,17 @@ Highlights:
 -- Registry system revamped. Hopefully with more accurate and efficient results. So far so good, though.
 -- GUI slimmed down. Add/Subtract and Manual are in a tab window together, among other things.
 -- At this point in time, with special characters causing errors in completely unrelated functions, I am HIGHLY recommending avoiding ANY and ALL special characters. I don't know why it has such a hard time parsing them, but it does, so I'd avoid them like the plague if I were you.
+-- Summaries add to all pertinent functions and variables.
+-- Each class in the Mainform.cs file that was not general functions only moved to their own *.cs file for ease of use.
+-- Solution folder tree restructured.
+-- Documentation added for the UniversalHandlersLibrary in the form of summaries.
+-- Global variables removed: Default calories, Calories.
 
 Features:
 -- Implemented rudimentary argument support.
 -- Manual Reset Time implemented: this feature allows you to set the time the calories will reset, and it will remain at this value until you change it (not recommended for beginners!
 	-- Right now, the MRT resets to disabled every turn on and shut off. This is a sort of "fail-safe" for beginners. I am thinking of implementing it as persistent, however.
--- Under-eating/overeating benefit/subtraction added to ensure people who eat less can have a ... few slip-ups, and those who have persistent overeating habits are punished when the calories reset. For now, this will give the whole allowance. As I progress with the program, I will de research into this subject and hopefully make it more accurate and less arbitrary.
+-- Under-eating/overeating benefit/subtraction added to ensure people who eat less can have a ... few slip-ups, and those who have persistent overeating habits are punished when the calories reset. For now, this will give the whole allowance. As I progress with the program, I will do research into this subject and hopefully make it more accurate and less arbitrary.
 -- Midnight Snacking Penalty is now referred to as the Eating Before Bed Penalty. If you eat within 8 hours of the reset time, you're punished. This strictly follows hour ONLY for the time being. I hope to fix it to be more accurate in the future.
 -- Default calorie numeric edit box added so you no longer have to fiddle with the code to set the default calorie allowance.
 
@@ -23,11 +28,14 @@ Bug Fix:
 -- Fixed a bug with the food table writer function which failed because a value was less than 1 and did not validate correctly thereafter.
 -- UniversalHandlersLibrary had a bug where it would crash when Messages.txt did not exist (and to a lesser extent, errors.dmp), this has been fixed.
 
+Notes:
+-- Readability of the code may be diminished as of this update due to the reformatting of each class upon splitting from the MainForm.cs file. I've done my best to keep this to a minimum.
+
 Update 4:
 
 Highlights:
 -- FxCop installed and used to update and optimize code.
--- Folder tree restructuring.
+-- Programmatic folder tree restructuring.
 -- Modification class added...A new class with functions whose primary purpose is modification and creation, but who don't have a more pressing primary function.
 -- Regions added where appropriate for easier traversal of code. (May not be fully completed as of this update)
 -- Serious readability restructuring.

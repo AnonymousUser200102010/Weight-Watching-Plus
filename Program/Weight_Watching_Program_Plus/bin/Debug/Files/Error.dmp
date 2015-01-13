@@ -1,3 +1,9 @@
+January 11 09:59:18 PM:
+Object reference not set to an instance of an object.
+   at WeightWatchingProgramPlus.Validation.CheckDateValidity(DateTime dateToCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\MainForm.cs:line 427
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\MainForm.cs:line 863
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\Program.cs:line 96
+
 January 09 12:17:32 AM:
 Could not find file 'Files\Messages.txt'.
    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)

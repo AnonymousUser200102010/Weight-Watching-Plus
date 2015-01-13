@@ -2,4 +2,4 @@ Current arguments and what they do:
 
 "-clearcache" -- clears all files excluding food.table, food.bku, and any Error.dmp files before starting the program. This does not prevent them from being made again.
 
-"-noexplain" -- prevents a food.table explanation file from being created. Does not remove the file, it simply prevents it from being made if it doesn't already exist.
+"-noexplaination" -- prevents a food.table explanation file from being created. Does not remove the file, it simply prevents it from being made if it doesn't already exist.

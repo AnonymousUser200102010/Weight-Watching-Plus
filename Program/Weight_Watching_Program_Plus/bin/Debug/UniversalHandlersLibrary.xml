@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UniversalHandlersLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:UniversalHandlersLibrary.Errors">
+            <summary>
+            Errors handler entry point.
+            </summary>
+        </member>
+        <member name="M:UniversalHandlersLibrary.Errors.Writer(System.Exception,System.Boolean,System.Int32)">
+            <summary>
+            Writes to the Error.dmp file. Should only be used ONLY if just a writing operation should be initiated.
+            </summary>
+            <param name="providedException">
+            The exception that will be handled while writing to the Error.dmp file.
+            </param>
+            <param name="prune">
+            Is this operation checking the file to see if it should be pruned?
+            </param>
+            <param name="pruneCutOff">
+            The file size at which to prune the Error.dmp file. (default is 524288)
+            </param>
+        </member>
+        <member name="M:UniversalHandlersLibrary.Errors.Handler(System.Exception,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Error handler.
+            </summary>
+            <param name="providedException">
+            The exception that will be handled.
+            </param>
+            <param name="write">
+            Is this a write operation?
+            </param>
+            <param name="prune">
+            Is this operation also checking the file to see if it should be pruned?
+            </param>
+            <param name="pruneCutOff">
+            The file size at which to prune the Error.dmp file. (default is 524288)
+            </param>
+        </member>
+        <member name="M:UniversalHandlersLibrary.Errors.premadeExceptions(System.String,System.String,System.Int32)">
+            <summary>
+            A list of premade exceptions for convenience.
+            </summary>
+            <param name="offendingCode">
+            Where did the exception originate from?
+            </param>
+            <param name="areaWhereOffendingCodeResides">
+            Where within the originating code did the exception occur?
+            </param>
+            <param name="exceptionNumber">
+            The number of the exception you'd like to use.
+            </param>
+            <returns>
+            For exception number: 0, a FormatException with the text "Argument failed to produce a valid result." will be produced.
+            </returns>
+        </member>
+        <member name="T:UniversalHandlersLibrary.Messages">
+            <summary>
+            Messages handler entry point.
+            </summary>
+        </member>
+        <member name="M:UniversalHandlersLibrary.Messages.Handler(System.String,System.String,System.Boolean,System.Int32)">
+            <summary>
+            Message handler
+            </summary>
+            <param name="message">
+            The message to be handled.
+            </param>
+            <param name="nameOfAppWithoutExtension">
+            The application's name, which will be printed before the message.
+            </param>
+            <param name="prune">
+            Is this operation checking the file to see if it should be pruned?
+            </param>
+            <param name="pruneCutOff">
+            The file size at which to prune the Messages.txt file. (default is 102400)
+            </param>
+        </member>
+        <member name="T:UniversalHandlersLibrary.UniversalHandlersLibrary">
+            <summary>
+            UniversalHandlersLibrary.
+            </summary>
+        </member>
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibrary.returnFilePath(System.Int32)">
+            <summary>
+            DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            </summary>
+            <param name="fileCode">
+            The identification number of the file whose path is to be returned.
+            </param>
+            <returns>
+            Returns the file path of the file with the ID of fileCode.
+            </returns>
+        </member>
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibrary.pruneCheck(System.String,System.Int64,System.Int32)">
+            <summary>
+            DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            </summary>
+            <param name="fileToCheck">
+            File whose size is to be checked in this operation.
+            </param>
+            <param name="fileSize">
+            The size of the file in question.
+            </param>
+            <param name="pruneCutOff">
+            The size at which a file is pruned.
+            </param>
+        </member>
+    </members>
+</doc>
