@@ -1,3 +1,17 @@
+Update 6:
+
+Highlights:
+-- Removed all global variables relating to the MainForm, as I've now figured out how to manipulate them without the need for a direct reference.
+
+Features:
+--
+
+Bug Fixes:
+--
+
+Notes:
+--
+------------------------------------------------------
 Update 5:
 
 Highlights:
@@ -5,7 +19,7 @@ Highlights:
 -- Registry system revamped. Hopefully with more accurate and efficient results. So far so good, though.
 -- GUI slimmed down. Add/Subtract and Manual are in a tab window together, among other things.
 -- At this point in time, with special characters causing errors in completely unrelated functions, I am HIGHLY recommending avoiding ANY and ALL special characters. I don't know why it has such a hard time parsing them, but it does, so I'd avoid them like the plague if I were you.
--- Summaries add to all pertinent functions and variables.
+-- Summaries added to all pertinent functions and variables.
 -- Each class in the Mainform.cs file that was not general functions only moved to their own *.cs file for ease of use.
 -- Solution folder tree restructured.
 -- Documentation added for the UniversalHandlersLibrary in the form of summaries.
@@ -19,7 +33,7 @@ Features:
 -- Midnight Snacking Penalty is now referred to as the Eating Before Bed Penalty. If you eat within 8 hours of the reset time, you're punished. This strictly follows hour ONLY for the time being. I hope to fix it to be more accurate in the future.
 -- Default calorie numeric edit box added so you no longer have to fiddle with the code to set the default calorie allowance.
 
-Bug Fix:
+Bug Fixes:
 -- Fixed a bug with the newly implemented "NoIdentical" error on adding an item (which unintentionally stopped property setting).
 -- Fixed the persistent bug mentioned in the last update.
 -- Manual tab would never update it's value with the actual calorie count. This has been fixed.
@@ -30,7 +44,7 @@ Bug Fix:
 
 Notes:
 -- Readability of the code may be diminished as of this update due to the reformatting of each class upon splitting from the MainForm.cs file. I've done my best to keep this to a minimum.
-
+------------------------------------------------------
 Update 4:
 
 Highlights:

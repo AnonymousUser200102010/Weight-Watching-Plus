@@ -24,9 +24,6 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Sub-logic handler for modification of calories. Simply to reduce code bloat and make understanding the final processes easier.
 		/// </summary>
-		/// <param name="userServingInputTextBox">
-		/// The NumericUpDown for the "number of servings" value the user has input.
-		/// </param>
 		/// <param name="add">
 		/// Are you adding calories?
 		/// </param>
@@ -34,7 +31,7 @@ namespace WeightWatchingProgramPlus
 		/// Returns the calorie value after the logical operations have been finished.
 		/// </returns>
 		#endregion
-		internal float ModifyCalories(NumericUpDown userServingInputTextBox, bool add)
+		internal float ModifyCalories(bool add)
 		{
 			
 			int hour = DateTime.Now.Hour;
@@ -43,7 +40,7 @@ namespace WeightWatchingProgramPlus
 			
 			Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 			
-			float tempFloat = FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item3 * float.Parse(userServingInputTextBox.Text, CultureInfo.CurrentCulture) / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
+			float tempFloat = FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item3 * (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
 			
 			if (hour >= unsafeHourThreshold && Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1.Day == DateTime.Now.Day && Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1.ToString("tt", CultureInfo.InvariantCulture).Equals(amPMDefiner, StringComparison.OrdinalIgnoreCase))
 			{
@@ -156,41 +153,26 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Changes the property of an existing food item or creates a new food item.
 		/// </summary>
-		/// <param name="foodList">
-		/// The food list ListBox.
-		/// </param>
-		/// <param name="foodNameEditBox">
-		/// The edit box for the name of the food.
-		/// </param>
-		/// <param name="servingSizeEditBox">
-		/// The NumericUpDown for the serving size value of the food.
-		/// </param>
-		/// <param name="caloriesPerServingEditBox">
-		/// The NumericUpDown for the calories per serving value of the food.
-		/// </param>
-		/// <param name="definerEditBox">
-		/// The edit box for the definer value of the food.
-		/// </param>
-		/// <param name="newItemCheckbox">
-		/// The check box which defines if an item is being added or not.
+		/// <param name="AllValidEntries">
+		/// All property entries are valid.
 		/// </param>
 		#endregion
-		internal void ModifyFoodItemProperty(ListBox foodList, TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox, CheckBox newItemCheckbox)
+		internal static void ModifyFoodItemProperty(bool AllValidEntries)
 		{
 			
-			if (!Validation.EditBoxesHaveValidEntries(foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox, newItemCheckbox, this.PopupHandler))
+			if (!AllValidEntries)
 			{
 				
 				return;
 				
 			}
 			
-			if (!newItemCheckbox.Checked)
+			if (!MainForm.IsCreatingANewFoodItem)
 			{
 				
 				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
 				
-				FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string>(foodNameEditBox.Text, float.Parse(servingSizeEditBox.Text, CultureInfo.CurrentCulture), float.Parse(caloriesPerServingEditBox.Text, CultureInfo.CurrentCulture), definerEditBox.Text));
+				FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty));
 				
 				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string>(null, 0f, 0f, null));
 				
@@ -198,13 +180,13 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string>(foodNameEditBox.Text, float.Parse(servingSizeEditBox.Text, CultureInfo.InvariantCulture), float.Parse(caloriesPerServingEditBox.Text, CultureInfo.InvariantCulture), definerEditBox.Text));
+				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty));
 				
-				newItemCheckbox.Checked = false;
+				MainForm.IsCreatingANewFoodItem = false;
 				
 			}
 			
-			Functions.Refresh_foodList(foodList);
+			Functions.Refresh_foodList();
 			
 		}
 
@@ -212,60 +194,31 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Clears the property settings boxes.
 		/// </summary>
-		/// <param name="foodNameEditBox">
-		/// The edit box for the name of the food.
+		/// <param name="clear">
+		/// Clears all of the property boxes.
 		/// </param>
-		/// <param name="servingSizeEditBox">
-		/// The NumericUpDown for the serving size value of the food.
+		/// <param name="stringProperties">
+		/// Contains the strings for all properties that require them. So far, in order, these properties are counted: FoodName, Definer
 		/// </param>
-		/// <param name="caloriesPerServingEditBox">
-		/// The NumericUpDown for the calories per serving value of the food.
-		/// </param>
-		/// <param name="definerEditBox">
-		/// The edit box for the definer value of the food.
+		/// <param name="decimalProperties">
+		/// Contains the decimal values for all properties that require them. So far, in order, these properties are counted: ServingSize, CaloriesPerServing.
 		/// </param>
 		#endregion
-		public static void DumpFoodPropertiesList(TextBox foodNameEditBox, NumericUpDown servingSizeEditBox, NumericUpDown caloriesPerServingEditBox, TextBox definerEditBox)
+		public static void ModifyFoodPropertiesList(bool clear, string[] stringProperties, decimal[] decimalProperties)
 		{
-			
-			foodNameEditBox.Clear();
-			servingSizeEditBox.Value = 0;
-			caloriesPerServingEditBox.Value = 0;
-			definerEditBox.Clear();
-			
-		}
-
-		#region
-		/// <summary>
-		/// Creates a pre-made seperator.
-		/// </summary>
-		/// <param name="Seperator">
-		/// The label that will be transformed into a seperator
-		/// </param>
-		/// <param name="vertical">
-		/// Is this a vertical seperator?
-		/// </param>
-		#endregion
-		internal static void ModifySeperator(Label Seperator, bool vertical)
-		{
-			
-			const BorderStyle fixed3D = BorderStyle.Fixed3D;
-			
-			if (vertical)
+			if (!clear)
 			{
-				
-				Seperator.AutoSize = false;
-				Seperator.BorderStyle = fixed3D;
-				Seperator.Width = 1;
-				
+				MainForm.FoodNameProperty = stringProperties[0];
+				MainForm.DefinerProperty = stringProperties[1];
+				MainForm.ServingSizeProperty = decimalProperties[0];
+				MainForm.CaloriesPerServingProperty = decimalProperties[1];
 			}
 			else
 			{
-				
-				Seperator.AutoSize = false;
-				Seperator.BorderStyle = fixed3D;
-				Seperator.Height = 2;
-				
+				MainForm.FoodNameProperty = null;
+				MainForm.ServingSizeProperty = 0;
+				MainForm.CaloriesPerServingProperty = 0;
+				MainForm.DefinerProperty = null;
 			}
 			
 		}

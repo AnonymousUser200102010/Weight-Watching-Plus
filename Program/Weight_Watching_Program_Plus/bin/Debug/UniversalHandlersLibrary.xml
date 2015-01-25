@@ -19,7 +19,7 @@
             <param name="prune">
             Is this operation checking the file to see if it should be pruned?
             </param>
-            <param name="pruneCutOff">
+            <param name="pruneCutoff">
             The file size at which to prune the Error.dmp file. (default is 524288)
             </param>
         </member>
@@ -36,11 +36,11 @@
             <param name="prune">
             Is this operation also checking the file to see if it should be pruned?
             </param>
-            <param name="pruneCutOff">
+            <param name="pruneCutoff">
             The file size at which to prune the Error.dmp file. (default is 524288)
             </param>
         </member>
-        <member name="M:UniversalHandlersLibrary.Errors.premadeExceptions(System.String,System.String,System.Int32)">
+        <member name="M:UniversalHandlersLibrary.Errors.PremadeExceptions(System.String,System.String,System.Int32)">
             <summary>
             A list of premade exceptions for convenience.
             </summary>
@@ -75,16 +75,16 @@
             <param name="prune">
             Is this operation checking the file to see if it should be pruned?
             </param>
-            <param name="pruneCutOff">
+            <param name="pruneCutoff">
             The file size at which to prune the Messages.txt file. (default is 102400)
             </param>
         </member>
-        <member name="T:UniversalHandlersLibrary.UniversalHandlersLibrary">
+        <member name="T:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal">
             <summary>
-            UniversalHandlersLibrary.
+            Global Functions
             </summary>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibrary.returnFilePath(System.Int32)">
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.returnFilePath(System.Int32)">
             <summary>
             DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
             </summary>
@@ -95,7 +95,7 @@
             Returns the file path of the file with the ID of fileCode.
             </returns>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibrary.pruneCheck(System.String,System.Int64,System.Int32)">
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.pruneCheck(System.String,System.Int64,System.Int32)">
             <summary>
             DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
             </summary>
@@ -105,7 +105,7 @@
             <param name="fileSize">
             The size of the file in question.
             </param>
-            <param name="pruneCutOff">
+            <param name="pruneCutoff">
             The size at which a file is pruned.
             </param>
         </member>

@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using UniversalHandlersLibrary;
 
@@ -23,6 +24,10 @@ namespace WeightWatchingProgramPlus
 		[STAThread]
 		private static void Main (string[] args)
 		{
+			
+			Application.ThreadException += Application_ThreadException;
+			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+			
 			try
 			{
 				
@@ -92,7 +97,7 @@ namespace WeightWatchingProgramPlus
 				}
 				
 				findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt", explain);
-
+				
 				Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 				
 			}
@@ -183,5 +188,20 @@ namespace WeightWatchingProgramPlus
 			}
 			
 		}
+
+		static void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
+		{
+			MessageBox.Show(e.Exception.Message, "Unhandled Thread Exception");
+			// here you can log the exception ...
+			Errors.Handler(e.Exception, true, true, 524288);
+		}
+
+		static void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
+		{
+			MessageBox.Show((e.ExceptionObject as Exception).Message, "Unhandled UI Exception");
+			// here you can log the exception ...
+			Errors.Handler((e.ExceptionObject as Exception), true, true, 524288);
+		}
+		
 	}
 }

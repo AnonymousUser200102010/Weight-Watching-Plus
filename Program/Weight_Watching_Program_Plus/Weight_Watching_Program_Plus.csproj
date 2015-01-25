@@ -7,7 +7,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>WeightWatchingProgramPlus</RootNamespace>
     <AssemblyName>WeightWatchingProgramPlus</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -20,13 +20,13 @@
     <RunCodeAnalysis>True</RunCodeAnalysis>
     <SourceAnalysisOverrideSettingsFile>%Appdata%\Roaming\ICSharpCode\SharpDevelop5\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <StartupObject>WeightWatchingProgramPlus.Program</StartupObject>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
     <DelaySign>False</DelaySign>
     <UICulture>en-US</UICulture>
     <ReferencePath>C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Libraries\</ReferencePath>
+    <TargetFrameworkProfile />
+    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
@@ -62,7 +62,6 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
-    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
@@ -70,7 +69,6 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
-    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -114,9 +112,6 @@
     <EmbeddedResource Include="z  Program\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="z  Program" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

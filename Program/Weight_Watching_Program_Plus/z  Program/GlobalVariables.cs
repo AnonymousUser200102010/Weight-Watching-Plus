@@ -72,16 +72,7 @@ namespace WeightWatchingProgramPlus
         /// The stored item from the food list ListBox that has been determined to be current.
         /// </summary>
         public static int SelectedListItem { get; set; }
-
-        /// <summary>
-        /// Program form.
-        /// </summary>
-        public static Form MainForm { get; set; }
         
-        /// <summary>
-        /// Stored "additional settings" DateTimePicker.
-        /// </summary>
-        public static DateTimePicker ExactResetDateTimePicker { get; set; }
 
         static GlobalVariables ()
         {

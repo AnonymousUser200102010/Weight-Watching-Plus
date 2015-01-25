@@ -55,7 +55,7 @@ namespace WeightWatchingProgramPlus
 							if (!float.TryParse(combined[1], NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[0]) || !float.TryParse(combined[2], NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[1]))
 							{
 								
-								Errors.Handler(Errors.premadeExceptions("ReadFoodTable", "tupleItemFloat", 0), true, true, 524288);
+								Errors.Handler(Errors.PremadeExceptions("ReadFoodTable", "tupleItemFloat", 0), true, true, 524288);
 								
 							}
 							
@@ -196,16 +196,42 @@ namespace WeightWatchingProgramPlus
 					if (!float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempfloat))
 					{
 						
-						Errors.Handler(Errors.premadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
+						Errors.Handler(Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
 						
 					}
+					
 					tempfloat = 0f;
+					
 					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Default Calories Per Day")))
 					{
 						
 						tempKey.SetValue("Default Calories Per Day", "2140");
 						
 					}
+					else if (!float.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempfloat))
+					{
+						
+						Errors.Handler(Errors.PremadeExceptions("Registry", "Default Calories Per Day", 0), true, true, 524288);
+						
+					}
+					
+					bool tempBool = false;
+					
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Manual Time")))
+					{
+						
+						tempKey.SetValue("Manual Time", tempBool.ToString());
+						
+					}
+					else if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
+					{
+						
+						Errors.Handler(Errors.PremadeExceptions("Registry", "Manual Time", 0), true, true, 524288);
+						
+					}
+					
+					MainForm.ManualTimeIsInitiated = tempBool;
+					
 					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Last Used Date")))
 					{
 						
@@ -287,6 +313,7 @@ namespace WeightWatchingProgramPlus
 				
 				tempKey.SetValue("Calories Left for the Day", tempFloat, RegistryValueKind.String);
 				tempKey.SetValue("Default Calories Per Day", defaultCalories.ToString(CultureInfo.CurrentCulture));
+				tempKey.SetValue("Manual Time", MainForm.ManualTimeIsInitiated.ToString());
 				
 			}
 		}
@@ -314,13 +341,14 @@ namespace WeightWatchingProgramPlus
 		/// Float (2): the amount of calories that is set by default.
 		/// </example>
 		#endregion
-		internal static Tuple<DateTime, float, float> GetRetrievableRegistryValues(string appendedRegistryValue, string registryValue)
+		internal static Tuple<DateTime, float, float, bool> GetRetrievableRegistryValues(string appendedRegistryValue, string registryValue)
 		{
 			DateTime tempDate = new DateTime();
 			float[] tempFloat = {
 				0f,
 				0f
 			};
+			bool tempBool = false;
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
@@ -328,25 +356,32 @@ namespace WeightWatchingProgramPlus
 				if (!DateTime.TryParseExact(tempKey.GetValue("Last Used Date").ToString(), new[] {"yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
 				{
 					
-					Errors.Handler(Errors.premadeExceptions("Registry", "Last Used Date", 0), true, true, 524288);
+					Errors.Handler(Errors.PremadeExceptions("Registry", "Last Used Date", 0), true, true, 524288);
 					
 				}
 				
 				if (!float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat[0]))
 				{
 					
-					Errors.Handler(Errors.premadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
+					Errors.Handler(Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
 					
 				}
 				
 				if (!float.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat[1]))
 				{
 					
-					Errors.Handler(Errors.premadeExceptions("Registry", "Default Calories Per Day", 0), true, true, 524288);
+					Errors.Handler(Errors.PremadeExceptions("Registry", "Default Calories Per Day", 0), true, true, 524288);
 					
 				}
+				
+				else if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
+				{
+						
+					Errors.Handler(Errors.PremadeExceptions("Registry", "Manual Time", 0), true, true, 524288);
+						
+				}
 			}
-			return Tuple.Create(tempDate, tempFloat[0], tempFloat[1]);
+			return Tuple.Create(tempDate, tempFloat[0], tempFloat[1], tempBool);
 		}
 
 		#region Food Tracking Diary Summary
@@ -359,48 +394,39 @@ namespace WeightWatchingProgramPlus
 		/// <param name="file">
 		/// The name of the diary file.
 		/// </param>
-		/// <param name="WriteToFile">
-		/// Is this operation writing the diary values to a file?
-		/// </param>
-		/// <param name="record">
-		/// Is this operation recording at all?
-		/// </param>
-		/// <param name="userServingInputTextBox">
-		/// The NumericUpDown for the "number of servings" value the user has input.
-		/// </param>
 		/// <param name="add">
 		/// Is this operation the result of an addition operation?
 		/// </param>
 		#endregion
-		internal static void WriteFoodEaten(string directory, string file, CheckBox WriteToFile, CheckBox record, NumericUpDown userServingInputTextBox, bool add)
+		internal static void WriteFoodEaten(string directory, string file, bool add)
 		{
 			string finalstring = null;
 			const string seperator = "-";
 			
-			if (record.Checked)
+			if (MainForm.DiaryIsBeingUsed)
 			{
 				
-				if (WriteToFile.Checked)
+				if (MainForm.UserIsWritingDiaryToFile)
 				{
 					
 					DateTime Now = DateTime.Now;
 					
-					float tempserval = float.Parse(userServingInputTextBox.Text, CultureInfo.CurrentCulture) / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
+					float tempserval = (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
 					
 					float temptolval = FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2 * tempserval;
 					
 					temptolval = Math.Floor(temptolval) <= 0 ? (float)Math.Round(temptolval, 1) : (float)Math.Floor(temptolval);
 					
-					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2}: {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCulture) ? "drank" : "ate", userServingInputTextBox.Value, FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4);
+					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2}: {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCulture) ? "drank" : "ate", MainForm.UserProvidedServings, FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4);
 					
-					if (userServingInputTextBox.Value > 1)
+					if (MainForm.UserProvidedServings > 1)
 					{
 						
 						finalstring += "s";
 						
 					}
 					
-					float tempcalval = FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item3 * float.Parse(userServingInputTextBox.Text, CultureInfo.CurrentCulture) / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
+					float tempcalval = FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item3 * (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, " (of: '{0}').\nWhich is {1} servings, or {2} calories of '{0}'. ", FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item1, tempserval, Math.Round(tempcalval, 4, MidpointRounding.AwayFromZero));
 					
@@ -434,7 +460,7 @@ namespace WeightWatchingProgramPlus
 				
 				//ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue + "\\Diary");
 				
-				userServingInputTextBox.Value = 1;
+				MainForm.UserProvidedServings = 1;
 				
 			}
 			

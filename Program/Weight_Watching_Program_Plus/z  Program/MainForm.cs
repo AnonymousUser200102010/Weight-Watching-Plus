@@ -4,10 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using UniversalHandlersLibrary;
 
 #endregion
@@ -23,13 +21,16 @@ namespace WeightWatchingProgramPlus
     
 	internal partial class MainForm : Form
 	{
+		
 		private Modification Modification = new Modification ();
 
 		private PopupHandler PopupHandler = new PopupHandler ();
-		
+
 		private Validation Validation = new Validation ();
-		
+
 		private Functions Functions = new Functions ();
+		
+		private static MainForm mainForm = new MainForm ();
 
 		internal MainForm ()
 		{
@@ -38,20 +39,357 @@ namespace WeightWatchingProgramPlus
 			//
 			InitializeComponent();
 			//
-			GlobalVariables.MainForm = this;
 			
-			GlobalVariables.ExactResetDateTimePicker = exactResetDatetimePicker;
-			
-			Functions.InitializeForms(foodList, calorieRadioButton, timeRadioButton, caloriesLabel, Seperator5, howManyServingsLabel, foodNameEditBox, definerEditBox, servingSizeEditBox, caloriesPerServingEditBox, manualCalorieEditBox, defaultCaloriesNumericUpDown, exactResetDatetimePicker);
+			mainForm = (this as MainForm);
+
+			Functions.InitializeForms();
 			
 			//
 		}
+
+		#region delegates
+			
+			/// <summary>
+			/// Gets or Sets the title of the application after launch.
+			/// </summary>
+			public static string MainFormTitle
+			{
+				
+				get { return mainForm.Text; }
+				
+				set { mainForm.Text = value; }
+				
+			}
+		
+			/// <summary>
+			/// Gets or Sets the value in the #Servings NumericUpDown.
+			/// </summary>
+			public static decimal UserProvidedServings
+			{
+				
+				get{ return mainForm.userServingInputTextBox.Value; }
+				
+				set{ mainForm.userServingInputTextBox.Value = value; }
+				
+			}
+	
+			/// <summary>
+			/// Gets or Sets whether the manual time is being used or not.
+			/// </summary>
+			public static bool ManualTimeIsInitiated
+			{
+				
+				get{ return mainForm.resetCaloriesManualCheckBox.Checked; }
+				
+				set{ mainForm.resetCaloriesManualCheckBox.Checked = value; }
+				
+			}
+	
+			/// <summary>
+			/// Gets or Sets the Manual Reset Time.
+			/// </summary>
+			public static DateTime ManualDateTime
+			{
+				
+				get { return mainForm.exactResetDatetimePicker.Value; }
+				
+				set { mainForm.exactResetDatetimePicker.Value = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the main Food List ListBox's DataSource.
+			/// </summary>
+			public static object MainFoodListDataSource
+			{
+				
+				get { return mainForm.foodList.DataSource; }
+				
+				set { mainForm.foodList.DataSource = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets the main Food List ListBox's items.
+			/// </summary>
+			public static ListBox.ObjectCollection MainFoodListItems
+			{
+				
+				get { return mainForm.foodList.Items; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the SelectedIndex for the main Food List ListBox
+			/// </summary>
+			public static int FoodListSelected
+			{
+				
+				get { return mainForm.foodList.SelectedIndex; }
+				
+				set { mainForm.foodList.SelectedIndex = value; }
+				
+			}
+			
+			#region FoodListGet/Select Summary
+			/// <summary>
+			/// Gets or Sets the selection for the specified item in the main Food List ListBox.
+			/// </summary>
+			/// <param name="set">
+			/// Is this operation setting the selected value for the main Food List ListBox as well?
+			/// </param>
+			/// <param name="index">
+			/// The zero-based index of the item that determines whether it is selected.
+			/// </param>
+			/// <param name="value">
+			/// True to select the specified item; otherwise false.
+			/// </param>
+			/// <returns>
+			/// Returns a bool based on the GetSelected function for the main Food List ListBox.
+			/// </returns>
+			#endregion
+			public static bool FoodListGetOrSetSelected(bool set, int index, bool value)
+			{
+					
+				if (set)
+				{
+						
+					mainForm.foodList.SetSelected(index, value);
+						
+				}
+						
+				return mainForm.foodList.GetSelected(index);			
+					
+			}
+			
+			/// <summary>
+			/// Gets or Sets the uppermost item in the main Food List ListBox.
+			/// </summary>
+			public static int GetFoodListTopItem
+			{
+				
+				get { return mainForm.foodList.TopIndex; }
+				
+				set { mainForm.foodList.TopIndex = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the label which the user seems asking how many servings they are eating.
+			/// </summary>
+			public static string NumberOfServingsLabel
+			{
+				
+				get { return mainForm.howManyServingsLabel.Text; }
+				
+				set { mainForm.howManyServingsLabel.Text = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the "Name" property box which shows the name of the currently selected food item.
+			/// </summary>
+			public static string FoodNameProperty
+			{
+				
+				get { return mainForm.foodNameEditBox.Text; }
+				
+				set 
+				{ 
+					
+					mainForm.foodNameEditBox.Text = value;
+					mainForm.foodNameEditBox.TextAlign = HorizontalAlignment.Center;
+					
+				}
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the "Definer" property box which shows the definer of the currently selected food item.
+			/// </summary>
+			public static string DefinerProperty
+			{
+				
+				get { return mainForm.definerEditBox.Text; }
+				
+				set 
+				{ 
+					
+					mainForm.definerEditBox.Text = value; 
+					mainForm.definerEditBox.TextAlign = HorizontalAlignment.Center;
+					
+				}
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the "Serving Size" property box which shows the serving size of the currently selected food item.
+			/// </summary>
+			public static decimal ServingSizeProperty
+			{
+				
+				get { return mainForm.servingSizeEditBox.Value; }
+				
+				set 
+				{
+					
+					mainForm.servingSizeEditBox.Value = value; 
+					mainForm.servingSizeEditBox.TextAlign = HorizontalAlignment.Center;
+					
+				}
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the "Calories Per Serving" property box which shows how many calories are in each serving of the currently selected food item.
+			/// </summary>
+			public static decimal CaloriesPerServingProperty
+			{
+				
+				get { return mainForm.caloriesPerServingEditBox.Value; }
+				
+				set 
+				{
+					
+					mainForm.caloriesPerServingEditBox.Value = value; 
+					mainForm.caloriesPerServingEditBox.TextAlign = HorizontalAlignment.Center;
+					
+				}
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets if the user is checking the time.
+			/// </summary>
+			public static bool UserCheckingTime
+			{
+				
+				get { return mainForm.timeRadioButton.Checked; }
+				
+				set { mainForm.timeRadioButton.Checked = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets if the user is checking their current calorie balance.
+			/// </summary>
+			public static bool UserCheckingCalories
+			{
+				
+				get { return mainForm.calorieRadioButton.Checked; }
+				
+				set { mainForm.calorieRadioButton.Checked = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets the calorie label
+			/// </summary>
+			public static Label NabCalorieLabel
+			{
+				
+				get { return mainForm.caloriesLabel; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the amount of calories in the NumericUpDown in the "manual" tab of the "main" tab.
+			/// </summary>
+			public static decimal UserSetCalories
+			{
+				
+				get { return mainForm.manualCalorieEditBox.Value; }
+				
+				set { mainForm.manualCalorieEditBox.Value = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the amount of default calories to be applied wherever applicable.
+			/// </summary>
+			public static decimal DefaultCalories
+			{
+				
+				get { return mainForm.defaultCaloriesNumericUpDown.Value; }
+				
+				set { mainForm.defaultCaloriesNumericUpDown.Value = value; }
+				
+			}
+			
+			/// <summary>
+			/// Gets or Sets the value for the "new item" checkbox.
+			/// </summary>
+			public static bool IsCreatingANewFoodItem
+			{
+				
+				get { return mainForm.newItemCheckbox.Checked; }
+				
+				set { mainForm.newItemCheckbox.Checked = value; }
+				
+			}
+
+			/// <summary>
+			/// Gets the property control box of your choice based on the contolID provided. This is to be used as a LAST RESTORT when ALL ELSE FAILS!
+			/// </summary>
+			/// <param name="controlID">
+			/// The ID of the control item you wish to use.
+			/// </param>
+			/// <returns>
+			/// Returns a property control value based on the following IDs: (ID 0): Food Name, (ID 1): Serving Size, (ID 2): Calories Per Serving, (ID 3): Definer.
+			/// </returns>
+			public static Control ReturnPropertyControl(int controlID)
+			{
+				
+				switch(controlID)
+				{
+						
+					case 0:
+						return mainForm.foodNameEditBox;
+						
+					case 1:
+						return mainForm.servingSizeEditBox;
+						
+					case 2:
+						return mainForm.caloriesPerServingEditBox;
+						
+					case 3:
+						return mainForm.definerEditBox;
+						
+					default:
+						break;
+						
+				}
+				
+				Errors.Handler(new ArgumentOutOfRangeException("controlID", controlID, "Value must be between " + 0 + " and " + 3), true, true, 524288);
+				
+				return null;
+				
+			}
+			
+			public static bool UserIsWritingDiaryToFile
+			{
+				
+				get { return mainForm.WriteToFileCheckBox.Checked; }
+				
+				set { mainForm.WriteToFileCheckBox.Checked = value; }
+				
+			}
+			
+			public static bool DiaryIsBeingUsed
+			{
+				
+				get { return mainForm.RecordFoodCheckBox.Checked; }
+				
+				set { mainForm.RecordFoodCheckBox.Checked = value; }
+				
+			}
+		#endregion
 
 		#region Main Tab
 
 		#region Search Bar
 
-		protected internal virtual void SearchBarTextChanged (object sender, EventArgs e)
+		private void SearchBarTextChanged (object sender, EventArgs e)
 		{
 				
 			if (!string.IsNullOrWhiteSpace(searchBar.Text) && !searchBar.Text.Equals("Click Here to Search the Food List", StringComparison.CurrentCultureIgnoreCase))
@@ -64,7 +402,7 @@ namespace WeightWatchingProgramPlus
 						
 				}
 					
-				Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, foodList, false);
+				Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, false);
 					
 				return;
 					
@@ -80,7 +418,7 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		protected internal void SearchBarFocusGranted (object sender, EventArgs e)
+		private void SearchBarFocusGranted (object sender, EventArgs e)
 		{
 				
 			searchBar.Clear();
@@ -93,7 +431,7 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		protected internal void ClearSearchBar (object sender, EventArgs e)
+		private void ClearSearchBar (object sender, EventArgs e)
 		{
 				
 			if (!nextSearchButton.Focused)
@@ -111,7 +449,7 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		protected internal void FindNextSearchItem (object sender, EventArgs e)
+		private void FindNextSearchItem (object sender, EventArgs e)
 		{
 				
 			if (string.IsNullOrWhiteSpace(searchBar.Text) || searchBar.Text.Equals("Click Here to Search the Food List", StringComparison.CurrentCultureIgnoreCase))
@@ -128,7 +466,7 @@ namespace WeightWatchingProgramPlus
 					
 			}
 				
-			Functions.Find(GlobalVariables.SelectedListItem, searchBar.Text, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, exactSearchCheckBox.Checked, foodList, true);
+			Functions.Find(GlobalVariables.SelectedListItem, searchBar.Text, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, exactSearchCheckBox.Checked, true);
 				
 		}
 
@@ -136,7 +474,7 @@ namespace WeightWatchingProgramPlus
 
 		#region Food Listbox
 
-		protected internal virtual void FoodListSelectedIndexChanged (object sender, EventArgs e)
+		private void FoodListSelectedIndexChanged (object sender, EventArgs e)
 		{
 				
 			if (foodList.SelectedIndex > -1)
@@ -173,7 +511,7 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		protected internal void FoodListFocusChanged (object sender, EventArgs e)
+		private void FoodListFocusChanged (object sender, EventArgs e)
 		{
 				
 			if (newItemCheckbox.Checked)
@@ -212,19 +550,19 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		protected internal void DeleteFoodItemFromTable (object sender, EventArgs e)
+		private void DeleteFoodItemFromTable (object sender, EventArgs e)
 		{
 			
 			if (PopupHandler.CreatePopup("Are you sure you want to delete " + FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1 + "?", foodList, 5, false) == DialogResult.Yes)
 			{
 					
-				Modification.DumpFoodPropertiesList(foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox);
+				Modification.ModifyFoodPropertiesList(true, new string[]{null,null}, new decimal[]{0, 0});
 				
 				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
 					
 				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string> (null, 0f, 0f, null));
 					
-				Functions.Refresh_foodList(foodList);
+				Functions.Refresh_foodList();
 					
 				foodList.SetSelected(GlobalVariables.SelectedListItem, true);
 					
@@ -236,30 +574,30 @@ namespace WeightWatchingProgramPlus
 
 		#region Edit Your Calories Manual Tab
 
-		protected internal void NewItemCheckboxCheckedChanged (object sender, EventArgs e)
+		private void NewItemCheckboxCheckedChanged (object sender, EventArgs e)
 		{
 				
-			Modification.DumpFoodPropertiesList(foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox);
+			Modification.ModifyFoodPropertiesList(true, new string[]{null,null}, new decimal[]{0, 0});
 				
 			foodPropertiesButton.Text = newItemCheckbox.Checked ? "Add this new food item" : "Set Food Item Properties";
 				
 		}
 
-		protected internal void ResetCaloriesButtonClicked (object sender, EventArgs e)
+		private void ResetCaloriesButtonClicked (object sender, EventArgs e)
 		{
 				
 			manualCalorieEditBox.Value = (decimal)Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3;
 				
 		}
 
-		protected internal void ZeroOutCaloriesButtonClicked (object sender, EventArgs e)
+		private void ZeroOutCaloriesButtonClicked (object sender, EventArgs e)
 		{
 				
 			manualCalorieEditBox.Value = 0;
 				
 		}
 
-		protected internal void ManualSubmitButtonClicked (object sender, EventArgs e)
+		private void ManualSubmitButtonClicked (object sender, EventArgs e)
 		{
 
 			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now.AddDays(1), (float)manualCalorieEditBox.Value, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3, new [] {
@@ -267,7 +605,7 @@ namespace WeightWatchingProgramPlus
 				false
 			});
 				
-			Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel);
+			Validation.CheckCurrentRadioButton(caloriesLabel);
 				
 		}
 
@@ -280,27 +618,27 @@ namespace WeightWatchingProgramPlus
 
 		#endregion
 
-		protected internal void TimeOrCaloriesChangedWithoutEvent (object sender, EventArgs e)
+		private void TimeOrCaloriesChangedWithoutEvent (object sender, EventArgs e)
 		{
 				
 			Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 				
-			Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel);
+			Validation.CheckCurrentRadioButton(caloriesLabel);
 				
 		}
 
-		protected internal void SetFoodPropertiesButtonClicked (object sender, EventArgs e)
+		private void SetFoodPropertiesButtonClicked (object sender, EventArgs e)
 		{
 				
 			string oldtext = foodNameEditBox.Text;
 				
-			Modification.ModifyFoodItemProperty(foodList, foodNameEditBox, servingSizeEditBox, caloriesPerServingEditBox, definerEditBox, newItemCheckbox);
+			Modification.ModifyFoodItemProperty(Validation.EditBoxesHaveValidEntries());
 				
-			Functions.Find(0, oldtext, null, true, foodList, false);
+			Functions.Find(0, oldtext, null, true, false);
 				
 		}
 
-		protected internal void ModifyCalories (object sender, EventArgs e)
+		private void ModifyCalories (object sender, EventArgs e)
 		{
 			bool add = true;
 			int errorNum = 1;
@@ -320,13 +658,13 @@ namespace WeightWatchingProgramPlus
 			if (add)
 			{
 				
-				tempcalories += Modification.ModifyCalories(userServingInputTextBox, add);
+				tempcalories += Modification.ModifyCalories(add);
 				
 			}
 			else
 			{
 				
-				tempcalories -= Modification.ModifyCalories(userServingInputTextBox, add);
+				tempcalories -= Modification.ModifyCalories(add);
 				
 			}
 			
@@ -353,7 +691,7 @@ namespace WeightWatchingProgramPlus
 			if (safeToModify)
 			{
 				
-				Storage.WriteFoodEaten("Files\\Text\\", "Food Diary.txt", WriteToFileCheckBox, RecordFoodCheckBox, userServingInputTextBox, add);
+				Storage.WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add);
 				
 				if (Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0)
 				{
@@ -364,12 +702,12 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now.AddDays(1), tempcalories,  Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3, new [] {
+			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now.AddDays(1), tempcalories, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3, new [] {
 				false,
 				false
 			});
 			
-			Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel);
+			Validation.CheckCurrentRadioButton(caloriesLabel);
 			
 		}
 
@@ -379,6 +717,8 @@ namespace WeightWatchingProgramPlus
 
 		void ResetCaloriesSpecificCheckBoxCheckStatusChanged (object sender, EventArgs e)
 		{
+			
+			resetCaloriesManualCheckBox.Checked = true;
 			
 			exactResetDatetimePicker.Enabled = resetCaloriesManualCheckBox.Checked;
 			
@@ -417,52 +757,40 @@ namespace WeightWatchingProgramPlus
 	class Functions
 	{
 		
-		internal static void InitializeForms (ListBox foodList, RadioButton calorieRadioButton, RadioButton timeRadioButton, Label caloriesLabel, Label Seperator5, Label howManyServingsLabel, TextBox foodNameEditBox, TextBox definerEditBox, NumericUpDown servingSizeEditBox, NumericUpDown caloriesPerServingEditBox, NumericUpDown manualCalorieEditBox, NumericUpDown defaultCaloriesNumericUpDown, DateTimePicker exactResetDatetimePicker)
+		internal static void InitializeForms ()
 		{
-			const HorizontalAlignment center = HorizontalAlignment.Center;
 			
-			GlobalVariables.MainForm.Text = GlobalVariables.RegistryMainValue;
+			MainForm.MainFormTitle = GlobalVariables.RegistryMainValue;
 			
-			Modification.ModifySeperator(Seperator5, false);
+			Refresh_foodList();
 			
-			Refresh_foodList(foodList);
-			
-			foodList.SetSelected(foodList.TopIndex, true);
+			MainForm.FoodListGetOrSetSelected(true, MainForm.GetFoodListTopItem, true);
 			
 			GlobalVariables.SelectedListItem = 0;
 			
-			howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCultureIgnoreCase) ? "drinking" : "eating");
+			MainForm.NumberOfServingsLabel = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCultureIgnoreCase) ? "drinking" : "eating");
 			
-			foodNameEditBox.Text = foodList.Items [foodList.TopIndex].ToString();
-			foodNameEditBox.TextAlign = center;
 			
-			servingSizeEditBox.Text = FoodRelated.CombinedFoodList [0].Item2.ToString(CultureInfo.InvariantCulture);
-			servingSizeEditBox.TextAlign = center;
+			Modification.ModifyFoodPropertiesList(false, new []{MainForm.MainFoodListItems [MainForm.GetFoodListTopItem].ToString(), FoodRelated.CombinedFoodList [0].Item4}, new decimal[]{(decimal)FoodRelated.CombinedFoodList [0].Item2, (decimal)FoodRelated.CombinedFoodList [0].Item3});
 			
-			definerEditBox.Text = FoodRelated.CombinedFoodList [0].Item4;
-			definerEditBox.TextAlign = center;
+			Validation.CheckCurrentRadioButton(MainForm.NabCalorieLabel);
 			
-			caloriesPerServingEditBox.Text = FoodRelated.CombinedFoodList [0].Item3.ToString(CultureInfo.InvariantCulture);
-			caloriesPerServingEditBox.TextAlign = center;
+			MainForm.ManualDateTime = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1;
 			
-			Validation.CheckCurrentRadioButton(timeRadioButton, calorieRadioButton, caloriesLabel);
+			MainForm.UserSetCalories = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0 ? decimal.Parse(Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2.ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture) : 0;
 			
-			exactResetDatetimePicker.Value = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1;
-			
-			manualCalorieEditBox.Value = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0 ? decimal.Parse(Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2.ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture) : 0;
-			
-			defaultCaloriesNumericUpDown.Value = (decimal)Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3;
+			MainForm.DefaultCalories = (decimal)Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3;
 		}
 
-		public static void Refresh_foodList (ListBox foodList)
+		public static void Refresh_foodList ()
 		{
 			FoodRelated.CombinedFoodList.Clear();
 			
 			Storage.ReadFoodTable("Files\\Text\\", "food.table");
 			
-			foodList.DataSource = null;
+			MainForm.MainFoodListDataSource = null;
 			
-			foodList.Items.Clear();
+			MainForm.MainFoodListItems.Clear();
 			
 			List<string> Item1 = new List<string> ();
 			
@@ -476,7 +804,7 @@ namespace WeightWatchingProgramPlus
 			
 			Item1.Sort();
 			
-			foodList.DataSource = Item1;
+			MainForm.MainFoodListDataSource = Item1;
 			
 			Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string> (null, 0f, 0f, null));
 		}
@@ -497,28 +825,24 @@ namespace WeightWatchingProgramPlus
 		/// <param name="exactSearch">
 		/// Is this a search where only an exact match is allowed?
 		/// </param>
-		/// <param name="foodList">
-		/// The food list.
-		/// </param>
 		/// <param name="next">
 		/// Was the next button pressed?
 		/// </param>
 		#endregion
-		internal void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, ListBox foodList, bool next)
+		internal void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, bool next)
 		{
-			for (int i = offset; i <= foodList.Items.Count; i++)
+			for (int i = offset; i <= MainForm.MainFoodListItems.Count; i++)
 			{
 				
-				if (i < foodList.Items.Count)
+				if (i < MainForm.MainFoodListItems.Count)
 				{
 					if (exactSearch)
 					{
 						
-						if (foodList.Items [i].ToString().Equals(stringToFind, StringComparison.CurrentCultureIgnoreCase) &&
-						    !foodList.Items [i].ToString().Equals(stringToAvoid, StringComparison.CurrentCultureIgnoreCase))
+						if (MainForm.MainFoodListItems [i].ToString().Equals(stringToFind, StringComparison.CurrentCultureIgnoreCase) && !MainForm.MainFoodListItems [i].ToString().Equals(stringToAvoid, StringComparison.CurrentCultureIgnoreCase))
 						{
 							
-							foodList.SelectedIndex = i;
+							MainForm.FoodListSelected = i;
 							
 							return;
 							
@@ -528,11 +852,10 @@ namespace WeightWatchingProgramPlus
 					else
 					{
 					
-						if (foodList.Items [i].ToString().Contains(stringToFind, StringComparison.CurrentCultureIgnoreCase) &&
-						    !foodList.Items [i].ToString().Equals(stringToAvoid, StringComparison.CurrentCultureIgnoreCase))
+						if (MainForm.MainFoodListItems [i].ToString().Contains(stringToFind, StringComparison.CurrentCultureIgnoreCase) && !MainForm.MainFoodListItems [i].ToString().Equals(stringToAvoid, StringComparison.CurrentCultureIgnoreCase))
 						{
 							
-							foodList.SelectedIndex = i;
+							MainForm.FoodListSelected = i;
 							
 							return;
 							
@@ -541,10 +864,10 @@ namespace WeightWatchingProgramPlus
 					}
 					
 				}
-				else if (i >= foodList.Items.Count && !exactSearch && next)
+				else if (i >= MainForm.MainFoodListItems.Count && !exactSearch && next)
 				{
 					
-					Find(0, stringToFind, null, exactSearch, foodList, next);
+					Find(0, stringToFind, null, exactSearch, next);
 					
 					return;
 				}
