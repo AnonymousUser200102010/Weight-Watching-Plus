@@ -8,12 +8,13 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		readonly string[] title = {
-			"Error: ValueIsNull",
+			"Error: Value Is Null",
 			"You're overeating",
 			"You're overeating",
 			"Midnight Snacking Penalty",
-			"Error: ValueIsIdentical",
-			"Confirm Deletion"
+			"Error: Value Invalid",
+			"Confirm Deletion",
+			"Calorie Reset Error"
 		};
 		
 		readonly MessageBoxButtons[] messageBoxButton = {
@@ -22,7 +23,8 @@ namespace WeightWatchingProgramPlus
 			MessageBoxButtons.YesNo,
 			MessageBoxButtons.OKCancel,
 			MessageBoxButtons.OK,
-			MessageBoxButtons.YesNo
+			MessageBoxButtons.YesNo,
+			MessageBoxButtons.OK
 		};
 		
 		readonly MessageBoxIcon[] messageBoxIcon = {
@@ -31,6 +33,7 @@ namespace WeightWatchingProgramPlus
 			MessageBoxIcon.Warning,
 			MessageBoxIcon.Information,
 			MessageBoxIcon.Error,
+			MessageBoxIcon.Warning,
 			MessageBoxIcon.Warning
 		};
 		

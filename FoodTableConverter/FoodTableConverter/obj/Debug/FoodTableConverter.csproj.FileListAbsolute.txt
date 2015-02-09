@@ -1,0 +1,6 @@
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\FoodTableConverter\FoodTableConverter\obj\Debug\FoodTableConverter.csprojResolveAssemblyReference.cache
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\FoodTableConverter\FoodTableConverter\bin\Debug\FoodTableConverter.exe.config
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\FoodTableConverter\FoodTableConverter\bin\Debug\FoodTableConverter.exe
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\FoodTableConverter\FoodTableConverter\bin\Debug\FoodTableConverter.pdb
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\FoodTableConverter\FoodTableConverter\obj\Debug\FoodTableConverter.exe
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\FoodTableConverter\FoodTableConverter\obj\Debug\FoodTableConverter.pdb

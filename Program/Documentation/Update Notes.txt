@@ -2,15 +2,25 @@ Update 6:
 
 Highlights:
 -- Removed all global variables relating to the MainForm, as I've now figured out how to manipulate them without the need for a direct reference.
+-- MANY delegates added for the mainform. I hope to have a better way than static methods in the future.
+-- Date system tweaked, general datetime validation methods improved.
 
 Features:
---
+-- Manual setting of time is now constant until disabled or changed manually.
+-- During reset, calories now cannot exceed double the normal allowance or dip below 1200.
+-- You can no longer eat double your daily calorie allowance.
+-- New "Is Drink" checkbox button added. This allows you to set what is a drink or not, so the program doesn't have to check for each "valid" definer entry for drink keywords.
 
 Bug Fixes:
---
+-- Introducing (most) special characters into any food property that uses a string is now officially an invalid operation. I'll look into fixing it as I progress with the program.
+-- Fixed a bug with manual time that would not allow you to turn it off once it was on.
+-- Fixed a bug with the "are you sure" dialog, with regards to subtraction, which would subtract no matter if you chose yes or no.
+-- Fixed a bug with the reload button which wouldn't reload the date right, causing extra calories to be added if the date of reset was less than one day from the current date.
+-- Fixed a bug with the manual time that would reset twice for no reason no matter what the manual time was set to.
+-- General date get/set bugs fixed.
 
 Notes:
---
+-- It seems the search bar WILL NOT stop freezing when typing in an item with no values. From now until I am fairly convinced; consider all "fixed" updates to be tentative at best.
 ------------------------------------------------------
 Update 5:
 
@@ -27,7 +37,7 @@ Highlights:
 
 Features:
 -- Implemented rudimentary argument support.
--- Manual Reset Time implemented: this feature allows you to set the time the calories will reset, and it will remain at this value until you change it (not recommended for beginners!
+-- Manual Reset Time implemented: this feature allows you to set the time the calories will reset, and it will remain at this value until you change it (not recommended for beginners)!
 	-- Right now, the MRT resets to disabled every turn on and shut off. This is a sort of "fail-safe" for beginners. I am thinking of implementing it as persistent, however.
 -- Under-eating/overeating benefit/subtraction added to ensure people who eat less can have a ... few slip-ups, and those who have persistent overeating habits are punished when the calories reset. For now, this will give the whole allowance. As I progress with the program, I will do research into this subject and hopefully make it more accurate and less arbitrary.
 -- Midnight Snacking Penalty is now referred to as the Eating Before Bed Penalty. If you eat within 8 hours of the reset time, you're punished. This strictly follows hour ONLY for the time being. I hope to fix it to be more accurate in the future.

@@ -9,5 +9,5 @@ definer of food
 -------------------------------------------------------------------------
 
 You're allowed to use all normal characters, upper and lower case; numbers and letters
-You're also allowed to use all special characters. A word of warning, however, the program seems to have trouble processing them in conjunction with other characters, so it's best to steer clear of them if you can.
+You're forbidden from using special characters by design. Using them caused too much trouble and so they are disallowed for the time being.
 

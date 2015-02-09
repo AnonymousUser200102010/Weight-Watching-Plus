@@ -98,8 +98,6 @@ namespace WeightWatchingProgramPlus
 				
 				findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt", explain);
 				
-				Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
-				
 			}
 			catch (Exception e)
 			{
@@ -174,7 +172,7 @@ namespace WeightWatchingProgramPlus
 			}
 			const string seperator = "-------------------------------------------------------------------------\n";
 			
-			var dosanddonts = string.Format(CultureInfo.InvariantCulture, "{0}\n", "You're allowed to use all normal characters, upper and lower case; numbers and letters\nYou're also allowed to use all special characters. A word of warning, however, the program seems to have trouble processing them in conjunction with other characters, so it's best to steer clear of them if you can.");
+			var dosanddonts = string.Format(CultureInfo.InvariantCulture, "{0}\n", "You're allowed to use all normal characters, upper and lower case; numbers and letters\nYou're forbidden from using special characters by design. Using them caused too much trouble and so they are disallowed for the time being.");
 			
 			var explaination = string.Format(CultureInfo.InvariantCulture, "The food.table file is a converted food list.txt file. This new file has greater readability and reliability than the old method, which required iterating through a full list before continuing to another. Obviously this has the potential to break and cause problems.\nThe new format is like so:\n{0}\nName of food\nServing size of food\nCalories per serving of food\ndefiner of food\n{0}\n{1}\n", seperator, dosanddonts);
 			

@@ -1,6 +1,36 @@
-At 07:03:59 PM (on: January 24, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+At 09:51:30 PM (on: February 08, 2015): You ate: 3 pies (of: 'banquet pot pie').
+Which is 3 servings, or 1290 calories of 'banquet pot pie'. You had 0 calories left for the day.
+-
+At 12:11:52 AM (on: February 01, 2015): You ate: 5 chimichangas (of: 'beef and bean chimichangas').
+Which is 5 servings, or 1500 calories of 'beef and bean chimichangas'. You had 0 calories left for the day.
+-
+At 11:49:19 PM (on: January 31, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2128.333 calories left for the day.
 -
-At 07:03:57 PM (on: January 24, 2015): You drank: 1 fluid ounce (of: '7up').
+At 11:49:18 PM (on: January 31, 2015): You drank: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 07:27:51 PM (on: January 31, 2015): You added back to your calorie count: 1 fluid ounce (of: 'Floridas natural orange juice with pulp').
+Which is 0.125 servings, or 13.75 calories of 'Floridas natural orange juice with pulp'. You had 2116.25 calories left for the day.
+-
+At 07:27:48 PM (on: January 31, 2015): You drank: 1 fluid ounce (of: 'Floridas natural orange juice with pulp').
+Which is 0.125 servings, or 13.75 calories of 'Floridas natural orange juice with pulp'. You had 2140 calories left for the day.
+-
+At 07:27:12 PM (on: January 31, 2015): You added back to your calorie count: 1 fluid ounce (of: 'Florida's natural orange juice w/ pulp').
+Which is 0.125 servings, or 13.75 calories of 'Florida's natural orange juice w/ pulp'. You had 2116.25 calories left for the day.
+-
+At 07:27:10 PM (on: January 31, 2015): You ate: 1 fluid ounce (of: 'Florida's natural orange juice w/ pulp').
+Which is 0.125 servings, or 13.75 calories of 'Florida's natural orange juice w/ pulp'. You had 2140 calories left for the day.
+-
+At 07:26:50 PM (on: January 31, 2015): You added back to your calorie count: 1 ounce (of: 'banana').
+Which is 1 servings, or 25 calories of 'banana'. You had 2105 calories left for the day.
+-
+At 07:26:48 PM (on: January 31, 2015): You ate: 1 ounce (of: 'banana').
+Which is 1 servings, or 25 calories of 'banana'. You had 2140 calories left for the day.
+-
+At 07:26:14 PM (on: January 31, 2015): You added back to your calorie count: 1 fluid ounce (of: '7up').
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2118.333 calories left for the day.
+-
+At 07:26:11 PM (on: January 31, 2015): You drank: 1 fluid ounce (of: '7up').
 Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
 -

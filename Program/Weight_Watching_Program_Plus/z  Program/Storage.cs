@@ -39,7 +39,9 @@ namespace WeightWatchingProgramPlus
 					int number = 0;
 					int position = 0;
 					String line;
-					string[] combined = new string[4];
+					string[] combined = new string[2];
+					float[] tupleItemFloat =  new float[2];
+					bool tupleItemBool = false;
 					
 					while (!string.IsNullOrEmpty((line = sr.ReadLine())))
 					{
@@ -47,19 +49,8 @@ namespace WeightWatchingProgramPlus
 						if (line.Contains("-", StringComparison.CurrentCultureIgnoreCase))
 						{
 							
-							float[] tupleItemFloat =  {
-								0.0f,
-								0.0f
-							};
+							FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string, bool>(combined[0], tupleItemFloat[0], tupleItemFloat[1], combined[1], tupleItemBool));
 							
-							if (!float.TryParse(combined[1], NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[0]) || !float.TryParse(combined[2], NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[1]))
-							{
-								
-								Errors.Handler(Errors.PremadeExceptions("ReadFoodTable", "tupleItemFloat", 0), true, true, 524288);
-								
-							}
-							
-							FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string>(combined[0], tupleItemFloat[0], tupleItemFloat[1], combined[3]));
 							position++;
 							
 							number = 0;
@@ -67,8 +58,37 @@ namespace WeightWatchingProgramPlus
 						}
 						else
 						{
+							switch (number)
+							{
+									
+								case 1:
+								case 2:
+									
+									if (!float.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat[number == 1 ? 0 : 1]))
+									{
+										Errors.Handler(Errors.PremadeExceptions("ReadFoodTable", "tupleItemFloat", 0), true, true, 524288);
+									}
+									
+									break;
+									
+								case 4:
+									
+									if(!bool.TryParse(line, out tupleItemBool))
+									{
+										
+										Errors.Handler(Errors.PremadeExceptions("ReadFoodTable", "tupleItemBool", 0), true, true, 524288);
+										
+									}
+									
+									break;
+								default:
+									
+									combined[number == 0 ? 0 : 1] = line;
+									
+									break;
+									
+							}
 							
-							combined[number] = line;
 							number++;
 							
 						}
@@ -105,7 +125,7 @@ namespace WeightWatchingProgramPlus
 		/// A Tuple containing ONE additional food item which will be added to the food list.
 		/// </param>
 		#endregion
-		internal static void WriteFoodTable(string directory, string file, Tuple<string, float, float, string> additionToFoodTable)
+		internal static void WriteFoodTable(string directory, string file, Tuple<string, float, float, string, bool> additionToFoodTable)
 		{
 			
 			Modification.SortFoodList();
@@ -129,16 +149,16 @@ namespace WeightWatchingProgramPlus
 			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
 			{
 				
-				Tuple<string, float, float, string> foodTuple = FoodRelated.CombinedFoodList[i];
+				Tuple<string, float, float, string, bool> foodTuple = FoodRelated.CombinedFoodList[i];
 				
-				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}", foodTuple.Item1, foodTuple.Item2, foodTuple.Item3, foodTuple.Item4, seperator);
+				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", foodTuple.Item1, foodTuple.Item2, foodTuple.Item3, foodTuple.Item4, foodTuple.Item5,  seperator);
 				
 			}
 			
 			if (!string.IsNullOrWhiteSpace(additionToFoodTable.Item1) && additionToFoodTable.Item2 > 0 && additionToFoodTable.Item3 > 0 && !string.IsNullOrWhiteSpace(additionToFoodTable.Item4))
 			{
 				
-				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, seperator);
+				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5, seperator);
 				
 			}
 			else
@@ -171,8 +191,6 @@ namespace WeightWatchingProgramPlus
 		internal static void ReadRegistry(string appendedRegistryValue, string registyValue)
 		{
 			
-			Validation Validation = new Validation ();
-			
 			if (Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue) == null)
 			{
 				Registry.LocalMachine.CreateSubKey(appendedRegistryValue + registyValue);
@@ -187,7 +205,7 @@ namespace WeightWatchingProgramPlus
 					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Calories Left for the Day")))
 					{
 						
-						tempKey.SetValue("Calories Left for the Day", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3);
+						tempKey.SetValue("Calories Left for the Day", GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3);
 						
 					}
 					
@@ -232,20 +250,20 @@ namespace WeightWatchingProgramPlus
 					
 					MainForm.ManualTimeIsInitiated = tempBool;
 					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Last Used Date")))
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Next Reset Date")))
 					{
 						
-						tempKey.SetValue("Last Used Date", DateTime.Now.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
+						tempKey.SetValue("Next Reset Date", DateTime.Now.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
 						
 					}
-					
-					Validation.CheckDateValidity(GetRetrievableRegistryValues(appendedRegistryValue, registyValue).Item1);
 					
 				}
 				else if (registyValue.Contains("Diary", StringComparison.OrdinalIgnoreCase))
 				{
 					//Do nothing...yet
 				}
+				
+				Validation.CheckDateValidity();
 			}
 		}
 
@@ -275,31 +293,52 @@ namespace WeightWatchingProgramPlus
 		internal static void WriteRegistry(string appendedRegistryValue, string registyValue, DateTime date, float calories, float defaultCalories, System.Collections.Generic.IList<bool> reset)
 		{
 			
+			PopupHandler PopupHandler = new PopupHandler ();
+			
 			float tempFloat = calories;
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue, true))
 			{
+				
+				var registryTuple = GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 				
 				if (reset[0])
 				{
 					
 					if (calories > 0)
 					{
-						
-						tempFloat += Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3;
+					
+						tempFloat += registryTuple.Item3;
 						
 					}
 					else if (calories < 0)
 					{
 						
-						tempFloat = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3 + calories;
+						tempFloat = registryTuple.Item3 + calories;
 						
 					}
 					else
 					{
 						
-						tempFloat = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3;
+						tempFloat = registryTuple.Item3;
 						
+					}
+					
+					if(tempFloat > (registryTuple.Item3 * 2))
+					{
+							
+						tempFloat = (registryTuple.Item3 * 2);
+							
+							
+						PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have more than double your daily allowance. As a result, your calories have only been set to {0}.", tempFloat), null, 6, false);
+							
+					}
+					else if (tempFloat < 1200f)
+					{
+							
+						tempFloat = 1200f;
+							
+						PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have less than 1200 calories per day, as that is considered the lowest point before starving. As a result, your calories have only been set to {0}.", 1200), null, 6, false);
 					}
 					
 				}
@@ -307,7 +346,9 @@ namespace WeightWatchingProgramPlus
 				if (reset[1])
 				{
 					
-					tempKey.SetValue("Last Used Date", date.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture), RegistryValueKind.String);
+					tempKey.SetValue("Next Reset Date", date.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture), RegistryValueKind.String);
+					
+					MainForm.ManualDateTime = date;
 					
 				}
 				
@@ -340,6 +381,9 @@ namespace WeightWatchingProgramPlus
 		/// <example>
 		/// Float (2): the amount of calories that is set by default.
 		/// </example>
+		/// <example>
+		/// Bool: if the user is using a manual time instead of an automatic one.
+		/// </example>
 		#endregion
 		internal static Tuple<DateTime, float, float, bool> GetRetrievableRegistryValues(string appendedRegistryValue, string registryValue)
 		{
@@ -353,10 +397,10 @@ namespace WeightWatchingProgramPlus
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
 				
-				if (!DateTime.TryParseExact(tempKey.GetValue("Last Used Date").ToString(), new[] {"yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
+				if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {"yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
 				{
 					
-					Errors.Handler(Errors.PremadeExceptions("Registry", "Last Used Date", 0), true, true, 524288);
+					Errors.Handler(Errors.PremadeExceptions("Registry", "Next Reset Date", 0), true, true, 524288);
 					
 				}
 				
@@ -417,7 +461,7 @@ namespace WeightWatchingProgramPlus
 					
 					temptolval = Math.Floor(temptolval) <= 0 ? (float)Math.Round(temptolval, 1) : (float)Math.Floor(temptolval);
 					
-					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2}: {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCulture) ? "drank" : "ate", MainForm.UserProvidedServings, FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4);
+					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2}: {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : MainForm.IsDrinkProperty ? "drank" : "ate", MainForm.UserProvidedServings, FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item4);
 					
 					if (MainForm.UserProvidedServings > 1)
 					{
@@ -430,7 +474,7 @@ namespace WeightWatchingProgramPlus
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, " (of: '{0}').\nWhich is {1} servings, or {2} calories of '{0}'. ", FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item1, tempserval, Math.Round(tempcalval, 4, MidpointRounding.AwayFromZero));
 					
-					finalstring += Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0 ? string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2, seperator) : string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", Math.Abs(Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2), seperator);
+					finalstring += GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0 ? string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2, seperator) : string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", Math.Abs(GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2), seperator);
 					
 					if (File.Exists(directory + file))
 					{

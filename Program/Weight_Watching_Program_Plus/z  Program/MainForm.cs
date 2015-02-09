@@ -55,8 +55,6 @@ namespace WeightWatchingProgramPlus
 			public static string MainFormTitle
 			{
 				
-				get { return mainForm.Text; }
-				
 				set { mainForm.Text = value; }
 				
 			}
@@ -103,8 +101,6 @@ namespace WeightWatchingProgramPlus
 			public static object MainFoodListDataSource
 			{
 				
-				get { return mainForm.foodList.DataSource; }
-				
 				set { mainForm.foodList.DataSource = value; }
 				
 			}
@@ -124,8 +120,6 @@ namespace WeightWatchingProgramPlus
 			/// </summary>
 			public static int FoodListSelected
 			{
-				
-				get { return mainForm.foodList.SelectedIndex; }
 				
 				set { mainForm.foodList.SelectedIndex = value; }
 				
@@ -170,17 +164,13 @@ namespace WeightWatchingProgramPlus
 				
 				get { return mainForm.foodList.TopIndex; }
 				
-				set { mainForm.foodList.TopIndex = value; }
-				
 			}
 			
 			/// <summary>
-			/// Gets or Sets the label which the user seems asking how many servings they are eating.
+			/// Gets or Sets the label which the user sees asking how many servings they are eating.
 			/// </summary>
 			public static string NumberOfServingsLabel
 			{
-				
-				get { return mainForm.howManyServingsLabel.Text; }
 				
 				set { mainForm.howManyServingsLabel.Text = value; }
 				
@@ -258,6 +248,15 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
+			public static bool IsDrinkProperty
+			{
+				
+				get { return mainForm.isDrinkCheckBox.Checked; }
+				
+				set { mainForm.isDrinkCheckBox.Checked = value; }
+				
+			}
+			
 			/// <summary>
 			/// Gets or Sets if the user is checking the time.
 			/// </summary>
@@ -265,8 +264,6 @@ namespace WeightWatchingProgramPlus
 			{
 				
 				get { return mainForm.timeRadioButton.Checked; }
-				
-				set { mainForm.timeRadioButton.Checked = value; }
 				
 			}
 			
@@ -278,18 +275,6 @@ namespace WeightWatchingProgramPlus
 				
 				get { return mainForm.calorieRadioButton.Checked; }
 				
-				set { mainForm.calorieRadioButton.Checked = value; }
-				
-			}
-			
-			/// <summary>
-			/// Gets the calorie label
-			/// </summary>
-			public static Label NabCalorieLabel
-			{
-				
-				get { return mainForm.caloriesLabel; }
-				
 			}
 			
 			/// <summary>
@@ -297,8 +282,6 @@ namespace WeightWatchingProgramPlus
 			/// </summary>
 			public static decimal UserSetCalories
 			{
-				
-				get { return mainForm.manualCalorieEditBox.Value; }
 				
 				set { mainForm.manualCalorieEditBox.Value = value; }
 				
@@ -309,8 +292,6 @@ namespace WeightWatchingProgramPlus
 			/// </summary>
 			public static decimal DefaultCalories
 			{
-				
-				get { return mainForm.defaultCaloriesNumericUpDown.Value; }
 				
 				set { mainForm.defaultCaloriesNumericUpDown.Value = value; }
 				
@@ -335,7 +316,7 @@ namespace WeightWatchingProgramPlus
 			/// The ID of the control item you wish to use.
 			/// </param>
 			/// <returns>
-			/// Returns a property control value based on the following IDs: (ID 0): Food Name, (ID 1): Serving Size, (ID 2): Calories Per Serving, (ID 3): Definer.
+			/// Returns a property control value based on the following IDs: (ID 0): Food Name, (ID 1): Serving Size, (ID 2): Calories Per Serving, (ID 3): Definer. (ID 4): Calories Label.
 			/// </returns>
 			public static Control ReturnPropertyControl(int controlID)
 			{
@@ -355,32 +336,38 @@ namespace WeightWatchingProgramPlus
 					case 3:
 						return mainForm.definerEditBox;
 						
+					case 4:
+						return mainForm.caloriesLabel;
+						
 					default:
+						Errors.Handler(new ArgumentOutOfRangeException("controlID", controlID, "Value must be between " + 0 + " and " + 4), true, true, 524288);
 						break;
 						
 				}
-				
-				Errors.Handler(new ArgumentOutOfRangeException("controlID", controlID, "Value must be between " + 0 + " and " + 3), true, true, 524288);
 				
 				return null;
 				
 			}
 			
+			/// <summary>
+			/// Gets or Sets whether the user has chosen to write the diary portion of Food Tracking to a file.
+			/// </summary>
 			public static bool UserIsWritingDiaryToFile
 			{
 				
 				get { return mainForm.WriteToFileCheckBox.Checked; }
 				
-				set { mainForm.WriteToFileCheckBox.Checked = value; }
-				
 			}
 			
+			/// <summary>
+			/// Gets or Sets whether the user has chosen to use the diary portion of Food Tracking.
+			/// </summary>
 			public static bool DiaryIsBeingUsed
 			{
 				
 				get { return mainForm.RecordFoodCheckBox.Checked; }
 				
-				set { mainForm.RecordFoodCheckBox.Checked = value; }
+				private set { mainForm.RecordFoodCheckBox.Checked = value; }
 				
 			}
 		#endregion
@@ -488,8 +475,10 @@ namespace WeightWatchingProgramPlus
 				}
 					
 				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
+				
+				isDrinkCheckBox.Checked = FoodRelated.CombinedFoodList[foodList.SelectedIndex].Item5;
 					
-				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCultureIgnoreCase) ? "drinking" : "eating");
+				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, isDrinkCheckBox.Checked ? "drinking" : "eating");
 					
 				foodNameEditBox.Text = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item1;
 					
@@ -560,7 +549,7 @@ namespace WeightWatchingProgramPlus
 				
 				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
 					
-				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string> (null, 0f, 0f, null));
+				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool> (null, 0f, 0f, null, false));
 					
 				Functions.Refresh_foodList();
 					
@@ -666,40 +655,36 @@ namespace WeightWatchingProgramPlus
 				
 				tempcalories -= Modification.ModifyCalories(add);
 				
+				if(tempcalories < -Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3)
+				{
+					
+					PopupHandler.CreatePopup("You're not allowed to subtract more than the normal daily allowance from a negative calorie value.", null, 1, false);
+					
+					return;
+					
+				}
+				
 			}
-			
-			bool safeToModify = false;
 			
 			if (tempcalories < 0f && !add || tempcalories > Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3 && add)
 			{
 				
-				if (PopupHandler.CreatePopup(warningText, null, errorNum, false) == DialogResult.Yes)
+				if (PopupHandler.CreatePopup(warningText, null, errorNum, false) != DialogResult.Yes)
 				{
 					
-					safeToModify = true;
+					return;
 					
 				}
-				
-			}
-			else
-			{
-				
-				safeToModify = true;
 				
 			}
 			
-			if (safeToModify)
+			Storage.WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add);
+				
+			if (Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0)
 			{
-				
-				Storage.WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add);
-				
-				if (Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0)
-				{
 					
-					manualCalorieEditBox.Value = (decimal)Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2;
+				manualCalorieEditBox.Value = (decimal)Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2;
 					
-				}
-				
 			}
 			
 			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now.AddDays(1), tempcalories, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3, new [] {
@@ -718,20 +703,22 @@ namespace WeightWatchingProgramPlus
 		void ResetCaloriesSpecificCheckBoxCheckStatusChanged (object sender, EventArgs e)
 		{
 			
-			resetCaloriesManualCheckBox.Checked = true;
-			
 			exactResetDatetimePicker.Enabled = resetCaloriesManualCheckBox.Checked;
 			
-			Validation.ManualTimeEngaged = resetCaloriesManualCheckBox.Checked;
+			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			
+			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now, registryTuple.Item2, registryTuple.Item3, new List<bool> {false, false});
 			
 		}
 
 		void ExactResetDatetimePickerValueChanged (object sender, EventArgs e)
 		{
-			if (resetCaloriesManualCheckBox.Checked && exactResetDatetimePicker.Value != Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1)
+			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			
+			if (resetCaloriesManualCheckBox.Checked && exactResetDatetimePicker.Value != registryTuple.Item1)
 			{
 				
-				Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, exactResetDatetimePicker.Value, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3, new [] {
+				Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, exactResetDatetimePicker.Value, registryTuple.Item2, registryTuple.Item3, new [] {
 					false,
 					true
 				});
@@ -760,6 +747,10 @@ namespace WeightWatchingProgramPlus
 		internal static void InitializeForms ()
 		{
 			
+			Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			
+			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			
 			MainForm.MainFormTitle = GlobalVariables.RegistryMainValue;
 			
 			Refresh_foodList();
@@ -771,15 +762,18 @@ namespace WeightWatchingProgramPlus
 			MainForm.NumberOfServingsLabel = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4.Contains("fluid", StringComparison.CurrentCultureIgnoreCase) ? "drinking" : "eating");
 			
 			
-			Modification.ModifyFoodPropertiesList(false, new []{MainForm.MainFoodListItems [MainForm.GetFoodListTopItem].ToString(), FoodRelated.CombinedFoodList [0].Item4}, new decimal[]{(decimal)FoodRelated.CombinedFoodList [0].Item2, (decimal)FoodRelated.CombinedFoodList [0].Item3});
+			Modification.ModifyFoodPropertiesList(false, new []{MainForm.MainFoodListItems [MainForm.GetFoodListTopItem].ToString(), FoodRelated.CombinedFoodList [0].Item4}, new []{(decimal)FoodRelated.CombinedFoodList [0].Item2, (decimal)FoodRelated.CombinedFoodList [0].Item3});
 			
-			Validation.CheckCurrentRadioButton(MainForm.NabCalorieLabel);
+			Validation.CheckCurrentRadioButton((Label)MainForm.ReturnPropertyControl(4));
 			
-			MainForm.ManualDateTime = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1;
+			MainForm.ManualTimeIsInitiated = registryTuple.Item4;
 			
-			MainForm.UserSetCalories = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2 >= 0 ? decimal.Parse(Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2.ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture) : 0;
+			MainForm.ManualDateTime = registryTuple.Item1;
 			
-			MainForm.DefaultCalories = (decimal)Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3;
+			MainForm.UserSetCalories = registryTuple.Item2 >= 0 ? decimal.Parse(registryTuple.Item2.ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture) : 0;
+			
+			MainForm.DefaultCalories = (decimal)registryTuple.Item3;
+			
 		}
 
 		public static void Refresh_foodList ()
@@ -796,7 +790,7 @@ namespace WeightWatchingProgramPlus
 			
 			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
 			{
-				Tuple<string, float, float, string> name = FoodRelated.CombinedFoodList [i];
+				Tuple<string, float, float, string, bool> name = FoodRelated.CombinedFoodList [i];
 				
 				Item1.Add(name.Item1);
 				
@@ -806,7 +800,7 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.MainFoodListDataSource = Item1;
 			
-			Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string> (null, 0f, 0f, null));
+			Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool> (null, 0f, 0f, null, false));
 		}
 
 		#region Find Item Summary

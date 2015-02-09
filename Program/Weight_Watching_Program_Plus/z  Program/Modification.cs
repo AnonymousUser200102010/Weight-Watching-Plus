@@ -172,15 +172,15 @@ namespace WeightWatchingProgramPlus
 				
 				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
 				
-				FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty));
+				FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string, bool>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty));
 				
-				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string>(null, 0f, 0f, null));
+				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool>(null, 0f, 0f, null, false));
 				
 			}
 			else
 			{
 				
-				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty));
+				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty));
 				
 				MainForm.IsCreatingANewFoodItem = false;
 				
@@ -206,19 +206,19 @@ namespace WeightWatchingProgramPlus
 		#endregion
 		public static void ModifyFoodPropertiesList(bool clear, string[] stringProperties, decimal[] decimalProperties)
 		{
-			if (!clear)
-			{
-				MainForm.FoodNameProperty = stringProperties[0];
-				MainForm.DefinerProperty = stringProperties[1];
-				MainForm.ServingSizeProperty = decimalProperties[0];
-				MainForm.CaloriesPerServingProperty = decimalProperties[1];
-			}
-			else
+			if (clear)
 			{
 				MainForm.FoodNameProperty = null;
 				MainForm.ServingSizeProperty = 0;
 				MainForm.CaloriesPerServingProperty = 0;
 				MainForm.DefinerProperty = null;
+			}
+			else
+			{
+				MainForm.FoodNameProperty = stringProperties[0];
+				MainForm.DefinerProperty = stringProperties[1];
+				MainForm.ServingSizeProperty = decimalProperties[0];
+				MainForm.CaloriesPerServingProperty = decimalProperties[1];
 			}
 			
 		}
@@ -229,8 +229,10 @@ namespace WeightWatchingProgramPlus
 		internal static void SortFoodList()
 		{
 			
-			List<Tuple<string, float, float, string>> sortedEnum = FoodRelated.CombinedFoodList.ToList();
+			List<Tuple<string, float, float, string, bool>> sortedEnum = FoodRelated.CombinedFoodList.ToList();
+			
 			sortedEnum.Sort();
+			
 			FoodRelated.CombinedFoodList = sortedEnum;
 			
 		}

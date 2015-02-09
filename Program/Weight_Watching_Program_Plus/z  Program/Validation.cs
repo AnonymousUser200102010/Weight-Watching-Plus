@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using UniversalHandlersLibrary;
@@ -15,28 +16,27 @@ namespace WeightWatchingProgramPlus
 	class Validation
 	{
 
-		internal bool ManualTimeEngaged;
-
 		#region Check Date Summary
 		/// <summary>
 		/// Checks to see if the reset date is earlier or later than the checked date.
 		/// </summary>
-		/// <param name="dateToCheck">
-		/// Checked date.
-		/// </param>
 		#endregion
-		internal void CheckDateValidity(DateTime dateToCheck)
+		internal static void CheckDateValidity()
 		{
 			
-			if (DateTime.Compare(!ManualTimeEngaged ? dateToCheck : MainForm.ManualDateTime, DateTime.Now) <= 0 || Registry.LocalMachine.OpenSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue) == null)
+			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			
+			if (DateTime.Compare(registryTuple.Item1, DateTime.Now) <= 0 || Registry.LocalMachine.OpenSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue) == null)
 			{
 				
-				Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, !ManualTimeEngaged ? DateTime.Now.AddDays(1) : MainForm.ManualDateTime.AddDays(1), Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3, new[] {
+				var manualTimeIsInitiated = MainForm.ManualTimeIsInitiated;
+				
+				DateTime tempDate = manualTimeIsInitiated ? new DateTime(registryTuple.Item1.Year, registryTuple.Item1.Month, DateTime.Now.Day + 1, registryTuple.Item1.Hour, registryTuple.Item1.Minute, registryTuple.Item1.Second, registryTuple.Item1.Millisecond, DateTimeKind.Local) : DateTime.Now.AddDays(1);
+				
+				Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, tempDate, registryTuple.Item2, registryTuple.Item3, new[] {
 					true,
 					true
 				});
-				
-				MainForm.ManualDateTime = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1;
 				
 			}
 		}
@@ -78,12 +78,21 @@ namespace WeightWatchingProgramPlus
 		/// Checks to see if the food item property setting boxes have values that are within acceptable parameters.
 		/// </summary>
 		/// <returns>
-		/// True if the name box is not an exact duplicate of another food name, all TextBoxes are not void or white space, and all NumericUpDowns have values >= 0, else returns false.
+		/// True if the name box is not an exact duplicate of another food name, all TextBoxes are not void or white space and contain valid characters, and all NumericUpDowns have values >= 0; else returns false.
 		/// </returns>
 		#endregion
 		internal static bool EditBoxesHaveValidEntries()
 		{
 			PopupHandler PopupHandler = new PopupHandler ();
+			
+			if (HasInvalidCharacters(MainForm.FoodNameProperty) || HasInvalidCharacters(MainForm.DefinerProperty))
+			{
+				
+				PopupHandler.CreatePopup("Properties cannot contain special characters!", MainForm.ReturnPropertyControl(0), 4, true);
+				
+				return false;
+				
+			}
 			
 			if (AlreadyExists(MainForm.FoodNameProperty))
 			{
@@ -150,21 +159,26 @@ namespace WeightWatchingProgramPlus
 			
 			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
 			{
-				Tuple<string, float, float, string> t = FoodRelated.CombinedFoodList[i];
+				Tuple<string, float, float, string, bool> t = FoodRelated.CombinedFoodList[i];
 				
-				if (text.Equals(t.Item1, StringComparison.OrdinalIgnoreCase))
+				if (text.Equals(t.Item1, StringComparison.OrdinalIgnoreCase) && (i != GlobalVariables.SelectedListItem || MainForm.IsCreatingANewFoodItem))
 				{
 					
-					if (i != GlobalVariables.SelectedListItem || MainForm.IsCreatingANewFoodItem)
-					{
-						
-						return true;
-						
-					}
+					return true;
 					
 				}
+				
 			}
 			return false;
+		}
+		
+		private static bool HasInvalidCharacters(string text)
+		{
+			
+			Regex RgxUrl = new Regex("[^a-zA-Z0-9 ()%]");
+			
+			return RgxUrl.IsMatch(text);
+			
 		}
 		
 	}

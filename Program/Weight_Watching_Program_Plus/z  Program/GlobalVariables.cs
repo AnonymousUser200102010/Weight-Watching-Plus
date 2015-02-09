@@ -34,14 +34,17 @@ namespace WeightWatchingProgramPlus
         /// <item4>
         /// Item 4 = definer fod the food item.
         /// </item4>
+        /// <item5>
+        /// Item 5 = drink bool.
+        /// </item5>
         /// </example>
         #endregion
-        public static IList<Tuple<string, float, float, string>> CombinedFoodList { get; set; }
+        public static IList<Tuple<string, float, float, string, bool>> CombinedFoodList { get; set; }
         
         static FoodRelated()
         {
         	
-        	CombinedFoodList = new List<Tuple<string, float, float, string>>();
+        	CombinedFoodList = new List<Tuple<string, float, float, string, bool>>();
         	
         }
         
