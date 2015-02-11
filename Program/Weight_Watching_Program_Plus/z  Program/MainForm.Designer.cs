@@ -28,7 +28,6 @@ namespace WeightWatchingProgramPlus
 		private System.Windows.Forms.Button subtractCaloriesButton;
 		private System.Windows.Forms.Label howManyServingsLabel;
 		private System.Windows.Forms.NumericUpDown caloriesPerServingEditBox;
-		private System.Windows.Forms.NumericUpDown userServingInputTextBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label ManualFoodLabel;
 		private System.Windows.Forms.Button nextSearchButton;
@@ -59,6 +58,14 @@ namespace WeightWatchingProgramPlus
 		private System.Windows.Forms.NumericUpDown defaultCaloriesNumericUpDown;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.CheckBox isDrinkCheckBox;
+		private System.Windows.Forms.NumericUpDown userServingInputTextBox;
+		private System.Windows.Forms.TabControl AddSub_SubTabControl;
+		private System.Windows.Forms.TabPage addSub_SubTabManual;
+		private System.Windows.Forms.TabPage addSub_SubTabArithmetic;
+		private System.Windows.Forms.NumericUpDown arithmeticNumericUpDown_Left;
+		private System.Windows.Forms.ComboBox arithmeticSignComboBox;
+		private System.Windows.Forms.NumericUpDown arithmeticNumericUpDown_Right;
+
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -108,9 +115,15 @@ namespace WeightWatchingProgramPlus
 			this.foodNameEditBox = new System.Windows.Forms.TextBox();
 			this.MainSubTabControl = new System.Windows.Forms.TabControl();
 			this.AddSubButton = new System.Windows.Forms.TabPage();
+			this.AddSub_SubTabControl = new System.Windows.Forms.TabControl();
+			this.addSub_SubTabArithmetic = new System.Windows.Forms.TabPage();
+			this.arithmeticNumericUpDown_Right = new System.Windows.Forms.NumericUpDown();
+			this.arithmeticSignComboBox = new System.Windows.Forms.ComboBox();
+			this.arithmeticNumericUpDown_Left = new System.Windows.Forms.NumericUpDown();
+			this.addSub_SubTabManual = new System.Windows.Forms.TabPage();
+			this.userServingInputTextBox = new System.Windows.Forms.NumericUpDown();
 			this.WriteToFileCheckBox = new System.Windows.Forms.CheckBox();
 			this.RecordFoodCheckBox = new System.Windows.Forms.CheckBox();
-			this.userServingInputTextBox = new System.Windows.Forms.NumericUpDown();
 			this.howManyServingsLabel = new System.Windows.Forms.Label();
 			this.addCaloriesButtonMain = new System.Windows.Forms.Button();
 			this.subtractCaloriesButton = new System.Windows.Forms.Button();
@@ -142,6 +155,11 @@ namespace WeightWatchingProgramPlus
 			((System.ComponentModel.ISupportInitialize)(this.servingSizeEditBox)).BeginInit();
 			this.MainSubTabControl.SuspendLayout();
 			this.AddSubButton.SuspendLayout();
+			this.AddSub_SubTabControl.SuspendLayout();
+			this.addSub_SubTabArithmetic.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.arithmeticNumericUpDown_Right)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.arithmeticNumericUpDown_Left)).BeginInit();
+			this.addSub_SubTabManual.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.userServingInputTextBox)).BeginInit();
 			this.ManualButton.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).BeginInit();
@@ -475,9 +493,9 @@ namespace WeightWatchingProgramPlus
 			// AddSubButton
 			// 
 			this.AddSubButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.AddSubButton.Controls.Add(this.AddSub_SubTabControl);
 			this.AddSubButton.Controls.Add(this.WriteToFileCheckBox);
 			this.AddSubButton.Controls.Add(this.RecordFoodCheckBox);
-			this.AddSubButton.Controls.Add(this.userServingInputTextBox);
 			this.AddSubButton.Controls.Add(this.howManyServingsLabel);
 			this.AddSubButton.Controls.Add(this.addCaloriesButtonMain);
 			this.AddSubButton.Controls.Add(this.subtractCaloriesButton);
@@ -490,6 +508,139 @@ namespace WeightWatchingProgramPlus
 			this.AddSubButton.Text = "Add/Subtract";
 			this.AddSubButton.UseVisualStyleBackColor = true;
 			// 
+			// AddSub_SubTabControl
+			// 
+			this.AddSub_SubTabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
+			this.AddSub_SubTabControl.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+			this.AddSub_SubTabControl.Controls.Add(this.addSub_SubTabArithmetic);
+			this.AddSub_SubTabControl.Controls.Add(this.addSub_SubTabManual);
+			this.AddSub_SubTabControl.Location = new System.Drawing.Point(8, 48);
+			this.AddSub_SubTabControl.Multiline = true;
+			this.AddSub_SubTabControl.Name = "AddSub_SubTabControl";
+			this.AddSub_SubTabControl.SelectedIndex = 0;
+			this.AddSub_SubTabControl.Size = new System.Drawing.Size(889, 90);
+			this.AddSub_SubTabControl.TabIndex = 30;
+			// 
+			// addSub_SubTabArithmetic
+			// 
+			this.addSub_SubTabArithmetic.BackColor = System.Drawing.SystemColors.Control;
+			this.addSub_SubTabArithmetic.Controls.Add(this.arithmeticNumericUpDown_Right);
+			this.addSub_SubTabArithmetic.Controls.Add(this.arithmeticSignComboBox);
+			this.addSub_SubTabArithmetic.Controls.Add(this.arithmeticNumericUpDown_Left);
+			this.addSub_SubTabArithmetic.Location = new System.Drawing.Point(68, 4);
+			this.addSub_SubTabArithmetic.Name = "addSub_SubTabArithmetic";
+			this.addSub_SubTabArithmetic.Padding = new System.Windows.Forms.Padding(3);
+			this.addSub_SubTabArithmetic.Size = new System.Drawing.Size(817, 82);
+			this.addSub_SubTabArithmetic.TabIndex = 0;
+			this.addSub_SubTabArithmetic.Text = "Arithmetic";
+			// 
+			// arithmeticNumericUpDown_Right
+			// 
+			this.arithmeticNumericUpDown_Right.DecimalPlaces = 1;
+			this.arithmeticNumericUpDown_Right.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
+			this.arithmeticNumericUpDown_Right.Location = new System.Drawing.Point(718, 11);
+			this.arithmeticNumericUpDown_Right.Maximum = new decimal(new int[] {
+			0,
+			902409669,
+			54,
+			0});
+			this.arithmeticNumericUpDown_Right.Minimum = new decimal(new int[] {
+			1,
+			0,
+			0,
+			0});
+			this.arithmeticNumericUpDown_Right.Name = "arithmeticNumericUpDown_Right";
+			this.arithmeticNumericUpDown_Right.Size = new System.Drawing.Size(90, 65);
+			this.arithmeticNumericUpDown_Right.TabIndex = 2;
+			this.arithmeticNumericUpDown_Right.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.arithmeticNumericUpDown_Right.Value = new decimal(new int[] {
+			1,
+			0,
+			0,
+			0});
+			// 
+			// arithmeticSignComboBox
+			// 
+			this.arithmeticSignComboBox.BackColor = System.Drawing.SystemColors.Window;
+			this.arithmeticSignComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.arithmeticSignComboBox.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
+			this.arithmeticSignComboBox.FormattingEnabled = true;
+			this.arithmeticSignComboBox.Items.AddRange(new object[] {
+			"/",
+			"*",
+			"-",
+			"+"});
+			this.arithmeticSignComboBox.Location = new System.Drawing.Point(648, 11);
+			this.arithmeticSignComboBox.MaxDropDownItems = 4;
+			this.arithmeticSignComboBox.Name = "arithmeticSignComboBox";
+			this.arithmeticSignComboBox.Size = new System.Drawing.Size(64, 65);
+			this.arithmeticSignComboBox.TabIndex = 1;
+			// 
+			// arithmeticNumericUpDown_Left
+			// 
+			this.arithmeticNumericUpDown_Left.DecimalPlaces = 9;
+			this.arithmeticNumericUpDown_Left.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.arithmeticNumericUpDown_Left.Location = new System.Drawing.Point(6, 11);
+			this.arithmeticNumericUpDown_Left.Maximum = new decimal(new int[] {
+			0,
+			902409669,
+			54,
+			0});
+			this.arithmeticNumericUpDown_Left.Minimum = new decimal(new int[] {
+			1,
+			0,
+			0,
+			589824});
+			this.arithmeticNumericUpDown_Left.Name = "arithmeticNumericUpDown_Left";
+			this.arithmeticNumericUpDown_Left.Size = new System.Drawing.Size(636, 65);
+			this.arithmeticNumericUpDown_Left.TabIndex = 0;
+			this.arithmeticNumericUpDown_Left.Tag = "";
+			this.arithmeticNumericUpDown_Left.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.arithmeticNumericUpDown_Left.Value = new decimal(new int[] {
+			1,
+			0,
+			0,
+			0});
+			// 
+			// addSub_SubTabManual
+			// 
+			this.addSub_SubTabManual.BackColor = System.Drawing.SystemColors.Control;
+			this.addSub_SubTabManual.Controls.Add(this.userServingInputTextBox);
+			this.addSub_SubTabManual.Location = new System.Drawing.Point(68, 4);
+			this.addSub_SubTabManual.Name = "addSub_SubTabManual";
+			this.addSub_SubTabManual.Padding = new System.Windows.Forms.Padding(3);
+			this.addSub_SubTabManual.Size = new System.Drawing.Size(817, 82);
+			this.addSub_SubTabManual.TabIndex = 1;
+			this.addSub_SubTabManual.Tag = "";
+			this.addSub_SubTabManual.Text = "Explicit";
+			// 
+			// userServingInputTextBox
+			// 
+			this.userServingInputTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.userServingInputTextBox.DecimalPlaces = 9;
+			this.userServingInputTextBox.Font = new System.Drawing.Font("Times New Roman", 28.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.userServingInputTextBox.Location = new System.Drawing.Point(7, 12);
+			this.userServingInputTextBox.Margin = new System.Windows.Forms.Padding(4);
+			this.userServingInputTextBox.Maximum = new decimal(new int[] {
+			0,
+			902409669,
+			54,
+			0});
+			this.userServingInputTextBox.Minimum = new decimal(new int[] {
+			1,
+			0,
+			0,
+			655360});
+			this.userServingInputTextBox.Name = "userServingInputTextBox";
+			this.userServingInputTextBox.Size = new System.Drawing.Size(821, 63);
+			this.userServingInputTextBox.TabIndex = 31;
+			this.userServingInputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.userServingInputTextBox.Value = new decimal(new int[] {
+			1,
+			0,
+			0,
+			0});
+			// 
 			// WriteToFileCheckBox
 			// 
 			this.WriteToFileCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
@@ -497,7 +648,7 @@ namespace WeightWatchingProgramPlus
 			this.WriteToFileCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.WriteToFileCheckBox.Enabled = false;
 			this.WriteToFileCheckBox.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-			this.WriteToFileCheckBox.Location = new System.Drawing.Point(905, 86);
+			this.WriteToFileCheckBox.Location = new System.Drawing.Point(907, 102);
 			this.WriteToFileCheckBox.Margin = new System.Windows.Forms.Padding(4);
 			this.WriteToFileCheckBox.Name = "WriteToFileCheckBox";
 			this.WriteToFileCheckBox.Size = new System.Drawing.Size(128, 32);
@@ -511,7 +662,7 @@ namespace WeightWatchingProgramPlus
 			this.RecordFoodCheckBox.Checked = true;
 			this.RecordFoodCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.RecordFoodCheckBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-			this.RecordFoodCheckBox.Location = new System.Drawing.Point(905, 48);
+			this.RecordFoodCheckBox.Location = new System.Drawing.Point(907, 52);
 			this.RecordFoodCheckBox.Margin = new System.Windows.Forms.Padding(4);
 			this.RecordFoodCheckBox.Name = "RecordFoodCheckBox";
 			this.RecordFoodCheckBox.Size = new System.Drawing.Size(129, 31);
@@ -520,39 +671,14 @@ namespace WeightWatchingProgramPlus
 			this.RecordFoodCheckBox.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.RecordFoodCheckBox.UseVisualStyleBackColor = true;
 			// 
-			// userServingInputTextBox
-			// 
-			this.userServingInputTextBox.DecimalPlaces = 9;
-			this.userServingInputTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-			this.userServingInputTextBox.Location = new System.Drawing.Point(131, 62);
-			this.userServingInputTextBox.Margin = new System.Windows.Forms.Padding(4);
-			this.userServingInputTextBox.Maximum = new decimal(new int[] {
-			0,
-			902409669,
-			54,
-			0});
-			this.userServingInputTextBox.Minimum = new decimal(new int[] {
-			1,
-			0,
-			0,
-			655360});
-			this.userServingInputTextBox.Name = "userServingInputTextBox";
-			this.userServingInputTextBox.Size = new System.Drawing.Size(767, 42);
-			this.userServingInputTextBox.TabIndex = 24;
-			this.userServingInputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.userServingInputTextBox.Value = new decimal(new int[] {
-			1,
-			0,
-			0,
-			0});
-			// 
 			// howManyServingsLabel
 			// 
+			this.howManyServingsLabel.BackColor = System.Drawing.SystemColors.Control;
 			this.howManyServingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
-			this.howManyServingsLabel.Location = new System.Drawing.Point(131, 4);
+			this.howManyServingsLabel.Location = new System.Drawing.Point(8, 4);
 			this.howManyServingsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.howManyServingsLabel.Name = "howManyServingsLabel";
-			this.howManyServingsLabel.Size = new System.Drawing.Size(767, 41);
+			this.howManyServingsLabel.Size = new System.Drawing.Size(1027, 41);
 			this.howManyServingsLabel.TabIndex = 29;
 			this.howManyServingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
@@ -573,7 +699,7 @@ namespace WeightWatchingProgramPlus
 			// 
 			this.subtractCaloriesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
 			this.subtractCaloriesButton.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.subtractCaloriesButton.Location = new System.Drawing.Point(8, 132);
+			this.subtractCaloriesButton.Location = new System.Drawing.Point(8, 142);
 			this.subtractCaloriesButton.Margin = new System.Windows.Forms.Padding(4);
 			this.subtractCaloriesButton.Name = "subtractCaloriesButton";
 			this.subtractCaloriesButton.Size = new System.Drawing.Size(1027, 44);
@@ -649,14 +775,14 @@ namespace WeightWatchingProgramPlus
 			// 
 			// manualCalorieEditBox
 			// 
-			this.manualCalorieEditBox.DecimalPlaces = 3;
+			this.manualCalorieEditBox.DecimalPlaces = 4;
 			this.manualCalorieEditBox.Font = new System.Drawing.Font("Book Antiqua", 27.75F, System.Drawing.FontStyle.Bold);
 			this.manualCalorieEditBox.Increment = new decimal(new int[] {
 			1,
 			0,
 			0,
-			196608});
-			this.manualCalorieEditBox.Location = new System.Drawing.Point(8, 66);
+			262144});
+			this.manualCalorieEditBox.Location = new System.Drawing.Point(18, 66);
 			this.manualCalorieEditBox.Margin = new System.Windows.Forms.Padding(4);
 			this.manualCalorieEditBox.Maximum = new decimal(new int[] {
 			0,
@@ -664,9 +790,9 @@ namespace WeightWatchingProgramPlus
 			542,
 			0});
 			this.manualCalorieEditBox.Name = "manualCalorieEditBox";
-			this.manualCalorieEditBox.Size = new System.Drawing.Size(1029, 63);
+			this.manualCalorieEditBox.Size = new System.Drawing.Size(1019, 63);
 			this.manualCalorieEditBox.TabIndex = 5;
-			this.manualCalorieEditBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.manualCalorieEditBox.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
 			// 
 			// refreshCaloriesTimeButton
 			// 
@@ -890,6 +1016,11 @@ namespace WeightWatchingProgramPlus
 			((System.ComponentModel.ISupportInitialize)(this.servingSizeEditBox)).EndInit();
 			this.MainSubTabControl.ResumeLayout(false);
 			this.AddSubButton.ResumeLayout(false);
+			this.AddSub_SubTabControl.ResumeLayout(false);
+			this.addSub_SubTabArithmetic.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.arithmeticNumericUpDown_Right)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.arithmeticNumericUpDown_Left)).EndInit();
+			this.addSub_SubTabManual.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.userServingInputTextBox)).EndInit();
 			this.ManualButton.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.manualCalorieEditBox)).EndInit();

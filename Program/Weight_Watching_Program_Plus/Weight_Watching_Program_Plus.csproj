@@ -91,6 +91,9 @@
     <Compile Include="z  Program\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="z  Program\Mathematics.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="z  Program\Modification.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>

@@ -7,11 +7,12 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using UniversalHandlersLibrary;
+
 #endregion
 
 namespace WeightWatchingProgramPlus
 {
-	
+
 	/// <summary>
 	/// Functions whose primary purpose is modification and creation, but who don't have a more pressing primary function.
 	/// </summary>
@@ -19,63 +20,86 @@ namespace WeightWatchingProgramPlus
 	{
 
 		private PopupHandler PopupHandler = new PopupHandler ();
-
+		
 		#region Modify Calories Summary
 		/// <summary>
-		/// Sub-logic handler for modification of calories. Simply to reduce code bloat and make understanding the final processes easier.
+		/// Performs the main operation when modifying the user's calorie balance.
 		/// </summary>
-		/// <param name="add">
-		/// Are you adding calories?
+		/// <param name="sender">
+		/// 
 		/// </param>
-		/// <returns>
-		/// Returns the calorie value after the logical operations have been finished.
-		/// </returns>
 		#endregion
-		internal float ModifyCalories(bool add)
+		internal void ModifyCalories(object sender)
 		{
 			
-			int hour = DateTime.Now.Hour;
-			int unsafeHourThreshold = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1.Hour - 8;
-			string amPMDefiner = DateTime.Now.ToString("tt", CultureInfo.InvariantCulture);
+			bool add = true;
+			int errorNum = 1;
+			string warningText = "The amount of calories that you are trying to add would put you over your daily limit, and is not allowed.";
 			
-			Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
-			
-			float tempFloat = FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item3 * (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item2;
-			
-			if (hour >= unsafeHourThreshold && Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1.Day == DateTime.Now.Day && Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1.ToString("tt", CultureInfo.InvariantCulture).Equals(amPMDefiner, StringComparison.OrdinalIgnoreCase))
+			if (sender.ToString().Contains("subtract", StringComparison.OrdinalIgnoreCase))
 			{
 				
-				float midSnackPenalty = tempFloat / 10;
+				add = false;
+				errorNum = 2;
+				warningText = "The amount of calories that are about to be subtracted would put you below your daily limit! Continue?";
 				
-				if (midSnackPenalty < 10)
+			} 
+			
+			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			
+			float tempcalories = registryTuple.Item2;
+			
+			Mathematics Mathematics = new Mathematics ();
+			
+			if (add)
+			{
+				
+				tempcalories += Mathematics.GetFinalCalories(add);
+				
+			}
+			else
+			{
+				
+				tempcalories -= Mathematics.GetFinalCalories(add);
+				
+				if (tempcalories < -registryTuple.Item3)
 				{
 					
-					midSnackPenalty = 10;
+					PopupHandler.CreatePopup("You're not allowed to subtract more than the normal daily allowance from a negative calorie value.", null, 1, false);
+					
+					return;
 					
 				}
-				else if (midSnackPenalty > Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3 / 2)
-				{
-					
-					midSnackPenalty = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item3 / 2;
-						
-				}
-				
-				if (this.PopupHandler.CreatePopup(string.Format(CultureInfo.InvariantCulture, "An eating before bed {2} of {0} calories will be {1} your daily calorie count if you continue.", midSnackPenalty, !add ? "subtracted from" : "added to", !add ? "penalty" : "benefit"), null, 3, false) != DialogResult.OK)
-				{
-					
-					return 0;
-					
-				}
-				
-				return tempFloat + midSnackPenalty;
 				
 			}
 			
-			return tempFloat;
+			if ( (tempcalories < 0f && !add) || (tempcalories > registryTuple.Item3 && add) )
+			{
+				
+				if (PopupHandler.CreatePopup(warningText, null, errorNum, false) != DialogResult.Yes)
+				{
+					
+					return;
+					
+				}
+				
+			}
+			
+			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now.AddDays(1), tempcalories, registryTuple.Item3, new [] {
+				false,
+				false
+			});
+
+			MainForm.UserSetCalories = (decimal)registryTuple.Item2;
+			
+			Validation.CheckCurrentRadioButton();
+			
+			Storage.WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add);
 			
 		}
 
 		#region Write To Object Summary
+
 		/// <summary>
 		/// A lightweight modular text changer for use on a variety of objects.
 		/// </summary>
@@ -89,33 +113,32 @@ namespace WeightWatchingProgramPlus
 		/// The number used to handle the operation.
 		/// </param>
 		#endregion
-		public static void WriteToObject(Label labelToChange, TextBox textBoxToChange, int objectNumber)
+		public static void WriteToObject (Label labelToChange, TextBox textBoxToChange, int objectNumber)
 		{
 			
-			string[] messages =  {
+			string[] messages = {
 				string.Format(CultureInfo.InvariantCulture, "Calories Left For The Day: {0}", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2),
 				string.Format(CultureInfo.InvariantCulture, "Calories will reset on {0:MMMM dd} at {0:hh:mm tt}", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1),
 				"Click Here to Search the Food List"
 			};
 			
-			var font1 = new Font("Microsoft Sans Serif", 12f, FontStyle.Bold);
+			var font1 = new Font ("Microsoft Sans Serif", 12f, FontStyle.Bold);
 			var font2 = new Font ("Microsoft Sans Serif", 8.25f, FontStyle.Italic);
-			Font[] fontStyle =  {
+			Font[] fontStyle = {
 				font1,
 				font1,
 				font2
 			};
 			
 			var middleCenter = ContentAlignment.MiddleCenter;
-			ContentAlignment[] objectAlignment =  {
+			ContentAlignment[] objectAlignment = {
 				middleCenter,
 				middleCenter,
 				middleCenter
 			};
 			
 			var center = HorizontalAlignment.Center;
-			HorizontalAlignment[] horizontalObjectAlignment =
-			{
+			HorizontalAlignment[] horizontalObjectAlignment = {
 				center,
 				center,
 				center
@@ -203,8 +226,11 @@ namespace WeightWatchingProgramPlus
 		/// <param name="decimalProperties">
 		/// Contains the decimal values for all properties that require them. So far, in order, these properties are counted: ServingSize, CaloriesPerServing.
 		/// </param>
+		/// <param name="boolProperties">
+		/// Contains the bool values for all properties that require them. So far, in order, these properties are counted: IsDrinkCheckBox.
+		/// </param>
 		#endregion
-		public static void ModifyFoodPropertiesList(bool clear, string[] stringProperties, decimal[] decimalProperties)
+		public static void ModifyFoodPropertiesList(bool clear, string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties)
 		{
 			if (clear)
 			{
@@ -212,6 +238,7 @@ namespace WeightWatchingProgramPlus
 				MainForm.ServingSizeProperty = 0;
 				MainForm.CaloriesPerServingProperty = 0;
 				MainForm.DefinerProperty = null;
+				MainForm.IsDrinkProperty = false;
 			}
 			else
 			{
@@ -219,13 +246,16 @@ namespace WeightWatchingProgramPlus
 				MainForm.DefinerProperty = stringProperties[1];
 				MainForm.ServingSizeProperty = decimalProperties[0];
 				MainForm.CaloriesPerServingProperty = decimalProperties[1];
+				MainForm.IsDrinkProperty = boolProperties[0];
 			}
 			
 		}
 
+		#region Sort Food List Summary
 		/// <summary>
 		/// Sorts the food list in one function to reduce code bloat.
 		/// </summary>
+		#endregion
 		internal static void SortFoodList()
 		{
 			

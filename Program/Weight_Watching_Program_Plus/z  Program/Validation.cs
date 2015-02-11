@@ -1,27 +1,32 @@
 ﻿#region Using Directives
 
 using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using UniversalHandlersLibrary;
+
 #endregion
 
 namespace WeightWatchingProgramPlus
 {
+
 	/// <summary>
 	/// Functions whose primary purpose is verification and validation, but who don't have a more pressing primary function.
 	/// </summary>
-	class Validation
+	static class Validation
 	{
 
 		#region Check Date Summary
+
 		/// <summary>
 		/// Checks to see if the reset date is earlier or later than the checked date.
 		/// </summary>
 		#endregion
-		internal static void CheckDateValidity()
+		internal static void CheckDateValidity ()
 		{
 			
 			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
@@ -31,7 +36,7 @@ namespace WeightWatchingProgramPlus
 				
 				var manualTimeIsInitiated = MainForm.ManualTimeIsInitiated;
 				
-				DateTime tempDate = manualTimeIsInitiated ? new DateTime(registryTuple.Item1.Year, registryTuple.Item1.Month, DateTime.Now.Day + 1, registryTuple.Item1.Hour, registryTuple.Item1.Minute, registryTuple.Item1.Second, registryTuple.Item1.Millisecond, DateTimeKind.Local) : DateTime.Now.AddDays(1);
+				DateTime tempDate = manualTimeIsInitiated ? new DateTime (registryTuple.Item1.Year, registryTuple.Item1.Month, DateTime.Now.Day + 1, registryTuple.Item1.Hour, registryTuple.Item1.Minute, registryTuple.Item1.Second, registryTuple.Item1.Millisecond, DateTimeKind.Local) : DateTime.Now.AddDays(1);
 				
 				Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, tempDate, registryTuple.Item2, registryTuple.Item3, new[] {
 					true,
@@ -42,15 +47,15 @@ namespace WeightWatchingProgramPlus
 		}
 
 		#region Check Radio Button Summary
+
 		/// <summary>
 		/// Checks to see which radio button is currently active.
 		/// </summary>
-		/// <param name="caloriesLabel">
-		/// The label at the top of the "Main" tab.
-		/// </param>
 		#endregion
-		internal static void CheckCurrentRadioButton(Label caloriesLabel)
+		internal static void CheckCurrentRadioButton ()
 		{
+			
+			Label caloriesLabel = (Label)MainForm.ReturnPropertyControl(4);
 			
 			if (MainForm.UserCheckingTime)
 			{
@@ -67,13 +72,14 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				Errors.Handler(new InvalidOperationException("CheckCurrentRadioButton: operation invalid; perameters cannot be parsed into a logical operation."), true, true, 524288);
+				Errors.Handler(new InvalidOperationException ("CheckCurrentRadioButton: operation invalid; perameters cannot be parsed into a logical operation."), true, true, 524288);
 				
 			}
 				
 		}
 
 		#region Edit Box Validity Summary
+
 		/// <summary>
 		/// Checks to see if the food item property setting boxes have values that are within acceptable parameters.
 		/// </summary>
@@ -81,7 +87,7 @@ namespace WeightWatchingProgramPlus
 		/// True if the name box is not an exact duplicate of another food name, all TextBoxes are not void or white space and contain valid characters, and all NumericUpDowns have values >= 0; else returns false.
 		/// </returns>
 		#endregion
-		internal static bool EditBoxesHaveValidEntries()
+		internal static bool EditBoxesHaveValidEntries ()
 		{
 			PopupHandler PopupHandler = new PopupHandler ();
 			
@@ -144,6 +150,7 @@ namespace WeightWatchingProgramPlus
 		}
 
 		#region Check Exist Status Summary
+
 		/// <summary>
 		/// Checks to see if the string that has been supplied is equal to any string in the food list names database.
 		/// </summary>
@@ -154,12 +161,12 @@ namespace WeightWatchingProgramPlus
 		/// Checks the supplied string against all names in the food list database and if it equals one or more, returns true. Otherwise false.
 		/// </returns>
 		#endregion
-		private static bool AlreadyExists(string text)
+		private static bool AlreadyExists (string text)
 		{
 			
 			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
 			{
-				Tuple<string, float, float, string, bool> t = FoodRelated.CombinedFoodList[i];
+				Tuple<string, float, float, string, bool> t = FoodRelated.CombinedFoodList [i];
 				
 				if (text.Equals(t.Item1, StringComparison.OrdinalIgnoreCase) && (i != GlobalVariables.SelectedListItem || MainForm.IsCreatingANewFoodItem))
 				{
@@ -171,13 +178,55 @@ namespace WeightWatchingProgramPlus
 			}
 			return false;
 		}
-		
-		private static bool HasInvalidCharacters(string text)
+
+		#region Character Validity Summary
+		/// <summary>
+		/// Checks a string for characters not normally considered illegal but are so for the purposes of this program.
+		/// </summary>
+		/// <param name="text">
+		/// String to check.
+		/// </param>
+		/// <returns>
+		/// Returns true if it has any illegal characters; else false.
+		/// </returns>
+		#endregion
+		private static bool HasInvalidCharacters (string text)
 		{
 			
-			Regex RgxUrl = new Regex("[^a-zA-Z0-9 ()%]");
+			Regex validCharacters = new Regex ("[^a-zA-Z0-9 ()%]");
 			
-			return RgxUrl.IsMatch(text);
+			return validCharacters.IsMatch(text);
+			
+		}
+		
+		internal static bool ValidateBackup (string appendedRegistryValue, string registryValue)
+		{
+			
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+			
+			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
+			{
+				if(string.IsNullOrWhiteSpace((string)tempKey.GetValue("Last WWP+ Version")))
+				{
+							
+					tempKey.SetValue("Last WWP+ Version", fvi.FileVersion);
+							
+					return true;
+							
+				}
+				
+				if ((string)tempKey.GetValue("Last WWP+ Version") == fvi.FileVersion)
+				{
+					
+					tempKey.SetValue("Last WWP+ Version", fvi.FileVersion);
+					
+					return true;
+					
+				}
+			}
+			
+			return false;
 			
 		}
 		

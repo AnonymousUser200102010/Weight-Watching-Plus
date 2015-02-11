@@ -76,6 +76,8 @@ namespace WeightWatchingProgramPlus
         /// </summary>
         public static int SelectedListItem { get; set; }
         
+        public static bool CreateBackups { get; set; }
+        
 
         static GlobalVariables ()
         {
@@ -83,6 +85,8 @@ namespace WeightWatchingProgramPlus
             RegistryAppendedValue = "SOFTWARE\\Wow6432Node\\";
             
             RegistryMainValue = WeightWatchingProgram;
+            
+            CreateBackups = true;
             
         }
         

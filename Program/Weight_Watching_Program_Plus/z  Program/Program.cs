@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using UniversalHandlersLibrary;
@@ -12,6 +13,19 @@ using UniversalHandlersLibrary;
 
 namespace WeightWatchingProgramPlus
 {
+	
+	internal static class SafeNativeMethods
+	{
+		
+		#if DEBUG
+		
+		[DllImport("kernel32.dll", SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool AllocConsole ();
+		
+		#endif
+		
+	}
 
 	internal sealed class Program
 	{
@@ -20,6 +34,8 @@ namespace WeightWatchingProgramPlus
 		/// Program entry point.
 		/// </summary>
 		/// 
+		
+		private static bool explain = true;
 		
 		[STAThread]
 		private static void Main (string[] args)
@@ -34,6 +50,8 @@ namespace WeightWatchingProgramPlus
 				#if DEBUG
 				
 				GlobalVariables.RegistryMainValue = string.Format(CultureInfo.InvariantCulture, "{0}~debug", GlobalVariables.RegistryMainValue);
+				
+				SafeNativeMethods.AllocConsole();
 				
 				#endif
 				
@@ -51,50 +69,7 @@ namespace WeightWatchingProgramPlus
 					Directory.CreateDirectory("Files\\Text\\");
 				}
 				
-				bool explain = true;
-				
-				foreach (string s in args)
-				{
-					
-					if (s.Equals("-clearcache", StringComparison.CurrentCultureIgnoreCase))
-					{
-						
-						if (File.Exists("Files\\Text\\Messages.txt"))
-						{
-							
-							File.Delete("Files\\Text\\Messages.txt");
-							
-						}
-						
-						if (File.Exists("Files\\Text\\food.table explaination.txt"))
-						{
-							
-							File.Delete("Files\\Text\\food.table explaination.txt");
-							
-						}
-						
-						if (File.Exists("Files\\Text\\Food Diary.txt"))
-						{
-							
-							File.Delete("Files\\Text\\Food Diary.txt");
-							
-						}
-						
-					}
-					else if (s.Equals("-noexplaination", StringComparison.CurrentCultureIgnoreCase))
-					{
-						
-						explain = false;
-						
-					}
-					else
-					{
-						
-						Errors.Handler(new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue."), true, true, 524288);
-						
-					}
-					
-				}
+				ArgumentHandler(args);
 				
 				findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt", explain);
 				
@@ -129,7 +104,7 @@ namespace WeightWatchingProgramPlus
 		/// Toggles the creation of the explaination file on and off.
 		/// </param>
 
-		public static void findTextFiles (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
+		private static void findTextFiles (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
 		{
 			
 			if (!File.Exists(textFilesfoodtable))
@@ -187,18 +162,72 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		static void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
+		private static void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
 		{
 			MessageBox.Show(e.Exception.Message, "Unhandled Thread Exception");
 			// here you can log the exception ...
 			Errors.Handler(e.Exception, true, true, 524288);
 		}
 
-		static void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
+		private static void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
 		{
 			MessageBox.Show((e.ExceptionObject as Exception).Message, "Unhandled UI Exception");
 			// here you can log the exception ...
 			Errors.Handler((e.ExceptionObject as Exception), true, true, 524288);
+		}
+		
+		private static void ArgumentHandler(string[] args)
+		{
+			
+			foreach (string s in args)
+				{
+					
+					if (s.Equals("-clearcache", StringComparison.CurrentCultureIgnoreCase))
+					{
+						
+						if (File.Exists("Files\\Text\\Messages.txt"))
+						{
+							
+							File.Delete("Files\\Text\\Messages.txt");
+							
+						}
+						
+						if (File.Exists("Files\\Text\\food.table explaination.txt"))
+						{
+							
+							File.Delete("Files\\Text\\food.table explaination.txt");
+							
+						}
+						
+						if (File.Exists("Files\\Text\\Food Diary.txt"))
+						{
+							
+							File.Delete("Files\\Text\\Food Diary.txt");
+							
+						}
+						
+					}
+					else if (s.Equals("-noexplaination", StringComparison.CurrentCultureIgnoreCase))
+					{
+						
+						explain = false;
+						
+					}
+					else if (s.Equals("-nobackup", StringComparison.CurrentCultureIgnoreCase))
+					{
+						
+						GlobalVariables.CreateBackups = false;
+						
+					}
+					else
+					{
+						
+						Errors.Handler(new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue."), true, true, 524288);
+						
+					}
+					
+				}
+			
 		}
 		
 	}

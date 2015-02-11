@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace WeightWatchingProgramPlus
 {
+
 	public class PopupHandler
 	{
 		
@@ -16,7 +17,7 @@ namespace WeightWatchingProgramPlus
 			"Confirm Deletion",
 			"Calorie Reset Error"
 		};
-		
+
 		readonly MessageBoxButtons[] messageBoxButton = {
 			MessageBoxButtons.OK,
 			MessageBoxButtons.OK,
@@ -26,7 +27,7 @@ namespace WeightWatchingProgramPlus
 			MessageBoxButtons.YesNo,
 			MessageBoxButtons.OK
 		};
-		
+
 		readonly MessageBoxIcon[] messageBoxIcon = {
 			MessageBoxIcon.Error,
 			MessageBoxIcon.Information,
@@ -36,12 +37,12 @@ namespace WeightWatchingProgramPlus
 			MessageBoxIcon.Warning,
 			MessageBoxIcon.Warning
 		};
-		
+
 		public DialogResult CreatePopup (string message, Control controlItem, int errorCode, bool hasAdditionalActions)
 		{
-			DialogResult dialogResult = MessageBox.Show (message, this.title [errorCode], this.messageBoxButton [errorCode], this.messageBoxIcon [errorCode], MessageBoxDefaultButton.Button1);
+			DialogResult dialogResult = MessageBox.Show(message, this.title [errorCode], this.messageBoxButton [errorCode], this.messageBoxIcon [errorCode], MessageBoxDefaultButton.Button1);
 			
-			if(hasAdditionalActions)
+			if (hasAdditionalActions)
 			{
 				
 				controlItem.Select();

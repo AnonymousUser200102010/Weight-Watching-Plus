@@ -4,12 +4,18 @@ Highlights:
 -- Removed all global variables relating to the MainForm, as I've now figured out how to manipulate them without the need for a direct reference.
 -- MANY delegates added for the mainform. I hope to have a better way than static methods in the future.
 -- Date system tweaked, general datetime validation methods improved.
+-- New Mathematics class added...
+-- General calorie "awareness" functions (functions that show and/or parse calorie values) improved.
+-- Program now more accurately reflects the real version number with it's version number.
 
 Features:
 -- Manual setting of time is now constant until disabled or changed manually.
 -- During reset, calories now cannot exceed double the normal allowance or dip below 1200.
 -- You can no longer eat double your daily calorie allowance.
 -- New "Is Drink" checkbox button added. This allows you to set what is a drink or not, so the program doesn't have to check for each "valid" definer entry for drink keywords.
+-- Manual calorie NumericUpDown now supports negative numbers.
+-- User serving options expanded: program now supports arithmetic values (1/6, 1 * 3, etc). (Serving sizes, as shown on the food table as well as in the food property box, are still in literal numbers, and do not support any form of arithmetic.)
+-- Program now stores it's version number in the registry. When you upgrade to a new version, all files in your "Files//Text//" folder (excluding explaination files) are copied to a new "Backups" folder. This removes the need for manual backup and is especially helpful if you are currently using a development version as a release version. (I.E. you're using a development version as your main application)
 
 Bug Fixes:
 -- Introducing (most) special characters into any food property that uses a string is now officially an invalid operation. I'll look into fixing it as I progress with the program.
@@ -18,9 +24,12 @@ Bug Fixes:
 -- Fixed a bug with the reload button which wouldn't reload the date right, causing extra calories to be added if the date of reset was less than one day from the current date.
 -- Fixed a bug with the manual time that would reset twice for no reason no matter what the manual time was set to.
 -- General date get/set bugs fixed.
+-- Fixed a bug with the diary function in which it would not write the correct amount of calories.
+-- Fixed a bug with the "New Item" functionality which would not put the latest item back on the list (in their respective boxes) if the checkbox was checked and then unchecked without clicking the "Add This New Food Item" button.
+-- "Fixed" the freezing problem with relation to the search bar.
 
 Notes:
--- It seems the search bar WILL NOT stop freezing when typing in an item with no values. From now until I am fairly convinced; consider all "fixed" updates to be tentative at best.
+-- It seems the search bar WILL NOT stop the program from freezing when typing in an item with no values. From now until I am fairly convinced; consider all "fixed" updates to be tentative at best.
 ------------------------------------------------------
 Update 5:
 
