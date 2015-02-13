@@ -121,7 +121,20 @@ namespace WeightWatchingProgramPlus
 		public static int FoodListSelected
 		{
 				
-			set { mainForm.foodList.SelectedIndex = value; }
+			set 
+			{ 
+				
+				mainForm.foodList.SelectedIndex = value;
+				
+				GlobalVariables.SelectedListItem = value;
+				
+				#if DEBUG
+				
+				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", mainForm.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList[mainForm.foodList.SelectedIndex].Item1));
+				
+				#endif
+				
+			}
 				
 		}
 
@@ -489,6 +502,8 @@ namespace WeightWatchingProgramPlus
 				Modification.WriteToObject(null, searchBar, 2);
 					
 				nextSearchButton.Enabled = false;
+				
+				foodList.SetSelected(GlobalVariables.SelectedListItem, true);
 					
 			}
 				
@@ -532,27 +547,25 @@ namespace WeightWatchingProgramPlus
 						
 				}
 					
-				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
-				
-				isDrinkCheckBox.Checked = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item5;
-					
 				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, isDrinkCheckBox.Checked ? "drinking" : "eating");
 					
-				foodNameEditBox.Text = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item1;
+				FoodNameProperty = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item1;
 					
-				foodNameEditBox.TextAlign = HorizontalAlignment.Center;
+				ServingSizeProperty = (decimal)FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item2;
 					
-				servingSizeEditBox.Text = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item2.ToString(CultureInfo.CurrentCulture);
-					
-				servingSizeEditBox.TextAlign = HorizontalAlignment.Center;
-					
-				definerEditBox.Text = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item4;
-					
-				definerEditBox.TextAlign = HorizontalAlignment.Center;
-					
-				caloriesPerServingEditBox.Text = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item3.ToString(CultureInfo.CurrentCulture);
-					
-				caloriesPerServingEditBox.TextAlign = HorizontalAlignment.Center;
+				CaloriesPerServingProperty = (decimal)FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item3;
+				
+				DefinerProperty = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item4;
+				
+				isDrinkCheckBox.Checked = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item5;
+				
+				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
+				
+				#if DEBUG
+				
+				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", mainForm.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList[mainForm.foodList.SelectedIndex].Item1));
+				
+				#endif
 					
 			}
 				
@@ -570,26 +583,17 @@ namespace WeightWatchingProgramPlus
 				
 			if (foodList.Focused)
 			{
-					
-				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
-					
-				if (!deleteSelectedFoodItemButton.Enabled && foodList.Items.Count > 0)
+				
+				if (foodList.SelectedIndex > -1)
 				{
-						
-					deleteSelectedFoodItemButton.Enabled = true;
-						
+					
+					GlobalVariables.SelectedListItem = foodList.SelectedIndex;
+					
 				}
 					
 			}
 			else
 			{
-					
-				if (deleteSelectedFoodItemButton.Enabled && foodList.Items.Count <= 0)
-				{
-						
-					deleteSelectedFoodItemButton.Enabled = false;
-						
-				}
 					
 				foodList.ClearSelected();
 					
@@ -600,9 +604,11 @@ namespace WeightWatchingProgramPlus
 		private void DeleteFoodItemFromTable (object sender, EventArgs e)
 		{
 			
-			if (PopupHandler.CreatePopup("Are you sure you want to delete " + FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1 + "?", foodList, 5, false) == DialogResult.Yes)
+			if (PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "Are you sure you want to delete {0}?", FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item1), foodList, 5, false) == DialogResult.Yes)
 			{
-					
+				
+				int previouslySelectedIndex = GlobalVariables.SelectedListItem;
+				
 				Modification.ModifyFoodPropertiesList(true, new string[] {
 					null,
 					null
@@ -618,9 +624,10 @@ namespace WeightWatchingProgramPlus
 				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool> (null, 0f, 0f, null, false));
 					
 				Functions.Refresh_foodList();
+				
+				Console.WriteLine(FoodRelated.CombinedFoodList[previouslySelectedIndex].Item1);
 					
-				foodList.SetSelected(GlobalVariables.SelectedListItem, true);
-					
+				foodList.SetSelected(previouslySelectedIndex, true);
 			}
 				
 		}
@@ -648,7 +655,7 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				FoodListSelectedIndexChanged(sender, e);
+				foodList.SetSelected(GlobalVariables.SelectedListItem, true);
 				
 			}
 				

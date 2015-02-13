@@ -233,7 +233,7 @@ namespace WeightWatchingProgramPlus
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
 			this.groupBox1.Size = new System.Drawing.Size(581, 281);
-			this.groupBox1.TabIndex = 23;
+			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Food List";
 			// 
@@ -257,14 +257,13 @@ namespace WeightWatchingProgramPlus
 			this.nextSearchButton.Margin = new System.Windows.Forms.Padding(4);
 			this.nextSearchButton.Name = "nextSearchButton";
 			this.nextSearchButton.Size = new System.Drawing.Size(72, 25);
-			this.nextSearchButton.TabIndex = 4;
+			this.nextSearchButton.TabIndex = 3;
 			this.nextSearchButton.Text = "Next";
 			this.nextSearchButton.UseVisualStyleBackColor = true;
 			this.nextSearchButton.Click += new System.EventHandler(this.FindNextSearchItem);
 			// 
 			// deleteSelectedFoodItemButton
 			// 
-			this.deleteSelectedFoodItemButton.Enabled = false;
 			this.deleteSelectedFoodItemButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
 			this.deleteSelectedFoodItemButton.Location = new System.Drawing.Point(23, 214);
 			this.deleteSelectedFoodItemButton.Margin = new System.Windows.Forms.Padding(4);
@@ -283,7 +282,7 @@ namespace WeightWatchingProgramPlus
 			this.clearSearchBarButton.Margin = new System.Windows.Forms.Padding(4);
 			this.clearSearchBarButton.Name = "clearSearchBarButton";
 			this.clearSearchBarButton.Size = new System.Drawing.Size(72, 25);
-			this.clearSearchBarButton.TabIndex = 6;
+			this.clearSearchBarButton.TabIndex = 4;
 			this.clearSearchBarButton.Text = "Clear";
 			this.clearSearchBarButton.UseVisualStyleBackColor = true;
 			this.clearSearchBarButton.Click += new System.EventHandler(this.ClearSearchBar);
@@ -305,7 +304,7 @@ namespace WeightWatchingProgramPlus
 			this.searchBar.Margin = new System.Windows.Forms.Padding(4);
 			this.searchBar.Name = "searchBar";
 			this.searchBar.Size = new System.Drawing.Size(260, 23);
-			this.searchBar.TabIndex = 3;
+			this.searchBar.TabIndex = 2;
 			this.searchBar.Text = "Click Here to Search the Food List";
 			this.searchBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.searchBar.TextChanged += new System.EventHandler(this.SearchBarTextChanged);
@@ -355,7 +354,7 @@ namespace WeightWatchingProgramPlus
 			this.isDrinkCheckBox.Location = new System.Drawing.Point(378, 183);
 			this.isDrinkCheckBox.Name = "isDrinkCheckBox";
 			this.isDrinkCheckBox.Size = new System.Drawing.Size(91, 26);
-			this.isDrinkCheckBox.TabIndex = 13;
+			this.isDrinkCheckBox.TabIndex = 10;
 			this.isDrinkCheckBox.Text = "Is Drink";
 			this.isDrinkCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.isDrinkCheckBox.UseVisualStyleBackColor = true;
@@ -385,7 +384,7 @@ namespace WeightWatchingProgramPlus
 			0});
 			this.caloriesPerServingEditBox.Name = "caloriesPerServingEditBox";
 			this.caloriesPerServingEditBox.Size = new System.Drawing.Size(208, 30);
-			this.caloriesPerServingEditBox.TabIndex = 9;
+			this.caloriesPerServingEditBox.TabIndex = 8;
 			// 
 			// servingSizeEditBox
 			// 
@@ -400,7 +399,7 @@ namespace WeightWatchingProgramPlus
 			0});
 			this.servingSizeEditBox.Name = "servingSizeEditBox";
 			this.servingSizeEditBox.Size = new System.Drawing.Size(224, 30);
-			this.servingSizeEditBox.TabIndex = 8;
+			this.servingSizeEditBox.TabIndex = 7;
 			// 
 			// foodPropertiesButton
 			// 
@@ -432,7 +431,7 @@ namespace WeightWatchingProgramPlus
 			this.definerEditBox.Margin = new System.Windows.Forms.Padding(4);
 			this.definerEditBox.Name = "definerEditBox";
 			this.definerEditBox.Size = new System.Drawing.Size(358, 26);
-			this.definerEditBox.TabIndex = 10;
+			this.definerEditBox.TabIndex = 9;
 			// 
 			// caloriesPerServingLabel
 			// 
@@ -474,7 +473,7 @@ namespace WeightWatchingProgramPlus
 			this.foodNameEditBox.Margin = new System.Windows.Forms.Padding(4);
 			this.foodNameEditBox.Name = "foodNameEditBox";
 			this.foodNameEditBox.Size = new System.Drawing.Size(455, 26);
-			this.foodNameEditBox.TabIndex = 7;
+			this.foodNameEditBox.TabIndex = 6;
 			// 
 			// MainSubTabControl
 			// 
@@ -487,7 +486,7 @@ namespace WeightWatchingProgramPlus
 			this.MainSubTabControl.Name = "MainSubTabControl";
 			this.MainSubTabControl.SelectedIndex = 0;
 			this.MainSubTabControl.Size = new System.Drawing.Size(1062, 279);
-			this.MainSubTabControl.TabIndex = 21;
+			this.MainSubTabControl.TabIndex = 13;
 			this.MainSubTabControl.SelectedIndexChanged += new System.EventHandler(this.ChangedTabManualAddSub);
 			// 
 			// AddSubButton
@@ -519,7 +518,7 @@ namespace WeightWatchingProgramPlus
 			this.AddSub_SubTabControl.Name = "AddSub_SubTabControl";
 			this.AddSub_SubTabControl.SelectedIndex = 0;
 			this.AddSub_SubTabControl.Size = new System.Drawing.Size(889, 90);
-			this.AddSub_SubTabControl.TabIndex = 30;
+			this.AddSub_SubTabControl.TabIndex = 0;
 			// 
 			// addSub_SubTabArithmetic
 			// 
@@ -548,7 +547,7 @@ namespace WeightWatchingProgramPlus
 			1,
 			0,
 			0,
-			0});
+			131072});
 			this.arithmeticNumericUpDown_Right.Name = "arithmeticNumericUpDown_Right";
 			this.arithmeticNumericUpDown_Right.Size = new System.Drawing.Size(90, 65);
 			this.arithmeticNumericUpDown_Right.TabIndex = 2;
@@ -632,7 +631,7 @@ namespace WeightWatchingProgramPlus
 			0,
 			655360});
 			this.userServingInputTextBox.Name = "userServingInputTextBox";
-			this.userServingInputTextBox.Size = new System.Drawing.Size(821, 63);
+			this.userServingInputTextBox.Size = new System.Drawing.Size(803, 63);
 			this.userServingInputTextBox.TabIndex = 31;
 			this.userServingInputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.userServingInputTextBox.Value = new decimal(new int[] {
@@ -802,7 +801,7 @@ namespace WeightWatchingProgramPlus
 			this.refreshCaloriesTimeButton.Margin = new System.Windows.Forms.Padding(4);
 			this.refreshCaloriesTimeButton.Name = "refreshCaloriesTimeButton";
 			this.refreshCaloriesTimeButton.Size = new System.Drawing.Size(43, 33);
-			this.refreshCaloriesTimeButton.TabIndex = 20;
+			this.refreshCaloriesTimeButton.TabIndex = 2;
 			this.refreshCaloriesTimeButton.UseVisualStyleBackColor = true;
 			this.refreshCaloriesTimeButton.Click += new System.EventHandler(this.TimeOrCaloriesChangedWithoutEvent);
 			// 
@@ -813,7 +812,7 @@ namespace WeightWatchingProgramPlus
 			this.timeRadioButton.Margin = new System.Windows.Forms.Padding(4);
 			this.timeRadioButton.Name = "timeRadioButton";
 			this.timeRadioButton.Size = new System.Drawing.Size(84, 21);
-			this.timeRadioButton.TabIndex = 19;
+			this.timeRadioButton.TabIndex = 1;
 			this.timeRadioButton.TabStop = true;
 			this.timeRadioButton.Text = "Time";
 			this.timeRadioButton.UseVisualStyleBackColor = true;
@@ -827,7 +826,7 @@ namespace WeightWatchingProgramPlus
 			this.calorieRadioButton.Margin = new System.Windows.Forms.Padding(4);
 			this.calorieRadioButton.Name = "calorieRadioButton";
 			this.calorieRadioButton.Size = new System.Drawing.Size(84, 21);
-			this.calorieRadioButton.TabIndex = 18;
+			this.calorieRadioButton.TabIndex = 0;
 			this.calorieRadioButton.TabStop = true;
 			this.calorieRadioButton.Text = "Calories";
 			this.calorieRadioButton.UseVisualStyleBackColor = true;
@@ -842,7 +841,7 @@ namespace WeightWatchingProgramPlus
 			this.caloriesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.caloriesLabel.Name = "caloriesLabel";
 			this.caloriesLabel.Size = new System.Drawing.Size(903, 46);
-			this.caloriesLabel.TabIndex = 0;
+			this.caloriesLabel.TabIndex = 100;
 			this.caloriesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// tabsMenu
@@ -860,7 +859,7 @@ namespace WeightWatchingProgramPlus
 			this.tabsMenu.ShowToolTips = true;
 			this.tabsMenu.Size = new System.Drawing.Size(1070, 600);
 			this.tabsMenu.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-			this.tabsMenu.TabIndex = 30;
+			this.tabsMenu.TabIndex = 3;
 			// 
 			// additionalOptionsTab
 			// 

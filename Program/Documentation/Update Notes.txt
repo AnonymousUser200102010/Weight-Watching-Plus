@@ -4,9 +4,11 @@ Highlights:
 -- Removed all global variables relating to the MainForm, as I've now figured out how to manipulate them without the need for a direct reference.
 -- MANY delegates added for the mainform. I hope to have a better way than static methods in the future.
 -- Date system tweaked, general datetime validation methods improved.
--- New Mathematics class added...
+-- New Mathematics class added...A new class with functions whose primary purpose is parsing mathematical operations and performing arithmetic, but who don't have a more pressing primary function.
 -- General calorie "awareness" functions (functions that show and/or parse calorie values) improved.
 -- Program now more accurately reflects the real version number with it's version number.
+-- Tweaked the functionality of the "clear" button to no longer clear the selected food item on use.
+-- Also tweaked the functionality of the "delete" button. It now no longer sends you to the top of the food list. Rather, it sends you to the item that took it's place once it was removed (it's old spot on the list index).
 
 Features:
 -- Manual setting of time is now constant until disabled or changed manually.
@@ -27,6 +29,9 @@ Bug Fixes:
 -- Fixed a bug with the diary function in which it would not write the correct amount of calories.
 -- Fixed a bug with the "New Item" functionality which would not put the latest item back on the list (in their respective boxes) if the checkbox was checked and then unchecked without clicking the "Add This New Food Item" button.
 -- "Fixed" the freezing problem with relation to the search bar.
+-- Fixed a bug with the new "Arithmetic/Explicit" feature that would only do arithmetic operations regardless of which tab was selected.
+-- Fixed a bug with the diary which made it not include arithmetic.
+-- Fixed a bug which would crash the program if you tabbed away from the search bar or attempted to clear after tabbing away from the food table.`
 
 Notes:
 -- It seems the search bar WILL NOT stop the program from freezing when typing in an item with no values. From now until I am fairly convinced; consider all "fixed" updates to be tentative at best.

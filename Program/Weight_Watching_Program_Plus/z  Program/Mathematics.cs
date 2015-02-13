@@ -13,7 +13,7 @@ namespace WeightWatchingProgramPlus
 {
 	
 	/// <summary>
-	/// Functions whose primary purpose is parsing mathematic operations and performing arithmetic, but who don't have a more pressing primary function.
+	/// Functions whose primary purpose is parsing mathematical operations and performing arithmetic, but who don't have a more pressing primary function.
 	/// </summary>
 	class Mathematics
 	{
@@ -45,7 +45,7 @@ namespace WeightWatchingProgramPlus
 				if (!float.TryParse(computation.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out returnFloat))
 				{
 
-					Errors.Handler(Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
+					Errors.Handler(Errors.PremadeExceptions("PerformArithmeticOperation", "computation", 0), true, true, 524288);
 
 				}
 
@@ -82,7 +82,7 @@ namespace WeightWatchingProgramPlus
 
 			float tempFloat = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3;
 
-			float tempArithmetic = MainForm.AddSub_SelectedSubTab.Name.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? (float)MainForm.UserProvidedServings : PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false)));
+			float tempArithmetic = MainForm.AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? (float)MainForm.UserProvidedServings : PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false)));
 
 			if (tempArithmetic > 0)
 			{

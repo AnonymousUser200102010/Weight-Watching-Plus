@@ -76,6 +76,9 @@ namespace WeightWatchingProgramPlus
         /// </summary>
         public static int SelectedListItem { get; set; }
         
+        /// <summary>
+        /// Determines if backups should be made for this program at or after runtime.
+        /// </summary>
         public static bool CreateBackups { get; set; }
         
 

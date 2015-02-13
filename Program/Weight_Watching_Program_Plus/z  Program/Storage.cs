@@ -476,22 +476,26 @@ namespace WeightWatchingProgramPlus
 					
 					DateTime Now = DateTime.Now;
 					
-					float tempserval = (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
+					Mathematics math = new Mathematics ();
+					
+					var userProvidedServings = MainForm.AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? (float)MainForm.UserProvidedServings : math.PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false)));
+					
+					float tempserval = (float)userProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
 					
 					float temptolval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2 * tempserval;
 					
 					temptolval = Math.Floor(temptolval) <= 0 ? (float)Math.Round(temptolval, 1) : (float)Math.Floor(temptolval);
 					
-					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2}: {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : MainForm.IsDrinkProperty ? "drank" : "ate", MainForm.UserProvidedServings, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4);
+					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2}: {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : MainForm.IsDrinkProperty ? "drank" : "ate", userProvidedServings, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4);
 					
-					if (MainForm.UserProvidedServings > 1)
+					if (userProvidedServings > 1)
 					{
 						
 						finalstring += "s";
 						
 					}
 					
-					float tempcalval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
+					float tempcalval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * (float)userProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, " (of: '{0}').\nWhich is {1} servings, or {2} calories of '{0}'. ", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, tempserval, Math.Round(tempcalval, 4, MidpointRounding.AwayFromZero));
 					
@@ -553,21 +557,25 @@ namespace WeightWatchingProgramPlus
 			}
 			else
 			{
-				foreach(string file in Directory.GetFiles(backupDirectory))
+				for (int i = 0, maxLength = Directory.GetFiles(backupDirectory).Length; i < maxLength; i++)
 				{
+					
+					string file = Directory.GetFiles(backupDirectory)[i];
 					
 					File.Delete(file);
 					
 				}
 			}
 			
-			foreach(string file in Directory.GetFiles(originalDirectory))
+			for (int i = 0, maxLength = Directory.GetFiles(originalDirectory).Length; i < maxLength; i++)
 			{
 				
-				if(!Path.GetFileName(file).Contains("explaination"))
+				string file = Directory.GetFiles(originalDirectory)[i];
+				
+				if (!Path.GetFileName(file).Contains("explaination"))
 				{
 					
-					File.Copy(file, string.Format("{0}{1}", backupDirectory, Path.GetFileName(file)));
+					File.Copy(file, string.Format(CultureInfo.InvariantCulture, "{0}{1}", backupDirectory, Path.GetFileName(file)));
 					
 				}
 				

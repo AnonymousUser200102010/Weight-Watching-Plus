@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Weight Watching Program Plus")]
+[assembly: AssemblyTitle("Weight Watching Program +")]
 [assembly: AssemblyDescription("A program used mainly for dieting and tracking calorie intake.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("1.5.75.*")]
+[assembly: AssemblyVersion("0.5.90.*")]

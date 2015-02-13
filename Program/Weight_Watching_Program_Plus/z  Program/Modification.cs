@@ -118,6 +118,7 @@ namespace WeightWatchingProgramPlus
 			
 			string[] messages = {
 				string.Format(CultureInfo.InvariantCulture, "Calories Left For The Day: {0}", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2),
+				
 				string.Format(CultureInfo.InvariantCulture, "Calories will reset on {0:MMMM dd} at {0:hh:mm tt}", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1),
 				"Click Here to Search the Food List"
 			};
