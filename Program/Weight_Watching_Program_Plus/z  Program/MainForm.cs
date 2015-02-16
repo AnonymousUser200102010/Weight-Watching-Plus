@@ -28,7 +28,7 @@ namespace WeightWatchingProgramPlus
 
 		private Functions Functions = new Functions ();
 
-		private static MainForm mainForm = new MainForm ();
+		private static MainForm mainForm;
 
 		internal MainForm ()
 		{
@@ -65,7 +65,14 @@ namespace WeightWatchingProgramPlus
 		public static decimal UserProvidedServings
 		{
 				
-			get{ return mainForm.userServingInputTextBox.Value; }
+			get
+			{
+				
+				Mathematics math = new Mathematics ();
+				
+				return AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? mainForm.userServingInputTextBox.Value : (decimal)(math.PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false))));
+				
+			}
 				
 			set{ mainForm.userServingInputTextBox.Value = value; }
 				
@@ -128,6 +135,8 @@ namespace WeightWatchingProgramPlus
 				
 				GlobalVariables.SelectedListItem = value;
 				
+				mainForm.howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item5 ? "drinking" : "eating");
+				
 				#if DEBUG
 				
 				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", mainForm.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList[mainForm.foodList.SelectedIndex].Item1));
@@ -137,7 +146,7 @@ namespace WeightWatchingProgramPlus
 			}
 				
 		}
-
+		
 		#region FoodListGet/Select Summary
 
 		/// <summary>
@@ -256,6 +265,7 @@ namespace WeightWatchingProgramPlus
 			{
 					
 				mainForm.caloriesPerServingEditBox.Value = value; 
+				
 				mainForm.caloriesPerServingEditBox.TextAlign = HorizontalAlignment.Center;
 					
 			}
@@ -546,8 +556,10 @@ namespace WeightWatchingProgramPlus
 					newItemCheckbox.Checked = false;
 						
 				}
+				
+				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
 					
-				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, isDrinkCheckBox.Checked ? "drinking" : "eating");
+				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList[foodList.SelectedIndex].Item5 ? "drinking" : "eating");
 					
 				FoodNameProperty = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item1;
 					
@@ -558,8 +570,6 @@ namespace WeightWatchingProgramPlus
 				DefinerProperty = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item4;
 				
 				isDrinkCheckBox.Checked = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item5;
-				
-				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
 				
 				#if DEBUG
 				
@@ -689,7 +699,7 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		void ChangedTabManualAddSub (object sender, EventArgs e)
+		private void ChangedTabManualAddSub (object sender, EventArgs e)
 		{
 				
 			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
@@ -763,10 +773,12 @@ namespace WeightWatchingProgramPlus
 
 		void DefaultCaloriesSetButtonClick (object sender, EventArgs e)
 		{
+			
 			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now, Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2, (float)defaultCaloriesNumericUpDown.Value, new [] {
 				false,
 				false
 			});
+			
 		}
 
 		#endregion
@@ -793,9 +805,6 @@ namespace WeightWatchingProgramPlus
 			
 			GlobalVariables.SelectedListItem = 0;
 			
-			MainForm.NumberOfServingsLabel = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item5 ? "drinking" : "eating");
-			
-			
 			Modification.ModifyFoodPropertiesList(false, new []{MainForm.MainFoodListItems [MainForm.GetFoodListTopItem].ToString(), FoodRelated.CombinedFoodList [0].Item4}, new []{(decimal)FoodRelated.CombinedFoodList [0].Item2, (decimal)FoodRelated.CombinedFoodList [0].Item3}, new []{FoodRelated.CombinedFoodList[0].Item5});
 			
 			Validation.CheckCurrentRadioButton();
@@ -816,6 +825,7 @@ namespace WeightWatchingProgramPlus
 
 		public static void Refresh_foodList ()
 		{
+			
 			FoodRelated.CombinedFoodList.Clear();
 			
 			Storage.ReadFoodTable("Files\\Text\\", "food.table");
@@ -839,6 +849,7 @@ namespace WeightWatchingProgramPlus
 			MainForm.MainFoodListDataSource = Item1;
 			
 			Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool> (null, 0f, 0f, null, false));
+			
 		}
 
 		#region Find Item Summary

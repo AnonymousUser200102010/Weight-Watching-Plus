@@ -82,12 +82,12 @@ namespace WeightWatchingProgramPlus
 
 			float tempFloat = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3;
 
-			float tempArithmetic = MainForm.AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? (float)MainForm.UserProvidedServings : PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false)));
+			float userServings = (float)MainForm.UserProvidedServings;
 
-			if (tempArithmetic > 0)
+			if (userServings > 0)
 			{
 
-				tempArithmetic /= FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
+				userServings /= FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
 
 			}
 			else
@@ -97,7 +97,7 @@ namespace WeightWatchingProgramPlus
 
 			}
 			
-			tempFloat *= tempArithmetic;
+			tempFloat *= userServings;
 			
 			float tempFloatPenalty = GetSnackingPenalty(tempFloat, add);
 			

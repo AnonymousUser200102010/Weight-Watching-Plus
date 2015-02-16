@@ -163,7 +163,7 @@ namespace WeightWatchingProgramPlus
 		#endregion
 		private static bool AlreadyExists (string text)
 		{
-			
+
 			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
 			{
 				Tuple<string, float, float, string, bool> t = FoodRelated.CombinedFoodList [i];
@@ -199,15 +199,33 @@ namespace WeightWatchingProgramPlus
 			
 		}
 		
+		#region Validate Backup Summary
+		/// <summary>
+		/// Checks whether a backup needs to be made.
+		/// </summary>
+		/// <param name="appendedRegistryValue">
+		/// Registry value that comes first after LOCAL_MACHINE
+		/// </param>
+		/// <param name="registryValue">
+		/// Registry value that is added after the appended value.
+		/// </param>
+		/// <returns>
+		/// True if current version number is greater than previous or no registry value exists; else false.
+		/// </returns>
+		#endregion
 		internal static bool ValidateBackup (string appendedRegistryValue, string registryValue)
 		{
 			
 			Assembly assembly = Assembly.GetExecutingAssembly();
+			
 			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+			
+			var versionNumber = Storage.GetRetrievableRegistryValues(appendedRegistryValue, registryValue).Item5;
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
-				if(string.IsNullOrWhiteSpace((string)tempKey.GetValue("Last WWP+ Version")))
+				
+				if(string.IsNullOrWhiteSpace(versionNumber) || !string.Equals(versionNumber, fvi.FileVersion, StringComparison.OrdinalIgnoreCase))
 				{
 							
 					tempKey.SetValue("Last WWP+ Version", fvi.FileVersion);
@@ -216,14 +234,6 @@ namespace WeightWatchingProgramPlus
 							
 				}
 				
-				if ((string)tempKey.GetValue("Last WWP+ Version") == fvi.FileVersion)
-				{
-					
-					tempKey.SetValue("Last WWP+ Version", fvi.FileVersion);
-					
-					return true;
-					
-				}
 			}
 			
 			return false;

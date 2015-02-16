@@ -86,6 +86,7 @@ namespace WeightWatchingProgramPlus
 				Application.Run(new MainForm ());
 				
 			}
+			
 		}
 
 		/// <summary>

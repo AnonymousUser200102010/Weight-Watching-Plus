@@ -12,10 +12,10 @@
          <Members>
           <Member Name="#CombinedFoodList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2015-02-12 03:56:22Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2015-02-16 12:55:04Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.CombinedFoodList' to be read-only by removing the property setter.</Issue>
             </Message>
-            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2015-02-12 03:56:22Z" FixCategory="Breaking">
+            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2015-02-16 12:55:04Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalError">Consider a design where 'FoodRelated.CombinedFoodList' doesn't nest generic type 'IList&lt;Tuple&lt;string, float, float, string, bool&gt;&gt;'.</Issue>
             </Message>
            </Messages>
@@ -26,7 +26,7 @@
          <Members>
           <Member Name="#WriteToObject(System.Windows.Forms.Label,System.Windows.Forms.TextBox,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Status="Active" Created="2015-02-12 03:56:22Z" FixCategory="Breaking">
+            <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Status="Active" Created="2015-02-16 12:55:04Z" FixCategory="Breaking">
              <Issue Name="Reserved" Certainty="95" Level="Error">'Modification.WriteToObject(Label, TextBox, int)' creates an exception of type 'NullReferenceException', an exception type that is reserved by the runtime and should never be raised by managed code. If this exception instance might be thrown, use a different exception type.</Issue>
             </Message>
            </Messages>
@@ -37,7 +37,7 @@
          <Members>
           <Member Name="#CreatePopup(System.String,System.Windows.Forms.Control,System.Int32,System.Boolean)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-02-12 03:56:22Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-02-16 12:55:04Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'PopupHandler.CreatePopup(string, Control, int, bool)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -48,14 +48,14 @@
          <Members>
           <Member Name="#Application_ThreadException(System.Object,System.Threading.ThreadExceptionEventArgs)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-02-12 03:56:22Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-02-16 12:55:04Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'Program.Application_ThreadException(object, ThreadExceptionEventArgs)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CurrentDomain_UnhandledException(System.Object,System.UnhandledExceptionEventArgs)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-02-12 03:56:22Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-02-16 12:55:04Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'Program.CurrentDomain_UnhandledException(object, UnhandledExceptionEventArgs)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>

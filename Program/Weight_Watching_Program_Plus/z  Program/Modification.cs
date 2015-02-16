@@ -73,15 +73,10 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			if ( (tempcalories < 0f && !add) || (tempcalories > registryTuple.Item3 && add) )
+			if ( ((tempcalories < 0f && !add) || (tempcalories > registryTuple.Item3 && add)) && PopupHandler.CreatePopup(warningText, null, errorNum, false) != DialogResult.Yes )
 			{
 				
-				if (PopupHandler.CreatePopup(warningText, null, errorNum, false) != DialogResult.Yes)
-				{
-					
-					return;
-					
-				}
+				return;
 				
 			}
 			

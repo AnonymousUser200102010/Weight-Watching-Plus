@@ -84,26 +84,34 @@
             Global Functions
             </summary>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.returnFilePath(System.Int32)">
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.readFile(System.String)">
             <summary>
             DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
             </summary>
-            <param name="fileCode">
-            The identification number of the file whose path is to be returned.
+            <param name="filename">
+            The file to read from.
+            </param>
+            <returns>
+            Returns a string containing a parsed version of the file's contents.
+            </returns>
+        </member>
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.returnFilePath(System.String)">
+            <summary>
+            DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            </summary>
+            <param name="fileName">
+            The name of the file.
             </param>
             <returns>
             Returns the file path of the file with the ID of fileCode.
             </returns>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.pruneCheck(System.String,System.Int64,System.Int32)">
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.pruneCheck(System.String,System.Int32)">
             <summary>
             DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
             </summary>
             <param name="fileToCheck">
             File whose size is to be checked in this operation.
-            </param>
-            <param name="fileSize">
-            The size of the file in question.
             </param>
             <param name="pruneCutoff">
             The size at which a file is pruned.
