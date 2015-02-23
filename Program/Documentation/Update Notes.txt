@@ -2,20 +2,24 @@ Update 6:
 
 Highlights:
 -- Removed all global variables relating to the MainForm, as I've now figured out how to manipulate them without the need for a direct reference.
--- MANY delegates added for the mainform. I hope to have a better way than static methods in the future.
+-- MANY properties added for the mainform. I hope to have a better way than static properties in the future.
 -- Date system tweaked, general datetime validation methods improved.
 -- New Mathematics class added...A new class with functions whose primary purpose is parsing mathematical operations and performing arithmetic, but who don't have a more pressing primary function.
 -- General calorie "awareness" functions (functions that show and/or parse calorie values) improved.
 -- Program now more accurately reflects the real version number with it's version number.
 -- Tweaked the functionality of the "clear" button to no longer clear the selected food item on use.
 -- Also tweaked the functionality of the "delete" button. It now no longer sends you to the top of the food list. Rather, it sends you to the item that took it's place once it was removed (it's old spot on the list index).
--- Tweaked the format of the diaries "you ate: X Y (of: 'Z')" to "you ate X Y of Z".
+-- Tweaked the format of the diary's "you ate: X Y (of: 'Z')" to "you ate X Y of 'Z'".
 -- Added the Lucene.Net library (https://lucenenet.apache.org/) however it will not be used at this time. I hope to implement it later in the form of better user search support.
 -- Did some code restructuring and fixed a few summaries which were off.
+-- Removed all Errors.Handler references everywhere beside the two error-handling threads in the main program.cs file. This should reduce the size of the Errors.dmp file slightly.
+-- UniversalHandlersLibrary updated to 1.0.5527.26879. There will be no update notes for the UHLib as of yet.
+-- Optimized several features and functions with LINQ.
+-- Added a redundant check in the validation of registry values (the ValidateRegistryValues function) which should not only help with code bloat but should standardize future use of the registry and the pulling of it's values. While this redundancy is _technically_ not needed, I feel it's better to use redundancies now and be a little less efficient then have problems down the road later because I didn't standardize the usage of the registry. I have also not merged the ValidateRegistryValues and the ValidateBackup functions. I am unsure if I will in the future, even though technically they are more or less the same function.
 
 Features:
 -- Manual setting of time is now constant until disabled or changed manually.
--- During reset, calories now cannot exceed double the normal allowance or dip below 1200. As well, you can no longer gain double your daily calorie allowance through an undereating bonus.
+-- During reset, calories now cannot exceed double the normal allowance or dip below 1200. As well, you can no longer gain double your daily calorie allowance through an under-eating bonus.
 -- New "Is Drink" checkbox button added. This allows you to set what is a drink or not, so the program doesn't have to check for each "valid" definer entry for drink keywords.
 -- Manual calorie NumericUpDown now supports negative numbers.
 -- User serving options expanded: program now supports arithmetic values (1/6, 1 * 3, etc). (Serving sizes, as shown on the food table as well as in the food property box, are still in literal numbers, and do not support any form of arithmetic.)
@@ -35,6 +39,7 @@ Bug Fixes:
 -- Fixed multiple bugs in the "Read Registry" function which would cause the program to crash at runtime if you did not have any registry values (or one of the values was off) due to a logic error.
 -- Fixed a small bug with the way I handled my classes. MainForm used to initialize twice; now is back to once. I will attempt to do the same with the rest of my classes (probably next update).
 -- Fixed another small bug with relation to the "How many X do you plan on Ying", in that it was not refreshing properly due to another logic error.
+-- Fixed a bug with the UniversalHandlersLibrary which would throw a "null object exception" when attempting to use any of the Errors class functions.
 
 Notes:
 -- It seems the search bar WILL NOT stop the program from freezing when typing in an item with no values. From now until I am fairly convinced, consider all "fixed" updates to be tentative at best.

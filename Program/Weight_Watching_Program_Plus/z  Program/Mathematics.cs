@@ -30,6 +30,9 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// The result of the arithmetic operation as a string.
 		/// </returns>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
 		#endregion
 		internal float PerformArithmeticOperation (string equation)
 		{
@@ -45,7 +48,7 @@ namespace WeightWatchingProgramPlus
 				if (!float.TryParse(computation.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out returnFloat))
 				{
 
-					Errors.Handler(Errors.PremadeExceptions("PerformArithmeticOperation", "computation", 0), true, true, 524288);
+					throw Errors.PremadeExceptions("PerformArithmeticOperation", "computation", 0);
 
 				}
 

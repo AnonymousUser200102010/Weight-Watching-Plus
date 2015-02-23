@@ -84,31 +84,70 @@
             Global Functions
             </summary>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.readFile(System.String)">
+        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.Contains(System.String,System.String,System.StringComparison)">
             <summary>
-            DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            Returns a value indicating if the provided String object occurs within the string.
             </summary>
-            <param name="filename">
+            <param name="source">
+            The string to check.
+            </param>
+            <param name="toCheck">
+            The keyword to check for.
+            </param>
+            <param name="comp">
+            The string comparison mode you wish to use for this operation.
+            </param>
+            <returns>
+            true if the toCheck parameter occurs within the string, or if the toCheck value is an empty string (""); else false.
+            </returns>
+        </member>
+        <member name="T:UniversalHandlersLibrary.InternalFunctions">
+            <summary>
+            DO NOT USE ANY OF THESE FUNCTIONS OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            </summary>
+        </member>
+        <member name="M:UniversalHandlersLibrary.InternalFunctions.Writer(System.String,System.String,System.Boolean,System.Int32)">
+            <summary>
+            Central writing code for most writing operations required by this library.
+            </summary>
+            <param name="message">
+            Message to write to the file.
+            </param>
+            <param name="file">
+            The file to write to.
+            </param>
+            <param name="prune">
+            Is this operation checking the file to see if it should be pruned?
+            </param>
+            <param name="pruneCutoff">
+            The file size at which to prune the file.
+            </param>
+        </member>
+        <member name="M:UniversalHandlersLibrary.InternalFunctions.ReadFile(System.String)">
+            <summary>
+            Central reading code for most reading operations required by the program.
+            </summary>
+            <param name="file">
             The file to read from.
             </param>
             <returns>
             Returns a string containing a parsed version of the file's contents.
             </returns>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.returnFilePath(System.String)">
+        <member name="M:UniversalHandlersLibrary.InternalFunctions.ReturnFilePath(System.String)">
             <summary>
-            DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            Returns the most logical path available for the provided file.
             </summary>
             <param name="fileName">
             The name of the file.
             </param>
             <returns>
-            Returns the file path of the file with the ID of fileCode.
+            Returns the desired file path of the provided file name.
             </returns>
         </member>
-        <member name="M:UniversalHandlersLibrary.UniversalHandlersLibraryGlobal.pruneCheck(System.String,System.Int32)">
+        <member name="M:UniversalHandlersLibrary.InternalFunctions.PruneCheck(System.String,System.Int32)">
             <summary>
-            DO NOT USE OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
+            Checks to see if the provided file should be pruned.
             </summary>
             <param name="fileToCheck">
             File whose size is to be checked in this operation.

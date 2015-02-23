@@ -10,6 +10,12 @@ banana
 ounce
 False
 -------------------------------------------------------------------------
+banquet boneless pork riblet meal
+1
+310
+meal
+False
+-------------------------------------------------------------------------
 Banquet meatloaf meal
 1
 250
@@ -46,10 +52,16 @@ bertolli mushroom alfredo
 cup
 False
 -------------------------------------------------------------------------
-breyers blasts (reese's)
+breyers blasts (reeses)
 0.5
 170
 cup
+False
+-------------------------------------------------------------------------
+butterfinger
+2
+170
+bar
 False
 -------------------------------------------------------------------------
 calidad tortilla chips
@@ -94,11 +106,29 @@ chunk white albacore in water
 can
 False
 -------------------------------------------------------------------------
-Darigold half&half ultra pasturized
+coca cola vanilla
+1
+150
+can
+True
+-------------------------------------------------------------------------
+cyrus oleary dutch apple pie
+0.1666667
+300
+total pie
+False
+-------------------------------------------------------------------------
+darigold fat free cottage cheese
+0.5
+80
+cup
+False
+-------------------------------------------------------------------------
+Darigold half and half ultra pasturized
 2
 40
 tablespoon
-False
+True
 -------------------------------------------------------------------------
 del monte tomato ketchup
 1
@@ -106,9 +136,15 @@ del monte tomato ketchup
 tablespoon
 False
 -------------------------------------------------------------------------
-delimax beef & cheese taquitos
+delimax beef and cheese taquitos
 1
 95
+taquito
+False
+-------------------------------------------------------------------------
+delimax beef taquitos
+3
+230
 taquito
 False
 -------------------------------------------------------------------------
@@ -124,22 +160,64 @@ digiorno pizza meatball marinara
 total pizza
 False
 -------------------------------------------------------------------------
+dole pinapple slices
+2
+60
+slice
+False
+-------------------------------------------------------------------------
+earth wise coconut pineapple juice
+1
+100
+cup
+True
+-------------------------------------------------------------------------
 eclair (generic)
 1
 250
 eclair
 False
 -------------------------------------------------------------------------
+edwards new york style cheesecake
+0.2
+470
+pie
+False
+-------------------------------------------------------------------------
+edwards turtle pie
+0.13
+390
+total pie
+False
+-------------------------------------------------------------------------
+el monterey beef and bean burritos
+1
+290
+burrito
+False
+-------------------------------------------------------------------------
 Floridas natural orange juice with pulp
-8
+1
 110
-fluid ounce
+cup
 True
+-------------------------------------------------------------------------
+generic hamburger meat
+4
+300
+ounce
+False
 -------------------------------------------------------------------------
 hamburger bun
 1
 140
 bun
+False
+-------------------------------------------------------------------------
+hersheys milk chocolate bar
+1
+210
+bar
 False
 -------------------------------------------------------------------------
 ice cream bar
@@ -160,7 +238,7 @@ Jimmy Dean original sausage patties
 patty
 False
 -------------------------------------------------------------------------
-Johnsonville beddar with cheddar brat/sausage
+Johnsonville beddar with cheddar sausage
 1
 200
 sausage
@@ -172,16 +250,70 @@ Johnsonville stadium brat
 link
 False
 -------------------------------------------------------------------------
+jolly rancher crunch n chew
+3
+60
+piece
+False
+-------------------------------------------------------------------------
+jolly rancher hard candy stix
+1
+40
+piece
+False
+-------------------------------------------------------------------------
 la Victoria salsa
 2
 10
 tablespoon
 False
 -------------------------------------------------------------------------
-Lean pockets meatballs & mozzarella
+LandOFrost hickory smoked turkey breast
+4
+90
+slice
+False
+-------------------------------------------------------------------------
+Lean pockets meatballs and mozzarella
 1
 290
 pocket
+False
+-------------------------------------------------------------------------
+libbys sweet peas
+1
+245
+can
+False
+-------------------------------------------------------------------------
+libbys whole kernel sweet corn
+1
+210
+can
+False
+-------------------------------------------------------------------------
+life cereal
+0.75
+120
+cup
+False
+-------------------------------------------------------------------------
+lucerne cookies and cream ice cream
+1
+280
+cup
+False
+-------------------------------------------------------------------------
+lucerne eggs
+1
+70
+egg
+False
+-------------------------------------------------------------------------
+lucerne neopolitan ice cream
+0.5
+130
+cup
 False
 -------------------------------------------------------------------------
 lucerne peach yogurt
@@ -226,22 +358,40 @@ mission cheddar cheese dip
 tablespoon
 False
 -------------------------------------------------------------------------
+ocean spray wave (apple with white cranberries)
+1
+80
+cup
+True
+-------------------------------------------------------------------------
 old orchard apple cherry fruit juice
-8
+1
 90
-fluid ounce
-False
+cup
+True
+-------------------------------------------------------------------------
+old orchard apple cranberry fruit juice
+1
+90
+cup
+True
 -------------------------------------------------------------------------
 old orchard apple kiwi strawberry fruit juice
-8
+1
 90
-fluid ounce
-False
+cup
+True
 -------------------------------------------------------------------------
 Old orchard nectars (papaya)
-8
+1
 75
-Fluid Ounce
+cup
+True
+-------------------------------------------------------------------------
+open nature fruit and veggie bars (mixed berry)
+1
+80
+bar
 False
 -------------------------------------------------------------------------
 oscar mayer oven roasted turkey
@@ -253,6 +403,12 @@ False
 outshine fruit bar (lemon)
 1
 70
+bar
+False
+-------------------------------------------------------------------------
+outshine fruit bar (peach)
+1
+90
 bar
 False
 -------------------------------------------------------------------------
@@ -280,13 +436,37 @@ outshine fruit bars (mango)
 bar
 False
 -------------------------------------------------------------------------
+pantry essentials reduced fat milk
+1
+130
+cup
+True
+-------------------------------------------------------------------------
+pantry essentials white bread
+2
+130
+slice
+False
+-------------------------------------------------------------------------
+Papa murhpies BIY (Mushroomx2, italian sausage)
+0.17
+382
+total pizza
+False
+-------------------------------------------------------------------------
 papa murhpies Cowboy Pizza
 0.17
 673.6
 total pizza
 False
 -------------------------------------------------------------------------
-papa murphies papa's stuffed pizza
+papa murphies all meat
+0.17
+282
+total pizza
+False
+-------------------------------------------------------------------------
+papa murphies papas stuffed pizza
 0.17
 981.33
 total pizza
@@ -304,7 +484,7 @@ quaker chewy yogurt strawberry bars
 bar
 False
 -------------------------------------------------------------------------
-red baron (classic crust) sausage & pepperoni pizza
+red baron (classic crust) sausage and pepperoni pizza
 0.25
 390
 total pizza
@@ -322,16 +502,34 @@ Red Baron (classic crust) supreme pizza
 total pizza
 False
 -------------------------------------------------------------------------
+Reeses pieces
+51
+200
+pieces
+False
+-------------------------------------------------------------------------
 Safeway boston cream pie
 76
 200
 gram
 False
 -------------------------------------------------------------------------
+safeway chocolate chip cookies
+1
+60
+cookie
+False
+-------------------------------------------------------------------------
 Safeway Gourmet Cinnamon Roll
 5
 553
 ounce
+False
+-------------------------------------------------------------------------
+safeway red velvet cookies
+1
+160
+cookie
 False
 -------------------------------------------------------------------------
 safeway select chicken enchiladas
@@ -347,16 +545,16 @@ gram
 False
 -------------------------------------------------------------------------
 simply lemonade
-8
+1
 120
-fluid ounce
-False
+cup
+True
 -------------------------------------------------------------------------
 simply limeade
-8
+1
 120
-fluid ounce
-False
+cup
+True
 -------------------------------------------------------------------------
 Snack artist sausage and pepperoni pockets
 6
@@ -382,17 +580,29 @@ super one white bread
 slice
 False
 -------------------------------------------------------------------------
+welchs essentials concord grape juice
+1
+130
+cup
+True
+-------------------------------------------------------------------------
+western family 100 percent juice apple cider
+8
+110
+fluid ounce
+True
+-------------------------------------------------------------------------
 western family 2% reduced fat milk
 1
 130
 cup
-False
+True
 -------------------------------------------------------------------------
 western family drink mix
 1
 80
 gallon
-False
+True
 -------------------------------------------------------------------------
 western family enriched spagetti
 56
@@ -406,6 +616,12 @@ western family light mayonnaise
 tablespoon
 False
 -------------------------------------------------------------------------
+western family low moisture part skim mozzarella
+1
+80
+ounce
+False
+-------------------------------------------------------------------------
 western family mayonnaise
 1
 100
@@ -416,5 +632,11 @@ western family rainbos cereal
 32
 120
 gram
+False
+-------------------------------------------------------------------------
+western family tropical fruit mix frozen fruit
+1
+70
+cup
 False
 -------------------------------------------------------------------------

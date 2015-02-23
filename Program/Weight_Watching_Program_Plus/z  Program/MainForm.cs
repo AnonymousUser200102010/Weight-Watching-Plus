@@ -342,6 +342,9 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns a property control value based on the following IDs: (ID 0): Food Name, (ID 1): Serving Size, (ID 2): Calories Per Serving, (ID 3): Definer. (ID 4): Calories Label.
 		/// </returns>
+		/// <exception cref="T:System.ArgumentOutOfRangeException">
+		/// Thrown if the ID provided does not correlate (is less or more) to any of the controls that have been explicitly exposed.
+		/// </exception>
 		public static Control ReturnPropertyControl (int controlID)
 		{
 				
@@ -363,13 +366,9 @@ namespace WeightWatchingProgramPlus
 				case 4:
 					return mainForm.caloriesLabel;
 						
-				default:
-					Errors.Handler(new ArgumentOutOfRangeException ("controlID", controlID, "Value must be between " + 0 + " and " + 4), true, true, 524288);
-					break;
-						
 			}
 				
-			return null;
+			throw new ArgumentOutOfRangeException ("controlID", controlID, "Value must be between " + 0 + " and " + 4);
 				
 		}
 
@@ -475,6 +474,7 @@ namespace WeightWatchingProgramPlus
 				return;
 					
 			}
+			
 			if (nextSearchButton.Enabled)
 			{
 					
@@ -493,9 +493,7 @@ namespace WeightWatchingProgramPlus
 				
 			clearSearchBarButton.Enabled = true;
 				
-			Font tempfont = new Font ("Times New Roman", 10f);
-				
-			searchBar.Font = tempfont;
+			searchBar.Font = new Font ("Times New Roman", 10f);
 				
 		}
 
@@ -591,15 +589,10 @@ namespace WeightWatchingProgramPlus
 					
 			}
 				
-			if (foodList.Focused)
+			if (foodList.Focused && foodList.SelectedIndex > -1)
 			{
 				
-				if (foodList.SelectedIndex > -1)
-				{
-					
-					GlobalVariables.SelectedListItem = foodList.SelectedIndex;
-					
-				}
+				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
 					
 			}
 			else
@@ -648,6 +641,7 @@ namespace WeightWatchingProgramPlus
 
 		private void NewItemCheckboxCheckedChanged (object sender, EventArgs e)
 		{
+			
 			if (newItemCheckbox.Checked)
 			{
 				
@@ -749,14 +743,14 @@ namespace WeightWatchingProgramPlus
 			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 			
 			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now, registryTuple.Item2, registryTuple.Item3, new List<bool> {
-				
-					false,
+				false,
 				false});
 			
 		}
 
 		void ExactResetDatetimePickerValueChanged (object sender, EventArgs e)
 		{
+			
 			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 			
 			if (resetCaloriesManualCheckBox.Checked && exactResetDatetimePicker.Value != registryTuple.Item1)
@@ -790,6 +784,9 @@ namespace WeightWatchingProgramPlus
 	class Functions
 	{
 		
+		/// <summary>
+		/// Main initialization for the program as handled by the developer (and not, say, through windows forms or what have you).
+		/// </summary>
 		internal static void InitializeForms ()
 		{
 			
@@ -823,6 +820,9 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
+		/// <summary>
+		/// Clears and reloads the food table into the food listbox
+		/// </summary>
 		public static void Refresh_foodList ()
 		{
 			
@@ -834,19 +834,7 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.MainFoodListItems.Clear();
 			
-			List<string> Item1 = new List<string> ();
-			
-			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
-			{
-				Tuple<string, float, float, string, bool> name = FoodRelated.CombinedFoodList [i];
-				
-				Item1.Add(name.Item1);
-				
-			}
-			
-			Item1.Sort();
-			
-			MainForm.MainFoodListDataSource = Item1;
+			MainForm.MainFoodListDataSource = new List<string>(FoodRelated.CombinedFoodList.Select(item1 => item1.Item1));
 			
 			Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool> (null, 0f, 0f, null, false));
 			
@@ -874,50 +862,25 @@ namespace WeightWatchingProgramPlus
 		#endregion
 		internal void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, bool next)
 		{
-			for (int i = offset; i <= MainForm.MainFoodListItems.Count; i++)
+			
+			foreach (var foodItem in MainForm.MainFoodListItems.OfType<string>().Where(searchResult => ((!exactSearch ? searchResult.Contains(stringToFind, StringComparison.OrdinalIgnoreCase) : searchResult.Equals(stringToFind, StringComparison.OrdinalIgnoreCase)) && !searchResult.Equals(stringToAvoid, StringComparison.OrdinalIgnoreCase) && (MainForm.MainFoodListItems.IndexOf(searchResult) > offset || (MainForm.MainFoodListItems.IndexOf(searchResult) == 0 && offset == 0 && !next) && MainForm.MainFoodListItems.IndexOf(searchResult) != -1))).Select(searchResult => MainForm.MainFoodListItems.IndexOf(searchResult)))
 			{
 				
-				if (i < MainForm.MainFoodListItems.Count)
-				{
-					if (exactSearch)
-					{
-						
-						if (MainForm.MainFoodListItems [i].ToString().Equals(stringToFind, StringComparison.CurrentCultureIgnoreCase) && !MainForm.MainFoodListItems [i].ToString().Equals(stringToAvoid, StringComparison.CurrentCultureIgnoreCase))
-						{
-							
-							MainForm.FoodListSelected = i;
-							
-							return;
-							
-						}
-						
-					}
-					else
-					{
+				MainForm.FoodListSelected = foodItem;
 					
-						if (MainForm.MainFoodListItems [i].ToString().Contains(stringToFind, StringComparison.CurrentCultureIgnoreCase) && !MainForm.MainFoodListItems [i].ToString().Equals(stringToAvoid, StringComparison.CurrentCultureIgnoreCase))
-						{
-							
-							MainForm.FoodListSelected = i;
-							
-							return;
-							
-						}
-						
-					}
-					
-				}
+				return;
 				
 			}
 			
 			if(next && offset > 0)
 			{
 				
-				Find(0, stringToFind, stringToAvoid, exactSearch, next);
+				Find(0, stringToFind, stringToAvoid, exactSearch, false);
 				
 			}
 			
 			return;
+			
 		}
 		
 	}

@@ -81,6 +81,11 @@ namespace WeightWatchingProgramPlus
         /// </summary>
         public static bool CreateBackups { get; set; }
         
+        /// <summary>
+        /// Determines if the program should debug regardless of the build type.
+        /// </summary>
+        public static bool Debug { get; set; }
+        
 
         static GlobalVariables ()
         {
@@ -90,6 +95,8 @@ namespace WeightWatchingProgramPlus
             RegistryMainValue = WeightWatchingProgram;
             
             CreateBackups = true;
+            
+            Debug = false;
             
         }
         

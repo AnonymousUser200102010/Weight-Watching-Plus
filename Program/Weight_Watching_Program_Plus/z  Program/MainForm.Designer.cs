@@ -320,6 +320,7 @@ namespace WeightWatchingProgramPlus
 			this.foodList.Margin = new System.Windows.Forms.Padding(4);
 			this.foodList.Name = "foodList";
 			this.foodList.Size = new System.Drawing.Size(551, 164);
+			this.foodList.Sorted = true;
 			this.foodList.TabIndex = 0;
 			this.foodList.SelectedIndexChanged += new System.EventHandler(this.FoodListSelectedIndexChanged);
 			this.foodList.Enter += new System.EventHandler(this.FoodListFocusChanged);

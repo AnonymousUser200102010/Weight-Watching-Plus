@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UniversalHandlersLibrary;
@@ -35,57 +36,49 @@ namespace WeightWatchingProgramPlus
 		/// </summary>
 		/// 
 		
-		private static bool explain = true;
+		private static bool Explain = true;
 		
 		[STAThread]
 		private static void Main (string[] args)
 		{
 			
 			Application.ThreadException += Application_ThreadException;
+			
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 			
-			try
+			#if DEBUG
+				
+			GlobalVariables.RegistryMainValue += "~debug";
+				
+			SafeNativeMethods.AllocConsole();
+				
+			#endif
+				
+			Application.EnableVisualStyles();
+				
+			Application.SetCompatibleTextRenderingDefault(false);
+				
+			if (!Directory.Exists("Files\\"))
 			{
-				
-				#if DEBUG
-				
-				GlobalVariables.RegistryMainValue = string.Format(CultureInfo.InvariantCulture, "{0}~debug", GlobalVariables.RegistryMainValue);
-				
-				SafeNativeMethods.AllocConsole();
-				
-				#endif
-				
-				Application.EnableVisualStyles();
-				
-				Application.SetCompatibleTextRenderingDefault(false);
-				
-				if (!Directory.Exists("Files\\"))
-				{
-					Directory.CreateDirectory("Files\\");
-				}
-				
-				if (!Directory.Exists("Files\\Text\\"))
-				{
-					Directory.CreateDirectory("Files\\Text\\");
-				}
-				
-				ArgumentHandler(args);
-				
-				findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\food.table explaination.txt", explain);
-				
+				Directory.CreateDirectory("Files\\");
 			}
-			catch (Exception e)
+				
+			if (!Directory.Exists("Files\\Text\\"))
 			{
-				
-				Errors.Handler(e, true, true, 524288);
-				
+				Directory.CreateDirectory("Files\\Text\\");
 			}
-			finally
-			{
 				
-				Application.Run(new MainForm ());
+			ArgumentHandler(args);
+			
+			#if DEBUG
+			
+			GlobalVariables.Debug = true;
+			
+			#endif
 				
-			}
+			findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\README.txt", Explain);
+			
+			Application.Run(new MainForm ());
 			
 		}
 
@@ -104,7 +97,9 @@ namespace WeightWatchingProgramPlus
 		/// <param name="explain">
 		/// Toggles the creation of the explaination file on and off.
 		/// </param>
-
+		/// <exception cref="T:System.ArgumentNullException">
+		/// Thrown if the file, as provided in the textFilesfoodtable variable, doesn't exist.
+		/// </exception>
 		private static void findTextFiles (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
 		{
 			
@@ -114,9 +109,7 @@ namespace WeightWatchingProgramPlus
 				if (!File.Exists(textFilesfoodbku))
 				{
 					
-					Errors.Handler(new ArgumentNullException (textFilesfoodtable, "program.cs: You need a food.table! Put a food.table file in the Files\\Text\\ folder!"), true, true, 524288);
-					
-					return;
+					throw new ArgumentNullException (textFilesfoodtable, "program.cs: You need a food.table! Put a food.table file in the Files\\Text\\ folder!");
 					
 				}
 				
@@ -146,11 +139,12 @@ namespace WeightWatchingProgramPlus
 				File.SetAttributes(textFilesfoodbku, FileAttributes.Archive | FileAttributes.Temporary | FileAttributes.Compressed);
 				
 			}
+			
 			const string seperator = "-------------------------------------------------------------------------\n";
 			
-			var dosanddonts = string.Format(CultureInfo.InvariantCulture, "{0}\n", "You're allowed to use all normal characters, upper and lower case; numbers and letters\nYou're forbidden from using special characters by design. Using them caused too much trouble and so they are disallowed for the time being.");
+			string dosanddonts = string.Format(CultureInfo.InvariantCulture, "{0}\n", "You're allowed to use all normal characters, upper and lower case; numbers and letters\nYou're forbidden from using special characters by design. Using them caused too much trouble and so they are disallowed for the time being.");
 			
-			var explaination = string.Format(CultureInfo.InvariantCulture, "The food.table file is a converted food list.txt file. This new file has greater readability and reliability than the old method, which required iterating through a full list before continuing to another. Obviously this has the potential to break and cause problems.\nThe new format is like so:\n{0}\nName of food\nServing size of food\nCalories per serving of food\ndefiner of food\n{0}\n{1}\n", seperator, dosanddonts);
+			string explaination = string.Format(CultureInfo.InvariantCulture, "The format for the food.table is like so:\n{0}Name of food\nServing size of food\nCalories per serving of food\ndefiner of food\n{0}\n{1}\n", seperator, dosanddonts);
 			
 			if (!File.Exists(textFilesfoodtableExplainationtxt) && explain)
 			{
@@ -165,69 +159,88 @@ namespace WeightWatchingProgramPlus
 
 		private static void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
 		{
+			
 			MessageBox.Show(e.Exception.Message, "Unhandled Thread Exception");
-			// here you can log the exception ...
+			
 			Errors.Handler(e.Exception, true, true, 524288);
+			
 		}
 
 		private static void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
 		{
+			
 			MessageBox.Show((e.ExceptionObject as Exception).Message, "Unhandled UI Exception");
-			// here you can log the exception ...
+			
 			Errors.Handler((e.ExceptionObject as Exception), true, true, 524288);
+			
 		}
 		
+		/// <summary>
+		/// Parses and activates any arguments provided to the program at runtime.
+		/// </summary>
+		/// <param name="args">
+		/// An array of string values containing any arguments provided with the program (or as added by you).
+		/// </param>
+		/// <exception cref="T:System.ArgumentException">
+		/// Thrown if ANY arguement is input that has not been explicitly listed and/or handled in the function.
+		/// </exception>
 		private static void ArgumentHandler(string[] args)
 		{
 			
 			foreach (string s in args)
+			{
+					
+				if (s.Equals("-clearcache", StringComparison.CurrentCultureIgnoreCase))
 				{
 					
-					if (s.Equals("-clearcache", StringComparison.CurrentCultureIgnoreCase))
+					if (File.Exists("Files\\Text\\Messages.txt"))
 					{
 						
-						if (File.Exists("Files\\Text\\Messages.txt"))
-						{
+						File.Delete("Files\\Text\\Messages.txt");
 							
-							File.Delete("Files\\Text\\Messages.txt");
-							
-						}
-						
-						if (File.Exists("Files\\Text\\food.table explaination.txt"))
-						{
-							
-							File.Delete("Files\\Text\\food.table explaination.txt");
-							
-						}
-						
-						if (File.Exists("Files\\Text\\Food Diary.txt"))
-						{
-							
-							File.Delete("Files\\Text\\Food Diary.txt");
-							
-						}
-						
 					}
-					else if (s.Equals("-noexplaination", StringComparison.CurrentCultureIgnoreCase))
+						
+					if (File.Exists("Files\\Text\\README.txt"))
 					{
-						
-						explain = false;
-						
+							
+						File.Delete("Files\\Text\\README.txt");
+							
 					}
-					else if (s.Equals("-nobackup", StringComparison.CurrentCultureIgnoreCase))
+						
+					if (File.Exists("Files\\Text\\Food Diary.txt"))
 					{
-						
-						GlobalVariables.CreateBackups = false;
-						
+							
+						File.Delete("Files\\Text\\Food Diary.txt");
+							
 					}
-					else
-					{
 						
-						Errors.Handler(new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue."), true, true, 524288);
+				}
+				else if (s.Equals("-noexplanation", StringComparison.CurrentCultureIgnoreCase))
+				{
 						
-					}
+					Explain = false;
+						
+				}
+				else if (s.Equals("-nobackup", StringComparison.CurrentCultureIgnoreCase))
+				{
+						
+					GlobalVariables.CreateBackups = false;
+						
+				}
+				else if (s.Equals("-debugrelease", StringComparison.CurrentCultureIgnoreCase))
+				{
+					
+					GlobalVariables.Debug = true;
 					
 				}
+				else
+				{
+						
+					throw new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue.");
+					
+				}
+					
+			}
 			
 		}
 		

@@ -29,14 +29,22 @@ namespace WeightWatchingProgramPlus
 		/// <param name="file">
 		/// The name of the food table.
 		/// </param>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
+		/// <exception cref="T:System.IO.IOException">
+		/// Thrown if the provided file, in the provided directory, does not exist.
+		/// </exception>
 		#endregion
 		internal static void ReadFoodTable (string directory, string file)
 		{
 			
 			if (File.Exists(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
 			{
+				
 				using (StreamReader sr = new StreamReader (directory + file))
 				{
+					
 					int number = 0;
 					int position = 0;
 					String line;
@@ -65,6 +73,7 @@ namespace WeightWatchingProgramPlus
 						}
 						else
 						{
+							
 							switch (number)
 							{
 									
@@ -73,7 +82,9 @@ namespace WeightWatchingProgramPlus
 									
 									if (!float.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat [number == 1 ? 0 : 1]))
 									{
-										Errors.Handler(Errors.PremadeExceptions("ReadFoodTable", "tupleItemFloat", 0), true, true, 524288);
+										
+										throw Errors.PremadeExceptions("ReadFoodTable", "tupleItemFloat", 0);
+										
 									}
 									
 									break;
@@ -83,11 +94,12 @@ namespace WeightWatchingProgramPlus
 									if (!bool.TryParse(line, out tupleItemBool))
 									{
 										
-										Errors.Handler(Errors.PremadeExceptions("ReadFoodTable", "tupleItemBool", 0), true, true, 524288);
+										throw Errors.PremadeExceptions("ReadFoodTable", "tupleItemBool", 0);
 										
 									}
 									
 									break;
+									
 								default:
 									
 									combined [number == 0 ? 0 : 1] = line;
@@ -112,7 +124,7 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				Errors.Handler(new IOException (string.Format(CultureInfo.InvariantCulture, "{0}{1} does not exist", directory, file)), true, true, 524288);
+				throw new IOException (string.Format(CultureInfo.InvariantCulture, "{0}{1} does not exist", directory, file));
 				
 			}
 			
@@ -132,6 +144,9 @@ namespace WeightWatchingProgramPlus
 		/// <param name="additionToFoodTable">
 		/// A Tuple containing ONE additional food item which will be added to the food list.
 		/// </param>
+		/// <exception cref="T:System.IO.IOException">
+		/// Thrown if the provided file, in the provided directory, does not exist.
+		/// </exception>
 		#endregion
 		internal static void WriteFoodTable (string directory, string file, Tuple<string, float, float, string, bool> additionToFoodTable)
 		{
@@ -147,11 +162,12 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				Errors.Handler(new IOException (string.Format(CultureInfo.CurrentCulture, "{0}{1} does not exist", directory, file)), true, true, 524288);
+				throw new IOException (string.Format(CultureInfo.CurrentCulture, "{0}{1} does not exist", directory, file));
 				
 			}
 			
 			string finalstring = null;
+			
 			const string seperator = "-------------------------------------------------------------------------\n";
 			
 			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
@@ -169,14 +185,10 @@ namespace WeightWatchingProgramPlus
 				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5, seperator);
 				
 			}
-			else
+			else if (GlobalVariables.Debug)
 			{
-				if (string.IsNullOrWhiteSpace(additionToFoodTable.Item1) || additionToFoodTable.Item2 <= 0 || additionToFoodTable.Item3 <= 0 || string.IsNullOrWhiteSpace(additionToFoodTable.Item4))
-				{
-					
-					Messages.Handler("additionToFoodTable: one or more of your addons contained an invalid entry. Was this intended?", "Weight Watching +", true, 102400);
-					
-				}
+				
+				Messages.Handler(string.Format(CultureInfo.InvariantCulture, "additionToFoodTable: one or more of your addons contained an invalid entry: \nItem 1: '{0}'\n Item 2: '{1}'\nItem 3: '{2}'\nItem 4: '{3}'\nItem 5: '{4}'\n", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5), "Weight Watching +", true, 102400);
 				
 			}
 			
@@ -196,6 +208,9 @@ namespace WeightWatchingProgramPlus
 		/// <param name="registyValue">
 		/// Registry value that is added after the appended value.
 		/// </param>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
 		#endregion
 		internal static void ReadRegistry (string appendedRegistryValue, string registyValue)
 		{
@@ -204,81 +219,13 @@ namespace WeightWatchingProgramPlus
 			{
 				Registry.LocalMachine.CreateSubKey(appendedRegistryValue + registyValue);
 			}
-			
-			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue, true))
-			{
 				
 				if (appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
 				{
 					
-					float tempfloat = 0f;
+					Validation.ValidateRegistryValues(appendedRegistryValue, registyValue, true);
 					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Default Calories Per Day")))
-					{
-						
-						tempKey.SetValue("Default Calories Per Day", "2140");
-						
-					}
-					else if (!float.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempfloat))
-					{
-						
-						Errors.Handler(Errors.PremadeExceptions("Registry", "Default Calories Per Day", 0), true, true, 524288);
-						
-					}
-					
-					tempfloat = 0;
-					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Calories Left for the Day")))
-					{
-						
-						tempKey.SetValue("Calories Left for the Day", 0);
-						
-					}
-					else if (!float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempfloat))
-					{
-						
-						Errors.Handler(Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
-						
-					}
-					
-					tempfloat = 0;
-					
-					bool tempBool = false;
-					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Manual Time")))
-					{
-						
-						tempKey.SetValue("Manual Time", tempBool.ToString());
-						
-					}
-					else if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
-					{
-						
-						Errors.Handler(Errors.PremadeExceptions("Registry", "Manual Time", 0), true, true, 524288);
-						
-					}
-					
-					MainForm.ManualTimeIsInitiated = tempBool;
-					
-					tempBool = false;
-					
-					DateTime tempDate = new DateTime();
-					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Next Reset Date")))
-					{
-						
-						tempKey.SetValue("Next Reset Date", DateTime.Now.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
-						
-					}
-					else if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {
-					                                	"yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
-					{
-						
-						Errors.Handler(Errors.PremadeExceptions("Registry", "Reset Date", 0), true, true, 524288);
-						
-					}
-					
-					tempDate = new DateTime();
+					MainForm.ManualTimeIsInitiated = GetRetrievableRegistryValues(appendedRegistryValue, registyValue).Item4;
 					
 					if(Validation.ValidateBackup(appendedRegistryValue, registyValue) && GlobalVariables.CreateBackups)
 					{
@@ -294,7 +241,6 @@ namespace WeightWatchingProgramPlus
 				}
 				
 				Validation.CheckDateValidity();
-			}
 		}
 
 		#region Write To Registry Summary
@@ -419,54 +365,26 @@ namespace WeightWatchingProgramPlus
 		/// <example>
 		/// string: The current program version as stored in the registry.
 		/// </example>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
 		#endregion
 		internal static Tuple<DateTime, float, float, bool, string> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue)
 		{
-			DateTime tempDate = new DateTime ();
-			float[] tempFloat = {
-				0f,
-				0f
-			};
-			bool tempBool = false;
+			
 			string tempString = null;
+			
+			var validationTuple = Validation.ValidateRegistryValues(appendedRegistryValue, registryValue, GlobalVariables.Debug);
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
 				
-				if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {
-					"yyyy MMMMM dd hh:mm:ss tt"
-				}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
-				{
-					
-					Errors.Handler(Errors.PremadeExceptions("Registry", "Next Reset Date", 0), true, true, 524288);
-					
-				}
-				
-				if (!float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat [0]))
-				{
-					
-					Errors.Handler(Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0), true, true, 524288);
-					
-				}
-				
-				if (!float.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat [1]))
-				{
-					
-					Errors.Handler(Errors.PremadeExceptions("Registry", "Default Calories Per Day", 0), true, true, 524288);
-					
-				}
-				
-				if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
-				{
-						
-					Errors.Handler(Errors.PremadeExceptions("Registry", "Manual Time", 0), true, true, 524288);
-						
-				}
-				
 				tempString = (string)tempKey.GetValue("Last WWP+ Version");
 				
 			}
-			return Tuple.Create(tempDate, tempFloat [0], tempFloat [1], tempBool, tempString);
+			
+			return Tuple.Create(validationTuple.Item1, validationTuple.Item2, validationTuple.Item3, validationTuple.Item4, tempString);
+			
 		}
 
 		#region Food Tracking Diary Summary
@@ -531,7 +449,7 @@ namespace WeightWatchingProgramPlus
 							while (!string.IsNullOrEmpty((line = sr.ReadLine())))
 							{
 								
-								finalstring += line.Contains(seperator, StringComparison.CurrentCultureIgnoreCase) ? string.Format(CultureInfo.CurrentCulture, "{0}\n", seperator) : string.Format(CultureInfo.CurrentCulture, "{0}\n", line);
+								finalstring += string.Format(CultureInfo.CurrentCulture, "{0}\n", line);
 								
 							}
 							
@@ -569,7 +487,7 @@ namespace WeightWatchingProgramPlus
 		{
 			
 			string[] passoverDocumentKeywords = {
-				"explaination",
+				"readme",
 				"diary"
 			};
 			
@@ -582,7 +500,7 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				foreach(string file in (Directory.GetFiles(backupDirectory).Where(file => !string.IsNullOrWhiteSpace(file))))
+				foreach(string file in ( Directory.GetFiles(backupDirectory).Where(file => !string.IsNullOrWhiteSpace(file))) )
 				{
 					
 					File.Delete(file);
@@ -591,7 +509,7 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			foreach(string file in Directory.GetFiles(originalDirectory).Where(file => !passoverDocumentKeywords.Any(s => file.Contains(s, StringComparison.OrdinalIgnoreCase))))
+			foreach(string file in Directory.GetFiles(originalDirectory).Where(file => !passoverDocumentKeywords.Any((string s) => file.Contains(s, StringComparison.OrdinalIgnoreCase))))
 			{
 				
 				File.Copy(file, string.Format(CultureInfo.InvariantCulture, "{0}{1}", backupDirectory, Path.GetFileName(file)));

@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -51,6 +52,9 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Checks to see which radio button is currently active.
 		/// </summary>
+		/// <exception cref="T:System.InvalidOperationException">
+		/// Thrown if, for some reason, the user is not checking any value, as explicitly state in this function. in the main title textbox of the program.
+		/// </exception>
 		#endregion
 		internal static void CheckCurrentRadioButton ()
 		{
@@ -72,7 +76,7 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				Errors.Handler(new InvalidOperationException ("CheckCurrentRadioButton: operation invalid; perameters cannot be parsed into a logical operation."), true, true, 524288);
+				throw new InvalidOperationException ("CheckCurrentRadioButton: operation invalid; perameters cannot be parsed into a logical operation.");
 				
 			}
 				
@@ -163,20 +167,9 @@ namespace WeightWatchingProgramPlus
 		#endregion
 		private static bool AlreadyExists (string text)
 		{
-
-			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
-			{
-				Tuple<string, float, float, string, bool> t = FoodRelated.CombinedFoodList [i];
-				
-				if (text.Equals(t.Item1, StringComparison.OrdinalIgnoreCase) && (i != GlobalVariables.SelectedListItem || MainForm.IsCreatingANewFoodItem))
-				{
-					
-					return true;
-					
-				}
-				
-			}
-			return false;
+			
+			return FoodRelated.CombinedFoodList.Where(item => !item.Item1.Equals(text, StringComparison.OrdinalIgnoreCase)).Select(item => item.Item1).Any(s => text.Contains(s, StringComparison.OrdinalIgnoreCase));
+			
 		}
 
 		#region Character Validity Summary
@@ -237,6 +230,124 @@ namespace WeightWatchingProgramPlus
 			}
 			
 			return false;
+			
+		}
+		
+		/// <summary>
+		/// Validates registry items before passing them on if needed.
+		/// </summary>
+		/// <param name="appendedRegistryValue">
+		/// Registry value that comes first after LOCAL_MACHINE
+		/// </param>
+		/// <param name="registryValue">
+		/// Registry value that is added after the appended value.
+		/// </param>
+		/// <param name="thoroughCheck">
+		/// If true, checks each registry value individually. If false, checks all of them all at once.
+		/// </param>
+		/// <returns>
+		/// Returns a list of validated registry values to be used if needed. Some registry values do not need a pre-validation (such as strings) and as such are not included.
+		/// </returns>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a registry value cannot be parsed.
+		/// </exception>
+		internal static Tuple<DateTime, float, float, bool> ValidateRegistryValues(string appendedRegistryValue, string registryValue, bool thoroughCheck)
+		{
+			
+			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
+			{
+			
+				float[] tempFloat = {
+					0f,
+					0f
+				};
+				
+				bool tempBool = false;
+				
+				DateTime tempDate = new DateTime();
+				
+				if(thoroughCheck)
+				{
+						
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Default Calories Per Day")))
+					{
+							
+						tempKey.SetValue("Default Calories Per Day", "2140");
+							
+					}
+					
+					
+					if (!float.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat[1]))
+					{
+							
+						throw Errors.PremadeExceptions("Registry", "Default Calories Per Day", 0);
+							
+					}
+						
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Calories Left for the Day")))
+					{
+							
+						tempKey.SetValue("Calories Left for the Day", 0);
+							
+					}
+					
+					
+					if (!float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat[0]))
+					{
+							
+						throw Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0);
+							
+					}
+						
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Manual Time")))
+					{
+							
+						tempKey.SetValue("Manual Time", tempBool.ToString());
+							
+					}
+					
+					
+					if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
+					{
+							
+						throw Errors.PremadeExceptions("Registry", "Manual Time", 0);
+							
+					}
+						
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Next Reset Date")))
+					{
+							
+						tempKey.SetValue("Next Reset Date", DateTime.Now.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
+							
+					}
+					
+					
+					if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {	                                	"yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
+					{
+							
+						throw Errors.PremadeExceptions("Registry", "Reset Date", 0);
+							
+					}
+					
+				}
+				else
+				{
+					
+					if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {"yyyy MMMMM dd hh:mm:ss tt"}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate) || 
+					    !float.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat [0]) || 
+					    !float.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out tempFloat [1]) || 
+					    !bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
+					{
+						
+						throw Errors.PremadeExceptions("Registry", "ValidateRegistryValues", 0);
+						
+					}
+					
+				}
+				
+				return new Tuple<DateTime, float, float, bool>(tempDate, tempFloat[0], tempFloat[1], tempBool);
+				
+			}
 			
 		}
 		

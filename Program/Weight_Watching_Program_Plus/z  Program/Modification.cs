@@ -18,32 +18,27 @@ namespace WeightWatchingProgramPlus
 	/// </summary>
 	internal class Modification
 	{
-
-		private PopupHandler PopupHandler = new PopupHandler ();
+		
+		PopupHandler PopupHandler = new PopupHandler ();
 		
 		#region Modify Calories Summary
 		/// <summary>
 		/// Performs the main operation when modifying the user's calorie balance.
 		/// </summary>
 		/// <param name="sender">
-		/// 
+		/// Who or what triggered this function.
 		/// </param>
 		#endregion
 		internal void ModifyCalories(object sender)
 		{
 			
-			bool add = true;
-			int errorNum = 1;
-			string warningText = "The amount of calories that you are trying to add would put you over your daily limit, and is not allowed.";
+			bool senderIsSubtracting = sender.ToString().Contains("subtract", StringComparison.OrdinalIgnoreCase);
 			
-			if (sender.ToString().Contains("subtract", StringComparison.OrdinalIgnoreCase))
-			{
-				
-				add = false;
-				errorNum = 2;
-				warningText = "The amount of calories that are about to be subtracted would put you below your daily limit! Continue?";
-				
-			} 
+			bool add = !senderIsSubtracting;
+			
+			int errorNum = !senderIsSubtracting ? 1 : 2;
+			
+			string warningText = string.Format(CultureInfo.InvariantCulture, "The amount of calories that {0}", !senderIsSubtracting ? "you are trying to add would put you over your daily limit, and is not allowed." : "are about to be subtracted would put you below your daily limit! Continue?");
 			
 			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
 			
@@ -107,6 +102,9 @@ namespace WeightWatchingProgramPlus
 		/// <param name="objectNumber">
 		/// The number used to handle the operation.
 		/// </param>
+		/// <exception cref="T:System.InvalidCastException">
+		/// Thrown when attempting to use an object type that is not yet supported.
+		/// </exception>
 		#endregion
 		public static void WriteToObject (Label labelToChange, TextBox textBoxToChange, int objectNumber)
 		{
@@ -163,9 +161,10 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				Errors.Handler(new NullReferenceException("writeToObject: All Valid Parameters:"), true, true, 524288);
+				throw new InvalidCastException("writeToObject: All Valid Parameters:");
 				
 			}
+			
 		}
 
 		#region Food Item Modification Summary
@@ -186,24 +185,20 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
+			var combinedTuple = new Tuple<string, float, float, string, bool>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty);
+			
 			if (!MainForm.IsCreatingANewFoodItem)
 			{
 				
 				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
 				
-				FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string, bool>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty));
-				
-				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool>(null, 0f, 0f, null, false));
+				FoodRelated.CombinedFoodList.Add(combinedTuple);
 				
 			}
-			else
-			{
-				
-				Storage.WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, float, float, string, bool>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty));
-				
-				MainForm.IsCreatingANewFoodItem = false;
-				
-			}
+			
+			Storage.WriteFoodTable("Files\\Text\\", "food.table", MainForm.IsCreatingANewFoodItem ? combinedTuple : new Tuple<string, float, float, string, bool>(null, 0f, 0f, null, false));
+			
+			MainForm.IsCreatingANewFoodItem = false;
 			
 			Functions.Refresh_foodList();
 			
@@ -255,7 +250,7 @@ namespace WeightWatchingProgramPlus
 		internal static void SortFoodList()
 		{
 			
-			List<Tuple<string, float, float, string, bool>> sortedEnum = FoodRelated.CombinedFoodList.ToList();
+			var sortedEnum = FoodRelated.CombinedFoodList.ToList();
 			
 			sortedEnum.Sort();
 			
