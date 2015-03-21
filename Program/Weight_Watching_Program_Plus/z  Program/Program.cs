@@ -1,11 +1,10 @@
 ﻿#region Using Directives
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UniversalHandlersLibrary;
@@ -14,19 +13,6 @@ using UniversalHandlersLibrary;
 
 namespace WeightWatchingProgramPlus
 {
-	
-	internal static class SafeNativeMethods
-	{
-		
-		#if DEBUG
-		
-		[DllImport("kernel32.dll", SetLastError = true)]
-		[return: MarshalAs(UnmanagedType.Bool)]
-		public static extern bool AllocConsole ();
-		
-		#endif
-		
-	}
 
 	internal sealed class Program
 	{
@@ -37,48 +23,50 @@ namespace WeightWatchingProgramPlus
 		/// 
 		
 		private static bool Explain = true;
-		
+		private static bool MultiTask = false;
+
 		[STAThread]
 		private static void Main (string[] args)
 		{
 			
-			Application.ThreadException += Application_ThreadException;
+			//Application.ThreadException += Application_ThreadException;
 			
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+				
+			IOHandler.CreateFolderTree(null);
+			
+			ArgumentHandler(args);
+				
+			findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\README.txt", Explain);
 			
 			#if DEBUG
 				
 			GlobalVariables.RegistryMainValue += "~debug";
-				
-			SafeNativeMethods.AllocConsole();
+			
+			GlobalVariables.Debug = true;
 				
 			#endif
+			
+			BackEnd.SetupConsole(GlobalVariables.Debug);
 				
 			Application.EnableVisualStyles();
 				
 			Application.SetCompatibleTextRenderingDefault(false);
-				
-			if (!Directory.Exists("Files\\"))
+			
+			if(Process.GetProcessesByName (Path.GetFileNameWithoutExtension (Application.ProductName)).Count() <= 1 || MultiTask)
 			{
-				Directory.CreateDirectory("Files\\");
-			}
 				
-			if (!Directory.Exists("Files\\Text\\"))
+				Application.Run(new MainForm ());
+				
+			}
+			else
 			{
-				Directory.CreateDirectory("Files\\Text\\");
+				
+				MessageBox.Show("This program is already running!", "Application Failed to Launch");
+				
+				Environment.Exit(0);
+				
 			}
-				
-			ArgumentHandler(args);
-			
-			#if DEBUG
-			
-			GlobalVariables.Debug = true;
-			
-			#endif
-				
-			findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\README.txt", Explain);
-			
-			Application.Run(new MainForm ());
 			
 		}
 
@@ -121,20 +109,14 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				if (!File.Exists(textFilesfoodbku))
-				{
-					
-					File.Copy(textFilesfoodtable, textFilesfoodbku);
-					
-				}
-				else
+				if (File.Exists(textFilesfoodbku))
 				{
 					
 					File.Delete(textFilesfoodbku);
 					
-					File.Copy(textFilesfoodtable, textFilesfoodbku);
-					
 				}
+				
+				File.Copy(textFilesfoodtable, textFilesfoodbku);
 				
 				File.SetAttributes(textFilesfoodbku, FileAttributes.Archive | FileAttributes.Temporary | FileAttributes.Compressed);
 				
@@ -174,7 +156,7 @@ namespace WeightWatchingProgramPlus
 			Errors.Handler((e.ExceptionObject as Exception), true, true, 524288);
 			
 		}
-		
+
 		/// <summary>
 		/// Parses and activates any arguments provided to the program at runtime.
 		/// </summary>
@@ -184,7 +166,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.ArgumentException">
 		/// Thrown if ANY arguement is input that has not been explicitly listed and/or handled in the function.
 		/// </exception>
-		private static void ArgumentHandler(string[] args)
+		private static void ArgumentHandler (string[] args)
 		{
 			
 			foreach (string s in args)
@@ -233,10 +215,16 @@ namespace WeightWatchingProgramPlus
 					GlobalVariables.Debug = true;
 					
 				}
+				else if (s.Equals("-allowmulti", StringComparison.CurrentCultureIgnoreCase))
+				{
+					
+					MultiTask = true;
+					
+				}
 				else
 				{
 						
-					throw new ArgumentException (s + " is not a valid argument! The program cannot parse it and therefore cannot continue.");
+					throw new ArgumentException (string.Format(CultureInfo.InvariantCulture, "{0} is not a valid argument! The program cannot parse it and therefore cannot continue.", s));
 					
 				}
 					

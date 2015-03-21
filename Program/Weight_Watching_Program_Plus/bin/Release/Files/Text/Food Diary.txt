@@ -1,3 +1,18 @@
+At 05:11:08 PM (on: March 19, 2015): You added back to your calorie count 1 ounce of 'banana'.
+Which is 1 servings, or 25 calories of 'banana'. You had 661.5 calories left for the day.
+-
+At 05:11:07 PM (on: March 19, 2015): You ate 1 ounce of 'banana'.
+Which is 1 servings, or 25 calories of 'banana'. You had 626.5 calories left for the day.
+-
+At 05:11:03 PM (on: March 19, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 661.5 calories left for the day.
+-
+At 05:11:00 PM (on: March 19, 2015): You ate 1 fluid ounce of '7up'.
+Which is 0.08333334 servings, or 11.6667 calories of '7up'. You had 661.5 calories left for the day.
+-
+At 08:46:09 PM (on: March 15, 2015): You ate 1 ounce of 'banana'.
+Which is 1 servings, or 25 calories of 'banana'. You had 94 calories left for the day.
+-
 At 02:51:20 PM (on: February 21, 2015): You added back to your calorie count 1 ounce of 'banana'.
 Which is 1 servings, or 25 calories of 'banana'. You had 1383.557 calories left for the day.
 -

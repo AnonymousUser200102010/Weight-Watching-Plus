@@ -5,42 +5,127 @@ using System.Windows.Forms;
 namespace WeightWatchingProgramPlus
 {
 
-	public class PopupHandler
+	internal class PopupHandler : IPopup
 	{
 		
-		readonly string[] title = {
+		private readonly string[] title = {
 			"Error: Value Is Null",
 			"You're overeating",
 			"You're overeating",
 			"Midnight Snacking Penalty",
 			"Error: Value Invalid",
 			"Confirm Deletion",
-			"Calorie Reset Error"
+			"Calorie Reset Error",
+			"Copyright Information"
 		};
+		
+		public delegate DialogResult CreatePopupDelegate(DialogResult CreatePopup);
 
-		readonly MessageBoxButtons[] messageBoxButton = {
-			MessageBoxButtons.OK,
-			MessageBoxButtons.OK,
-			MessageBoxButtons.YesNo,
-			MessageBoxButtons.OKCancel,
-			MessageBoxButtons.OK,
-			MessageBoxButtons.YesNo,
-			MessageBoxButtons.OK
-		};
+		#region Create Popup Only Override Summary
 
-		readonly MessageBoxIcon[] messageBoxIcon = {
-			MessageBoxIcon.Error,
-			MessageBoxIcon.Information,
-			MessageBoxIcon.Warning,
-			MessageBoxIcon.Information,
-			MessageBoxIcon.Error,
-			MessageBoxIcon.Warning,
-			MessageBoxIcon.Warning
-		};
-
-		public DialogResult CreatePopup (string message, Control controlItem, int errorCode, bool hasAdditionalActions)
+		/// <summary>
+		/// Handles the creation of popup messageboxes.
+		/// </summary>
+		/// <param name="message">
+		/// The text that goes in the body of the messagebox.
+		/// </param>
+		/// <param name="popupCode">
+		/// The code that defines how the popup will set itself up.
+		/// </param>
+		/// <returns>
+		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
+		/// </returns>
+		#endregion
+		public DialogResult CreatePopup (string message, int popupCode)
 		{
-			DialogResult dialogResult = MessageBox.Show(message, this.title [errorCode], this.messageBoxButton [errorCode], this.messageBoxIcon [errorCode], MessageBoxDefaultButton.Button1);
+			
+			return CreatePopup(message, popupCode, false, null);
+			
+		}
+
+		#region Create Popup Additional Actions Override Summary
+
+		/// <summary>
+		/// Handles the creation of popup messageboxes.
+		/// </summary>
+		/// <param name="message">
+		/// The text that goes in the body of the messagebox.
+		/// </param>
+		/// <param name="popupCode">
+		/// The code that defines how the popup will set itself up.
+		/// </param>
+		/// <param name="controlItem">
+		/// The items to be selected if additional actions are required.
+		/// </param>
+		/// <returns>
+		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
+		/// </returns>
+		#endregion
+		public DialogResult CreatePopup (string message, int popupCode, Control controlItem)
+		{
+			
+			return CreatePopup(message, popupCode, true, controlItem);
+			
+		}
+
+		#region Create Popup Summary
+
+		/// <summary>
+		/// Handles the creation of popup messageboxes.
+		/// </summary>
+		/// <param name="message">
+		/// The text that goes in the body of the messagebox.
+		/// </param>
+		/// <param name="popupCode">
+		/// The code that defines how the popup will set itself up.
+		/// </param>
+		/// <param name="hasAdditionalActions">
+		/// Do you need to select the control item after?
+		/// </param>
+		/// <param name="controlItem">
+		/// The items to be selected if additional actions are required.
+		/// </param>
+		/// <returns>
+		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
+		/// </returns>
+		
+		#endregion
+		private DialogResult CreatePopup (string message, int popupCode, bool hasAdditionalActions, Control controlItem)
+		{
+			
+			MessageBoxButtons messageBoxButton = MessageBoxButtons.OK;
+			
+			MessageBoxIcon messageBoxIcon = MessageBoxIcon.Information;
+			
+			switch (popupCode)
+			{
+					
+				case 0:
+				case 4:
+					messageBoxIcon = MessageBoxIcon.Error;
+					break;
+					
+				case 1:
+					messageBoxIcon = MessageBoxIcon.Hand;
+					break;
+					
+				case 2:
+				case 5:
+					messageBoxButton = MessageBoxButtons.YesNo;
+					messageBoxIcon = MessageBoxIcon.Question;
+					break;
+					
+				case 3:
+					messageBoxButton = MessageBoxButtons.OKCancel;
+					break;
+					
+				case 6:
+					messageBoxIcon = MessageBoxIcon.Warning;
+					break;
+					
+			}
+			
+			DialogResult dialogResult = MessageBox.Show(message, this.title [popupCode], messageBoxButton, messageBoxIcon, MessageBoxDefaultButton.Button1);
 			
 			if (hasAdditionalActions)
 			{

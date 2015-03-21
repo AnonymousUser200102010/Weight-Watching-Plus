@@ -4,6 +4,12 @@
 fluid ounce
 True
 -------------------------------------------------------------------------
+American beauty thin spaghetti
+2
+210
+ounce
+False
+-------------------------------------------------------------------------
 banana
 1
 25
@@ -46,7 +52,7 @@ beef top ramen
 packet
 False
 -------------------------------------------------------------------------
-bertolli mushroom alfredo
+Bernoulli mushroom Alfredo
 0.25
 70
 cup
@@ -70,11 +76,23 @@ calidad tortilla chips
 chip
 False
 -------------------------------------------------------------------------
+Canada dry ginger ale
+1
+140
+can
+True
+-------------------------------------------------------------------------
 cheese danish
 1
 250
 danish
 False
+-------------------------------------------------------------------------
+cherry coke
+1
+150
+can
+True
 -------------------------------------------------------------------------
 Cherry lane egg
 1
@@ -112,10 +130,16 @@ coca cola vanilla
 can
 True
 -------------------------------------------------------------------------
-cyrus oleary dutch apple pie
+Cyrus oleary Dutch apple pie
 0.1666667
 300
-total pie
+pie
+False
+-------------------------------------------------------------------------
+Cyrus oleary pumpkin pie
+0.2
+280
+pie
 False
 -------------------------------------------------------------------------
 darigold fat free cottage cheese
@@ -124,7 +148,7 @@ darigold fat free cottage cheese
 cup
 False
 -------------------------------------------------------------------------
-Darigold half and half ultra pasturized
+Darigold half and half ultra pasteurized
 2
 40
 tablespoon
@@ -148,19 +172,19 @@ delimax beef taquitos
 taquito
 False
 -------------------------------------------------------------------------
-digiorno pizza chicken parmesan
+Digiorno pizza chicken parmesan
 0.17
 300
 total pizza
 False
 -------------------------------------------------------------------------
-digiorno pizza meatball marinara
+Digiorno pizza meatball marinara
 0.17
 330
 total pizza
 False
 -------------------------------------------------------------------------
-dole pinapple slices
+dole pineapple slices
 2
 60
 slice
@@ -178,13 +202,13 @@ eclair (generic)
 eclair
 False
 -------------------------------------------------------------------------
-edwards new york style cheesecake
+Edwards new york style cheesecake
 0.2
 470
 pie
 False
 -------------------------------------------------------------------------
-edwards turtle pie
+Edwards turtle pie
 0.13
 390
 total pie
@@ -206,6 +230,12 @@ generic hamburger meat
 4
 300
 ounce
+False
+-------------------------------------------------------------------------
+green grapes
+1
+3
+grape
 False
 -------------------------------------------------------------------------
 hamburger bun
@@ -274,6 +304,12 @@ LandOFrost hickory smoked turkey breast
 slice
 False
 -------------------------------------------------------------------------
+langers pineapple juice
+1
+130
+cup
+True
+-------------------------------------------------------------------------
 Lean pockets meatballs and mozzarella
 1
 290
@@ -298,6 +334,12 @@ life cereal
 cup
 False
 -------------------------------------------------------------------------
+lucerne chocolate ice cream
+0.5
+140
+cup
+False
+-------------------------------------------------------------------------
 lucerne cookies and cream ice cream
 1
 280
@@ -310,7 +352,7 @@ lucerne eggs
 egg
 False
 -------------------------------------------------------------------------
-lucerne neopolitan ice cream
+lucerne Neapolitan ice cream
 0.5
 130
 cup
@@ -358,6 +400,12 @@ mission cheddar cheese dip
 tablespoon
 False
 -------------------------------------------------------------------------
+mountain dew
+1
+170
+can
+True
+-------------------------------------------------------------------------
 ocean spray wave (apple with white cranberries)
 1
 80
@@ -394,7 +442,7 @@ open nature fruit and veggie bars (mixed berry)
 bar
 False
 -------------------------------------------------------------------------
-oscar mayer oven roasted turkey
+Oscar Mayer oven roasted turkey
 1
 35
 slice
@@ -448,25 +496,25 @@ pantry essentials white bread
 slice
 False
 -------------------------------------------------------------------------
-Papa murhpies BIY (Mushroomx2, italian sausage)
-0.17
-382
-total pizza
-False
--------------------------------------------------------------------------
-papa murhpies Cowboy Pizza
-0.17
-673.6
-total pizza
-False
--------------------------------------------------------------------------
-papa murphies all meat
+papa Murphies all meat
 0.17
 282
 total pizza
 False
 -------------------------------------------------------------------------
-papa murphies papas stuffed pizza
+Papa Murphies BIY (Mushroomx2, Italian sausage)
+0.17
+382
+total pizza
+False
+-------------------------------------------------------------------------
+papa Murphies Cowboy Pizza
+0.17
+673.6
+total pizza
+False
+-------------------------------------------------------------------------
+papa Murphies papas stuffed pizza
 0.17
 981.33
 total pizza
@@ -508,13 +556,19 @@ Reeses pieces
 pieces
 False
 -------------------------------------------------------------------------
-Safeway boston cream pie
+russell stover assorted fine chocolate
+2
+160
+pieces
+False
+-------------------------------------------------------------------------
+Safeway Boston cream pie
 76
 200
 gram
 False
 -------------------------------------------------------------------------
-safeway chocolate chip cookies
+Safeway chocolate chip cookies
 1
 60
 cookie
@@ -526,19 +580,31 @@ Safeway Gourmet Cinnamon Roll
 ounce
 False
 -------------------------------------------------------------------------
-safeway red velvet cookies
+Safeway kitchens angel hair pasta
+2
+200
+ounces
+False
+-------------------------------------------------------------------------
+Safeway kitchens pineapple chunks
+1
+360
+can
+False
+-------------------------------------------------------------------------
+Safeway red velvet cookies
 1
 160
 cookie
 False
 -------------------------------------------------------------------------
-safeway select chicken enchiladas
+Safeway select chicken enchiladas
 1
 210
 enchilada
 False
 -------------------------------------------------------------------------
-safeway select meat lasagna
+Safeway select meat lasagna
 224
 310
 gram
@@ -555,6 +621,12 @@ simply limeade
 120
 cup
 True
+-------------------------------------------------------------------------
+smuckers butterscotch topping
+2
+120
+tablespoon
+False
 -------------------------------------------------------------------------
 Snack artist sausage and pepperoni pockets
 6
@@ -574,6 +646,12 @@ snickers fun size bars
 bar
 False
 -------------------------------------------------------------------------
+sunkist grape
+1
+170
+can
+True
+-------------------------------------------------------------------------
 super one white bread
 1
 70
@@ -592,11 +670,29 @@ western family 100 percent juice apple cider
 fluid ounce
 True
 -------------------------------------------------------------------------
+western family 100% juice apple cider
+1
+110
+cup
+True
+-------------------------------------------------------------------------
 western family 2% reduced fat milk
 1
 130
 cup
 True
+-------------------------------------------------------------------------
+western family cheese singles
+1
+60
+single
+False
+-------------------------------------------------------------------------
+western family cheese singles
+1
+60
+single
+False
 -------------------------------------------------------------------------
 western family drink mix
 1
@@ -604,10 +700,16 @@ western family drink mix
 gallon
 True
 -------------------------------------------------------------------------
-western family enriched spagetti
+western family enriched spaghetti
 56
 210
 gram
+False
+-------------------------------------------------------------------------
+western family fruit cocktail
+1
+210
+can
 False
 -------------------------------------------------------------------------
 western family light mayonnaise
@@ -626,6 +728,12 @@ western family mayonnaise
 1
 100
 tablespoon
+False
+-------------------------------------------------------------------------
+western family peach slices in 100% juice
+1
+175
+can
 False
 -------------------------------------------------------------------------
 western family rainbos cereal

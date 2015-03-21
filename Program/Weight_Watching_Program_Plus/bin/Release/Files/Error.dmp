@@ -1,0 +1,71 @@
+March 20 05:34:46 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid, Boolean roundCaloriesLeftForDay)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid)
+   at WeightWatchingProgramPlus.Validation.ValidateBackup(String appendedRegistryValue, String registryValue)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+March 20 05:33:59 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid, Boolean roundCaloriesLeftForDay)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+March 20 05:33:06 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid, Boolean roundCaloriesLeftForDay)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+March 20 05:32:50 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid, Boolean roundCaloriesLeftForDay)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+March 20 05:21:05 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid, Boolean roundCaloriesLeftForDay)
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+

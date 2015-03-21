@@ -1,3 +1,29 @@
+Update 7:
+
+Highlights:
+-- Updated UHLib. The source code will be copied over from it's work folder from now on, in place of constant update notes. As well, version numbers will not be shown in these notes (very often) as the program is modified fairly regularly, and often times many times over the course of an update to this main program.
+-- Moved the "console decider" function (the small function from program.cs which, if debug, would open a console or simply do nothing) to the UHLib. This was initially as an attempt to remove the "Intel-compatible processor" restriction, however in light of that fix, and the fact that the function probably had nothing to do with the problem in the first place, I've decided to leave it over there.
+-- General Functions moved to it's own .cs file for readability and ease of use reasons.
+-- Interfaces added to all classes so that they do not need to be accessed directly (or via a static function). Also all interfaces will be housed in a separate .cs file for readability reasons, but they are all connected to the correct class.
+-- I messed with the architecture a bit so that all the classes could be started (Instantiated) once and then wouldn't need to be started again. This will hopefully increase efficiency, but we'll have to see.
+-- Replaced all floats with doubles for performance reasons.
+-- All decimals standardized and a "decimal and rounding" system is in place to further standardize the program as a whole.
+
+Features:
+-- Added a new "Info Bar" to the bottom of the main form. It consists of one text box housing the program's current version (including the revision number), Greek letter (Alpha, Beta, etc) for each section, and the build type of the currently running executable. The "Greek letters" after the initial (alpha/beta/release.*.*) only show up after the major product number is greater than 0. This is to save on space mostly as the others were intended more as an "after release" thing. As well, using the "-debugrelease" command will not change the build type. This can only be changed by compiling a development build.
+-- Copyright button added to the Additional Options tab which contains all copyright notices, what particular copyright license is being used at the moment, and where to get copies of the license itself.
+-- Program will not start now unless there are no other instances running or an argument is used to bypass this feature.
+-- You can now set the amount of decimals you want to see in pertinent values throughout the program. This allows for greater or lesser accuracy depending on your personal preference. This does not yet have support for an example when the decimal value of calories is less than the desired decimal place. I don't view it as much of a problem now, but I'll get around to fixing it eventually.
+-- The additional options elements that didn't refresh when moving between tabs now does, albeit crudely. I hope to refine the technique at a later date.
+
+Bugs:
+-- Minor bug fixed in the adding of calories. Before, the program would not allow you to add calories which equalled the default calories amount, this functionality has been replaced with a globally standardized version of itself.
+-- Major bug addressed: With .NET 4.5.2 and above (I think, I only had 4.5.2 at the time of writing), a problem unknown to me causes architecture problems for anything but Intel compatible processors, likely with relation to the console. If you have one, you're welcome to upgrade it. For the sake of modulation, I will not.
+-- Fixed a recurring bug with relation to the changing of the food name of an item from the food list.
+
+Notes:
+--
+
 Update 6:
 
 Highlights:

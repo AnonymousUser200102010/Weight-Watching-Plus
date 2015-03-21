@@ -1,7 +1,6 @@
 ﻿#region Using Directives
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -16,20 +15,31 @@ namespace WeightWatchingProgramPlus
 	/// <summary>
 	/// Functions whose primary purpose is modification and creation, but who don't have a more pressing primary function.
 	/// </summary>
-	internal class Modification
+	internal class Modification : IModification
 	{
 		
-		PopupHandler PopupHandler = new PopupHandler ();
+		IPopup PopupHandler;
+			
+		IValidation Validation;
+			
+		IStorage Storage;
+			
+		IMathematics Mathematics;
+			
+		IGeneralFunctions Functions;
 		
-		#region Modify Calories Summary
-		/// <summary>
-		/// Performs the main operation when modifying the user's calorie balance.
-		/// </summary>
-		/// <param name="sender">
-		/// Who or what triggered this function.
-		/// </param>
-		#endregion
-		internal void ModifyCalories(object sender)
+		public Modification(PopupHandler pH, Validation validation, Storage storage, Mathematics math, Functions _func)
+		{
+			
+			this.PopupHandler = pH;
+			this.Validation = validation;
+			this.Storage = storage;
+			this.Mathematics = math;
+			this.Functions = _func;
+			
+		}
+
+		public void ModifyCalories (object sender)
 		{
 			
 			bool senderIsSubtracting = sender.ToString().Contains("subtract", StringComparison.OrdinalIgnoreCase);
@@ -40,27 +50,25 @@ namespace WeightWatchingProgramPlus
 			
 			string warningText = string.Format(CultureInfo.InvariantCulture, "The amount of calories that {0}", !senderIsSubtracting ? "you are trying to add would put you over your daily limit, and is not allowed." : "are about to be subtracted would put you below your daily limit! Continue?");
 			
-			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
 			
-			float tempcalories = registryTuple.Item2;
-			
-			Mathematics Mathematics = new Mathematics ();
+			double tempcalories = registryTuple.Item2;
 			
 			if (add)
 			{
 				
-				tempcalories += Mathematics.GetFinalCalories(add);
+				tempcalories += this.Mathematics.GetFinalCalories(add, this.Validation);
 				
 			}
 			else
 			{
 				
-				tempcalories -= Mathematics.GetFinalCalories(add);
+				tempcalories -= this.Mathematics.GetFinalCalories(add, this.Validation);
 				
 				if (tempcalories < -registryTuple.Item3)
 				{
 					
-					PopupHandler.CreatePopup("You're not allowed to subtract more than the normal daily allowance from a negative calorie value.", null, 1, false);
+					this.PopupHandler.CreatePopup("You're not allowed to subtract more than the normal daily allowance from a negative calorie value.", 1);
 					
 					return;
 					
@@ -68,51 +76,78 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			if ( ((tempcalories < 0f && !add) || (tempcalories > registryTuple.Item3 && add)) && PopupHandler.CreatePopup(warningText, null, errorNum, false) != DialogResult.Yes )
+			string decimalPlacesLiteral = null;
+			
+			for (int i = 1; i < registryTuple.Item6; i++)
+			{
+				
+				decimalPlacesLiteral += "0";
+				
+				#if DEBUG
+				
+				//Console.WriteLine(decimalPlacesLiteral);
+				
+				#endif
+				
+			}
+			
+			if(GlobalVariables.Debug)
+			{
+				
+				Console.WriteLine(decimalPlacesLiteral);
+				
+				//Console.WriteLine(string.Format(CultureInfo.CurrentCulture, ".{0}1", decimalPlacesLiteral));
+				
+				//Console.WriteLine(this.Mathematics.PerformArithmeticOperation(string.Format(CultureInfo.CurrentCulture, "{0}+.{1}1", registryTuple.Item3, decimalPlacesLiteral)));
+				
+				Console.WriteLine(double.Parse(string.Format(CultureInfo.CurrentCulture, "{0}.{1}1", registryTuple.Item3, decimalPlacesLiteral), CultureInfo.CurrentCulture));
+				
+			}
+			
+			if (((tempcalories < 0f && !add) || (tempcalories >= double.Parse(string.Format(CultureInfo.CurrentCulture, "{0}.{1}1", registryTuple.Item3, decimalPlacesLiteral), CultureInfo.InvariantCulture) && add)) && this.PopupHandler.CreatePopup(warningText, errorNum) != DialogResult.Yes)
 			{
 				
 				return;
 				
 			}
 			
-			Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now.AddDays(1), tempcalories, registryTuple.Item3, new [] {
-				false,
-				false
-			});
+			this.Storage.WriteRegistry(tempcalories, registryTuple.Item3, registryTuple.Item6, this.Validation);
+			
+			registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
 
 			MainForm.UserSetCalories = (decimal)registryTuple.Item2;
 			
-			Validation.CheckCurrentRadioButton();
+			this.Validation.CheckCurrentRadioButton(this);
 			
-			Storage.WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add);
+			MainForm.DecimalExample = registryTuple.Item2.ToString(CultureInfo.CurrentCulture);
+			
+			this.Storage.WriteFoodEaten(add, this.Validation);
 			
 		}
 
-		#region Write To Object Summary
-
-		/// <summary>
-		/// A lightweight modular text changer for use on a variety of objects.
-		/// </summary>
-		/// <param name="labelToChange">
-		/// The Label whos text value will be changed (if applicible)
-		/// </param>
-		/// <param name="textBoxToChange">
-		/// The TextBox whos text value will be changed (if applicible)
-		/// </param>
-		/// <param name="objectNumber">
-		/// The number used to handle the operation.
-		/// </param>
-		/// <exception cref="T:System.InvalidCastException">
-		/// Thrown when attempting to use an object type that is not yet supported.
-		/// </exception>
-		#endregion
-		public static void WriteToObject (Label labelToChange, TextBox textBoxToChange, int objectNumber)
+		public void WriteToObject (Label labelToChange, int objectNumber)
 		{
 			
+			WriteToObject(labelToChange, null, objectNumber);
+			
+		}
+
+		public void WriteToObject (TextBox textBoxToChange, int objectNumber)
+		{
+			
+			WriteToObject(null, textBoxToChange, objectNumber);
+			
+		}
+
+		private void WriteToObject (Label labelToChange, TextBox textBoxToChange, int objectNumber)
+		{
+			
+			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
+			
 			string[] messages = {
-				string.Format(CultureInfo.InvariantCulture, "Calories Left For The Day: {0}", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item2),
+				string.Format(CultureInfo.InvariantCulture, "Calories Left For The Day: {0}", registryTuple.Item2),
 				
-				string.Format(CultureInfo.InvariantCulture, "Calories will reset on {0:MMMM dd} at {0:hh:mm tt}", Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue).Item1),
+				string.Format(CultureInfo.InvariantCulture, "Calories will reset on {0:MMMM dd} at {0:hh:mm tt}", registryTuple.Item1),
 				"Click Here to Search the Food List"
 			};
 			
@@ -138,54 +173,46 @@ namespace WeightWatchingProgramPlus
 				center
 			};
 			
-			if(labelToChange != null)
+			if (labelToChange != null)
 			{
 				
-				labelToChange.Font = fontStyle[objectNumber];
+				labelToChange.Font = fontStyle [objectNumber];
 			
-				labelToChange.Text = messages[objectNumber];
+				labelToChange.Text = messages [objectNumber];
 			
-				labelToChange.TextAlign = objectAlignment[objectNumber];
+				labelToChange.TextAlign = objectAlignment [objectNumber];
 				
 			}
 			else if (textBoxToChange != null)
 			{
 				
-				textBoxToChange.Font = fontStyle[objectNumber];
+				textBoxToChange.Font = fontStyle [objectNumber];
 				
-				textBoxToChange.Text = messages[objectNumber];
+				textBoxToChange.Text = messages [objectNumber];
 				
-				textBoxToChange.TextAlign = horizontalObjectAlignment[objectNumber];
+				textBoxToChange.TextAlign = horizontalObjectAlignment [objectNumber];
 				
 			}
 			else
 			{
 				
-				throw new InvalidCastException("writeToObject: All Valid Parameters:");
+				throw new InvalidCastException ("writeToObject: All Valid Parameters:");
 				
 			}
 			
 		}
 
-		#region Food Item Modification Summary
-		/// <summary>
-		/// Changes the property of an existing food item or creates a new food item.
-		/// </summary>
-		/// <param name="AllValidEntries">
-		/// All property entries are valid.
-		/// </param>
-		#endregion
-		internal static void ModifyFoodItemProperty(bool AllValidEntries)
+		public void ModifyFoodItemProperty (bool allValidEntries)
 		{
 			
-			if (!AllValidEntries)
+			if (!allValidEntries)
 			{
 				
 				return;
 				
 			}
 			
-			var combinedTuple = new Tuple<string, float, float, string, bool>(MainForm.FoodNameProperty, (float)MainForm.ServingSizeProperty, (float)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty);
+			var combinedTuple = new Tuple<string, double, double, string, bool> (MainForm.FoodNameProperty, (double)MainForm.ServingSizeProperty, (double)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty);
 			
 			if (!MainForm.IsCreatingANewFoodItem)
 			{
@@ -196,65 +223,46 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			Storage.WriteFoodTable("Files\\Text\\", "food.table", MainForm.IsCreatingANewFoodItem ? combinedTuple : new Tuple<string, float, float, string, bool>(null, 0f, 0f, null, false));
+			this.Storage.WriteFoodTable(MainForm.IsCreatingANewFoodItem ? combinedTuple : new Tuple<string, double, double, string, bool> (null, 0f, 0f, null, false));
 			
 			MainForm.IsCreatingANewFoodItem = false;
 			
-			Functions.Refresh_foodList();
+			this.Functions.RefreshFoodList(this.Storage);
 			
 		}
 
-		#region Clear Food Property Boxes Summary
-		/// <summary>
-		/// Clears the property settings boxes.
-		/// </summary>
-		/// <param name="clear">
-		/// Clears all of the property boxes.
-		/// </param>
-		/// <param name="stringProperties">
-		/// Contains the strings for all properties that require them. So far, in order, these properties are counted: FoodName, Definer
-		/// </param>
-		/// <param name="decimalProperties">
-		/// Contains the decimal values for all properties that require them. So far, in order, these properties are counted: ServingSize, CaloriesPerServing.
-		/// </param>
-		/// <param name="boolProperties">
-		/// Contains the bool values for all properties that require them. So far, in order, these properties are counted: IsDrinkCheckBox.
-		/// </param>
-		#endregion
-		public static void ModifyFoodPropertiesList(bool clear, string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties)
+		public void ModifyFoodPropertiesList ()
+		{
+			
+			ModifyFoodPropertiesList(null, null, null, true);
+			
+		}
+
+		public void ModifyFoodPropertiesList (string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties)
+		{
+			
+			ModifyFoodPropertiesList(stringProperties, decimalProperties, boolProperties, false);
+			
+		}
+
+		private static void ModifyFoodPropertiesList (string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties, bool clear)
 		{
 			if (clear)
 			{
 				MainForm.FoodNameProperty = null;
-				MainForm.ServingSizeProperty = 0;
-				MainForm.CaloriesPerServingProperty = 0;
+				MainForm.ServingSizeProperty = MainForm.ServingSizeMinimumValue;
+				MainForm.CaloriesPerServingProperty = MainForm.CaloriesPerServingMinimumValue;
 				MainForm.DefinerProperty = null;
 				MainForm.IsDrinkProperty = false;
 			}
 			else
 			{
-				MainForm.FoodNameProperty = stringProperties[0];
-				MainForm.DefinerProperty = stringProperties[1];
-				MainForm.ServingSizeProperty = decimalProperties[0];
-				MainForm.CaloriesPerServingProperty = decimalProperties[1];
-				MainForm.IsDrinkProperty = boolProperties[0];
+				MainForm.FoodNameProperty = stringProperties [0];
+				MainForm.DefinerProperty = stringProperties [1];
+				MainForm.ServingSizeProperty = decimalProperties [0];
+				MainForm.CaloriesPerServingProperty = decimalProperties [1];
+				MainForm.IsDrinkProperty = boolProperties [0];
 			}
-			
-		}
-
-		#region Sort Food List Summary
-		/// <summary>
-		/// Sorts the food list in one function to reduce code bloat.
-		/// </summary>
-		#endregion
-		internal static void SortFoodList()
-		{
-			
-			var sortedEnum = FoodRelated.CombinedFoodList.ToList();
-			
-			sortedEnum.Sort();
-			
-			FoodRelated.CombinedFoodList = sortedEnum;
 			
 		}
 		

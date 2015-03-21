@@ -11,34 +11,32 @@ using UniversalHandlersLibrary;
 
 namespace WeightWatchingProgramPlus
 {
-
+	
 	/// <summary>
 	/// Functions that relate to storage
 	/// </summary>
-	static class Storage
+	internal class Storage : IStorage
 	{
 		
-		#region Read Food Table Summary
-
-		/// <summary>
-		/// This function reads the food table file and parses the results into their logical values.
-		/// </summary>
-		/// <param name="directory">
-		/// The directory where the food table is/will be created.
-		/// </param>
-		/// <param name="file">
-		/// The name of the food table.
-		/// </param>
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
-		/// <exception cref="T:System.IO.IOException">
-		/// Thrown if the provided file, in the provided directory, does not exist.
-		/// </exception>
-		#endregion
-		internal static void ReadFoodTable (string directory, string file)
+		IPopup PopupHandler;
+		
+		public Storage(PopupHandler pU)
 		{
 			
+			this.PopupHandler = pU;
+			
+		}
+		
+		public void ReadFoodTable()
+		{
+			
+			ReadFoodTable("Files\\Text\\", "food.table");
+			
+		}
+
+		public void ReadFoodTable (string directory, string file)
+		{
+
 			if (File.Exists(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
 			{
 				
@@ -49,7 +47,7 @@ namespace WeightWatchingProgramPlus
 					int position = 0;
 					String line;
 					string[] combined = new string[2];
-					float[] tupleItemFloat = new float[2];
+					double[] tupleItemDouble = new double[2];
 					bool tupleItemBool = false;
 					
 					while (!string.IsNullOrEmpty((line = sr.ReadLine())))
@@ -58,11 +56,11 @@ namespace WeightWatchingProgramPlus
 						if (line.Contains("-", StringComparison.CurrentCultureIgnoreCase))
 						{
 							
-							FoodRelated.CombinedFoodList.Add(new Tuple<string, float, float, string, bool> (combined [0], tupleItemFloat [0], tupleItemFloat [1], combined [1], tupleItemBool));
+							FoodRelated.CombinedFoodList.Add(new Tuple<string, double, double, string, bool> (combined [0], tupleItemDouble [0], tupleItemDouble [1], combined [1], tupleItemBool));
 							
 							#if DEBUG
 							
-							//Messages.Handler(string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n\n", combined [0], tupleItemFloat [0], tupleItemFloat [1], combined [1], tupleItemBool), "Weight Watching +", true, 102400);
+							//Messages.Handler(string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n\n", combined [0], tupleItemDouble [0], tupleItemDouble [1], combined [1], tupleItemBool), "Weight Watching +", true, 102400);
 							
 							#endif
 							
@@ -80,10 +78,10 @@ namespace WeightWatchingProgramPlus
 								case 1:
 								case 2:
 									
-									if (!float.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out tupleItemFloat [number == 1 ? 0 : 1]))
+									if (!double.TryParse(line, NumberStyles.Any, CultureInfo.InvariantCulture, out tupleItemDouble [number == 1 ? 0 : 1]))
 									{
 										
-										throw Errors.PremadeExceptions("ReadFoodTable", "tupleItemFloat", 0);
+										throw Errors.PremadeExceptions("ReadFoodTable", "tupleItemDouble", 0);
 										
 									}
 									
@@ -118,8 +116,6 @@ namespace WeightWatchingProgramPlus
 					
 				}
 				
-				Modification.SortFoodList();
-				
 			}
 			else
 			{
@@ -130,28 +126,24 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		#region Write To Food Table Summary
-
-		/// <summary>
-		/// Parses the logical values back into a readable format and writes them to the food table.
-		/// </summary>
-		/// <param name="directory">
-		/// The directory where the food table is/will be created.
-		/// </param>
-		/// <param name="file">
-		/// The name of the food table.
-		/// </param>
-		/// <param name="additionToFoodTable">
-		/// A Tuple containing ONE additional food item which will be added to the food list.
-		/// </param>
-		/// <exception cref="T:System.IO.IOException">
-		/// Thrown if the provided file, in the provided directory, does not exist.
-		/// </exception>
-		#endregion
-		internal static void WriteFoodTable (string directory, string file, Tuple<string, float, float, string, bool> additionToFoodTable)
+		public void WriteFoodTable()
 		{
 			
-			Modification.SortFoodList();
+			WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, double, double, string, bool>(null, 0, 0, null, false));
+			
+		}
+		
+		public void WriteFoodTable(Tuple<string, double, double, string, bool> additionToFoodTable)
+		{
+			
+			WriteFoodTable("Files\\Text\\", "food.table", additionToFoodTable);
+			
+		}
+
+		public void WriteFoodTable (string directory, string file, Tuple<string, double, double, string, bool> additionToFoodTable)
+		{
+			
+			FoodRelated.CombinedFoodList.Sort();
 			
 			if (File.Exists(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
 			{
@@ -166,118 +158,99 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			string finalstring = null;
-			
 			const string seperator = "-------------------------------------------------------------------------\n";
 			
-			for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
+			using (StreamWriter outfile = new StreamWriter(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
 			{
 				
-				Tuple<string, float, float, string, bool> foodTuple = FoodRelated.CombinedFoodList [i];
+				for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
+				{
+					
+					outfile.Write(string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", FoodRelated.CombinedFoodList [i].Item1, FoodRelated.CombinedFoodList [i].Item2, FoodRelated.CombinedFoodList [i].Item3, FoodRelated.CombinedFoodList [i].Item4, FoodRelated.CombinedFoodList [i].Item5, seperator));
+					
+				}
 				
-				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", foodTuple.Item1, foodTuple.Item2, foodTuple.Item3, foodTuple.Item4, foodTuple.Item5, seperator);
+				if (!string.IsNullOrWhiteSpace(additionToFoodTable.Item1) && additionToFoodTable.Item2 > 0 && additionToFoodTable.Item3 > 0 && !string.IsNullOrWhiteSpace(additionToFoodTable.Item4))
+				{
+					
+					outfile.Write(string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5, seperator));
+					
+				}
+				else if (GlobalVariables.Debug)
+				{
+					
+					Messages.Handler(string.Format(CultureInfo.InvariantCulture, "additionToFoodTable: one or more of your addons contained an invalid entry: \nItem 1: '{0}'\n Item 2: '{1}'\nItem 3: '{2}'\nItem 4: '{3}'\nItem 5: '{4}'\n", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5), "Weight Watching +", true, 102400);
+					
+				}
 				
 			}
 			
-			if (!string.IsNullOrWhiteSpace(additionToFoodTable.Item1) && additionToFoodTable.Item2 > 0 && additionToFoodTable.Item3 > 0 && !string.IsNullOrWhiteSpace(additionToFoodTable.Item4))
-			{
-				
-				finalstring += string.Format(CultureInfo.InvariantCulture, "{0}\n{1}\n{2}\n{3}\n{4}\n{5}", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5, seperator);
-				
-			}
-			else if (GlobalVariables.Debug)
-			{
-				
-				Messages.Handler(string.Format(CultureInfo.InvariantCulture, "additionToFoodTable: one or more of your addons contained an invalid entry: \nItem 1: '{0}'\n Item 2: '{1}'\nItem 3: '{2}'\nItem 4: '{3}'\nItem 5: '{4}'\n", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5), "Weight Watching +", true, 102400);
-				
-			}
-			
-			File.WriteAllText(directory + file, finalstring);
 			File.SetAttributes(directory + file, FileAttributes.Compressed);
 			
 		}
 
-		#region Read Registy Summary
-
-		/// <summary>
-		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date.
-		/// </summary>
-		/// <param name="appendedRegistryValue">
-		/// Registry value that comes first after LOCAL_MACHINE
-		/// </param>
-		/// <param name="registyValue">
-		/// Registry value that is added after the appended value.
-		/// </param>
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
-		#endregion
-		internal static void ReadRegistry (string appendedRegistryValue, string registyValue)
+		public void ReadRegistry(IValidation valid)
 		{
+			
+			ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid);
+			
+		}
+
+		public void ReadRegistry (string appendedRegistryValue, string registyValue, IValidation valid)
+		{
+			
+			Validation Validation = (valid as Validation);
 			
 			if (Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue) == null)
 			{
 				Registry.LocalMachine.CreateSubKey(appendedRegistryValue + registyValue);
 			}
 				
-				if (appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
+			if (appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
+			{
+				
+				Validation.ValidateRegistryValues(appendedRegistryValue, registyValue, true);
+				
+				var registryTuple = GetRetrievableRegistryValues(valid);
+				
+				MainForm.ManualTimeIsInitiated = registryTuple.Item4;
+				
+				MainForm.DecimalPlaces = (decimal)registryTuple.Item6;
+				
+				if (Validation.ValidateBackup(appendedRegistryValue, registyValue) && GlobalVariables.CreateBackups)
 				{
 					
-					Validation.ValidateRegistryValues(appendedRegistryValue, registyValue, true);
+					Backup("Files//Text//", "Files//Backup//");
 					
-					MainForm.ManualTimeIsInitiated = GetRetrievableRegistryValues(appendedRegistryValue, registyValue).Item4;
-					
-					if(Validation.ValidateBackup(appendedRegistryValue, registyValue) && GlobalVariables.CreateBackups)
-					{
-						
-						Backup("Files//Text//", "Files//Backup//");
-						
-					}
-					
-				}
-				else if (registyValue.Contains("Diary", StringComparison.OrdinalIgnoreCase))
-				{
-					//Do nothing...yet
 				}
 				
-				Validation.CheckDateValidity();
+			}
+			else if (registyValue.Contains("Diary", StringComparison.OrdinalIgnoreCase))
+			{
+				//Do nothing...yet
+			}
+				
+			Validation.CheckDateValidity();
 		}
 
-		#region Write To Registry Summary
-
-		/// <summary>
-		/// Writes all logical values to the registry in a format it can understand.
-		/// </summary>
-		/// <param name="appendedRegistryValue">
-		/// Registry value that comes first after LOCAL_MACHINE
-		/// </param>
-		/// <param name="registyValue">
-		/// Registry value that is added after the appended value.
-		/// </param>
-		/// <param name="date">
-		/// If resetting, this is the new reset date.
-		/// </param>
-		/// <param name="calories">
-		/// Current calories left.
-		/// </param>
-		/// <param name="defaultCalories">
-		/// Default calorie count.
-		/// </param>
-		/// <param name="reset">
-		/// reset[0] = calorie count, reset[1] = reset date.
-		/// </param>
-		#endregion
-		internal static void WriteRegistry (string appendedRegistryValue, string registyValue, DateTime date, float calories, float defaultCalories, System.Collections.Generic.IList<bool> reset)
+		public void WriteRegistry(double calories, double defaultCalories, int decimalPlaces, IValidation valid)
 		{
 			
-			PopupHandler PopupHandler = new PopupHandler ();
+			WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now, calories, defaultCalories, decimalPlaces, new []{ false, false }, valid);
 			
-			float tempFloat = calories;
+		}
+
+		public void WriteRegistry (string appendedRegistryValue, string registyValue, DateTime date, double calories, double defaultCalories, int decimalPlaces, System.Collections.Generic.IList<bool> reset, IValidation valid)
+		{
+			
+			Validation Validation = (valid as Validation);
+			
+			double tempDouble = calories;
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue, true))
 			{
 				
-				var registryTuple = GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+				var registryTuple = GetRetrievableRegistryValues(Validation, false);
 				
 				if (reset [0])
 				{
@@ -285,37 +258,37 @@ namespace WeightWatchingProgramPlus
 					if (calories > 0)
 					{
 					
-						tempFloat += registryTuple.Item3;
+						tempDouble += registryTuple.Item3;
 						
 					}
 					else if (calories < 0)
 					{
 						
-						tempFloat = registryTuple.Item3 + calories;
+						tempDouble = registryTuple.Item3 + calories;
 						
 					}
 					else
 					{
 						
-						tempFloat = registryTuple.Item3;
+						tempDouble = registryTuple.Item3;
 						
 					}
 					
-					if (tempFloat > (registryTuple.Item3 * 2))
+					if (tempDouble > (registryTuple.Item3 * 2))
 					{
 							
-						tempFloat = (registryTuple.Item3 * 2);
+						tempDouble = (registryTuple.Item3 * 2);
 							
 							
-						PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have more than double your daily allowance. As a result, your calories have only been set to {0}.", tempFloat), null, 6, false);
+						this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have more than double your daily allowance. As a result, your calories have only been set to {0}.", tempDouble), 6);
 							
 					}
-					else if (tempFloat < 1200f)
+					else if (tempDouble < 1200f)
 					{
 							
-						tempFloat = 1200f;
+						tempDouble = 1200f;
 							
-						PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have less than 1200 calories per day, as that is considered the lowest point before starving. As a result, your calories have only been set to {0}.", 1200), null, 6, false);
+						this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have less than 1200 calories per day, as that is considered the lowest point before starving. As a result, your calories have only been set to {0}.", 1200), 6);
 					}
 					
 				}
@@ -323,54 +296,38 @@ namespace WeightWatchingProgramPlus
 				if (reset [1])
 				{
 					
-					tempKey.SetValue("Next Reset Date", date.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture), RegistryValueKind.String);
+					tempKey.SetValue("Next Reset Date", date.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
 					
 					MainForm.ManualDateTime = date;
 					
 				}
 				
-				tempKey.SetValue("Calories Left for the Day", tempFloat, RegistryValueKind.String);
+				tempKey.SetValue("Calories Left for the Day", tempDouble.ToString(CultureInfo.CurrentCulture));
 				tempKey.SetValue("Default Calories Per Day", defaultCalories.ToString(CultureInfo.CurrentCulture));
 				tempKey.SetValue("Manual Time", MainForm.ManualTimeIsInitiated.ToString());
+				tempKey.SetValue("Dec. Places", decimalPlaces.ToString(CultureInfo.CurrentCulture));
 				
 			}
 		}
 
-		#region Get Registry Values Summary
-
-		/// <summary>
-		/// Gets all registry values that can be modified and used by the program (usually all of them).
-		/// </summary>
-		/// <param name="appendedRegistryValue">
-		/// Registry value that comes first after LOCAL_MACHINE
-		/// </param>
-		/// <param name="registryValue">
-		/// Registry value that is added after the appended value.
-		/// </param>
-		/// <returns>
-		/// Returns a Tuple(DateTime CaloriesResetTime, float Calories, float DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
-		/// </returns>
-		/// <example>
-		/// DateTime: the time at which the calories reset.
-		/// </example>
-		/// <example>
-		/// Float (1): the amount of calories left for the day.
-		/// </example>
-		/// <example>
-		/// Float (2): the amount of calories that is set by default.
-		/// </example>
-		/// <example>
-		/// Bool: if the user is using a manual time instead of an automatic one.
-		/// </example>
-		/// <example>
-		/// string: The current program version as stored in the registry.
-		/// </example>
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
-		#endregion
-		internal static Tuple<DateTime, float, float, bool, string> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue)
+		public Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues(IValidation valid)
 		{
+			
+			return GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid, true);
+			
+		}
+		
+		public Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay)
+		{
+			
+			return GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid, roundCaloriesLeftForDay);
+			
+		}
+
+		public Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay)
+		{
+			
+			Validation Validation = (valid as Validation);
 			
 			string tempString = null;
 			
@@ -383,27 +340,22 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			return Tuple.Create(validationTuple.Item1, validationTuple.Item2, validationTuple.Item3, validationTuple.Item4, tempString);
+			return Tuple.Create(validationTuple.Item1, roundCaloriesLeftForDay ? (double)Math.Round(validationTuple.Item2, validationTuple.Item5) : validationTuple.Item2, (double)Math.Round(validationTuple.Item3, validationTuple.Item5), validationTuple.Item4, tempString, validationTuple.Item5);
 			
 		}
 
-		#region Food Tracking Diary Summary
-
-		/// <summary>
-		/// Food Tracking Function 1: Diary: Writes to file what food you've eaten and when.
-		/// </summary>
-		/// <param name="directory">
-		/// The directory where the diary file is/will be created.
-		/// </param>
-		/// <param name="file">
-		/// The name of the diary file.
-		/// </param>
-		/// <param name="add">
-		/// Is this operation the result of an addition operation?
-		/// </param>
-		#endregion
-		internal static void WriteFoodEaten (string directory, string file, bool add)
+		public void WriteFoodEaten(bool add, IValidation valid)
 		{
+			
+			WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add, valid);
+			
+		}
+
+		public void WriteFoodEaten (string directory, string file, bool add, IValidation valid)
+		{
+			
+			Validation Validation = (valid as Validation);
+			
 			string finalstring = null;
 			const string seperator = "-";
 			
@@ -415,11 +367,11 @@ namespace WeightWatchingProgramPlus
 					
 					DateTime Now = DateTime.Now;
 					
-					float tempserval = (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
+					double tempserval = (double)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
 					
-					float temptolval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2 * tempserval;
+					double temptolval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2 * tempserval;
 					
-					temptolval = Math.Floor(temptolval) <= 0 ? (float)Math.Round(temptolval, 1) : (float)Math.Floor(temptolval);
+					temptolval = Math.Floor(temptolval) <= 0 ? (double)Math.Round(temptolval, 1) : (double)Math.Floor(temptolval);
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, "At {0} (on: {1}): You {2} {3} {4}", Now.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture), Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture), add ? "added back to your calorie count" : MainForm.IsDrinkProperty ? "drank" : "ate", MainForm.UserProvidedServings, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4);
 					
@@ -430,11 +382,11 @@ namespace WeightWatchingProgramPlus
 						
 					}
 					
-					float tempcalval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * (float)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
+					double tempcalval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * (double)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, " of '{0}'.\nWhich is {1} servings, or {2} calories of '{0}'. ", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, tempserval, Math.Round(tempcalval, 4, MidpointRounding.AwayFromZero));
 					
-					var registryTuple = GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+					var registryTuple = GetRetrievableRegistryValues(Validation);
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", registryTuple.Item2, seperator);
 					
@@ -471,19 +423,8 @@ namespace WeightWatchingProgramPlus
 			}
 			
 		}
-		
-		#region Store Backup Summary
-		/// <summary>
-		/// Backs up all files in the "original directory"
-		/// </summary>
-		/// <param name="originalDirectory">
-		/// The directory which you want to copy the files from.
-		/// </param>
-		/// <param name="backupDirectory">
-		/// The directory to copy the files to.
-		/// </param>
-		#endregion
-		private static void Backup(string originalDirectory, string backupDirectory)
+
+		private static void Backup (string originalDirectory, string backupDirectory)
 		{
 			
 			string[] passoverDocumentKeywords = {
@@ -491,7 +432,7 @@ namespace WeightWatchingProgramPlus
 				"diary"
 			};
 			
-			if(!Directory.Exists(backupDirectory))
+			if (!Directory.Exists(backupDirectory))
 			{
 				
 				Directory.CreateDirectory(backupDirectory);
@@ -500,7 +441,7 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				foreach(string file in ( Directory.GetFiles(backupDirectory).Where(file => !string.IsNullOrWhiteSpace(file))) )
+				foreach (string file in ( Directory.GetFiles(backupDirectory).Where(file => !string.IsNullOrWhiteSpace(file))))
 				{
 					
 					File.Delete(file);
@@ -509,7 +450,7 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			foreach(string file in Directory.GetFiles(originalDirectory).Where(file => !passoverDocumentKeywords.Any((string s) => file.Contains(s, StringComparison.OrdinalIgnoreCase))))
+			foreach (string file in Directory.GetFiles(originalDirectory).Where(file => !passoverDocumentKeywords.Any((string s) => file.Contains(s, StringComparison.OrdinalIgnoreCase))))
 			{
 				
 				File.Copy(file, string.Format(CultureInfo.InvariantCulture, "{0}{1}", backupDirectory, Path.GetFileName(file)));

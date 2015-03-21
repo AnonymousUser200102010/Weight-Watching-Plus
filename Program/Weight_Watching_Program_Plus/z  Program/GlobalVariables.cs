@@ -39,12 +39,12 @@ namespace WeightWatchingProgramPlus
         /// </item5>
         /// </example>
         #endregion
-        public static IList<Tuple<string, float, float, string, bool>> CombinedFoodList { get; set; }
+        public static List<Tuple<string, double, double, string, bool>> CombinedFoodList { get; set; }
         
-        static FoodRelated()
+        static FoodRelated ()
         {
         	
-        	CombinedFoodList = new List<Tuple<string, float, float, string, bool>>();
+        	CombinedFoodList = new List<Tuple<string, double, double, string, bool>>();
         	
         }
         

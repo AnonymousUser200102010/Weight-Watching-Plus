@@ -11,32 +11,28 @@ using UniversalHandlersLibrary;
 
 namespace WeightWatchingProgramPlus
 {
-	
+
 	/// <summary>
 	/// Functions whose primary purpose is parsing mathematical operations and performing arithmetic, but who don't have a more pressing primary function.
 	/// </summary>
-	class Mathematics
+	internal class Mathematics : IMathematics
 	{
-		private PopupHandler PopupHandler = new PopupHandler ();
-
-		#region Perform Arithmetic Operation Summary
-
-		/// <summary>
-		/// Performs an arithmetic operation on an equation which has been converted to it's logical string counterpart.
-		/// </summary>
-		/// <param name="equation">
-		/// An equation in string form. (Example: 1*1)
-		/// </param>
-		/// <returns>
-		/// The result of the arithmetic operation as a string.
-		/// </returns>
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
-		#endregion
-		internal float PerformArithmeticOperation (string equation)
+		
+		private IStorage Storage;
+		private IPopup PopupHandler;
+		
+		public Mathematics(Storage store, PopupHandler pU)
 		{
-			float returnFloat = 0f;
+			
+			this.Storage = store;
+			this.PopupHandler = pU;
+			
+		}
+
+		public double PerformArithmeticOperation (string equation)
+		{
+			
+			double returnDouble = 0f;
 
 			using (DataTable dt = new DataTable ())
 			{
@@ -45,17 +41,17 @@ namespace WeightWatchingProgramPlus
 
 				object computation = dt.Compute(equation, null);
 
-				if (!float.TryParse(computation.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out returnFloat))
+				if (!double.TryParse(computation.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out returnDouble))
 				{
 
 					throw Errors.PremadeExceptions("PerformArithmeticOperation", "computation", 0);
 
 				}
 
-				if (returnFloat <= 0f)
+				if (returnDouble <= 0f)
 				{
-
-					PopupHandler.CreatePopup("You cannot use a value of zero or less!", new Control (), 0, false);
+					
+					this.PopupHandler.CreatePopup("You cannot use arithmetic values which create an operation whose final value is zero or less!", 0);
 					
 					return 0;
 
@@ -63,48 +59,26 @@ namespace WeightWatchingProgramPlus
 
 			}
 
-			return returnFloat;
+			return returnDouble;
 		}
 
-		#region Get Final Calories Summary
-
-		/// <summary>
-		/// Sub-logic handler for modification of calories. Simply to reduce code bloat and make understanding the final processes easier.
-		/// </summary>
-		/// <param name="add">
-		/// Are you adding calories?
-		/// </param>
-		/// <returns>
-		/// Returns the calorie value after the logical operations have been finished.
-		/// </returns>
-		#endregion
-		internal float GetFinalCalories (bool add)
+		public double GetFinalCalories (bool add, IValidation valid)
 		{
 			
-			Storage.ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			this.Storage.ReadRegistry(valid);
 
-			float tempFloat = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3;
-
-			float userServings = (float)MainForm.UserProvidedServings;
-
-			if (userServings > 0)
+			double userServings = (FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * ((double)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2));
+			
+			if (userServings < .001)
 			{
-
-				userServings /= FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
-
-			}
-			else
-			{
-
+				
 				return 0;
-
+				
 			}
 			
-			tempFloat *= userServings;
+			double tempDoublePenalty = GetSnackingPenalty(userServings, add, (valid as Validation));
 			
-			float tempFloatPenalty = GetSnackingPenalty(tempFloat, add);
-			
-			return tempFloatPenalty > -1 ? tempFloat + tempFloatPenalty : 0;
+			return tempDoublePenalty > -1 ? userServings + tempDoublePenalty : 0;
 			
 		}
 
@@ -113,20 +87,23 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// The operation for obtaining the Eating Before Bed (Snacking) Penalty.
 		/// </summary>
-		/// <param name="tempFloat">
-		/// The float used for the calorie value before attempting to parse a penalty value from it.
+		/// <param name="tempDouble">
+		/// The double used for the calorie value before attempting to parse a penalty value from it.
 		/// </param>
 		/// <param name="add">
 		/// Are you adding calories?
 		/// </param>
+		/// <param name="Validation">
+		/// A preinitialized instance of Validation. It is not recommended to pass a new initialization of Validation.
+		/// </param>
 		/// <returns>
-		/// Returns the Eating Before Bed (Snacking) Penalty as a float.
+		/// Returns the Eating Before Bed (Snacking) Penalty as a double.
 		/// </returns>
 		#endregion
-		private float GetSnackingPenalty (float tempFloat, bool add)
+		private double GetSnackingPenalty (double tempDouble, bool add, Validation Validation)
 		{
 			
-			var registryTuple = Storage.GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue);
+			var registryTuple = this.Storage.GetRetrievableRegistryValues(Validation);
 
 			int hour = DateTime.Now.Hour;
 
@@ -134,12 +111,12 @@ namespace WeightWatchingProgramPlus
 
 			string amPMDefiner = DateTime.Now.ToString("tt", CultureInfo.InvariantCulture);
 
-			float midSnackPenalty = 0f;
+			double midSnackPenalty = 0f;
 
 			if (hour >= unsafeHourThreshold && registryTuple.Item1.Day == DateTime.Now.Day && registryTuple.Item1.ToString("tt", CultureInfo.InvariantCulture).Equals(amPMDefiner, StringComparison.OrdinalIgnoreCase))
 			{
 
-				midSnackPenalty = tempFloat / 10;
+				midSnackPenalty = tempDouble / 10;
 
 				if (midSnackPenalty < 10)
 				{
@@ -154,7 +131,7 @@ namespace WeightWatchingProgramPlus
 
 				}
 				
-				if (this.PopupHandler.CreatePopup(string.Format(CultureInfo.InvariantCulture, "An eating before bed {2} of {0} calories will be {1} your daily calorie count if you continue.", midSnackPenalty, !add ? "subtracted from" : "added to", !add ? "penalty" : "benefit"), null, 3, false) != DialogResult.OK)
+				if (this.PopupHandler.CreatePopup(string.Format(CultureInfo.InvariantCulture, "An eating before bed {2} of {0} calories will be {1} your daily calorie count if you continue.", midSnackPenalty, !add ? "subtracted from" : "added to", !add ? "penalty" : "benefit"), 3) != DialogResult.OK)
 				{
 
 					return -1;

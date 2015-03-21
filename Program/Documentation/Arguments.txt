@@ -1,9 +1,11 @@
 Current arguments and what they do:
 
-"-clearcache" -- clears all files excluding food.table, food.bku, and any Error.dmp files before starting the program. This does not prevent them from being made again.
+"-clearcache" -- clears all files excluding food.table, food.bku, and any Error.dmp files from the "Text" folder before starting the program. This does not prevent them from being made again. This also does not handle any file from any other folder in the hierarchy.
 
 "-noexplanation" -- prevents a food.table explanation file from being created. Does not remove the file, it simply prevents it from being made if it doesn't already exist.
 
 "-nobackup" -- prevents the automatic backup of your critical program files from the Files/Text/ folder. While this can decrease load time it is strongly advised that you do not use it.
 
 "-debugrelease" -- Allows you to debug in release mode. Only works for a few features and does not work when using a development build (dev. builds are already debugging).
+
+"-allowmulti" -- Allows you to launch multiple instances of the program. Without this argument, the program would fail to launch if one or more instances were already running.

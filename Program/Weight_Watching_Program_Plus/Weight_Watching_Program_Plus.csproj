@@ -7,7 +7,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>WeightWatchingProgramPlus</RootNamespace>
     <AssemblyName>WeightWatchingProgramPlus</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -30,6 +30,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
+    <Prefer32Bit>True</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -41,7 +42,7 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <StartAction>Project</StartAction>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>WeightWatchingProgram+.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -53,19 +54,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>WeightWatchingProgram+.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
@@ -86,25 +87,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="z  Program\Functions.cs">
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
+    </Compile>
     <Compile Include="z  Program\GlobalVariables.cs" />
-    <Compile Include="z  Program\MainForm.cs" />
+    <Compile Include="z  Program\MainForm.cs">
+      <DependentUpon>Program.cs</DependentUpon>
+    </Compile>
     <Compile Include="z  Program\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+      <DependentUpon>MainForm.resx</DependentUpon>
     </Compile>
     <Compile Include="z  Program\Mathematics.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
     <Compile Include="z  Program\Modification.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
     <Compile Include="z  Program\PopupHandler.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
     <Compile Include="z  Program\Program.cs" />
     <Compile Include="z  Program\Storage.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
     <Compile Include="z  Program\Validation.cs">
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="z  Program\WeightWatchingInterfaces.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -114,6 +123,8 @@
   <ItemGroup>
     <EmbeddedResource Include="z  Program\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainForm.Designer1.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

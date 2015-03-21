@@ -1,0 +1,302 @@
+March 20 09:09:52 AM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 273
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:09:48 AM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 273
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:09:32 AM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 273
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:08:38 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 266
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 327
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 316
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 36
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:07:53 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 266
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 325
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 316
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:06:57 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 266
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 325
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 316
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:06:16 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 219
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:06:00 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 219
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 325
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 316
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:05:18 AM:
+Exception Message:
+Registry: Decimal Places: Argument failed to produce a valid result.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 276
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 325
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 316
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 09:05:06 AM:
+Exception Message:
+Registry: Decimal Places: Argument failed to produce a valid result.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 276
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 08:40:08 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 266
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 323
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 312
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 214
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 08:38:59 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 266
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 08:37:32 AM:
+Exception Message:
+Unable to cast object of type 'System.Int32' to type 'System.String'.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, Boolean thoroughCheck) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Validation.cs:line 266
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(String appendedRegistryValue, String registryValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 321
+   at WeightWatchingProgramPlus.Storage.GetRetrievableRegistryValues(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 312
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 212
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 195
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 34
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 56
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 59
+
+March 20 04:52:44 AM:
+Exception Message:
+-noexplaination is not a valid argument! The program cannot parse it and therefore cannot continue.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Program.ArgumentHandler(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 227
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 38
+
+March 18 09:23:07 PM:
+Exception Message:
+Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "WeightWatchingProgramPlus.z__Program.MainForm.resources" was correctly embedded or linked into assembly "WeightWatchingProgramPlus" at compile time, or that all the satellite assemblies required are loadable and fully signed.
+
+Exception Stack Trace:
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+   at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureInfo culture, Dictionary`2 localResourceSets, Boolean tryParents, Boolean createIfNotExists, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo requestedCulture, Boolean createIfNotExists, Boolean tryParents, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo culture, Boolean createIfNotExists, Boolean tryParents)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture, Boolean wrapUnmanagedMemStream)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture)
+   at WeightWatchingProgramPlus.z__Program.MainForm.get_refreshCaloriesTimeButton_BackgroundImage() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer1.cs:line 538
+   at WeightWatchingProgramPlus.MainForm.InitializeComponent() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer.cs:line 802
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 43
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 09:19:39 PM:
+Exception Message:
+InvalidArgument=Value of '0' is not valid for 'SelectedIndex'.
+Parameter name: SelectedIndex
+
+Exception Stack Trace:
+   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at WeightWatchingProgramPlus.MainForm.set_SetArithmeticSign(Int32 value) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 435
+   at WeightWatchingProgramPlus.Functions.InitializeForms() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 162
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 48
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 09:17:17 PM:
+Exception Message:
+Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "WeightWatchingProgramPlus.z__Program.MainForm.resources" was correctly embedded or linked into assembly "WeightWatchingProgramPlus" at compile time, or that all the satellite assemblies required are loadable and fully signed.
+
+Exception Stack Trace:
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+   at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureInfo culture, Dictionary`2 localResourceSets, Boolean tryParents, Boolean createIfNotExists, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo requestedCulture, Boolean createIfNotExists, Boolean tryParents, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo culture, Boolean createIfNotExists, Boolean tryParents)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture, Boolean wrapUnmanagedMemStream)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture)
+   at WeightWatchingProgramPlus.z__Program.MainForm.get_refreshCaloriesTimeButton_BackgroundImage() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer1.cs:line 68
+   at WeightWatchingProgramPlus.MainForm.InitializeComponent() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer.cs:line 797
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 43
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 09:16:49 PM:
+Exception Message:
+Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "WeightWatchingProgramPlus.z__Program.MainForm.resources" was correctly embedded or linked into assembly "WeightWatchingProgramPlus" at compile time, or that all the satellite assemblies required are loadable and fully signed.
+
+Exception Stack Trace:
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+   at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureInfo culture, Dictionary`2 localResourceSets, Boolean tryParents, Boolean createIfNotExists, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo requestedCulture, Boolean createIfNotExists, Boolean tryParents, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo culture, Boolean createIfNotExists, Boolean tryParents)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture, Boolean wrapUnmanagedMemStream)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture)
+   at WeightWatchingProgramPlus.z__Program.MainForm.get_refreshCaloriesTimeButton_BackgroundImage() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer1.cs:line 68
+   at WeightWatchingProgramPlus.MainForm.InitializeComponent() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer.cs:line 797
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 43
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 09:16:42 PM:
+Exception Message:
+Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "WeightWatchingProgramPlus.z__Program.MainForm.resources" was correctly embedded or linked into assembly "WeightWatchingProgramPlus" at compile time, or that all the satellite assemblies required are loadable and fully signed.
+
+Exception Stack Trace:
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+   at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureInfo culture, Dictionary`2 localResourceSets, Boolean tryParents, Boolean createIfNotExists, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo requestedCulture, Boolean createIfNotExists, Boolean tryParents, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo culture, Boolean createIfNotExists, Boolean tryParents)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture, Boolean wrapUnmanagedMemStream)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture)
+   at WeightWatchingProgramPlus.z__Program.MainForm.get_refreshCaloriesTimeButton_BackgroundImage() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer1.cs:line 68
+   at WeightWatchingProgramPlus.MainForm.InitializeComponent() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer.cs:line 797
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 43
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 09:15:39 PM:
+Exception Message:
+Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "WeightWatchingProgramPlus.z__Program.MainForm.resources" was correctly embedded or linked into assembly "WeightWatchingProgramPlus" at compile time, or that all the satellite assemblies required are loadable and fully signed.
+
+Exception Stack Trace:
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+   at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureInfo culture, Dictionary`2 localResourceSets, Boolean tryParents, Boolean createIfNotExists, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo requestedCulture, Boolean createIfNotExists, Boolean tryParents, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo culture, Boolean createIfNotExists, Boolean tryParents)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture, Boolean wrapUnmanagedMemStream)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture)
+   at WeightWatchingProgramPlus.z__Program.MainForm.get_refreshCaloriesTimeButton_BackgroundImage() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer1.cs:line 68
+   at WeightWatchingProgramPlus.MainForm.InitializeComponent() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer.cs:line 797
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 43
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 09:15:10 PM:
+Exception Message:
+Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "WeightWatchingProgramPlus.z__Program.MainForm.resources" was correctly embedded or linked into assembly "WeightWatchingProgramPlus" at compile time, or that all the satellite assemblies required are loadable and fully signed.
+
+Exception Stack Trace:
+   at System.Resources.ManifestBasedResourceGroveler.HandleResourceStreamMissing(String fileName)
+   at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureInfo culture, Dictionary`2 localResourceSets, Boolean tryParents, Boolean createIfNotExists, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo requestedCulture, Boolean createIfNotExists, Boolean tryParents, StackCrawlMark& stackMark)
+   at System.Resources.ResourceManager.InternalGetResourceSet(CultureInfo culture, Boolean createIfNotExists, Boolean tryParents)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture, Boolean wrapUnmanagedMemStream)
+   at System.Resources.ResourceManager.GetObject(String name, CultureInfo culture)
+   at WeightWatchingProgramPlus.z__Program.MainForm.get_refreshCaloriesTimeButton_BackgroundImage() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer1.cs:line 68
+   at WeightWatchingProgramPlus.MainForm.InitializeComponent() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.Designer.cs:line 797
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 43
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 08:34:20 PM:
+Exception Message:
+ReadFoodTable: tupleItemBool: Argument failed to produce a valid result.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Storage.ReadFoodTable(String directory, String file) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 337
+   at WeightWatchingProgramPlus.Storage.ReadFoodTable() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 257
+   at WeightWatchingProgramPlus.Functions.RefreshFoodList() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 176
+   at WeightWatchingProgramPlus.Functions.InitializeForms() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 134
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 48
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
+March 18 08:34:09 PM:
+Exception Message:
+ReadFoodTable: tupleItemBool: Argument failed to produce a valid result.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Storage.ReadFoodTable(String directory, String file) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 337
+   at WeightWatchingProgramPlus.Storage.ReadFoodTable() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Storage.cs:line 257
+   at WeightWatchingProgramPlus.Functions.RefreshFoodList() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 176
+   at WeightWatchingProgramPlus.Functions.InitializeForms() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Functions.cs:line 134
+   at WeightWatchingProgramPlus.MainForm..ctor() in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\MainForm.cs:line 48
+   at WeightWatchingProgramPlus.Program.Main(String[] args) in c:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\z  Program\Program.cs:line 54
+
