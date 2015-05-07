@@ -220,7 +220,7 @@ namespace WeightWatchingProgramPlus
 				if (Validation.ValidateBackup(appendedRegistryValue, registyValue) && GlobalVariables.CreateBackups)
 				{
 					
-					Backup("Files//Text//", "Files//Backup//");
+					Backup("Files//Text//", "Files//Backup//", registryTuple.Item5, GetRetrievableRegistryValues(valid).Item5);
 					
 				}
 				
@@ -424,7 +424,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		private static void Backup (string originalDirectory, string backupDirectory)
+		private static void Backup (string originalDirectory, string backupDirectory, string oldVersion, string newVersion)
 		{
 			
 			string[] passoverDocumentKeywords = {
@@ -456,6 +456,8 @@ namespace WeightWatchingProgramPlus
 				File.Copy(file, string.Format(CultureInfo.InvariantCulture, "{0}{1}", backupDirectory, Path.GetFileName(file)));
 				
 			}
+			
+			File.WriteAllText(string.Format(CultureInfo.CurrentCulture, "{0}Backup.log", backupDirectory), string.Format(CultureInfo.CurrentCulture, "Files backed up on {0} at {1}.\nFrom version {2} to version {3}.", DateTime.Now.ToString("MMMMM dd yyyy", CultureInfo.CurrentCulture), DateTime.Now.ToString("hh:mm:ss tt", CultureInfo.CurrentCulture), oldVersion, newVersion));
 			
 		}
 		

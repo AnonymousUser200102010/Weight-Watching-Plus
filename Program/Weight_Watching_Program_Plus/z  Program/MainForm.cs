@@ -66,6 +66,13 @@ namespace WeightWatchingProgramPlus
 			set { mainForm.productVersionInfoBar.Text = value; }
 			
 		}
+		
+		public static string MainFormBuildInfoText
+		{
+			
+			set { mainForm.productBuildInfoBar.Text = value; }
+			
+		}
 
 		/// <summary>
 		/// Gets or Sets the title of the application after launch.
@@ -452,16 +459,6 @@ namespace WeightWatchingProgramPlus
 		}
 
 		/// <summary>
-		/// Sets the minimum value for the manual calorie NumericUpDown in the "manual" sub-tab.
-		/// </summary>
-		public static decimal ChangeManualCalorieMinimumValue
-		{
-			
-			set { mainForm.manualCalorieEditBox.Minimum = value; }
-			
-		}
-
-		/// <summary>
 		/// Gets the "sign" for the arithmetic operation in the "arithmetic" sub-tab.
 		/// </summary>
 		public static string GetArithmeticSign
@@ -513,45 +510,26 @@ namespace WeightWatchingProgramPlus
 			set 
 			{ 
 				
-				string decimalPlacesLiteral = ".";
-				
-				for (int i = 1; i < value; i++)
-				{
-					
-					decimalPlacesLiteral += "0";
-					
-				}
-				
-				decimalPlacesLiteral += "1";
-				
-				double decimalPlacesDouble = 0;
-				
-				if(!double.TryParse(decimalPlacesLiteral, NumberStyles.Any, CultureInfo.InvariantCulture, out decimalPlacesDouble))
-				{
-					
-					throw Errors.PremadeExceptions("SetAllDecimalPointValues", "decimalPlacesLiteral", 0);
-					
-				}
-			
 				mainForm.arithmeticNumericUpDown_Left.DecimalPlaces = value;
-				mainForm.arithmeticNumericUpDown_Left.Minimum = (decimal)decimalPlacesDouble;
 				
 				mainForm.defaultCaloriesNumericUpDown.DecimalPlaces = value;
-				mainForm.defaultCaloriesNumericUpDown.Minimum = (decimal)decimalPlacesDouble;
 				
 				mainForm.userServingInputTextBox.DecimalPlaces = value;
-				mainForm.userServingInputTextBox.Minimum = (decimal)decimalPlacesDouble;
 				
 				mainForm.caloriesPerServingEditBox.DecimalPlaces = value;
-				mainForm.caloriesPerServingEditBox.Minimum = (decimal)decimalPlacesDouble;
 				
 				mainForm.manualCalorieEditBox.DecimalPlaces = value;
-				mainForm.manualCalorieEditBox.Minimum = -(decimal.Parse(string.Format(CultureInfo.InvariantCulture, "{0}{1}", mainForm.Storage.GetRetrievableRegistryValues(mainForm.Validation).Item3, decimalPlacesLiteral), CultureInfo.CurrentCulture));
+				
+				double possibleMinNumber = 0.0000000000;
+				
+				possibleMinNumber = double.Parse(string.Format(CultureInfo.InvariantCulture, "{0}1", possibleMinNumber.ToString(string.Format(CultureInfo.InvariantCulture, "F{0}", (value - 1)), CultureInfo.InvariantCulture)), CultureInfo.CurrentCulture);
+				
+				MainForm.GlobalMinimumValue = possibleMinNumber;
 				
 				if(value <= 4)
 				{
 					mainForm.servingSizeEditBox.DecimalPlaces = value;
-					mainForm.servingSizeEditBox.Minimum = (decimal)decimalPlacesDouble;
+					mainForm.servingSizeEditBox.Minimum = (decimal)possibleMinNumber;
 				}
 				else if (value > 0)
 				{
@@ -577,16 +555,35 @@ namespace WeightWatchingProgramPlus
 			
 			get { return mainForm.servingSizeEditBox.Minimum; }
 			
-			set { mainForm.servingSizeEditBox.Value = value; }
+		}
+		
+		public static decimal ManualCaloriesMinimumValue
+		{
+			
+			get { return mainForm.manualCalorieEditBox.Minimum; }
 			
 		}
 		
-		public static decimal CaloriesPerServingMinimumValue
+		public static double GlobalMinimumValue
 		{
 			
-			get { return mainForm.caloriesPerServingEditBox.Minimum; }
+			set
+			{
+				
+				mainForm.arithmeticNumericUpDown_Left.Minimum = (decimal)value;
+
+				mainForm.defaultCaloriesNumericUpDown.Minimum = (decimal)value;
+				
+				mainForm.userServingInputTextBox.Minimum = (decimal)value;
+				
+				mainForm.caloriesPerServingEditBox.Minimum = (decimal)value;
+
+				mainForm.manualCalorieEditBox.Minimum = -(decimal)(mainForm.Storage.GetRetrievableRegistryValues(mainForm.Validation).Item3 + value);
+				
+			}
 			
-			set { mainForm.caloriesPerServingEditBox.Value = value; }
+			
+			get { return (double)mainForm.defaultCaloriesNumericUpDown.Minimum; }
 			
 		}
 
@@ -599,7 +596,7 @@ namespace WeightWatchingProgramPlus
 			
 			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
 			
-			exampleNumDecPlaceTextBox.Text = Math.Round(registryTuple.Item2, registryTuple.Item6).ToString(CultureInfo.CurrentCulture);
+			exampleNumDecPlaceTextBox.Text = registryTuple.Item2.ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
 			
 			decimalPlacesNumericUpDown.Value = registryTuple.Item6;
 			
@@ -622,7 +619,7 @@ namespace WeightWatchingProgramPlus
 						
 				}
 					
-				Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, false);
+				Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, false, this.PopupHandler);
 					
 				return;
 					
@@ -687,7 +684,7 @@ namespace WeightWatchingProgramPlus
 					
 			}
 				
-			this.Functions.Find(GlobalVariables.SelectedListItem, searchBar.Text, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, exactSearchCheckBox.Checked, true);
+			this.Functions.Find(GlobalVariables.SelectedListItem, searchBar.Text, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, exactSearchCheckBox.Checked, true, this.PopupHandler);
 				
 		}
 
@@ -856,7 +853,7 @@ namespace WeightWatchingProgramPlus
 				
 			this.Modification.ModifyFoodItemProperty(Validation.EditBoxesHaveValidEntries());
 				
-			Functions.Find(0, oldtext, null, true, false);
+			Functions.Find(0, oldtext, null, true, false, this.PopupHandler);
 				
 		}
 
@@ -871,7 +868,7 @@ namespace WeightWatchingProgramPlus
 
 		#region Additional Options Tab
 
-		void ResetCaloriesSpecificCheckBoxCheckStatusChanged (object sender, EventArgs e)
+		private void ResetCaloriesSpecificCheckBoxCheckStatusChanged (object sender, EventArgs e)
 		{
 			
 			exactResetDatetimePicker.Enabled = resetCaloriesManualCheckBox.Checked;
@@ -882,7 +879,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		void ExactResetDatetimePickerValueChanged (object sender, EventArgs e)
+		private void ExactResetDatetimePickerValueChanged (object sender, EventArgs e)
 		{
 			
 			var registryTuple = Storage.GetRetrievableRegistryValues(this.Validation, false);
@@ -899,7 +896,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		void DefaultCaloriesSetButtonClick (object sender, EventArgs e)
+		private void DefaultCaloriesSetButtonClick (object sender, EventArgs e)
 		{
 			
 			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
@@ -908,14 +905,14 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		void LicenseInfoButtonClick (object sender, EventArgs e)
+		private void LicenseInfoButtonClick (object sender, EventArgs e)
 		{
 			
 			this.PopupHandler.CreatePopup(string.Format(CultureInfo.InstalledUICulture, "This program was released under {0}. You may obtain more information on this license from either the license file that was (supposed to be) included with this program, or from any of the sources at the project's GitHub page <https://github.com/AnonymousUser200102010/Weight-Watching-Plus>.", FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).LegalCopyright), 7);
 			 
 		}
 		
-		void SetDecimalPlacesValueButtonClick(object sender, EventArgs e)
+		private void SetDecimalPlacesValueButtonClick(object sender, EventArgs e)
 		{
 			
 			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
@@ -926,16 +923,16 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.SetAllDecimalPointValues = registryTuple.Item6;
 			
-			//TimeOrCaloriesChangedWithoutEvent(sender, e);
+			TimeOrCaloriesChangedWithoutEvent(sender, e);
 			
 		}
 		
-		void DecimalPlacesNumericUpDownValueChanged(object sender, EventArgs e)
+		private void DecimalPlacesNumericUpDownValueChanged(object sender, EventArgs e)
 		{
 			
 			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
 			
-			exampleNumDecPlaceTextBox.Text = Math.Round(registryTuple.Item2, (int)decimalPlacesNumericUpDown.Value).ToString(CultureInfo.CurrentCulture);
+			exampleNumDecPlaceTextBox.Text = registryTuple.Item2.ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
 			
 		}
 		#endregion

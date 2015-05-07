@@ -12,13 +12,13 @@
          <Members>
           <Member Name="#CombinedFoodList" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="Breaking">
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="Breaking">
              <Issue Certainty="75" Level="Warning">Change 'FoodRelated.CombinedFoodList' to be read-only by removing the property setter.</Issue>
             </Message>
-            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="Breaking">
+            <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="Error">Change 'List&lt;Tuple&lt;string, double, double, string, bool&gt;&gt;' in 'FoodRelated.CombinedFoodList' to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Issue>
             </Message>
-            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="Breaking">
+            <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalError">Consider a design where 'FoodRelated.CombinedFoodList' doesn't nest generic type 'List&lt;Tuple&lt;string, double, double, string, bool&gt;&gt;'.</Issue>
             </Message>
            </Messages>
@@ -29,10 +29,10 @@
          <Members>
           <Member Name="#ModifyFoodPropertiesList(System.String[],System.Decimal[],System.Boolean[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="bool" TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="Breaking">
+            <Message Id="bool" TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="Breaking">
              <Issue Name="LanguageSpecificMemberParameter" Certainty="75" Level="Error">In member 'IModification.ModifyFoodPropertiesList(string[], decimal[], bool[])', consider replacing the language-specific data type identifier 'bool' in parameter name 'boolProperties' with a more generic term, such as 'value'.</Issue>
             </Message>
-            <Message Id="string" TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="Breaking">
+            <Message Id="string" TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="Breaking">
              <Issue Name="LanguageIndependentMemberParameter" Certainty="75" Level="Error">In member 'IModification.ModifyFoodPropertiesList(string[], decimal[], bool[])', consider replacing the data type identifier 'string' in parameter name 'stringProperties' with a more generic term, such as 'value'.</Issue>
             </Message>
            </Messages>
@@ -43,7 +43,7 @@
          <Members>
           <Member Name="#CreatePopup(System.String,System.Int32,System.Boolean,System.Windows.Forms.Control)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'PopupHandler.CreatePopup(string, int, bool, Control)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -54,24 +54,21 @@
          <Members>
           <Member Name="#Application_ThreadException(System.Object,System.Threading.ThreadExceptionEventArgs)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="NonBreaking">
-             <Issue Certainty="75" Level="Warning">'Program.Application_ThreadException(object, ThreadExceptionEventArgs)' appears to have no upstream public or protected callers.</Issue>
-            </Message>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'Program.Application_ThreadException(object, ThreadExceptionEventArgs)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CurrentDomain_UnhandledException(System.Object,System.UnhandledExceptionEventArgs)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'Program.CurrentDomain_UnhandledException(object, UnhandledExceptionEventArgs)' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Main(System.String[])" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-03-21 00:37:01Z" FixCategory="NonBreaking">
+            <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Status="Active" Created="2015-05-07 05:23:23Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="Error">Change 'Program.Main(string[])' to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Issue>
             </Message>
            </Messages>
@@ -86,16 +83,6 @@
   </Target>
  </Targets>
  <Rules>
-  <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
-   <Name>Avoid uncalled private code</Name>
-   <Description>There is uncalled code that is not externally visible and is not a known runtime entry point. If this violation fires in error, please send a problem report to the Visual Studio Code Analysis team.</Description>
-   <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
-   <Owner />
-   <Url>http://msdn.microsoft.com/library/ms182264(VS.100).aspx</Url>
-   <Email>[none]</Email>
-   <MessageLevel Certainty="75">Warning</MessageLevel>
-   <File Name="performancerules.dll" Version="10.0.0.0" />
-  </Rule>
   <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
    <Name>Collection properties should be read only</Name>
    <Description>Properties that return collections should be read-only so that users cannot entirely replace the backing store. Users can still modify the contents of the collection by calling relevant methods on the collection. Note that the XmlSerializer class has special support for deserializing read-only collections. See the XmlSerializer overview for more information.</Description>

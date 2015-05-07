@@ -1,12 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: ${someguythere}
- * Date: (c)3/19/2015
- * Time: 5:12 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace WeightWatchingProgramPlus
@@ -93,8 +85,11 @@ namespace WeightWatchingProgramPlus
 		/// <param name="searchForNextValue">
 		/// Was the "next" button pressed?
 		/// </param>
+		/// <param name="popup">
+		/// A preinitialized instance of IPopup. It is not recommended to pass a new initialization of IPopup.
+		/// </param>
 		#endregion
-		void Find (int offset, string valueToFind, string valueToAvoid, bool exactSearch, bool searchForNextValue);
+		void Find (int offset, string valueToFind, string valueToAvoid, bool exactSearch, bool searchForNextValue, IPopup popup);
 		
 	}
 	
@@ -104,7 +99,7 @@ namespace WeightWatchingProgramPlus
 	public interface IMathematics
 	{
 		
-		#region Perform Arithmetic Operation Summary
+		#region Perform Arithmetic Operation No Popups Override Summary
 
 		/// <summary>
 		/// Performs an arithmetic operation on an equation which has been converted to it's logical string counterpart.
@@ -120,6 +115,26 @@ namespace WeightWatchingProgramPlus
 		/// </exception>
 		#endregion
 		double PerformArithmeticOperation (string equation);
+		
+		#region Perform Arithmetic Operation Summary
+
+		/// <summary>
+		/// Performs an arithmetic operation on an equation which has been converted to it's logical string counterpart.
+		/// </summary>
+		/// <param name="equation">
+		/// An equation in string form. (Example: 1*1)
+		/// </param>
+		/// <param name="allowPopupWindows">
+		/// This operation allows the creation of and interaction with popup dialogs.
+		/// </param>
+		/// <returns>
+		/// The result of the arithmetic operation as a string.
+		/// </returns>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
+		#endregion
+		double PerformArithmeticOperation (string equation, bool allowPopupWindows);
 		
 		#region Get Final Calories Summary
 

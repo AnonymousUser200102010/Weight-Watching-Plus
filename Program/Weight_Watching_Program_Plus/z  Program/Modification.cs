@@ -76,35 +76,14 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			string decimalPlacesLiteral = null;
-			
-			for (int i = 1; i < registryTuple.Item6; i++)
-			{
-				
-				decimalPlacesLiteral += "0";
-				
-				#if DEBUG
-				
-				//Console.WriteLine(decimalPlacesLiteral);
-				
-				#endif
-				
-			}
-			
 			if(GlobalVariables.Debug)
 			{
 				
-				Console.WriteLine(decimalPlacesLiteral);
-				
-				//Console.WriteLine(string.Format(CultureInfo.CurrentCulture, ".{0}1", decimalPlacesLiteral));
-				
-				//Console.WriteLine(this.Mathematics.PerformArithmeticOperation(string.Format(CultureInfo.CurrentCulture, "{0}+.{1}1", registryTuple.Item3, decimalPlacesLiteral)));
-				
-				Console.WriteLine(double.Parse(string.Format(CultureInfo.CurrentCulture, "{0}.{1}1", registryTuple.Item3, decimalPlacesLiteral), CultureInfo.CurrentCulture));
+				Console.WriteLine((registryTuple.Item3 + (double)MainForm.GlobalMinimumValue));
 				
 			}
 			
-			if (((tempcalories < 0f && !add) || (tempcalories >= double.Parse(string.Format(CultureInfo.CurrentCulture, "{0}.{1}1", registryTuple.Item3, decimalPlacesLiteral), CultureInfo.InvariantCulture) && add)) && this.PopupHandler.CreatePopup(warningText, errorNum) != DialogResult.Yes)
+			if (((tempcalories < 0f && !add) || (tempcalories >= (registryTuple.Item3 + (double)MainForm.GlobalMinimumValue) && add)) && this.PopupHandler.CreatePopup(warningText, errorNum) != DialogResult.Yes)
 			{
 				
 				return;
@@ -118,8 +97,6 @@ namespace WeightWatchingProgramPlus
 			MainForm.UserSetCalories = (decimal)registryTuple.Item2;
 			
 			this.Validation.CheckCurrentRadioButton(this);
-			
-			MainForm.DecimalExample = registryTuple.Item2.ToString(CultureInfo.CurrentCulture);
 			
 			this.Storage.WriteFoodEaten(add, this.Validation);
 			
@@ -251,7 +228,7 @@ namespace WeightWatchingProgramPlus
 			{
 				MainForm.FoodNameProperty = null;
 				MainForm.ServingSizeProperty = MainForm.ServingSizeMinimumValue;
-				MainForm.CaloriesPerServingProperty = MainForm.CaloriesPerServingMinimumValue;
+				MainForm.CaloriesPerServingProperty = (decimal)MainForm.GlobalMinimumValue;
 				MainForm.DefinerProperty = null;
 				MainForm.IsDrinkProperty = false;
 			}

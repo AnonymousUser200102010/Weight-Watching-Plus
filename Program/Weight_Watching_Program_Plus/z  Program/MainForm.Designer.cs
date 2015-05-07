@@ -65,12 +65,13 @@ namespace WeightWatchingProgramPlus
 		private System.Windows.Forms.NumericUpDown arithmeticNumericUpDown_Left;
 		private System.Windows.Forms.ComboBox arithmeticSignComboBox;
 		private System.Windows.Forms.NumericUpDown arithmeticNumericUpDown_Right;
-		private System.Windows.Forms.TextBox productVersionInfoBar;
 		private System.Windows.Forms.Button LicenseInfoButton;
 		private System.Windows.Forms.GroupBox numberOfDecimalPlacesGroupBox;
 		private System.Windows.Forms.TextBox exampleNumDecPlaceTextBox;
 		private System.Windows.Forms.NumericUpDown decimalPlacesNumericUpDown;
 		private System.Windows.Forms.Button setDecimalPlacesValueButton;
+		private System.Windows.Forms.Label productVersionInfoBar;
+		private System.Windows.Forms.Label productBuildInfoBar;
 
 		
 		/// <summary>
@@ -158,7 +159,8 @@ namespace WeightWatchingProgramPlus
 			this.resetCaloriesManualCheckBox = new System.Windows.Forms.CheckBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.Seperator5 = new System.Windows.Forms.Label();
-			this.productVersionInfoBar = new System.Windows.Forms.TextBox();
+			this.productVersionInfoBar = new System.Windows.Forms.Label();
+			this.productBuildInfoBar = new System.Windows.Forms.Label();
 			this.planTab.SuspendLayout();
 			this.FoodListPage.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -925,10 +927,10 @@ namespace WeightWatchingProgramPlus
 			this.exampleNumDecPlaceTextBox.BackColor = System.Drawing.SystemColors.Control;
 			this.exampleNumDecPlaceTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.exampleNumDecPlaceTextBox.Enabled = false;
-			this.exampleNumDecPlaceTextBox.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold);
+			this.exampleNumDecPlaceTextBox.Font = new System.Drawing.Font("Bookman Old Style", 8F, System.Drawing.FontStyle.Bold);
 			this.exampleNumDecPlaceTextBox.Location = new System.Drawing.Point(58, 25);
 			this.exampleNumDecPlaceTextBox.Name = "exampleNumDecPlaceTextBox";
-			this.exampleNumDecPlaceTextBox.Size = new System.Drawing.Size(152, 18);
+			this.exampleNumDecPlaceTextBox.Size = new System.Drawing.Size(152, 16);
 			this.exampleNumDecPlaceTextBox.TabIndex = 1;
 			this.exampleNumDecPlaceTextBox.Text = "Example";
 			this.exampleNumDecPlaceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1074,14 +1076,23 @@ namespace WeightWatchingProgramPlus
 			// 
 			// productVersionInfoBar
 			// 
-			this.productVersionInfoBar.BackColor = System.Drawing.SystemColors.Control;
-			this.productVersionInfoBar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.productVersionInfoBar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.productVersionInfoBar.Location = new System.Drawing.Point(5, 666);
+			this.productVersionInfoBar.AutoEllipsis = true;
+			this.productVersionInfoBar.Font = new System.Drawing.Font("Times New Roman", 12F);
+			this.productVersionInfoBar.Location = new System.Drawing.Point(5, 667);
 			this.productVersionInfoBar.Name = "productVersionInfoBar";
-			this.productVersionInfoBar.Size = new System.Drawing.Size(1066, 23);
-			this.productVersionInfoBar.TabIndex = 102;
-			this.productVersionInfoBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.productVersionInfoBar.Size = new System.Drawing.Size(876, 23);
+			this.productVersionInfoBar.TabIndex = 103;
+			this.productVersionInfoBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// productBuildInfoBar
+			// 
+			this.productBuildInfoBar.AutoEllipsis = true;
+			this.productBuildInfoBar.Font = new System.Drawing.Font("Times New Roman", 12F);
+			this.productBuildInfoBar.Location = new System.Drawing.Point(887, 667);
+			this.productBuildInfoBar.Name = "productBuildInfoBar";
+			this.productBuildInfoBar.Size = new System.Drawing.Size(188, 23);
+			this.productBuildInfoBar.TabIndex = 104;
+			this.productBuildInfoBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// MainForm
 			// 
@@ -1090,6 +1101,7 @@ namespace WeightWatchingProgramPlus
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.ClientSize = new System.Drawing.Size(1077, 691);
+			this.Controls.Add(this.productBuildInfoBar);
 			this.Controls.Add(this.productVersionInfoBar);
 			this.Controls.Add(this.tabsMenu);
 			this.Controls.Add(this.calorieRadioButton);
@@ -1132,7 +1144,6 @@ namespace WeightWatchingProgramPlus
 			((System.ComponentModel.ISupportInitialize)(this.defaultCaloriesNumericUpDown)).EndInit();
 			this.resetCaloriesSpecificGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 	}

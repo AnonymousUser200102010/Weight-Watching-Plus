@@ -1,3 +1,27 @@
+At 03:09:46 AM (on: March 22, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.3333333333 calories left for the day.
+-
+At 01:28:42 AM (on: March 21, 2015): You drank 0 fluid ounce of '7up'.
+Which is 0 servings, or 0 calories of '7up'. You had 2128.3333 calories left for the day.
+-
+At 01:28:32 AM (on: March 21, 2015): You drank -1 fluid ounce of '7up'.
+Which is -0.0833333333333333 servings, or -11.6667 calories of '7up'. You had 2128.3333 calories left for the day.
+-
+At 01:18:19 AM (on: March 21, 2015): You drank 0 fluid ounce of '7up'.
+Which is 0 servings, or 0 calories of '7up'. You had 2128.3333 calories left for the day.
+-
+At 01:16:43 AM (on: March 21, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.3333 calories left for the day.
+-
+At 01:16:25 AM (on: March 21, 2015): You ate 86 ounces of 'banana'.
+Which is 86 servings, or 2150 calories of 'banana'. You had -10 calories left for the day.
+-
+At 01:14:36 AM (on: March 21, 2015): You added back to your calorie count 25 ounces of 'banana'.
+Which is 25 servings, or 625 calories of 'banana'. You had 2140 calories left for the day.
+-
+At 01:14:32 AM (on: March 21, 2015): You ate 25 ounces of 'banana'.
+Which is 25 servings, or 625 calories of 'banana'. You had 1515 calories left for the day.
+-
 At 04:55:02 PM (on: March 20, 2015): You drank 1 fluid ounce of '7up'.
 Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333 calories left for the day.
 -

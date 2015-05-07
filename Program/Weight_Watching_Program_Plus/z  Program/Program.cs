@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using UniversalHandlersLibrary;
@@ -29,7 +30,7 @@ namespace WeightWatchingProgramPlus
 		private static void Main (string[] args)
 		{
 			
-			//Application.ThreadException += Application_ThreadException;
+			Application.ThreadException += Application_ThreadException;
 			
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 				
@@ -62,7 +63,7 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				MessageBox.Show("This program is already running!", "Application Failed to Launch");
+				MessageBox.Show(string.Format(CultureInfo.CurrentCulture, "{0} is already running!", FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileDescription), "Application Failed to Launch");
 				
 				Environment.Exit(0);
 				
@@ -70,6 +71,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
+		#region Find Files Summary
 		/// <summary>
 		/// Looks for any and all text files and verifies if they exist.
 		/// </summary>
@@ -88,6 +90,8 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.ArgumentNullException">
 		/// Thrown if the file, as provided in the textFilesfoodtable variable, doesn't exist.
 		/// </exception>
+		
+		#endregion
 		private static void findTextFiles (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
 		{
 			

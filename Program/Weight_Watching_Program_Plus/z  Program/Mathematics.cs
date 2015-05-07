@@ -29,7 +29,14 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		public double PerformArithmeticOperation (string equation)
+		public double PerformArithmeticOperation(string equation)
+		{
+			
+			return PerformArithmeticOperation(equation, false);
+			
+		}
+		
+		public double PerformArithmeticOperation (string equation, bool allowPopups)
 		{
 			
 			double returnDouble = 0f;
@@ -48,7 +55,7 @@ namespace WeightWatchingProgramPlus
 
 				}
 
-				if (returnDouble <= 0f)
+				if (returnDouble <= 0f && allowPopups)
 				{
 					
 					this.PopupHandler.CreatePopup("You cannot use arithmetic values which create an operation whose final value is zero or less!", 0);
@@ -67,9 +74,11 @@ namespace WeightWatchingProgramPlus
 			
 			this.Storage.ReadRegistry(valid);
 
-			double userServings = (FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * ((double)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2));
+			var userProvidedServings = MainForm.AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? MainForm.UserProvidedServings : (decimal)(PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false)), true));
 			
-			if (userServings < .001)
+			double userServings = (FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * ((double)userProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2));
+			
+			if (userServings < (double)MainForm.ManualCaloriesMinimumValue)
 			{
 				
 				return 0;

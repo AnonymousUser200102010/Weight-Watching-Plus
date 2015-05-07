@@ -16,51 +16,17 @@ namespace WeightWatchingProgramPlus
 			"Error: Value Invalid",
 			"Confirm Deletion",
 			"Calorie Reset Error",
-			"Copyright Information"
+			"Copyright Information",
+			"Search Term Not Found"
 		};
 		
-		public delegate DialogResult CreatePopupDelegate(DialogResult CreatePopup);
-
-		#region Create Popup Only Override Summary
-
-		/// <summary>
-		/// Handles the creation of popup messageboxes.
-		/// </summary>
-		/// <param name="message">
-		/// The text that goes in the body of the messagebox.
-		/// </param>
-		/// <param name="popupCode">
-		/// The code that defines how the popup will set itself up.
-		/// </param>
-		/// <returns>
-		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
-		/// </returns>
-		#endregion
 		public DialogResult CreatePopup (string message, int popupCode)
 		{
 			
 			return CreatePopup(message, popupCode, false, null);
 			
 		}
-
-		#region Create Popup Additional Actions Override Summary
-
-		/// <summary>
-		/// Handles the creation of popup messageboxes.
-		/// </summary>
-		/// <param name="message">
-		/// The text that goes in the body of the messagebox.
-		/// </param>
-		/// <param name="popupCode">
-		/// The code that defines how the popup will set itself up.
-		/// </param>
-		/// <param name="controlItem">
-		/// The items to be selected if additional actions are required.
-		/// </param>
-		/// <returns>
-		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
-		/// </returns>
-		#endregion
+		
 		public DialogResult CreatePopup (string message, int popupCode, Control controlItem)
 		{
 			
@@ -69,7 +35,6 @@ namespace WeightWatchingProgramPlus
 		}
 
 		#region Create Popup Summary
-
 		/// <summary>
 		/// Handles the creation of popup messageboxes.
 		/// </summary>
@@ -121,6 +86,10 @@ namespace WeightWatchingProgramPlus
 					
 				case 6:
 					messageBoxIcon = MessageBoxIcon.Warning;
+					break;
+					
+				case 8:
+					messageBoxIcon = MessageBoxIcon.Exclamation;
 					break;
 					
 			}

@@ -4,6 +4,846 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
+ Time: 05-06-15 10:23 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:17 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:16 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:16 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:15 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:12 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:12 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:11 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:10 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:08 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:08 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:07 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:06 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:05 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 10:05 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:51 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:43 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:43 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:43 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:41 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:41 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:37 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:37 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:33 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:33 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:32 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:21 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:21 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:20 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:19 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:19 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-06-15 09:18 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:53 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:52 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:52 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:48 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:46 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:44 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:43 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:42 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:36 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 05-05-15 09:34 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-23-15 11:02 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 03:18 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 03:18 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 03:12 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 03:09 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 03:09 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:45 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:45 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:27 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:24 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:21 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:19 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:18 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:18 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:11 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:11 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:10 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:08 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:06 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:05 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:02 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 02:00 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 01:58 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 01:57 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 01:56 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 01:56 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-22-15 01:45 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 12:22 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 12:21 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 12:20 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 12:04 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 12:01 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 12:01 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:58 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:57 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:55 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:54 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:54 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:54 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 11:50 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:53 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:52 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:52 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:51 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:51 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:51 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:50 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:47 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:44 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:41 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:40 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:40 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:39 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:35 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:28 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:17 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:12 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:07 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:06 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:05 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:04 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-21-15 01:03 AM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
+ Time: 03-20-15 05:46 PM
+
+Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
+Item 1: ''
+ Item 2: '0'
+Item 3: '0'
+Item 4: ''
+Item 5: 'False'
  Time: 03-20-15 05:32 PM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 

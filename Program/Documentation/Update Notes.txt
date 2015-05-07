@@ -8,18 +8,22 @@ Highlights:
 -- I messed with the architecture a bit so that all the classes could be started (Instantiated) once and then wouldn't need to be started again. This will hopefully increase efficiency, but we'll have to see.
 -- Replaced all floats with doubles for performance reasons.
 -- All decimals standardized and a "decimal and rounding" system is in place to further standardize the program as a whole.
+-- Most mathematical functions and statements are being standardized to use the full value of the "calories left for the day", instead of rounding in the oddest places as was in the older system. As I clean up this messy and undesirable functionality for a cleaner, more efficient one, hopefully stability, and speed, will increase while CPU/memory usage will decrease.
+-- Changed the functionality of the auxiliary version text ("({3}{4}{5})" as it is displayed in the code) to a less compact but more understandable format. As well as standardized the grabbing of a "symbol" (E.G. "α", "β", "Δ", etc) for the secondary and tertiary version specifications.
 
 Features:
--- Added a new "Info Bar" to the bottom of the main form. It consists of one text box housing the program's current version (including the revision number), Greek letter (Alpha, Beta, etc) for each section, and the build type of the currently running executable. The "Greek letters" after the initial (alpha/beta/release.*.*) only show up after the major product number is greater than 0. This is to save on space mostly as the others were intended more as an "after release" thing. As well, using the "-debugrelease" command will not change the build type. This can only be changed by compiling a development build.
+-- Added a new "Info Bar" to the bottom of the main form. It consists of one text box housing the program's current version (including the revision number), Greek letter (Alpha, Beta, etc or in some cases the actual letters) for each section, and the build type of the currently running executable. The "Greek letters" after the initial (alpha/beta/release.*.*) only show up after the major product number is greater than 0. This is to save on space mostly as the others were intended more as an "after release" thing. As well, using the "-debugrelease" command will not change the build type. This can only be changed by compiling a development build.
 -- Copyright button added to the Additional Options tab which contains all copyright notices, what particular copyright license is being used at the moment, and where to get copies of the license itself.
 -- Program will not start now unless there are no other instances running or an argument is used to bypass this feature.
--- You can now set the amount of decimals you want to see in pertinent values throughout the program. This allows for greater or lesser accuracy depending on your personal preference. This does not yet have support for an example when the decimal value of calories is less than the desired decimal place. I don't view it as much of a problem now, but I'll get around to fixing it eventually.
+-- You can now set the amount of decimals you want to see in pertinent values throughout the program. This allows for greater or lesser accuracy depending on your personal preference.
 -- The additional options elements that didn't refresh when moving between tabs now does, albeit crudely. I hope to refine the technique at a later date.
+-- Search function will now alert the user when a search term cannot be found. Currently there is no "exact search" support.
 
 Bugs:
 -- Minor bug fixed in the adding of calories. Before, the program would not allow you to add calories which equalled the default calories amount, this functionality has been replaced with a globally standardized version of itself.
 -- Major bug addressed: With .NET 4.5.2 and above (I think, I only had 4.5.2 at the time of writing), a problem unknown to me causes architecture problems for anything but Intel compatible processors, likely with relation to the console. If you have one, you're welcome to upgrade it. For the sake of modulation, I will not.
 -- Fixed a recurring bug with relation to the changing of the food name of an item from the food list.
+-- Fixed a bug with the Arithmetic function which would show a messagebox for every iteration. Now, while requiring some extra code, a special instance of a user serving grab must be created that explicitly allows popups.
 
 Notes:
 --

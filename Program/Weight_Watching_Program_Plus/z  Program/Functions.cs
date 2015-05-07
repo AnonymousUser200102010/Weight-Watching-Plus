@@ -19,9 +19,6 @@ namespace WeightWatchingProgramPlus
 	internal class Functions : IGeneralFunctions
 	{
 		
-		/// <summary>
-		/// Main initialization for the program as handled by the developer (and not, say, through windows forms or what have you).
-		/// </summary>
 		public void InitializeForms (IModification modification, IStorage store, IValidation valid)
 		{
 			
@@ -37,59 +34,19 @@ namespace WeightWatchingProgramPlus
 			
 			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 			
-			string[] versionString = new string[3];
+			string[] versionString = {
+				
+				string.Format(CultureInfo.InvariantCulture, "{0}, ", fvi.ProductMajorPart <= 5 ? string.Format(CultureInfo.InvariantCulture, "Alpha {0}", fvi.ProductMajorPart) : fvi.ProductMajorPart <= 10 ? string.Format(CultureInfo.InvariantCulture, "Beta {0}", fvi.ProductMajorPart - 5) : string.Format(CultureInfo.InvariantCulture, "Release {0}", fvi.ProductMajorPart - 9)),
+				
+				fvi.ProductMinorPart < 100 ? string.Format(CultureInfo.InvariantCulture, "{0} Minor, ", FindSymbol(fvi.ProductMinorPart)) : string.Format(CultureInfo.InvariantCulture, "Stable Minor {0}, ", fvi.ProductMinorPart - 99),
+				
+				fvi.ProductBuildPart < 100 ? string.Format(CultureInfo.InvariantCulture, "{0} Build, ", FindSymbol(fvi.ProductBuildPart)) : string.Format(CultureInfo.InvariantCulture, "Stable Build {0}", fvi.ProductBuildPart - 99),
+				
+			};
 			
-			if (fvi.ProductMajorPart < 10)
-			{
-				
-				versionString [0] = string.Format(CultureInfo.InvariantCulture, "({0}", fvi.ProductMajorPart <= 5 ? "Alpha" : "Beta");
-				
-			}
-			else if (fvi.ProductMinorPart < 100 || fvi.ProductBuildPart < 100)
-			{
-				
-				versionString [0] = string.Format(CultureInfo.InvariantCulture, "(Release {0}", fvi.ProductMajorPart - 9);
-				
-			}
+			MainForm.MainFormVersionInfoText = string.Format(CultureInfo.InstalledUICulture, "Program Version: {0}.{1}.{2} ({3}{4}{5}) [Rev: {6}]", fvi.ProductMajorPart, fvi.ProductMinorPart, fvi.ProductBuildPart, versionString [0], versionString [1], versionString [2], fvi.ProductPrivatePart);
 			
-			if (fvi.ProductMajorPart > 0)
-			{
-				
-				if (fvi.ProductMinorPart < 100)
-				{
-					
-					versionString [1] = string.Format(CultureInfo.InvariantCulture, ".{0}", fvi.ProductMinorPart <= 10 ? "α" : fvi.ProductMinorPart <= 20 ? "β" : fvi.ProductMinorPart <= 30 ? "Δ" : fvi.ProductMinorPart <= 40 ? "ζ" : fvi.ProductMinorPart <= 50 ? "η" : fvi.ProductMinorPart <= 60 ? "Θ" : fvi.ProductMinorPart <= 70 ? "Λ" : fvi.ProductMinorPart <= 80 ? "Σ" : "Ω");
-					
-				}
-				else if (fvi.ProductBuildPart < 100)
-				{
-					
-					versionString [1] = string.Format(CultureInfo.InvariantCulture, "Stable Revision {0}.", fvi.ProductMinorPart - 99);
-					
-				}
-				
-				if (fvi.ProductBuildPart < 100 && fvi.ProductBuildPart > 0)
-				{
-					
-					versionString [2] = string.Format(CultureInfo.InvariantCulture, ".{0})", fvi.ProductBuildPart <= 10 ? "α" : fvi.ProductBuildPart <= 20 ? "β" : fvi.ProductBuildPart <= 30 ? "Δ" : fvi.ProductBuildPart <= 40 ? "ζ" : fvi.ProductBuildPart <= 50 ? "η" : fvi.ProductBuildPart <= 60 ? "Θ" : fvi.ProductBuildPart <= 70 ? "Λ" : fvi.ProductBuildPart <= 80 ? "Σ" : "Ω");
-					
-				}
-				else if (fvi.ProductMinorPart < 100)
-				{
-					
-					versionString [0] = "Stable Build)";
-					
-				}
-				
-			}
-			else
-			{
-				
-				versionString [2] = ")";
-				
-			}
-			
-			MainForm.MainFormVersionInfoText = string.Format(CultureInfo.InstalledUICulture, "Program Version: {0}.{1}.{2} {3}{4}{5} [Rev: {6}] \t{7} Build", fvi.ProductMajorPart, fvi.ProductMinorPart, fvi.ProductBuildPart, versionString [0], versionString [1], versionString [2], fvi.ProductPrivatePart, GlobalVariables.RegistryMainValue.Contains("debug", StringComparison.OrdinalIgnoreCase) ? "Development" : "Release");
+			MainForm.MainFormBuildInfoText = string.Format(CultureInfo.InstalledUICulture, "{0} Build", GlobalVariables.RegistryMainValue.Contains("debug", StringComparison.OrdinalIgnoreCase) ? "Development" : "Release");
 			
 			RefreshFoodList(store);
 			
@@ -109,15 +66,11 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.SetAllDecimalPointValues = registryTuple.Item6;
 			
-			MainForm.DecimalExample = registryTuple.Item2.ToString(CultureInfo.CurrentCulture);
-			
 			Validation.CheckCurrentRadioButton(modification);
 			
 			MainForm.ManualTimeIsInitiated = registryTuple.Item4;
 			
 			MainForm.ManualDateTime = registryTuple.Item1;
-			
-			MainForm.ChangeManualCalorieMinimumValue = (decimal)-registryTuple.Item3;
 			
 			MainForm.UserSetCalories = (decimal)registryTuple.Item2;
 			
@@ -126,10 +79,14 @@ namespace WeightWatchingProgramPlus
 			MainForm.SetArithmeticSign = 0;
 			
 		}
-
-		/// <summary>
-		/// Clears and reloads the food table into the food listbox
-		/// </summary>
+		
+		private static string FindSymbol(int numberToCheck)
+		{
+			
+			return numberToCheck <= 5 ? "α" : numberToCheck <= 10 ? "β" : numberToCheck <= 20 ? "Δ" : numberToCheck <= 30 ? "ζ" : numberToCheck <= 40 ? "η" : numberToCheck <= 50 ? "Θ" : numberToCheck <= 60 ? "Λ" : numberToCheck <= 70 ? "Σ" : "Ω";
+			
+		}
+		
 		public void RefreshFoodList (IStorage store)
 		{
 			
@@ -149,29 +106,11 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		#region Find Item Summary
-
-		/// <summary>
-		/// Finds an item within the food list and selects it.
-		/// </summary>
-		/// <param name="offset">
-		/// The previous item number.
-		/// </param>
-		/// <param name="stringToFind">
-		/// The string you'd like to find within the food list.
-		/// </param>
-		/// <param name="stringToAvoid">
-		/// The previously found name from the food list.
-		/// </param>
-		/// <param name="exactSearch">
-		/// Is this a search where only an exact match is allowed?
-		/// </param>
-		/// <param name="next">
-		/// Was the "next" button pressed?
-		/// </param>
-		#endregion
-		public void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, bool next)
+		public void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, bool next, IPopup popUp)
 		{
+			
+			PopupHandler PopupHandler = (popUp as PopupHandler);
+			
 			foreach (var foodItem in MainForm.MainFoodListItems.OfType<string>().Where(searchResult => ((!exactSearch ? searchResult.Contains(stringToFind, StringComparison.OrdinalIgnoreCase) : searchResult.Equals(stringToFind, StringComparison.OrdinalIgnoreCase)) && !searchResult.Equals(stringToAvoid, StringComparison.OrdinalIgnoreCase) && (MainForm.MainFoodListItems.IndexOf(searchResult) > offset || (MainForm.MainFoodListItems.IndexOf(searchResult) == 0 && offset == 0 && !next) && MainForm.MainFoodListItems.IndexOf(searchResult) != -1))).Select(searchResult => MainForm.MainFoodListItems.IndexOf(searchResult)))
 			{
 				
@@ -184,7 +123,13 @@ namespace WeightWatchingProgramPlus
 			if (next && offset > 0)
 			{
 				
-				Find(0, stringToFind, stringToAvoid, exactSearch, false);
+				Find(0, stringToFind, stringToAvoid, exactSearch, false, popUp);
+				
+			}
+			else if (!exactSearch)
+			{
+				
+				PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The term {0} could not be found in the food database!", stringToFind), 8);	
 				
 			}
 			
