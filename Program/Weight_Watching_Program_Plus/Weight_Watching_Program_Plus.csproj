@@ -20,7 +20,6 @@
     <RunCodeAnalysis>True</RunCodeAnalysis>
     <SourceAnalysisOverrideSettingsFile>%Appdata%\Roaming\ICSharpCode\SharpDevelop5\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <StartupObject>WeightWatchingProgramPlus.Program</StartupObject>
-    <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
     <DelaySign>False</DelaySign>
     <UICulture>en-US</UICulture>
@@ -29,8 +28,8 @@
     <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <Prefer32Bit>True</Prefer32Bit>
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
-    <Prefer32Bit>False</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -42,7 +41,7 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <StartAction>Project</StartAction>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>WeightWatchingProgram+.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

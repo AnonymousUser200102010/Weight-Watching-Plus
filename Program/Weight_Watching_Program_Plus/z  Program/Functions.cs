@@ -40,7 +40,7 @@ namespace WeightWatchingProgramPlus
 				
 				fvi.ProductMinorPart < 100 ? string.Format(CultureInfo.InvariantCulture, "{0} Minor, ", FindSymbol(fvi.ProductMinorPart)) : string.Format(CultureInfo.InvariantCulture, "Stable Minor {0}, ", fvi.ProductMinorPart - 99),
 				
-				fvi.ProductBuildPart < 100 ? string.Format(CultureInfo.InvariantCulture, "{0} Build, ", FindSymbol(fvi.ProductBuildPart)) : string.Format(CultureInfo.InvariantCulture, "Stable Build {0}", fvi.ProductBuildPart - 99),
+				fvi.ProductBuildPart < 100 ? string.Format(CultureInfo.InvariantCulture, "{0} Build", FindSymbol(fvi.ProductBuildPart)) : string.Format(CultureInfo.InvariantCulture, "Stable Build {0}", fvi.ProductBuildPart - 99),
 				
 			};
 			

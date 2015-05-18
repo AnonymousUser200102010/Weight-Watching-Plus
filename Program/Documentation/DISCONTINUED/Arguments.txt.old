@@ -9,3 +9,5 @@ Current arguments and what they do:
 "-debugrelease" -- Allows you to debug in release mode. Only works for a few features and does not work when using a development build (dev. builds are already debugging).
 
 "-allowmulti" -- Allows you to launch multiple instances of the program. Without this argument, the program would fail to launch if one or more instances were already running.
+
+THIS WAY OF DOCUMENTING ARGUMENTS HAS BEEN DISCONTINUED AS OF UPDATE 7.

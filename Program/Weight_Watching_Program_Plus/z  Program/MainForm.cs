@@ -55,10 +55,12 @@ namespace WeightWatchingProgramPlus
 
 			this.Functions.InitializeForms(this.Modification, this.Storage, this.Validation);
 			
+			//RegistryKey rHive = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "TESTMACHINE", RegistryView.Registry64);
+			
 			//
 		}
 
-		#region properties
+		#region Properties
 
 		public static string MainFormVersionInfoText
 		{
@@ -84,6 +86,34 @@ namespace WeightWatchingProgramPlus
 			
 			set { mainForm.Text = value; }
 				
+		}
+		
+		public static bool SyncEnabled
+		{
+			
+			get { return mainForm.syncEnabledToolStripMenuItem.Checked; }
+			
+			set { mainForm.syncEnabledToolStripMenuItem.Checked = value; }
+			
+		}
+		
+		public static string SyncComputerName
+		{
+			
+			get { return mainForm.SyncPlaceToAccess.Text; }
+			
+			set { mainForm.SyncPlaceToAccess.Text = value; }
+			
+		}
+		
+		public static string SyncComputerSocket
+		{
+			
+			get 
+			{ return mainForm.syncSocketTextBox.Text; }
+			
+			set { mainForm.syncSocketTextBox.Text = value; }
+			
 		}
 
 		/// <summary>
@@ -432,7 +462,7 @@ namespace WeightWatchingProgramPlus
 						
 			}
 				
-			throw new ArgumentOutOfRangeException ("controlID", controlID, "Value must be between " + 0 + " and " + 4);
+			throw new ArgumentOutOfRangeException("controlID", controlID, string.Format(CultureInfo.CurrentCulture, "Value must be between {0} and {1}", 0, 4));
 				
 		}
 
@@ -707,7 +737,11 @@ namespace WeightWatchingProgramPlus
 				
 				GlobalVariables.SelectedListItem = foodList.SelectedIndex;
 					
-				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item5 ? "drinking" : "eating");
+				howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s of {1} do you plan on {2}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item5 ? "drinking" : "eating");
+				
+				subtractCaloriesButton.Text = string.Format(CultureInfo.CurrentCulture, "Subtract {0}'s calories from your daily calorie allowance", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1);
+				
+				addCaloriesButtonMain.Text = string.Format(CultureInfo.CurrentCulture, "Add {0}'s calories to your daily calorie allowance", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1);
 					
 				FoodNameProperty = FoodRelated.CombinedFoodList [foodList.SelectedIndex].Item1;
 					
@@ -756,25 +790,36 @@ namespace WeightWatchingProgramPlus
 
 		private void DeleteFoodItemFromTable (object sender, EventArgs e)
 		{
-			
-			if (this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "Are you sure you want to delete {0}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1), 5) == DialogResult.Yes)
+			if(foodList.Items.Count > 1)
 			{
 				
-				int previouslySelectedIndex = GlobalVariables.SelectedListItem;
-				
-				this.Modification.ModifyFoodPropertiesList();
-				
-				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
+				if (this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "Are you sure you want to delete {0}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1), 5) == DialogResult.Yes)
+				{
 					
-				this.Storage.WriteFoodTable();
+					int previouslySelectedIndex = GlobalVariables.SelectedListItem;
 					
-				Functions.RefreshFoodList(this.Storage);
+					this.Modification.ModifyFoodPropertiesList();
+					
+					FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
+						
+					this.Storage.WriteFoodTable();
+						
+					Functions.RefreshFoodList(this.Storage);
+					
+					Console.WriteLine(FoodRelated.CombinedFoodList [previouslySelectedIndex < foodList.Items.Count ? previouslySelectedIndex : (foodList.Items.Count - 1)].Item1);
+						
+					foodList.SetSelected(previouslySelectedIndex < foodList.Items.Count ? previouslySelectedIndex : (foodList.Items.Count - 1), true);
+					
+				}
 				
-				Console.WriteLine(FoodRelated.CombinedFoodList [previouslySelectedIndex].Item1);
-					
-				foodList.SetSelected(previouslySelectedIndex, true);
 			}
+			else
+			{
 				
+				this.PopupHandler.CreatePopup("You cannot delete the last food item on your list!", 4);
+				
+			}
+			
 		}
 
 		#endregion
@@ -933,6 +978,34 @@ namespace WeightWatchingProgramPlus
 			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
 			
 			exampleNumDecPlaceTextBox.Text = registryTuple.Item2.ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
+			
+		}
+		#endregion
+		
+		#region Menu Items
+		
+		private void SyncStatusChanged(object sender, EventArgs e)
+		{
+			
+			if(sender.ToString().Contains("enabled", StringComparison.OrdinalIgnoreCase))
+			{
+				
+				bool @checked = syncEnabledToolStripMenuItem.Checked;
+			
+				serverInfoToolStripMenuItem.Enabled = @checked;
+				
+				SyncPlaceToAccess.Text = @checked ? "NAME OR IP HERE" : null;
+				
+			}
+			
+			if(this.Validation.PortIsValid())
+			{
+				
+				var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
+			
+				this.Storage.WriteRegistry(registryTuple.Item2, registryTuple.Item3, registryTuple.Item6, this.Validation);
+				
+			}
 			
 		}
 		#endregion

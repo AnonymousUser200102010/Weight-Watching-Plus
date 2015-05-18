@@ -36,17 +36,17 @@ namespace WeightWatchingProgramPlus
 				
 			IOHandler.CreateFolderTree(null);
 			
-			ArgumentHandler(args);
-				
-			findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\README.txt", Explain);
-			
 			#if DEBUG
-				
-			GlobalVariables.RegistryMainValue += "~debug";
 			
 			GlobalVariables.Debug = true;
 				
 			#endif
+			
+			GlobalVariables.RegistryMainValue += GlobalVariables.Debug ? "Development" : "Release";
+			
+			ArgumentHandler(args);
+				
+			findTextFiles("Files\\Text\\food.table", "Files\\Text\\food.bku", "Files\\Text\\README.txt", Explain);
 			
 			BackEnd.SetupConsole(GlobalVariables.Debug);
 				
@@ -95,13 +95,15 @@ namespace WeightWatchingProgramPlus
 		private static void findTextFiles (string textFilesfoodtable, string textFilesfoodbku, string textFilesfoodtableExplainationtxt, bool explain)
 		{
 			
+			const string seperator = "-------------------------------------------------------------------------\n";
+			
 			if (!File.Exists(textFilesfoodtable))
 			{
 				
 				if (!File.Exists(textFilesfoodbku))
 				{
 					
-					throw new ArgumentNullException (textFilesfoodtable, "program.cs: You need a food.table! Put a food.table file in the Files\\Text\\ folder!");
+					File.WriteAllText(textFilesfoodbku, seperator);
 					
 				}
 				
@@ -125,8 +127,6 @@ namespace WeightWatchingProgramPlus
 				File.SetAttributes(textFilesfoodbku, FileAttributes.Archive | FileAttributes.Temporary | FileAttributes.Compressed);
 				
 			}
-			
-			const string seperator = "-------------------------------------------------------------------------\n";
 			
 			string dosanddonts = string.Format(CultureInfo.InvariantCulture, "{0}\n", "You're allowed to use all normal characters, upper and lower case; numbers and letters\nYou're forbidden from using special characters by design. Using them caused too much trouble and so they are disallowed for the time being.");
 			

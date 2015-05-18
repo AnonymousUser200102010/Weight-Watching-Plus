@@ -18,7 +18,7 @@ namespace WeightWatchingProgramPlus
 	internal class Storage : IStorage
 	{
 		
-		IPopup PopupHandler;
+		private IPopup PopupHandler;
 		
 		public Storage(PopupHandler pU)
 		{
@@ -46,8 +46,14 @@ namespace WeightWatchingProgramPlus
 					int number = 0;
 					int position = 0;
 					String line;
-					string[] combined = new string[2];
-					double[] tupleItemDouble = new double[2];
+					string[] combined = {
+						"placeholder",
+						"placeholder"
+					};
+					double[] tupleItemDouble = {
+						1,
+						1
+					};
 					bool tupleItemBool = false;
 					
 					while (!string.IsNullOrEmpty((line = sr.ReadLine())))
@@ -145,10 +151,12 @@ namespace WeightWatchingProgramPlus
 			
 			FoodRelated.CombinedFoodList.Sort();
 			
-			if (File.Exists(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
+			string fileToUseLiteral = string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file);
+			
+			if (File.Exists(fileToUseLiteral))
 			{
 				
-				File.Delete(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file));
+				File.Delete(fileToUseLiteral);
 				
 			}
 			else
@@ -160,7 +168,7 @@ namespace WeightWatchingProgramPlus
 			
 			const string seperator = "-------------------------------------------------------------------------\n";
 			
-			using (StreamWriter outfile = new StreamWriter(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
+			using (StreamWriter outfile = new StreamWriter(fileToUseLiteral))
 			{
 				
 				for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
@@ -209,11 +217,20 @@ namespace WeightWatchingProgramPlus
 			if (appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
 			{
 				
-				Validation.ValidateRegistryValues(appendedRegistryValue, registyValue, true);
-				
 				var registryTuple = GetRetrievableRegistryValues(valid);
 				
 				MainForm.ManualTimeIsInitiated = registryTuple.Item4;
+				
+				MainForm.SyncEnabled = registryTuple.Item7.Item1;
+				
+				if(MainForm.SyncEnabled)
+				{
+					
+					MainForm.SyncComputerName = registryTuple.Item7.Item2;
+					
+					MainForm.SyncComputerSocket = registryTuple.Item7.Item3.ToString(CultureInfo.CurrentCulture);
+					
+				}
 				
 				MainForm.DecimalPlaces = (decimal)registryTuple.Item6;
 				
@@ -305,42 +322,49 @@ namespace WeightWatchingProgramPlus
 				tempKey.SetValue("Calories Left for the Day", tempDouble.ToString(CultureInfo.CurrentCulture));
 				tempKey.SetValue("Default Calories Per Day", defaultCalories.ToString(CultureInfo.CurrentCulture));
 				tempKey.SetValue("Manual Time", MainForm.ManualTimeIsInitiated.ToString());
+				tempKey.SetValue("Sync", MainForm.SyncEnabled);
+				tempKey.SetValue("Synced Computer Name", MainForm.SyncComputerName);
+				tempKey.SetValue("Sync Socket", MainForm.SyncComputerSocket.ToString(CultureInfo.CurrentCulture));
 				tempKey.SetValue("Dec. Places", decimalPlaces.ToString(CultureInfo.CurrentCulture));
 				
 			}
 		}
 
-		public Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues(IValidation valid)
+		public Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid)
 		{
 			
 			return GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid, true);
 			
 		}
 		
-		public Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay)
+		public Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay)
 		{
 			
 			return GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid, roundCaloriesLeftForDay);
 			
 		}
 
-		public Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay)
+		public Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay)
 		{
 			
 			Validation Validation = (valid as Validation);
 			
-			string tempString = null;
+			string[] tempString = {
+				null,
+				null
+			};
 			
 			var validationTuple = Validation.ValidateRegistryValues(appendedRegistryValue, registryValue, GlobalVariables.Debug);
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
 				
-				tempString = (string)tempKey.GetValue("Last WWP+ Version");
+				tempString[0] = (string)tempKey.GetValue("Last WWP+ Version");
+				tempString[1] = (string)tempKey.GetValue("Synced Computer Name");
 				
 			}
 			
-			return Tuple.Create(validationTuple.Item1, roundCaloriesLeftForDay ? (double)Math.Round(validationTuple.Item2, validationTuple.Item5) : validationTuple.Item2, (double)Math.Round(validationTuple.Item3, validationTuple.Item5), validationTuple.Item4, tempString, validationTuple.Item5);
+			return Tuple.Create(validationTuple.Item1, roundCaloriesLeftForDay ? (double)Math.Round(validationTuple.Item2, validationTuple.Item5) : validationTuple.Item2, (double)Math.Round(validationTuple.Item3, validationTuple.Item5), validationTuple.Item4, tempString[0], validationTuple.Item5, Tuple.Create(validationTuple.Item6, tempString[1], validationTuple.Item7));
 			
 		}
 

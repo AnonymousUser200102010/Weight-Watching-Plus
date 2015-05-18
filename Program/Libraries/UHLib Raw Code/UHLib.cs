@@ -62,17 +62,21 @@ namespace UniversalHandlersLibrary
 			public static void Handler (Exception providedException, bool write, bool prune, int pruneCutoff)
 			{
 				
-				if (pruneCutoff < 102400 || pruneCutoff > 1000000)
-				{
-						
-					Errors.Handler(new ArgumentOutOfRangeException("pruneCutoff", pruneCutoff,"UniversalHandlersLibrary: prune cutoff must be between 102400 and 1000000"), true, true, 524288);
-						
-				}
-				
 				if(write)
 				{
 					
-					Writer(providedException, prune, pruneCutoff);
+					if (pruneCutoff < 102400 || pruneCutoff > 1000000)
+					{
+							
+						Errors.Handler(new ArgumentOutOfRangeException("pruneCutoff", pruneCutoff,"UniversalHandlersLibrary: prune cutoff must be between 102400 and 1000000"), true, true, 524288);
+							
+					}
+					else
+					{
+						
+						Writer(providedException, prune, pruneCutoff);
+						
+					}
 					
 				}
 				else if(prune)
@@ -296,7 +300,7 @@ namespace UniversalHandlersLibrary
 		public static void DeleteAllSameNamedFiles(FileInfo fileToSearchWith, string rootDirectory, bool ignoreCase, bool deleteAtDirectory)
 		{
 
-			Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Starting deletion...Looking in '{0}' for files with the exact same name as '{1}', while {2} ignoring case.", rootDirectory, fileToSearchWith.Name, ignoreCase ? "also" : "not"));
+			Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Starting deletion...Looking in '{0}' for files with the exact same name as '{1}', while {2} case.", rootDirectory, fileToSearchWith.Name, ignoreCase ? "ignoring" : "including"));
 			
 			bool stopChecking = false;
 			

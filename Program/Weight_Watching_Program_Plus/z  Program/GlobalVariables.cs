@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace WeightWatchingProgramPlus
 {
@@ -64,7 +64,7 @@ namespace WeightWatchingProgramPlus
         /// <summary>
         /// Name of the program as the user sees it.
         /// </summary>
-        public const string WeightWatchingProgram = "Weight Watching Program+";
+        private const string WeightWatchingProgram = "Weight Watching Program+";
         
         /// <summary>
         /// Registry value that is added after the appended value.
@@ -90,9 +90,9 @@ namespace WeightWatchingProgramPlus
         static GlobalVariables ()
         {
             
-            RegistryAppendedValue = "SOFTWARE\\Wow6432Node\\";
+            RegistryAppendedValue = "SOFTWARE\\";
             
-            RegistryMainValue = WeightWatchingProgram;
+			RegistryMainValue = string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\", WeightWatchingProgram, Environment.UserName);
             
             CreateBackups = true;
             

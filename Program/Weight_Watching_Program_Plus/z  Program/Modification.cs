@@ -18,15 +18,15 @@ namespace WeightWatchingProgramPlus
 	internal class Modification : IModification
 	{
 		
-		IPopup PopupHandler;
+		private IPopup PopupHandler;
 			
-		IValidation Validation;
+		private IValidation Validation;
 			
-		IStorage Storage;
+		private IStorage Storage;
 			
-		IMathematics Mathematics;
+		private IMathematics Mathematics;
 			
-		IGeneralFunctions Functions;
+		private IGeneralFunctions Functions;
 		
 		public Modification(PopupHandler pH, Validation validation, Storage storage, Mathematics math, Functions _func)
 		{

@@ -8,7 +8,7 @@ namespace WeightWatchingProgramPlus
 	internal class PopupHandler : IPopup
 	{
 		
-		private readonly string[] title = {
+		private readonly string[] Title = {
 			"Error: Value Is Null",
 			"You're overeating",
 			"You're overeating",
@@ -94,7 +94,7 @@ namespace WeightWatchingProgramPlus
 					
 			}
 			
-			DialogResult dialogResult = MessageBox.Show(message, this.title [popupCode], messageBoxButton, messageBoxIcon, MessageBoxDefaultButton.Button1);
+			DialogResult dialogResult = MessageBox.Show(message, this.Title [popupCode], messageBoxButton, messageBoxIcon, MessageBoxDefaultButton.Button1);
 			
 			if (hasAdditionalActions)
 			{

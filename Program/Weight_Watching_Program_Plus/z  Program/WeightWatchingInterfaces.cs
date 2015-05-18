@@ -319,29 +319,45 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns a Tuple(DateTime CaloriesResetTime, double Calories, double DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
 		/// </returns>
-		/// <example>
-		/// DateTime: the time at which the calories reset.
-		/// </example>
-		/// <example>
-		/// Double (1): the amount of calories left for the day.
-		/// </example>
-		/// <example>
-		/// Double (2): the amount of calories that is set by default.
-		/// </example>
-		/// <example>
-		/// Bool: if the user is using a manual time instead of an automatic one.
-		/// </example>
-		/// <example>
-		/// String: The current program version as stored in the registry.
-		/// </example>
-		/// <example>
-		/// Int: The currently set amount of decimal places to use globally for standardization purposes.
-		/// </example>
+		/// 
+		/// <list type="Tuple1">
+			/// <example>
+			/// DateTime: the time at which the calories reset.
+			/// </example>
+			/// <example>
+			/// Double (1): the amount of calories left for the day.
+			/// </example>
+			/// <example>
+			/// Double (2): the amount of calories that is set by default.
+			/// </example>
+			/// <example>
+			/// Bool (1): if the user is using a manual time instead of an automatic one.
+			/// </example>
+			/// <example>
+			/// String (1): The current program version as stored in the registry.
+			/// </example>
+			/// <example>
+			/// Int (1): The currently set amount of decimal places to use globally for standardization purposes.
+			/// </example>
+		/// </list>
+		/// 
+		/// <list type="Tuple1">
+			/// <example>
+			/// Bool (2): if the user is syncing the application between computers.
+			/// </example>
+			/// <example>
+			/// String (2): The name of the computer with which to sync.
+			/// </example>
+			/// <example>
+			/// Int (2): The currently set socket for use in syncing activities.
+			/// </example>
+		/// </list>
+		/// 
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues(IValidation valid);
+		Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid);
 		
 		#region Get Registry Values Summary
 
@@ -357,29 +373,45 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns a Tuple(DateTime CaloriesResetTime, double Calories, double DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
 		/// </returns>
-		/// <example>
-		/// DateTime: the time at which the calories reset.
-		/// </example>
-		/// <example>
-		/// Double (1): the amount of calories left for the day.
-		/// </example>
-		/// <example>
-		/// Double (2): the amount of calories that is set by default.
-		/// </example>
-		/// <example>
-		/// Bool: if the user is using a manual time instead of an automatic one.
-		/// </example>
-		/// <example>
-		/// String: The current program version as stored in the registry.
-		/// </example>
-		/// <example>
-		/// Int: The currently set amount of decimal places to use globally for standardization purposes.
-		/// </example>
+		/// 
+		/// <list type="Tuple1">
+			/// <example>
+			/// DateTime: the time at which the calories reset.
+			/// </example>
+			/// <example>
+			/// Double (1): the amount of calories left for the day.
+			/// </example>
+			/// <example>
+			/// Double (2): the amount of calories that is set by default.
+			/// </example>
+			/// <example>
+			/// Bool (1): if the user is using a manual time instead of an automatic one.
+			/// </example>
+			/// <example>
+			/// String (1): The current program version as stored in the registry.
+			/// </example>
+			/// <example>
+			/// Int (1): The currently set amount of decimal places to use globally for standardization purposes.
+			/// </example>
+		/// </list>
+		/// 
+		/// <list type="Tuple1">
+			/// <example>
+			/// Bool (2): if the user is syncing the application between computers.
+			/// </example>
+			/// <example>
+			/// String (2): The name of the computer with which to sync.
+			/// </example>
+			/// <example>
+			/// Int (2): The currently set socket for use in syncing activities.
+			/// </example>
+		/// </list>
+		/// 
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay);
+		Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay);
 		
 		#region Get Registry Values Summary
 
@@ -401,29 +433,45 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns a Tuple(DateTime CaloriesResetTime, double Calories, double DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
 		/// </returns>
-		/// <example>
-		/// DateTime: the time at which the calories reset.
-		/// </example>
-		/// <example>
-		/// Double (1): the amount of calories left for the day.
-		/// </example>
-		/// <example>
-		/// Double (2): the amount of calories that is set by default.
-		/// </example>
-		/// <example>
-		/// Bool: if the user is using a manual time instead of an automatic one.
-		/// </example>
-		/// <example>
-		/// String: The current program version as stored in the registry.
-		/// </example>
-		/// <example>
-		/// Int: The currently set amount of decimal places to use globally for standardization purposes.
-		/// </example>
+		/// 
+		/// <list type="Tuple1">
+			/// <example>
+			/// DateTime: the time at which the calories reset.
+			/// </example>
+			/// <example>
+			/// Double (1): the amount of calories left for the day.
+			/// </example>
+			/// <example>
+			/// Double (2): the amount of calories that is set by default.
+			/// </example>
+			/// <example>
+			/// Bool (1): if the user is using a manual time instead of an automatic one.
+			/// </example>
+			/// <example>
+			/// String (1): The current program version as stored in the registry.
+			/// </example>
+			/// <example>
+			/// Int (1): The currently set amount of decimal places to use globally for standardization purposes.
+			/// </example>
+		/// </list>
+		/// 
+		/// <list type="Tuple1">
+			/// <example>
+			/// Bool (2): if the user is syncing the application between computers.
+			/// </example>
+			/// <example>
+			/// String (2): The name of the computer with which to sync.
+			/// </example>
+			/// <example>
+			/// Int (2): The currently set socket for use in syncing activities.
+			/// </example>
+		/// </list>
+		/// 
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, string, int> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay);
+		Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay);
 		
 		#region Food Tracking Diary Default Override Summary
 		/// <summary>
@@ -514,6 +562,7 @@ namespace WeightWatchingProgramPlus
 		bool ValidateBackup (string appendedRegistryValue, string registryValue);
 
 		#region Validate Registry Values Summary
+		
 		/// <summary>
 		/// Validates registry items before passing them on if needed.
 		/// </summary>
@@ -532,9 +581,16 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a registry value cannot be parsed.
 		/// </exception>
-		
 		#endregion
-		Tuple<DateTime, double, double, bool, int> ValidateRegistryValues (string appendedRegistryValue, string registryValue, bool thoroughCheck);
+		Tuple<DateTime, double, double, bool, int, bool, int> ValidateRegistryValues (string appendedRegistryValue, string registryValue, bool thoroughCheck);
+		
+		/// <summary>
+		/// Checks if the sync port is valid.
+		/// </summary>
+		/// <returns>
+		/// True if sync port is valid; else, false.
+		///</returns>
+		bool PortIsValid ();
 		
 	}
 	

@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -21,8 +22,8 @@ namespace WeightWatchingProgramPlus
 	internal class Validation : IValidation
 	{
 		
-		IPopup PopupHandler;
-		IStorage Storage;
+		private IPopup PopupHandler;
+		private IStorage Storage;
 		
 		public Validation (Storage store, PopupHandler pU)
 		{
@@ -155,6 +156,55 @@ namespace WeightWatchingProgramPlus
 			return validCharacters.IsMatch(text);
 			
 		}
+		
+		public bool PortIsValid ()
+		{
+			
+			var registryTuple = this.Storage.GetRetrievableRegistryValues(this, false);
+			
+			if(!HasOnlyNumbers(MainForm.SyncComputerSocket))
+			{
+				
+				MainForm.SyncComputerSocket = registryTuple.Item7.Item3.ToString(CultureInfo.CurrentCulture);
+				
+				PopupHandler.CreatePopup("The port field requires numbers.", 4);
+				
+				return false;
+				
+			}
+			
+			if(string.IsNullOrWhiteSpace(MainForm.SyncComputerSocket) || int.Parse(MainForm.SyncComputerSocket) <= IPEndPoint.MinPort || int.Parse(MainForm.SyncComputerSocket) >= IPEndPoint.MaxPort)
+			{
+				
+				MainForm.SyncComputerSocket = registryTuple.Item7.Item3.ToString(CultureInfo.CurrentCulture);
+				
+				PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "Port must be within {0} and {1} and cannot be an empty space.\nTo change single digits, simply highlight the digit and change it that way, instead of using the backspace key.", IPEndPoint.MinPort + 1, IPEndPoint.MaxPort - 1), 4);
+				
+				return false;
+				
+			}
+			
+			return true;
+			
+		}
+		
+		/// <summary>
+		/// Checks the given text for any character beside a number.
+		/// </summary>
+		/// <param name="text">
+		/// Text to check
+		/// </param>
+		/// <returns>
+		/// True if it only contains numbers; otherwise, false.
+		/// </returns>
+		private static bool HasOnlyNumbers (string text)
+		{
+			
+			Regex validCharacters = new Regex ("[^0-9]");
+			
+			return !validCharacters.IsMatch(text);
+			
+		}
 
 		public bool ValidateBackup (string appendedRegistryValue, string registryValue)
 		{
@@ -181,7 +231,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		public Tuple<DateTime, double, double, bool, int> ValidateRegistryValues (string appendedRegistryValue, string registryValue, bool thoroughCheck)
+		public Tuple<DateTime, double, double, bool, int, bool, int> ValidateRegistryValues (string appendedRegistryValue, string registryValue, bool thoroughCheck)
 		{
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
@@ -192,9 +242,15 @@ namespace WeightWatchingProgramPlus
 					0f
 				};
 				
-				bool tempBool = false;
+				bool[] tempBool = {
+					false,
+					false
+				};
 				
-				int tempInt = 0;
+				int[] tempInt = {
+					0,
+					0
+				};
 				
 				DateTime tempDate = new DateTime ();
 				
@@ -234,12 +290,12 @@ namespace WeightWatchingProgramPlus
 					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Manual Time")))
 					{
 							
-						tempKey.SetValue("Manual Time", tempBool.ToString());
+						tempKey.SetValue("Manual Time", tempBool[0].ToString());
 							
 					}
 					
 					
-					if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool))
+					if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool[0]))
 					{
 							
 						throw Errors.PremadeExceptions("Registry", "Manual Time", 0);
@@ -270,10 +326,31 @@ namespace WeightWatchingProgramPlus
 							
 					}
 					
-					if (!int.TryParse(tempKey.GetValue("Dec. Places").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt))
+					if (!int.TryParse(tempKey.GetValue("Dec. Places").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [0]))
 					{
 							
 						throw Errors.PremadeExceptions("Registry", "Decimal Places", 0);
+							
+					}
+					
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Sync")))
+					{
+							
+						tempKey.SetValue("Sync", tempBool[1].ToString());
+							
+					}
+					
+					if (!bool.TryParse((string)tempKey.GetValue("Sync"), out tempBool[1]))
+					{
+							
+						throw Errors.PremadeExceptions("Registry", "Sync", 0);
+							
+					}
+					
+					if (!int.TryParse(tempKey.GetValue("Sync Socket").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [1]))
+					{
+							
+						throw Errors.PremadeExceptions("Registry", "Sync Socket", 0);
 							
 					}
 					
@@ -286,7 +363,10 @@ namespace WeightWatchingProgramPlus
 					}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate) ||
 					    !double.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out tempDouble [0]) ||
 					    !double.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out tempDouble [1]) ||
-					    !bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool) || !int.TryParse(tempKey.GetValue("Dec. Places").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt))
+					    !bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool[0]) ||
+					    !bool.TryParse((string)tempKey.GetValue("Sync"), out tempBool[1]) || 
+					    !int.TryParse(tempKey.GetValue("Dec. Places").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt[0]) || 
+					    !int.TryParse(tempKey.GetValue("Sync Socket").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [1]))
 					{
 						
 						throw Errors.PremadeExceptions("Registry", "ValidateRegistryValues", 0);
@@ -295,7 +375,7 @@ namespace WeightWatchingProgramPlus
 					
 				}
 				
-				return new Tuple<DateTime, double, double, bool, int> (tempDate, tempDouble [0], tempDouble [1], tempBool, tempInt);
+				return Tuple.Create(tempDate, tempDouble [0], tempDouble [1], tempBool[0], tempInt[0], tempBool[1], tempInt[1]);
 				
 			}
 			

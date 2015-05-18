@@ -1,3 +1,13 @@
+May 13 08:32:45 AM:
+Exception Message:
+The network path was not found.
+
+
+Exception Stack Trace:
+   at Microsoft.Win32.RegistryKey.Win32ErrorStatic(Int32 errorCode, String str)
+   at Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(RegistryHive hKey, String machineName, RegistryView view)
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
 March 23 11:00:58 AM:
 Exception Message:
 The NeutralResourcesLanguageAttribute on the assembly "WeightWatchingProgramPlus, Version=0.6.50.18025, Culture=neutral, PublicKeyToken=3102d51f53b0728e" specifies an invalid culture name: "gr-US".
