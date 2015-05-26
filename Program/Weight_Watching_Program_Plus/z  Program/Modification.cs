@@ -28,14 +28,26 @@ namespace WeightWatchingProgramPlus
 			
 		private IGeneralFunctions Functions;
 		
-		public Modification(PopupHandler pH, Validation validation, Storage storage, Mathematics math, Functions _func)
+		private IRetrieval Retrieval;
+		
+		private IMainForm MainForm;
+		
+		public Modification(IPopup pH, IValidation validation, IStorage storage, IMathematics math, IGeneralFunctions _func, IRetrieval retrieve, IMainForm mainForm)
 		{
 			
 			this.PopupHandler = pH;
+			
 			this.Validation = validation;
+			
 			this.Storage = storage;
+			
 			this.Mathematics = math;
+			
 			this.Functions = _func;
+			
+			this.Retrieval = retrieve;
+			
+			this.MainForm = mainForm;
 			
 		}
 
@@ -50,9 +62,9 @@ namespace WeightWatchingProgramPlus
 			
 			string warningText = string.Format(CultureInfo.InvariantCulture, "The amount of calories that {0}", !senderIsSubtracting ? "you are trying to add would put you over your daily limit, and is not allowed." : "are about to be subtracted would put you below your daily limit! Continue?");
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
+			var registryCaloriesLeft = double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture);
 			
-			double tempcalories = registryTuple.Item2;
+			double tempcalories = registryCaloriesLeft;
 			
 			if (add)
 			{
@@ -65,7 +77,7 @@ namespace WeightWatchingProgramPlus
 				
 				tempcalories -= this.Mathematics.GetFinalCalories(add, this.Validation);
 				
-				if (tempcalories < -registryTuple.Item3)
+				if (tempcalories < -(double)MainForm.DefaultCalories)
 				{
 					
 					this.PopupHandler.CreatePopup("You're not allowed to subtract more than the normal daily allowance from a negative calorie value.", 1);
@@ -79,26 +91,26 @@ namespace WeightWatchingProgramPlus
 			if(GlobalVariables.Debug)
 			{
 				
-				Console.WriteLine((registryTuple.Item3 + (double)MainForm.GlobalMinimumValue));
+				Console.WriteLine(((double)MainForm.DefaultCalories + (double)MainForm.GlobalMinimumValue));
 				
 			}
 			
-			if (((tempcalories < 0f && !add) || (tempcalories >= (registryTuple.Item3 + (double)MainForm.GlobalMinimumValue) && add)) && this.PopupHandler.CreatePopup(warningText, errorNum) != DialogResult.Yes)
+			if (((tempcalories < 0f && !add) || (tempcalories >= ((double)MainForm.DefaultCalories + (double)MainForm.GlobalMinimumValue) && add)) && this.PopupHandler.CreatePopup(warningText, errorNum) != DialogResult.Yes)
 			{
 				
 				return;
 				
 			}
 			
-			this.Storage.WriteRegistry(tempcalories, registryTuple.Item3, registryTuple.Item6, this.Validation);
+			this.Storage.WriteRegistry(tempcalories.ToString(CultureInfo.CurrentCulture), "calories left", false, this.Validation, this.Retrieval);
 			
-			registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
+			registryCaloriesLeft = double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture);
 
-			MainForm.UserSetCalories = (decimal)registryTuple.Item2;
+			MainForm.UserSetCalories((decimal)registryCaloriesLeft);
 			
 			this.Validation.CheckCurrentRadioButton(this);
 			
-			this.Storage.WriteFoodEaten(add, this.Validation);
+			this.Storage.WriteFoodEaten(add, this.Validation, this.Retrieval);
 			
 		}
 
@@ -119,7 +131,7 @@ namespace WeightWatchingProgramPlus
 		private void WriteToObject (Label labelToChange, TextBox textBoxToChange, int objectNumber)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
+			var registryTuple = Tuple.Create(DateTime.Parse(this.Retrieval.GetRegistryValue("reset date"), CultureInfo.InvariantCulture), this.Retrieval.GetRegistryValue("calories left"));
 			
 			string[] messages = {
 				string.Format(CultureInfo.InvariantCulture, "Calories Left For The Day: {0}", registryTuple.Item2),
@@ -191,7 +203,7 @@ namespace WeightWatchingProgramPlus
 			
 			var combinedTuple = new Tuple<string, double, double, string, bool> (MainForm.FoodNameProperty, (double)MainForm.ServingSizeProperty, (double)MainForm.CaloriesPerServingProperty, MainForm.DefinerProperty, MainForm.IsDrinkProperty);
 			
-			if (!MainForm.IsCreatingANewFoodItem)
+			if (!MainForm.IsCreatingNewFoodItem)
 			{
 				
 				FoodRelated.CombinedFoodList.RemoveAt(GlobalVariables.SelectedListItem);
@@ -200,11 +212,11 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			this.Storage.WriteFoodTable(MainForm.IsCreatingANewFoodItem ? combinedTuple : new Tuple<string, double, double, string, bool> (null, 0f, 0f, null, false));
+			this.Storage.WriteFoodTable(MainForm.IsCreatingNewFoodItem ? combinedTuple : new Tuple<string, double, double, string, bool> (null, 0f, 0f, null, false));
 			
-			MainForm.IsCreatingANewFoodItem = false;
+			MainForm.IsCreatingNewFoodItem = false;
 			
-			this.Functions.RefreshFoodList(this.Storage);
+			this.Functions.RefreshFoodList(this.Storage, this.Retrieval, this.MainForm);
 			
 		}
 
@@ -222,28 +234,42 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		private static void ModifyFoodPropertiesList (string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties, bool clear)
+		private void ModifyFoodPropertiesList (string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties, bool clear)
 		{
+			
 			if (clear)
 			{
-				MainForm.FoodNameProperty = null;
-				MainForm.ServingSizeProperty = MainForm.ServingSizeMinimumValue;
-				MainForm.CaloriesPerServingProperty = (decimal)MainForm.GlobalMinimumValue;
-				MainForm.DefinerProperty = null;
-				MainForm.IsDrinkProperty = false;
+				
+				this.MainForm.FoodNameProperty = null;
+				
+				this.MainForm.ServingSizeProperty = this.MainForm.ServingSizeMinimumValue;
+				
+				this.MainForm.CaloriesPerServingProperty = (decimal)this.MainForm.GlobalMinimumValue;
+				
+				this.MainForm.DefinerProperty = null;
+				
+				this.MainForm.IsDrinkProperty = false;
+				
 			}
 			else
 			{
-				MainForm.FoodNameProperty = stringProperties [0];
-				MainForm.DefinerProperty = stringProperties [1];
-				MainForm.ServingSizeProperty = decimalProperties [0];
-				MainForm.CaloriesPerServingProperty = decimalProperties [1];
-				MainForm.IsDrinkProperty = boolProperties [0];
+				
+				this.MainForm.FoodNameProperty = stringProperties [0];
+				
+				this.MainForm.DefinerProperty = stringProperties [1];
+				
+				this.MainForm.ServingSizeProperty = decimalProperties [0];
+				
+				this.MainForm.CaloriesPerServingProperty = decimalProperties [1];
+				
+				this.MainForm.IsDrinkProperty = boolProperties [0];
+				
 			}
 			
 		}
 		
 	}
+	
 }
 
 

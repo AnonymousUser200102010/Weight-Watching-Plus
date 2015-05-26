@@ -24,6 +24,7 @@ namespace WeightWatchingProgramPlus
 		/// 
 		
 		private static bool Explain = true;
+		
 		private static bool MultiTask = false;
 
 		[STAThread]
@@ -35,6 +36,8 @@ namespace WeightWatchingProgramPlus
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 				
 			IOHandler.CreateFolderTree(null);
+			
+			MoveLooseFolders();
 			
 			#if DEBUG
 			
@@ -53,6 +56,13 @@ namespace WeightWatchingProgramPlus
 			Application.EnableVisualStyles();
 				
 			Application.SetCompatibleTextRenderingDefault(false);
+			
+			if (Microsoft.Win32.Registry.LocalMachine.OpenSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue) == null)
+			{
+				
+				Microsoft.Win32.Registry.LocalMachine.CreateSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue);
+				
+			}
 			
 			if(Process.GetProcessesByName (Path.GetFileNameWithoutExtension (Application.ProductName)).Count() <= 1 || MultiTask)
 			{
@@ -142,6 +152,34 @@ namespace WeightWatchingProgramPlus
 			}
 			
 		}
+		
+		private static void MoveLooseFolders()
+		{
+			
+			foreach(string fullFolder in Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory).Where(folderName => !folderName.Contains("Files", StringComparison.OrdinalIgnoreCase)))
+			{
+				
+				string folder = fullFolder.Remove(0, AppDomain.CurrentDomain.BaseDirectory.Length);
+				
+				if(Directory.Exists(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder)))
+				{
+					
+					foreach(string file in Directory.GetFiles(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder)))
+					{
+						
+						File.Delete(file);
+						
+					}
+					
+					Directory.Delete(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder));
+					
+				}
+				
+				Directory.Move(folder, string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder));
+				
+			}
+			
+		}
 
 		private static void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
 		{
@@ -223,6 +261,16 @@ namespace WeightWatchingProgramPlus
 				{
 					
 					MultiTask = true;
+					
+				}
+				else if (s.Contains("-sync", StringComparison.CurrentCultureIgnoreCase))
+				{
+					
+					var isClientArg = s.Contains("isclient", StringComparison.CurrentCultureIgnoreCase);
+					
+					GlobalVariables.IsClient = isClientArg;
+					
+					GlobalVariables.ClientStateOverride = isClientArg;
 					
 				}
 				else

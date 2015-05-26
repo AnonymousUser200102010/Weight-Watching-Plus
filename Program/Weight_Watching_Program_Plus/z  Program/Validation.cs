@@ -1,6 +1,7 @@
 ﻿#region Using Directives
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -23,19 +24,28 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		private IPopup PopupHandler;
+		
 		private IStorage Storage;
 		
-		public Validation (Storage store, PopupHandler pU)
+		private IMainForm MainForm;
+		
+		public Validation (IStorage store, IPopup pU, IMainForm mainForm)
 		{
 			
 			this.Storage = store;
+			
 			this.PopupHandler = pU;
+			
+			this.MainForm = mainForm;
 			
 		}
 
-		public void CheckDateValidity ()
+		public void CheckDateValidity (IRetrieval retrieve)
 		{
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this, false);
+			
+			Retrieval Retrieval = (retrieve as Retrieval);
+			
+			var registryTuple = Tuple.Create(DateTime.Parse(Retrieval.GetRegistryValue("reset date"), CultureInfo.InvariantCulture), Retrieval.GetRegistryValue("calories left"));
 			
 			if (DateTime.Compare(registryTuple.Item1, DateTime.Now) <= 0 || Registry.LocalMachine.OpenSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue) == null)
 			{
@@ -44,10 +54,9 @@ namespace WeightWatchingProgramPlus
 				
 				DateTime tempDate = manualTimeIsInitiated ? new DateTime (registryTuple.Item1.Year, registryTuple.Item1.Month, DateTime.Now.Day + 1, registryTuple.Item1.Hour, registryTuple.Item1.Minute, registryTuple.Item1.Second, registryTuple.Item1.Millisecond, DateTimeKind.Local) : DateTime.Now.AddDays(1);
 				
-				this.Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, tempDate, registryTuple.Item2, registryTuple.Item3, registryTuple.Item6, new[] {
-					true,
-					true
-				}, this);
+				this.Storage.WriteRegistry(registryTuple.Item2, "calories left", true, this, Retrieval);
+				
+				this.Storage.WriteRegistry(tempDate.ToString(), "reset date", true, this, Retrieval);
 				
 			}
 		}
@@ -157,28 +166,52 @@ namespace WeightWatchingProgramPlus
 			
 		}
 		
-		public bool PortIsValid ()
+		public bool PortIsValid (IRetrieval retrieve, bool listenPort)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this, false);
+			Retrieval Retrieval = (retrieve as Retrieval);
 			
-			if(!HasOnlyNumbers(MainForm.SyncComputerSocket))
+			var syncSocketVar = listenPort ? Retrieval.GetRegistryValue("sync listen socket") : Retrieval.GetRegistryValue("sync send socket");
+			
+			if(!HasOnlyNumbers(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, null))
 			{
 				
-				MainForm.SyncComputerSocket = registryTuple.Item7.Item3.ToString(CultureInfo.CurrentCulture);
+				if(listenPort)
+				{
+					
+					MainForm.SyncListenPort = syncSocketVar;
+					
+				}
+				else
+				{
+					
+					MainForm.SyncSendPort = syncSocketVar;
+					
+				}
 				
-				PopupHandler.CreatePopup("The port field requires numbers.", 4);
+				PopupHandler.CreatePopup("The port field can contain only numbers.", 4);
 				
 				return false;
 				
 			}
 			
-			if(string.IsNullOrWhiteSpace(MainForm.SyncComputerSocket) || int.Parse(MainForm.SyncComputerSocket) <= IPEndPoint.MinPort || int.Parse(MainForm.SyncComputerSocket) >= IPEndPoint.MaxPort)
+			if(string.IsNullOrWhiteSpace(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort) || int.Parse(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, CultureInfo.InvariantCulture) <= IPEndPoint.MinPort || int.Parse(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, CultureInfo.InvariantCulture) >= IPEndPoint.MaxPort)
 			{
 				
-				MainForm.SyncComputerSocket = registryTuple.Item7.Item3.ToString(CultureInfo.CurrentCulture);
+				if(listenPort)
+				{
+					
+					MainForm.SyncListenPort = syncSocketVar;
+					
+				}
+				else
+				{
+					
+					MainForm.SyncSendPort = syncSocketVar;
+					
+				}
 				
-				PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "Port must be within {0} and {1} and cannot be an empty space.\nTo change single digits, simply highlight the digit and change it that way, instead of using the backspace key.", IPEndPoint.MinPort + 1, IPEndPoint.MaxPort - 1), 4);
+				PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The port must be within {0} and {1} and cannot be an empty space.\nTo change single digits, simply highlight the digit and change it that way, instead of using the backspace key.", IPEndPoint.MinPort + 1, IPEndPoint.MaxPort - 1), 4);
 				
 				return false;
 				
@@ -188,35 +221,120 @@ namespace WeightWatchingProgramPlus
 			
 		}
 		
+		public bool IPAddressIsValid (IRetrieval retrieve)
+		{
+			
+			Retrieval Retrieval = (retrieve as Retrieval);
+			
+			var syncIPAVar = Retrieval.GetRegistryValue("sync server name");
+			
+			if(!HasOnlyNumbers(MainForm.SyncIPAddress, "."))
+			{
+				
+				MainForm.SyncIPAddress = syncIPAVar;
+				
+				PopupHandler.CreatePopup("The IP Address can contain only numbers and periods.", 4);
+				
+				return false;
+				
+			}
+			
+			int[] count = {
+				0,
+				0
+			};
+			
+			if(MainForm.SyncIPAddress.Length < 15)
+			{
+				
+				foreach(char character in MainForm.SyncIPAddress.Substring(0))
+				{
+					
+					string characterString = character.ToString();
+					
+					if(count[0] > 3 || count[1] > 3)
+					{
+							
+						MainForm.SyncIPAddress = syncIPAVar;
+					
+						PopupHandler.CreatePopup("The IP Address' format is wrong, the normal format is xxx.xxx.xxx.xxx " + count[0] + count[1], 4);
+							
+						return false;
+							
+					}
+					
+					if(characterString.Equals(".", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						count[0] = 0;
+						
+						count[1]++;
+						
+					}
+					else
+					{
+						
+						count[0]++;
+						
+					}
+					
+				}
+				
+			}
+			else
+			{
+				
+				MainForm.SyncIPAddress = syncIPAVar;
+					
+				PopupHandler.CreatePopup("The IP Address is too long. It can be up to 15 characters including periods.", 4);
+							
+				return false;
+				
+			}
+			
+			return true;
+			
+		}
+		
+		#region HasOnlyNumbers Summary
+		
 		/// <summary>
 		/// Checks the given text for any character beside a number.
 		/// </summary>
 		/// <param name="text">
 		/// Text to check
 		/// </param>
+		/// <param name="whitelistedCharacters">
+		/// Any additional characters that have been whitelisted for a special purpose.
+		/// </param>
 		/// <returns>
 		/// True if it only contains numbers; otherwise, false.
 		/// </returns>
-		private static bool HasOnlyNumbers (string text)
+		#endregion
+		private static bool HasOnlyNumbers (string text, string whitelistedCharacters)
 		{
 			
-			Regex validCharacters = new Regex ("[^0-9]");
+			Regex validCharacters = new Regex(string.Format(CultureInfo.InvariantCulture, "[^0-9 {0}]", whitelistedCharacters));
 			
 			return !validCharacters.IsMatch(text);
 			
 		}
 
-		public bool ValidateBackup (string appendedRegistryValue, string registryValue)
+		public bool ValidateBackup (string appendedRegistryValue, string registryValue, string backupDirectory, IRetrieval retrieve)
 		{
+			
+			Retrieval Retrieval = (retrieve as Retrieval);
 			
 			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 			
-			var versionNumber = this.Storage.GetRetrievableRegistryValues(this).Item5;
+			string fileBackupVersion = Retrieval.BackupVersionFileInfo(backupDirectory);
+			
+			var versionNumber = Retrieval.GetRegistryValue("program version");
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
 				
-				if (string.IsNullOrWhiteSpace(versionNumber) || !string.Equals(versionNumber, fvi.FileVersion, StringComparison.OrdinalIgnoreCase))
+				if (string.IsNullOrWhiteSpace(versionNumber) || string.Equals(versionNumber, "0.0.0.0", StringComparison.OrdinalIgnoreCase) || !string.Equals(versionNumber, fvi.FileVersion, StringComparison.OrdinalIgnoreCase))
 				{
 							
 					tempKey.SetValue("Last WWP+ Version", fvi.FileVersion);
@@ -225,159 +343,217 @@ namespace WeightWatchingProgramPlus
 							
 				}
 				
+				if(!string.Equals(fileBackupVersion, fvi.FileVersion, StringComparison.OrdinalIgnoreCase))
+				{
+					
+					return true;
+					
+				}
+				
 			}
 			
 			return false;
 			
 		}
-
-		public Tuple<DateTime, double, double, bool, int, bool, int> ValidateRegistryValues (string appendedRegistryValue, string registryValue, bool thoroughCheck)
+		
+		public bool RegistryValueDoesNotExist(string appendedRegistryValue, string registryValue, string registryIDKeyword, IRetrieval retrieve)
 		{
+			
+			Retrieval Retrieval = (retrieve as Retrieval);
+			
+			var parsedRegistryKey = Retrieval.ParseRegistryKeyById(registryIDKeyword);
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
-			
-				double[] tempDouble = {
-					0f,
-					0f
-				};
 				
-				bool[] tempBool = {
-					false,
-					false
-				};
-				
-				int[] tempInt = {
-					0,
-					0
-				};
-				
-				DateTime tempDate = new DateTime ();
-				
-				if (thoroughCheck)
-				{
-						
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Default Calories Per Day")))
-					{
-							
-						tempKey.SetValue("Default Calories Per Day", "2140");
-							
-					}
-					
-					
-					if (!double.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out tempDouble [1]))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Default Calories Per Day", 0);
-							
-					}
-						
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Calories Left for the Day")))
-					{
-							
-						tempKey.SetValue("Calories Left for the Day", "0");
-							
-					}
-					
-					
-					if (!double.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out tempDouble [0]))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Calories Left for the Day", 0);
-							
-					}
-						
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Manual Time")))
-					{
-							
-						tempKey.SetValue("Manual Time", tempBool[0].ToString());
-							
-					}
-					
-					
-					if (!bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool[0]))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Manual Time", 0);
-							
-					}
-						
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Next Reset Date")))
-					{
-							
-						tempKey.SetValue("Next Reset Date", DateTime.Now.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
-							
-					}
-					
-					
-					if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {
-						"yyyy MMMMM dd hh:mm:ss tt"
-					}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Reset Date", 0);
-							
-					}
-					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Dec. Places")))
-					{
-							
-						tempKey.SetValue("Dec. Places", "4");
-							
-					}
-					
-					if (!int.TryParse(tempKey.GetValue("Dec. Places").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [0]))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Decimal Places", 0);
-							
-					}
-					
-					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue("Sync")))
-					{
-							
-						tempKey.SetValue("Sync", tempBool[1].ToString());
-							
-					}
-					
-					if (!bool.TryParse((string)tempKey.GetValue("Sync"), out tempBool[1]))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Sync", 0);
-							
-					}
-					
-					if (!int.TryParse(tempKey.GetValue("Sync Socket").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [1]))
-					{
-							
-						throw Errors.PremadeExceptions("Registry", "Sync Socket", 0);
-							
-					}
-					
-				}
-				else
-				{
-					
-					if (!DateTime.TryParseExact(tempKey.GetValue("Next Reset Date").ToString(), new[] {
-						"yyyy MMMMM dd hh:mm:ss tt"
-					}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate) ||
-					    !double.TryParse(tempKey.GetValue("Calories Left for the Day").ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out tempDouble [0]) ||
-					    !double.TryParse(tempKey.GetValue("Default Calories Per Day").ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out tempDouble [1]) ||
-					    !bool.TryParse((string)tempKey.GetValue("Manual Time"), out tempBool[0]) ||
-					    !bool.TryParse((string)tempKey.GetValue("Sync"), out tempBool[1]) || 
-					    !int.TryParse(tempKey.GetValue("Dec. Places").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt[0]) || 
-					    !int.TryParse(tempKey.GetValue("Sync Socket").ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [1]))
-					{
-						
-						throw Errors.PremadeExceptions("Registry", "ValidateRegistryValues", 0);
-						
-					}
-					
-				}
-				
-				return Tuple.Create(tempDate, tempDouble [0], tempDouble [1], tempBool[0], tempInt[0], tempBool[1], tempInt[1]);
+				return string.IsNullOrWhiteSpace((string)tempKey.GetValue(parsedRegistryKey));
 				
 			}
+			
+		}
+
+		public string ValidateRegistryValues (string appendedRegistryValue, string registryValue, string registryIDKeyword, IRetrieval retrieve)
+		{
+			
+			Console.WriteLine("RAN");
+			
+			#region variables
+			
+			Retrieval Retrieval = (retrieve as Retrieval);
+			
+			double[] tempDouble = {
+				0,
+				2140
+			};
+				
+			bool[] tempBool = {
+				false,
+				false
+			};
+				
+			int[] tempInt = {
+				4,
+				5050,
+				5051
+			};
+			
+			DateTime[] tempDate = {
+				DateTime.Now
+			};
+			
+			string[] tempString = {
+				"0.0.0.0",
+				"127.0.0.1"
+			};
+			
+			//Name, Type, Array Position.
+			var list = new List<Tuple<string, string, int>>();
+			
+			list.Add(Tuple.Create("Next Reset Date", "datetime", 0));
+			list.Add(Tuple.Create("Calories Left for the Day", "double", 0));
+			list.Add(Tuple.Create("Default Calories Per Day", "double", 1));
+			list.Add(Tuple.Create("Manual Time", "bool", 0));
+			list.Add(Tuple.Create("Sync", "bool", 1));
+			list.Add(Tuple.Create("Dec. Places", "int", 0));
+			list.Add(Tuple.Create("Sync Listen Socket", "int", 1));
+			list.Add(Tuple.Create("Sync Send Socket", "int", 2));
+			list.Add(Tuple.Create("Last WWP+ Version", "string", 0));
+			list.Add(Tuple.Create("Synced Computer Name", "string", 1));
+			
+			var registryValueList = list;
+			#endregion
+			
+			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
+			{
+				
+				foreach(Tuple<string, string, int> registryValueTuple in registryValueList)
+				{
+					
+					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue(registryValueTuple.Item1)))
+					{
+						
+						if (registryValueTuple.Item2.Equals("double", StringComparison.OrdinalIgnoreCase))
+						{
+							
+							tempKey.SetValue(registryValueTuple.Item1, tempDouble [registryValueTuple.Item3].ToString(CultureInfo.CurrentCulture));
+							
+						}
+						else if (registryValueTuple.Item2.Equals("bool", StringComparison.OrdinalIgnoreCase))
+						{
+							
+							tempKey.SetValue(registryValueTuple.Item1, tempBool [registryValueTuple.Item3].ToString(CultureInfo.CurrentCulture));
+							
+						}
+						else if (registryValueTuple.Item2.Equals("datetime", StringComparison.OrdinalIgnoreCase))
+						{
+							
+							tempKey.SetValue(registryValueTuple.Item1, tempDate [registryValueTuple.Item3].ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.CurrentCulture));
+							
+						}
+						else if (registryValueTuple.Item2.Equals("int", StringComparison.OrdinalIgnoreCase))
+						{
+							
+							tempKey.SetValue(registryValueTuple.Item1, tempInt [registryValueTuple.Item3].ToString(CultureInfo.CurrentCulture));
+							
+						}
+						else if (registryValueTuple.Item2.Equals("string", StringComparison.OrdinalIgnoreCase))
+						{
+							
+							tempKey.SetValue(registryValueTuple.Item1, tempString [registryValueTuple.Item3]);
+							
+						}
+								
+					}
+					
+					string registryValueLiteral = (string)tempKey.GetValue(registryValueTuple.Item1);
+					
+					bool failedParse = false;
+					
+					if (registryValueTuple.Item2.Equals("double", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						failedParse |= !double.TryParse(registryValueLiteral, NumberStyles.Number, CultureInfo.InvariantCulture, out tempDouble[registryValueTuple.Item3]);
+						
+					}
+					else if (registryValueTuple.Item2.Equals("bool", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						failedParse |= !bool.TryParse(registryValueLiteral, out tempBool[registryValueTuple.Item3]);
+							
+					}
+					else if (registryValueTuple.Item2.Equals("datetime", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						failedParse |= !DateTime.TryParseExact(registryValueLiteral, new[] {
+							"yyyy MMMMM dd hh:mm:ss tt"
+						}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate[registryValueTuple.Item3]);
+						
+					}
+					else if (registryValueTuple.Item2.Equals("int", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						failedParse |= !int.TryParse(registryValueLiteral, NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt[registryValueTuple.Item3]);
+							
+					}
+					else if (!registryValueTuple.Item2.Equals("string", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						throw Errors.PremadeExceptions("ValidateRegistry: Type", registryValueTuple.Item2, 0);
+						
+					}
+					
+					if (failedParse)
+					{
+						
+						throw Errors.PremadeExceptions("ValidateRegistry", registryValueTuple.Item1, 0);
+						
+					}
+					
+				}
+				
+			}
+			
+			foreach(Tuple<string, string, int> currentItem in registryValueList.Where(value => value.Item1.Equals(Retrieval.ParseRegistryKeyById(registryIDKeyword), StringComparison.OrdinalIgnoreCase)))
+			{
+				
+				if (currentItem.Item2.Equals("double", StringComparison.OrdinalIgnoreCase))
+				{
+								
+					return tempDouble [currentItem.Item3].ToString(CultureInfo.InvariantCulture);
+								
+				}
+				
+				if (currentItem.Item2.Equals("bool", StringComparison.OrdinalIgnoreCase))
+				{
+								
+					return tempBool [currentItem.Item3].ToString();
+								
+				}
+				
+				if (currentItem.Item2.Equals("datetime", StringComparison.OrdinalIgnoreCase))
+				{
+								
+					return tempDate [currentItem.Item3].ToString();
+								
+				}
+				
+				if (currentItem.Item2.Equals("int", StringComparison.OrdinalIgnoreCase))
+				{
+								
+					return tempInt [currentItem.Item3].ToString(CultureInfo.InvariantCulture);
+					
+				}
+				
+				if(currentItem.Item2.Equals("string", StringComparison.OrdinalIgnoreCase))
+				{
+					
+					throw new InvalidOperationException("ValidateRegistryValues: This method does not allow the return of strings.");
+					
+				}
+				
+			}
+				
+			return null;
 			
 		}
 		

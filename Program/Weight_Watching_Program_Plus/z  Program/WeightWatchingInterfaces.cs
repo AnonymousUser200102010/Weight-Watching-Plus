@@ -5,6 +5,208 @@ namespace WeightWatchingProgramPlus
 {
 	
 	/// <summary>
+	/// Interface for the MainForm class so it doesn't need to be accessed directly.
+	/// </summary>
+	public interface IMainForm
+	{
+		
+		void setMainFormState(bool paused);
+
+		void MainFormVersionInfoText(string value);
+		
+		void MainFormBuildInfoText(string value);
+
+		/// <summary>
+		/// Gets or Sets the title of the application after launch.
+		/// </summary>
+		string MainFormTitle { get; set; }
+		
+		bool SyncEnabled { get; set; }
+		
+		string SyncIPAddress { get; set; }
+	
+		string SyncSendPort { get; set; }
+		
+		string SyncListenPort { get; set; }
+		
+		void SetSyncConnectionItems();
+
+		/// <summary>
+		/// Gets or Sets the value in the #Servings NumericUpDown.
+		/// </summary>
+		decimal UserProvidedServings { get; set; }
+
+		/// <summary>
+		/// Gets or Sets whether the manual time is being used or not.
+		/// </summary>
+		bool ManualTimeIsInitiated { get; set; }
+
+		/// <summary>
+		/// Gets or Sets the Manual Reset Time.
+		/// </summary>
+		DateTime ManualDateTime { get; set; }
+
+		/// <summary>
+		/// Gets or Sets the main Food List ListBox's DataSource.
+		/// </summary>
+		void MainFoodListDataSource(object value);
+
+		/// <summary>
+		/// Gets the main Food List ListBox's items.
+		/// </summary>
+		ListBox.ObjectCollection MainFoodListItems { get; }
+
+		#region FoodListGet/Select Summary
+
+		/// <summary>
+		/// Gets or Sets the selection for the specified item in the main Food List ListBox.
+		/// </summary>
+		/// <param name="setIndex">
+		/// Is this operation setting the selected value for the main Food List ListBox as well?
+		/// </param>
+		/// <param name="index">
+		/// The zero-based index of the item that determines whether it is selected.
+		/// </param>
+		/// <param name="value">
+		/// True to select the specified item; otherwise false.
+		/// </param>
+		/// <returns>
+		/// Returns the currently selected item.
+		/// </returns>
+		#endregion
+		int FoodListSelectedIndex (bool setIndex, int index, bool value);
+
+		/// <summary>
+		/// Gets or Sets the uppermost item in the main Food List ListBox.
+		/// </summary>
+		int GetFoodListTopItem { get; }
+
+		/// <summary>
+		/// Gets or Sets the label which the user sees asking how many servings they are eating.
+		/// </summary>
+		string NumberOfServingsLabel { set; }
+
+		/// <summary>
+		/// Gets or Sets the "Name" property box which shows the name of the currently selected food item.
+		/// </summary>
+		string FoodNameProperty { get; set; }
+
+		/// <summary>
+		/// Gets or Sets the "Definer" property box which shows the definer of the currently selected food item.
+		/// </summary>
+		string DefinerProperty { get; set; }
+
+		/// <summary>
+		/// Gets or Sets the "Serving Size" property box which shows the serving size of the currently selected food item.
+		/// </summary>
+		decimal ServingSizeProperty { get; set; }
+
+		/// <summary>
+		/// Gets or Sets the "Calories Per Serving" property box which shows how many calories are in each serving of the currently selected food item.
+		/// </summary>
+		decimal CaloriesPerServingProperty { get; set; }
+
+		/// <summary>
+		/// Gets or Sets the "Is Drink" checkbox button which indicates what food items are drinks and which are food.
+		/// </summary>
+		bool IsDrinkProperty { get; set; }
+
+		/// <summary>
+		/// Gets or Sets if the user is checking the time.
+		/// </summary>
+		bool UserCheckingTime { get; }
+
+		/// <summary>
+		/// Gets or Sets if the user is checking their current calorie balance.
+		/// </summary>
+		bool UserCheckingCalories { get; }
+
+		/// <summary>
+		/// Gets or Sets the amount of calories in the NumericUpDown in the "manual" tab of the "main" tab.
+		/// </summary>
+		void UserSetCalories(decimal value);
+
+		/// <summary>
+		/// Gets or Sets the amount of default calories to be applied wherever applicable.
+		/// </summary>
+		decimal DefaultCalories { get; set; }
+
+		/// <summary>
+		/// The NumericUpDown which shows, and sets, the decimal places to be used globally.
+		/// </summary>
+		decimal DecimalPlaces { get; set; }
+		
+		/// <summary>
+		/// Sets the decimal example text box.
+		/// </summary>
+		void DecimalExample(string value);
+		
+		/// <summary>
+		/// Gets or Sets the value for the "new item" checkbox.
+		/// </summary>
+		bool IsCreatingNewFoodItem { get; set; }
+
+		/// <summary>
+		/// Gets the property control box of your choice based on the contolID provided. This is to be used as a LAST RESTORT when ALL ELSE FAILS!
+		/// </summary>
+		/// <param name="controlID">
+		/// The ID of the control item you wish to use.
+		/// </param>
+		/// <returns>
+		/// Returns a property control value based on the following IDs: (ID 0): Food Name, (ID 1): Serving Size, (ID 2): Calories Per Serving, (ID 3): Definer. (ID 4): Calories Label.
+		/// </returns>
+		/// <exception cref="T:System.ArgumentOutOfRangeException">
+		/// Thrown if the ID provided does not correlate (is less or more) to any of the controls that have been explicitly exposed.
+		/// </exception>
+		Control ReturnPropertyControl (int controlID);
+
+		/// <summary>
+		/// Gets or Sets whether the user has chosen to write the diary portion of Food Tracking to a file.
+		/// </summary>
+		bool UserIsWritingDiaryToFile { get; }
+
+		/// <summary>
+		/// Gets or Sets whether the user has chosen to use the diary portion of Food Tracking.
+		/// </summary>
+		bool DiaryIsBeingUsed { get; }
+
+		/// <summary>
+		/// Gets the "sign" for the arithmetic operation in the "arithmetic" sub-tab.
+		/// </summary>
+		string GetArithmeticSign { get; }
+
+		/// <summary>
+		/// Sets the "sign" for the arithmetic operation in the "arithmetic" sub-tab.
+		/// </summary>
+		int SetArithmeticSign { set; }
+
+		TabPage AddSubSelectedSubTab { get; set; }
+
+		#region Get Arithmatic Number Summary
+		
+		/// <summary>
+		/// Gets the value from one of the NumericUpDowns in the "arithmetic" subtab.
+		/// </summary>
+		/// <param name="left">
+		/// Are you getting the value of the left NumericUpDown?
+		/// </param>
+		/// <returns>
+		/// The decimal value of the NumericUpDown as determined by <paramref name="left"></paramref>.
+		/// </returns>
+		#endregion
+		decimal GetArithmeticValue (bool left);
+		
+		void SetAllDecimalPointValues (int value);
+		 	
+		decimal ServingSizeMinimumValue { get; }
+		
+		decimal ManualCaloriesMinimumValue { get; }
+		
+		double GlobalMinimumValue { get; set; }
+		
+	}
+	
+	/// <summary>
 	/// Interface for the Popup Handler sub-class so it doesn't need to be accessed directly.
 	/// </summary>
 	public interface IPopup
@@ -58,12 +260,36 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Main initialization for the program as handled by the developer (and not, say, through windows forms or what have you).
 		/// </summary>
-		void InitializeForms (IModification modification, IStorage store, IValidation valid);
+		/// <param name="modification">
+		/// A preinitialized instance of IModification. It is not recommended to pass a new initialization of IModification.
+		/// </param>
+		/// <param name="store">
+		/// A preinitialized instance of IStorage. It is not recommended to pass a new initialization of IStorage.
+		/// </param>
+		/// <param name="valid">
+		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
+		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
+		/// <param name="netOps">
+		/// A preinitialized instance of INetOps. It is not recommended to pass a new initialization of INetOps.
+		/// </param>
+		/// <param name="mainForm">
+		/// A preinitialized instance of IMainForm. It is not recommended to pass a new initialization of IMainForm.
+		/// </param>
+		void InitializeForms (IModification modification, IStorage store, IValidation valid, IRetrieval retrieve, INetOps netOps, IMainForm mainForm);
 		
 		/// <summary>
 		/// Clears and reloads the food table into the food listbox
 		/// </summary>
-		void RefreshFoodList (IStorage store);
+		/// <param name="store">
+		/// A preinitialized instance of IStorage. It is not recommended to pass a new initialization of IStorage.
+		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
+		void RefreshFoodList (IStorage store, IRetrieval retrieve, IMainForm mainForm);
 		
 		#region Find Item Summary
 
@@ -89,7 +315,7 @@ namespace WeightWatchingProgramPlus
 		/// A preinitialized instance of IPopup. It is not recommended to pass a new initialization of IPopup.
 		/// </param>
 		#endregion
-		void Find (int offset, string valueToFind, string valueToAvoid, bool exactSearch, bool searchForNextValue, IPopup popup);
+		void Find (int offset, string valueToFind, string valueToAvoid, bool exactSearch, bool searchForNextValue, IPopup popup, IMainForm mainForm);
 		
 	}
 	
@@ -156,9 +382,9 @@ namespace WeightWatchingProgramPlus
 	}
 	
 	/// <summary>
-	/// Interface for the Storage sub-class so it doesn't need to be accessed directly.
+	/// Interface for the Retrieval sub-class so it doesn't need to be accessed directly.
 	/// </summary>
-	public interface IStorage
+	public interface IRetrieval
 	{
 		
 		#region Read Food Table Default Override Summary
@@ -187,6 +413,76 @@ namespace WeightWatchingProgramPlus
 		/// </exception>
 		#endregion
 		void ReadFoodTable (string directory, string file);
+		
+		#region Read Registry Default Override Summary
+		/// <summary>
+		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date. This override reads from the registry as dictated by the GlobalVariable values.
+		/// </summary>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
+		#endregion
+		void ReadRegistry();
+		
+		#region Read Registy Summary
+
+		/// <summary>
+		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date.
+		/// </summary>
+		/// <param name="appendedRegistryValue">
+		/// Registry value that comes first after LOCAL_MACHINE
+		/// </param>
+		/// <param name="registryValue">
+		/// Registry value that is added after the appended value.
+		/// </param>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
+		#endregion
+		void ReadRegistry (string appendedRegistryValue, string registryValue);
+		
+		#region Get Registry Values Default Override Summary
+
+		/// <summary>
+		/// Gets the registry value requested through the keyword provided.
+		/// </summary>
+		/// <param name="registryIdKeyword">
+		/// The keyword you wish to use to choose the registry item you wish to pull.
+		/// </param>
+		/// <returns>
+		/// Returns the most closely related registry value to the keyword provided.
+		/// </returns>
+		/// <exception cref="T:System.Exception">
+		/// Thrown if a local value that requires a parsable registry value cannot parse it.
+		/// </exception>
+		/// <exception cref="T:System.ArgumentException">
+		/// Thrown if the registry keyword fails to produce results.
+		/// </exception>
+		#endregion
+		string GetRegistryValue (string registryIdKeyword);
+		
+		string ParseRegistryKeyById(string registryIdKeyword);
+		
+		string GetRegistryValueFromRegistry(string appendedRegistryValue, string registryValue, string registryIdKeyword);
+		
+		#region Backup Summary
+		
+		/// <summary>
+		/// Initiates the backup of all files without any "passover keywords".
+		/// </summary>
+		/// <param name="backupDirectory">
+		/// The directory where the backup will reside.
+		/// </param>
+		#endregion
+		string BackupVersionFileInfo(string backupDirectory);
+		
+	}
+	
+	/// <summary>
+	/// Interface for the Storage sub-class so it doesn't need to be accessed directly.
+	/// </summary>
+	public interface IStorage
+	{
 		
 		#region Write Food Table Default Override Summary
 		/// <summary>
@@ -224,199 +520,54 @@ namespace WeightWatchingProgramPlus
 		/// </exception>
 		#endregion
 		void WriteFoodTable (string directory, string file, Tuple<string, double, double, string, bool> additionToFoodTable);
-		
-		#region Read Registry Default Override Summary
-		/// <summary>
-		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date. This override reads from the registry as dictated by the GlobalVariable values.
-		/// </summary>
-		/// <param name="valid">
-		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
-		/// </param>
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
-		#endregion
-		void ReadRegistry(IValidation valid);
-		
-		#region Read Registy Summary
+			
+		#region Write To Registry Default Overload Summary
 
 		/// <summary>
-		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date.
+		/// Writes the currently supplied object to the registry as a string.
 		/// </summary>
-		/// <param name="appendedRegistryValue">
-		/// Registry value that comes first after LOCAL_MACHINE
+		/// <param name="objectToSave">
+		/// The value provided, in object form.
 		/// </param>
-		/// <param name="registryValue">
-		/// Registry value that is added after the appended value.
-		/// </param>
-		/// <param name="valid">
-		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
-		/// </param>
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
-		#endregion
-		void ReadRegistry (string appendedRegistryValue, string registryValue, IValidation valid);
-		
-		#region Write Registry Default Override Summary
-		/// <summary>
-		/// Writes all logical values to the registry in a format it can understand. This override writes to the registry as dictated by the GlobalVariable values and does not reset any of the values.
-		/// </summary>
-		/// <param name="calories">
-		/// Current calories left.
-		/// </param>
-		/// <param name="defaultCalories">
-		/// Default calorie count.
-		/// </param>
-		/// <param name="decimalPlaces">
-		/// The amount of decimal places to be used globally.
-		/// </param>
-		/// <param name="valid">
-		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
-		/// </param>
-		#endregion
-		void WriteRegistry(double calories, double defaultCalories, int decimalPlaces, IValidation valid);
-		
-		#region Write To Registry Summary
-
-		/// <summary>
-		/// Writes all logical values to the registry in a format it can understand.
-		/// </summary>
-		/// <param name="appendedRegistryValue">
-		/// Registry value that comes first after LOCAL_MACHINE
-		/// </param>
-		/// <param name="registryValue">
-		/// Registry value that is added after the appended value.
-		/// </param>
-		/// <param name="dateToApply">
-		/// If resetting, this is the new reset date.
-		/// </param>
-		/// <param name="calories">
-		/// Current calories left.
-		/// </param>
-		/// <param name="defaultCalories">
-		/// Default calorie count.
-		/// </param>
-		/// <param name="decimalPlaces">
-		/// The amount of decimal places to be used globally.
+		/// <param name="registryIdKeyword">
+		/// The keyword you wish to use to choose the registry title you wish to write to.
 		/// </param>
 		/// <param name="reset">
-		/// reset[0] = calorie count, reset[1] = reset date.
+		/// Allows an action to be performed, where applicable, that "resets" or modifies the value before it is written to the registry.
 		/// </param>
 		/// <param name="valid">
 		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
 		/// </param>
-		#endregion
-		void WriteRegistry (string appendedRegistryValue, string registryValue, DateTime dateToApply, double calories, double defaultCalories, int decimalPlaces, System.Collections.Generic.IList<bool> reset, IValidation valid);
-		
-		#region Get Registry Values Default Override Summary
-		/// <summary>
-		/// Gets all registry values that can be modified and used by the program (usually all of them). This override reads from the registry as dictated by the GlobalVariable values.
-		/// </summary>
-		/// <param name="valid">
-		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		/// <returns>
-		/// Returns a Tuple(DateTime CaloriesResetTime, double Calories, double DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
-		/// </returns>
-		/// 
-		/// <list type="Tuple1">
-			/// <example>
-			/// DateTime: the time at which the calories reset.
-			/// </example>
-			/// <example>
-			/// Double (1): the amount of calories left for the day.
-			/// </example>
-			/// <example>
-			/// Double (2): the amount of calories that is set by default.
-			/// </example>
-			/// <example>
-			/// Bool (1): if the user is using a manual time instead of an automatic one.
-			/// </example>
-			/// <example>
-			/// String (1): The current program version as stored in the registry.
-			/// </example>
-			/// <example>
-			/// Int (1): The currently set amount of decimal places to use globally for standardization purposes.
-			/// </example>
-		/// </list>
-		/// 
-		/// <list type="Tuple1">
-			/// <example>
-			/// Bool (2): if the user is syncing the application between computers.
-			/// </example>
-			/// <example>
-			/// String (2): The name of the computer with which to sync.
-			/// </example>
-			/// <example>
-			/// Int (2): The currently set socket for use in syncing activities.
-			/// </example>
-		/// </list>
-		/// 
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid);
+		void WriteRegistry (string objectToSave, string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
 		
-		#region Get Registry Values Summary
+		#region Write To Registry No Obj Overload Summary
 
 		/// <summary>
-		/// Gets all registry values that can be modified and used by the program (usually all of them).
+		/// Writes the currently supplied object to the registry as a string.
 		/// </summary>
+		/// <param name="registryIdKeyword">
+		/// The keyword you wish to use to choose the registry title you wish to write to.
+		/// </param>
+		/// <param name="reset">
+		/// Allows an action to be performed, where applicable, that "resets" or modifies the value before it is written to the registry.
+		/// </param>
 		/// <param name="valid">
 		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
 		/// </param>
-		/// <param name="roundCaloriesLeftForDay">
-		/// This operation is rounding the calories left for the day to the global decimal point value.
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		/// <returns>
-		/// Returns a Tuple(DateTime CaloriesResetTime, double Calories, double DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
-		/// </returns>
-		/// 
-		/// <list type="Tuple1">
-			/// <example>
-			/// DateTime: the time at which the calories reset.
-			/// </example>
-			/// <example>
-			/// Double (1): the amount of calories left for the day.
-			/// </example>
-			/// <example>
-			/// Double (2): the amount of calories that is set by default.
-			/// </example>
-			/// <example>
-			/// Bool (1): if the user is using a manual time instead of an automatic one.
-			/// </example>
-			/// <example>
-			/// String (1): The current program version as stored in the registry.
-			/// </example>
-			/// <example>
-			/// Int (1): The currently set amount of decimal places to use globally for standardization purposes.
-			/// </example>
-		/// </list>
-		/// 
-		/// <list type="Tuple1">
-			/// <example>
-			/// Bool (2): if the user is syncing the application between computers.
-			/// </example>
-			/// <example>
-			/// String (2): The name of the computer with which to sync.
-			/// </example>
-			/// <example>
-			/// Int (2): The currently set socket for use in syncing activities.
-			/// </example>
-		/// </list>
-		/// 
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay);
+		void WriteRegistry(string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
 		
-		#region Get Registry Values Summary
-
+		#region Write To Registry Summary
+		
 		/// <summary>
-		/// Gets all registry values that can be modified and used by the program (usually all of them).
+		/// Writes the currently supplied values to the registry.
 		/// </summary>
 		/// <param name="appendedRegistryValue">
 		/// Registry value that comes first after LOCAL_MACHINE
@@ -424,56 +575,26 @@ namespace WeightWatchingProgramPlus
 		/// <param name="registryValue">
 		/// Registry value that is added after the appended value.
 		/// </param>
+		/// <param name="objectToSave">
+		/// The value provided, in object form.
+		/// </param>
+		/// <param name="registryIdKeyword">
+		/// The keyword you wish to use to choose the registry title you wish to write to.
+		/// </param>
+		/// <param name="reset">
+		/// Reset the "remaining" calories value.
+		/// </param>
 		/// <param name="valid">
 		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
 		/// </param>
-		/// <param name="roundCaloriesLeftForDay">
-		/// This operation is rounding the calories left for the day to the global decimal point value.
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		/// <returns>
-		/// Returns a Tuple(DateTime CaloriesResetTime, double Calories, double DefaultCalories, bool ManualTimeInitiated, string ProgramNumber).
-		/// </returns>
-		/// 
-		/// <list type="Tuple1">
-			/// <example>
-			/// DateTime: the time at which the calories reset.
-			/// </example>
-			/// <example>
-			/// Double (1): the amount of calories left for the day.
-			/// </example>
-			/// <example>
-			/// Double (2): the amount of calories that is set by default.
-			/// </example>
-			/// <example>
-			/// Bool (1): if the user is using a manual time instead of an automatic one.
-			/// </example>
-			/// <example>
-			/// String (1): The current program version as stored in the registry.
-			/// </example>
-			/// <example>
-			/// Int (1): The currently set amount of decimal places to use globally for standardization purposes.
-			/// </example>
-		/// </list>
-		/// 
-		/// <list type="Tuple1">
-			/// <example>
-			/// Bool (2): if the user is syncing the application between computers.
-			/// </example>
-			/// <example>
-			/// String (2): The name of the computer with which to sync.
-			/// </example>
-			/// <example>
-			/// Int (2): The currently set socket for use in syncing activities.
-			/// </example>
-		/// </list>
-		/// 
-		/// <exception cref="T:System.Exception">
-		/// Thrown if a local value that requires a parsable registry value cannot parse it.
-		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay);
+		void WriteRegistry (string appendedRegistryValue, string registryValue, string objectToSave, string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
 		
 		#region Food Tracking Diary Default Override Summary
+		
 		/// <summary>
 		/// Food Tracking Function 1: Diary: Writes to file what food you've eaten and when. This override writes to the default directory and file.
 		/// </summary>
@@ -483,8 +604,11 @@ namespace WeightWatchingProgramPlus
 		/// <param name="valid">
 		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
 		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
 		#endregion
-		void WriteFoodEaten(bool add, IValidation valid);
+		void WriteFoodEaten(bool add, IValidation valid, IRetrieval retrieve);
 		
 		#region Food Tracking Diary Summary
 
@@ -503,8 +627,34 @@ namespace WeightWatchingProgramPlus
 		/// <param name="valid">
 		/// A preinitialized instance of IValidation. It is not recommended to pass a new initialization of IValidation.
 		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
 		#endregion
-		void WriteFoodEaten (string directory, string file, bool add, IValidation valid);
+		void WriteFoodEaten (string directory, string file, bool add, IValidation valid, IRetrieval retrieve);
+		
+		#region Backup Summary
+		
+		/// <summary>
+		/// Initiates the backup of all files without any "passover keywords".
+		/// </summary>
+		/// <param name="originalDirectory">
+		/// The original directory where files will be copied from.
+		/// </param>
+		/// <param name="backupDirectory">
+		/// The directory where the backup will reside.
+		/// </param>
+		/// <param name="oldVersion">
+		/// The old version of the program.
+		/// </param>
+		/// <param name="newVersion">
+		/// The current version of the program.
+		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
+		#endregion
+		void Backup (string originalDirectory, string backupDirectory, string oldVersion, string newVersion, IRetrieval retrieve);
 		
 	}
 	
@@ -519,8 +669,11 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Checks to see if the reset date is earlier or later than the checked date.
 		/// </summary>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
 		#endregion
-		void CheckDateValidity ();
+		void CheckDateValidity (IRetrieval retrieve);
 
 		#region Check Radio Button Summary
 
@@ -555,16 +708,24 @@ namespace WeightWatchingProgramPlus
 		/// <param name="registryValue">
 		/// Registry value that is added after the appended value.
 		/// </param>
+		/// <param name="backupDirectory">
+		/// The directory where the backup will reside.
+		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
 		/// <returns>
-		/// True if current version number is greater than previous or no registry value exists; else false.
+		/// True if current version number is greater than previous, no registry value exists or has a value, or the backed up version file contains a different version number than the program; else false.
 		/// </returns>
 		#endregion
-		bool ValidateBackup (string appendedRegistryValue, string registryValue);
+		bool ValidateBackup (string appendedRegistryValue, string registryValue, string backupDirectory, IRetrieval retrieve);
+		
+		bool RegistryValueDoesNotExist(string appendedRegistryValue, string registryValue, string registryIdKeyword, IRetrieval retrieve);
 
 		#region Validate Registry Values Summary
 		
 		/// <summary>
-		/// Validates registry items before passing them on if needed.
+		/// Validates registry items before passing one on if needed. The one to be passed on would be the one which contains the registry keyword provided.
 		/// </summary>
 		/// <param name="appendedRegistryValue">
 		/// Registry value that comes first after LOCAL_MACHINE
@@ -572,25 +733,45 @@ namespace WeightWatchingProgramPlus
 		/// <param name="registryValue">
 		/// Registry value that is added after the appended value.
 		/// </param>
-		/// <param name="thoroughCheck">
-		/// If true, checks each registry value individually. If false, checks all of them all at once.
+		/// <param name="registryIdKeyword">
+		/// The keyword that most closely relates to the registry item you're seeking. If none, enter "null" as the parameter and null will be returned.
+		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
 		/// <returns>
-		/// Returns a list of validated registry values to be used if needed. Some registry values do not need a pre-validation (such as strings) and as such are not included.
+		/// Returns the requested registry item, if applicable.
 		/// </returns>
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a registry value cannot be parsed.
 		/// </exception>
 		#endregion
-		Tuple<DateTime, double, double, bool, int, bool, int> ValidateRegistryValues (string appendedRegistryValue, string registryValue, bool thoroughCheck);
+		string ValidateRegistryValues (string appendedRegistryValue, string registryValue, string registryIdKeyword, IRetrieval retrieve);
 		
 		/// <summary>
 		/// Checks if the sync port is valid.
 		/// </summary>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
+		/// <param name="listenPort">
+		/// Are you checking the listening port?
+		/// </param>
 		/// <returns>
 		/// True if sync port is valid; else, false.
 		///</returns>
-		bool PortIsValid ();
+		bool PortIsValid (IRetrieval retrieve, bool listenPort);
+		
+		/// <summary>
+		/// Checks if the sync IP address is valid.
+		/// </summary>
+		/// <param name="retrieve">
+		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
+		/// <returns>
+		/// True if IP Address is valid; else, false. 
+		/// </returns>
+		bool IPAddressIsValid (IRetrieval retrieve);
 		
 	}
 	
@@ -669,17 +850,33 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Modifies the property settings boxes.
 		/// </summary>
-		/// <param name="stringProperties">
+		/// <param name="wordProperties">
 		/// Contains the strings for all properties that require them. So far, in order, these properties are counted: FoodName, Definer
 		/// </param>
-		/// <param name="decimalProperties">
+		/// <param name="numberProperties">
 		/// Contains the decimal values for all properties that require them. So far, in order, these properties are counted: ServingSize, CaloriesPerServing.
 		/// </param>
-		/// <param name="boolProperties">
+		/// <param name="conditionProperties">
 		/// Contains the bool values for all properties that require them. So far, in order, these properties are counted: IsDrinkCheckBox.
 		/// </param>
 		#endregion
-		void ModifyFoodPropertiesList (string[] stringProperties, decimal[] decimalProperties, bool[] boolProperties);
+		void ModifyFoodPropertiesList (string[] wordProperties, decimal[] numberProperties, bool[] conditionProperties);
+		
+	}
+	
+	/// <summary>
+	/// Interface for the NetworkOps sub-class so it does not need to be directly accessed.
+	/// </summary>
+	public interface INetOps
+	{
+		
+		int ServerConnectionStatus { get; set; }
+		
+		int ClientConnectionStatus { get; set; }
+		
+		void StartListen(int port);
+		
+		void StartSend(string ipAddress, int port, string message, string additionalInfo, string fileName, string pathToFile);
 		
 	}
 	

@@ -19,7 +19,7 @@ namespace WeightWatchingProgramPlus
 	internal class Functions : IGeneralFunctions
 	{
 		
-		public void InitializeForms (IModification modification, IStorage store, IValidation valid)
+		public void InitializeForms (IModification modification, IStorage store, IValidation valid, IRetrieval retrieve, INetOps netOps, IMainForm mainForm)
 		{
 			
 			Modification Modification = (modification as Modification);
@@ -28,9 +28,24 @@ namespace WeightWatchingProgramPlus
 			
 			Validation Validation = (valid as Validation);
 			
-			Storage.ReadRegistry(valid);
+			Retrieval Retrieval = (retrieve as Retrieval);
 			
-			var registryTuple = Storage.GetRetrievableRegistryValues(valid);
+			NetworkOps NetworkOps = (netOps as NetworkOps);
+			
+			MainForm MainForm = (mainForm as MainForm);
+			
+			MainForm.SetSyncConnectionItems();
+			
+			if(!Validation.RegistryValueDoesNotExist(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, "sync enabled", retrieve) || !bool.Parse(Retrieval.GetRegistryValue("sync enabled")))
+			{
+				
+				NetworkOps.StartListen(int.Parse(MainForm.SyncListenPort, CultureInfo.InvariantCulture));
+				
+			}
+			
+			Retrieval.ReadRegistry();
+			
+			var registryTuple = Tuple.Create(DateTime.Parse(Retrieval.GetRegistryValue("reset date"), CultureInfo.InvariantCulture), decimal.Parse(Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), decimal.Parse(Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture), bool.Parse(Retrieval.GetRegistryValue("manual time enabled")), int.Parse(Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
 			
 			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 			
@@ -44,13 +59,13 @@ namespace WeightWatchingProgramPlus
 				
 			};
 			
-			MainForm.MainFormVersionInfoText = string.Format(CultureInfo.InstalledUICulture, "Program Version: {0}.{1}.{2} ({3}{4}{5}) [Rev: {6}]", fvi.ProductMajorPart, fvi.ProductMinorPart, fvi.ProductBuildPart, versionString [0], versionString [1], versionString [2], fvi.ProductPrivatePart);
+			MainForm.MainFormVersionInfoText(string.Format(CultureInfo.InstalledUICulture, "Program Version: {0}.{1}.{2} ({3}{4}{5}) [Rev: {6}]", fvi.ProductMajorPart, fvi.ProductMinorPart, fvi.ProductBuildPart, versionString [0], versionString [1], versionString [2], fvi.ProductPrivatePart));
 			
-			MainForm.MainFormBuildInfoText = string.Format(CultureInfo.InstalledUICulture, "{0} Build", GlobalVariables.RegistryMainValue.Contains("debug", StringComparison.OrdinalIgnoreCase) ? "Development" : "Release");
+			MainForm.MainFormBuildInfoText(string.Format(CultureInfo.InstalledUICulture, "{0} Build", GlobalVariables.RegistryMainValue.Contains("de", StringComparison.OrdinalIgnoreCase) ? "Development" : "Release"));
 			
-			RefreshFoodList(store);
+			RefreshFoodList(store, retrieve, mainForm);
 			
-			MainForm.FoodListGetOrSetSelected(true, MainForm.GetFoodListTopItem, true);
+			MainForm.FoodListSelectedIndex(true, MainForm.GetFoodListTopItem, true);
 			
 			GlobalVariables.SelectedListItem = 0;
 			
@@ -64,7 +79,7 @@ namespace WeightWatchingProgramPlus
 				FoodRelated.CombinedFoodList [0].Item5
 			});
 			
-			MainForm.SetAllDecimalPointValues = registryTuple.Item6;
+			MainForm.SetAllDecimalPointValues(registryTuple.Item5);
 			
 			Validation.CheckCurrentRadioButton(modification);
 			
@@ -72,9 +87,9 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.ManualDateTime = registryTuple.Item1;
 			
-			MainForm.UserSetCalories = (decimal)registryTuple.Item2;
+			MainForm.UserSetCalories(registryTuple.Item2);
 			
-			MainForm.DefaultCalories = (decimal)registryTuple.Item3;
+			MainForm.DefaultCalories = registryTuple.Item3;
 			
 			MainForm.SetArithmeticSign = 0;
 			
@@ -87,34 +102,40 @@ namespace WeightWatchingProgramPlus
 			
 		}
 		
-		public void RefreshFoodList (IStorage store)
+		public void RefreshFoodList (IStorage store, IRetrieval retrieve, IMainForm mainForm)
 		{
+			
+			MainForm MainForm = (mainForm as MainForm);
 			
 			Storage Storage = (store as Storage);
 			
+			Retrieval Retrieval = (retrieve as Retrieval);
+			
 			FoodRelated.CombinedFoodList.Clear();
 			
-			Storage.ReadFoodTable();
+			Retrieval.ReadFoodTable();
 			
-			MainForm.MainFoodListDataSource = null;
+			MainForm.MainFoodListDataSource(null);
 			
 			MainForm.MainFoodListItems.Clear();
 			
-			MainForm.MainFoodListDataSource = new List<string> (FoodRelated.CombinedFoodList.Select(item1 => item1.Item1));
+			MainForm.MainFoodListDataSource(new List<string> (FoodRelated.CombinedFoodList.Select(item1 => item1.Item1)));
 			
 			Storage.WriteFoodTable();
 			
 		}
 
-		public void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, bool next, IPopup popUp)
+		public void Find (int offset, string stringToFind, string stringToAvoid, bool exactSearch, bool next, IPopup popUp, IMainForm mainForm)
 		{
 			
 			PopupHandler PopupHandler = (popUp as PopupHandler);
 			
+			MainForm MainForm = (mainForm as MainForm);
+			
 			foreach (var foodItem in MainForm.MainFoodListItems.OfType<string>().Where(searchResult => ((!exactSearch ? searchResult.Contains(stringToFind, StringComparison.OrdinalIgnoreCase) : searchResult.Equals(stringToFind, StringComparison.OrdinalIgnoreCase)) && !searchResult.Equals(stringToAvoid, StringComparison.OrdinalIgnoreCase) && (MainForm.MainFoodListItems.IndexOf(searchResult) > offset || (MainForm.MainFoodListItems.IndexOf(searchResult) == 0 && offset == 0 && !next) && MainForm.MainFoodListItems.IndexOf(searchResult) != -1))).Select(searchResult => MainForm.MainFoodListItems.IndexOf(searchResult)))
 			{
 				
-				MainForm.FoodListSelected = foodItem;
+				MainForm.FoodListSelectedIndex(true , foodItem, true);
 				
 				return;
 				
@@ -123,7 +144,7 @@ namespace WeightWatchingProgramPlus
 			if (next && offset > 0)
 			{
 				
-				Find(0, stringToFind, stringToAvoid, exactSearch, false, popUp);
+				Find(0, stringToFind, stringToAvoid, exactSearch, false, popUp, mainForm);
 				
 			}
 			else if (!exactSearch)

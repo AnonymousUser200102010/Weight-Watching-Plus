@@ -7,6 +7,15 @@ using System.Runtime.InteropServices;
 namespace UniversalHandlersLibrary
 {
 	
+	internal struct ConstParameters
+	{
+		
+		internal const int minPruneVal = 25000;
+		
+		internal const int maxPruneVal = 26214400;
+		
+	}
+	
 	/// <summary>
 	/// Errors handler entry point.
 	/// </summary>
@@ -34,6 +43,8 @@ namespace UniversalHandlersLibrary
 				
 				string startingMessage = string.Format(CultureInfo.InvariantCulture, "{0}:\nException Message:\n{1}\n\nException Stack Trace:\n{2}\n\n{3}", DateTime.Now.ToString("MMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture), providedException.Message, providedException.StackTrace, providedException.InnerException != null ? string.Format(CultureInfo.InvariantCulture, "Inner Exception Message:\n{0}\n\nInner Exception Stack Trace:\n{1}\n\n", providedException.InnerException.Message, providedException.InnerException.StackTrace) : null);
 				
+				
+				
 				InternalFunctions.Writer(startingMessage, InternalFunctions.ReturnFilePath("Error.dmp"), prune, pruneCutoff);
 				
 			}
@@ -55,7 +66,7 @@ namespace UniversalHandlersLibrary
 			/// The file size at which to prune the Error.dmp file. (default is 524288)
 			/// </param>
 			/// <exception cref="T:System.ArgumentOutOfRangeException">
-			/// Thrown if the pruneCutOff value is less than 102400, or greater than 1000000.
+			/// Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
 			/// </exception>
 			
 			#endregion
@@ -65,22 +76,27 @@ namespace UniversalHandlersLibrary
 				if(write)
 				{
 					
-					if (pruneCutoff < 102400 || pruneCutoff > 1000000)
-					{
-							
-						Errors.Handler(new ArgumentOutOfRangeException("pruneCutoff", pruneCutoff,"UniversalHandlersLibrary: prune cutoff must be between 102400 and 1000000"), true, true, 524288);
-							
-					}
-					else
+					Writer(providedException, prune, pruneCutoff);
+					
+				}
+				
+				
+				if(prune)
+				{
+					
+					try
 					{
 						
-						Writer(providedException, prune, pruneCutoff);
+						InternalFunctions.CheckParameters(pruneCutoff, "prune");
+						
+					}
+					catch (Exception e)
+					{
+						
+						Errors.Handler(e, true, false, 0);
 						
 					}
 					
-				}
-				else if(prune)
-				{
 					string errorDmp = InternalFunctions.ReturnFilePath("Error.dmp");
 					
 					InternalFunctions.PruneCheck(errorDmp, pruneCutoff);
@@ -123,7 +139,7 @@ namespace UniversalHandlersLibrary
 			if (exceptionNumber < lower || exceptionNumber > upper)
 			{
 				
-				Errors.Handler(new ArgumentOutOfRangeException("exceptionNumber", exceptionNumber, "Value must be between " + lower + " and " + upper), true, true, 524288);
+				Errors.Handler(new ArgumentOutOfRangeException("exceptionNumber", exceptionNumber, string.Format(CultureInfo.CurrentCulture, "Value must be between {0} and {1}", lower, upper)), true, true, 524288);
 				
 			}
 			
@@ -167,7 +183,7 @@ namespace UniversalHandlersLibrary
 		/// The file size at which to prune the Messages.txt file. (default is 102400)
 		/// </param>
 		/// <exception cref="T:System.ArgumentOutOfRangeException">
-		/// Thrown if the pruneCutOff value is less than 102400, or greater than 1000000.
+		/// Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
 		/// </exception>
 		
 		#endregion
@@ -177,12 +193,7 @@ namespace UniversalHandlersLibrary
 			try
 			{
 				
-				if (pruneCutoff < 102400 || pruneCutoff > 1000000)
-				{
-						
-					throw new ArgumentOutOfRangeException("pruneCutoff", pruneCutoff,"UniversalHandlersLibrary: prune cutoff must be between 102400 and 1000000");
-						
-				}
+				InternalFunctions.CheckParameters(pruneCutoff, "prune");
 				
 				string startingMessage = string.Format(CultureInfo.InvariantCulture, "{0}: {1} Time: {2}\n\n", nameOfAppWithoutExtension, message, DateTime.Now.ToString("MM-dd-yy hh:mm tt", CultureInfo.InvariantCulture));
 				
@@ -376,7 +387,7 @@ namespace UniversalHandlersLibrary
 		public static void CreateFolderTree(string[] directoryHierarchy)
 		{
 			
-			CreateFolderTree(directoryHierarchy, null, true, true);
+			CreateFolderTree(directoryHierarchy, null, true, true, true);
 			
 		}
 		
@@ -402,9 +413,12 @@ namespace UniversalHandlersLibrary
 		/// <param name="createTextFolder">
 		/// If true the 'Files\\Text\\' folder will be marked for creation, else not. This would remove the need to add it to the directoryHeirarchy array as it is a vital folder.
 		/// </param>
+		/// <param name="createAuxiliaryFolders">
+		/// If true all folders considered non-essential will be marked for creation, else not. This would remove the need to add it to the directoryHeirarchy array, simply for convenience reasons.
+		/// </param>
 		
 		#endregion
-		public static void CreateFolderTree(string[] directoryHierarchy, string appendedDirectoryRoot, bool createFilesFolder, bool createTextFolder)
+		public static void CreateFolderTree(string[] directoryHierarchy, string appendedDirectoryRoot, bool createFilesFolder, bool createTextFolder, bool createAuxiliaryFolders)
 		{
 			
 			if(createFilesFolder && !Directory.Exists(string.IsNullOrEmpty(appendedDirectoryRoot) ? "Files\\" : string.Format(CultureInfo.InvariantCulture, "{0}\\Files\\", appendedDirectoryRoot)))
@@ -421,7 +435,21 @@ namespace UniversalHandlersLibrary
 				
 			}
 			
-			if(directoryHierarchy != null)
+			if(createAuxiliaryFolders && !Directory.Exists(string.IsNullOrEmpty(appendedDirectoryRoot) ? "Files\\Help\\" : string.Format(CultureInfo.InvariantCulture, "{0}\\Files\\Help\\", appendedDirectoryRoot)))
+			{
+				
+				Directory.CreateDirectory(string.IsNullOrEmpty(appendedDirectoryRoot) ? "Files\\Help\\" : string.Format(CultureInfo.InvariantCulture, "{0}\\Files\\Help\\", appendedDirectoryRoot));
+				
+			}
+			
+			if(createAuxiliaryFolders && !Directory.Exists(string.IsNullOrEmpty(appendedDirectoryRoot) ? "Files\\Assets\\" : string.Format(CultureInfo.InvariantCulture, "{0}\\Files\\Assets\\", appendedDirectoryRoot)))
+			{
+				
+				Directory.CreateDirectory(string.IsNullOrEmpty(appendedDirectoryRoot) ? "Files\\Assets\\" : string.Format(CultureInfo.InvariantCulture, "{0}\\Files\\Assets\\", appendedDirectoryRoot));
+				
+			}
+			
+			if(directoryHierarchy != null && directoryHierarchy.Any())
 			{
 				
 				for (int curDir = 0, directoryHierarchyLength = directoryHierarchy.Length; curDir < directoryHierarchyLength; curDir++)
@@ -494,6 +522,35 @@ namespace UniversalHandlersLibrary
 	/// </summary>
 	internal static class InternalFunctions
 	{
+		
+		#region Check Parameters Summary
+		
+		/// <summary>
+		/// Depending on the parameter name provided, it makes sure the provided value is within the conditions specified within the code.
+		/// </summary>
+		/// <param name="value">
+		/// The value/parameter to check.
+		/// </param>
+		/// <param name="parameterName">
+		/// The name of the parameter you are currently checking.
+		/// </param>
+		#endregion
+		internal static void CheckParameters(int value, string parameterName)
+		{
+			
+			if(parameterName.Contains("prune", StringComparison.OrdinalIgnoreCase))
+			{
+				
+				if (value < ConstParameters.minPruneVal || value > ConstParameters.maxPruneVal)
+				{
+					
+					throw new ArgumentOutOfRangeException("value", value, string.Format(CultureInfo.CurrentCulture, "UniversalHandlersLibrary: value must be between {0} and {1}", ConstParameters.minPruneVal, ConstParameters.maxPruneVal));
+					
+				}
+				
+			}
+			
+		}
 		
 		#region Internal Writer Summary
 		/// <summary>
@@ -593,11 +650,38 @@ namespace UniversalHandlersLibrary
 		internal static string ReturnFilePath(string fileName)
 		{
 			
-			string[] ImportantFileExtentions = {
+			string[] ExcludedFileExtentions = {
 				".dmp"
 			};
 			
-			if (Directory.Exists("Files\\Text\\") && !ImportantFileExtentions.Any(s => fileName.Contains(s, StringComparison.OrdinalIgnoreCase)))
+			string[] AssetFileExtentions = {
+				".jpg",
+				".jpeg",
+				".bmp",
+				".gif",
+				".png",
+				".ico"
+			};
+			
+			string[] HelpFileExtentions = {
+				"NOTHINGYET!!!!11!!!1"
+			};
+			
+			if (Directory.Exists("Files\\Help\\") && HelpFileExtentions.Any(s => fileName.Contains(s, StringComparison.OrdinalIgnoreCase)))
+			{
+				
+				return string.Format(CultureInfo.InvariantCulture, "Files\\Help\\{0}", fileName);
+					
+			}
+			
+			if (Directory.Exists("Files\\Assets\\") && AssetFileExtentions.Any(s => fileName.Contains(s, StringComparison.OrdinalIgnoreCase)))
+			{
+				
+				return string.Format(CultureInfo.InvariantCulture, "Files\\Assets\\{0}", fileName);
+					
+			}
+			
+			if (Directory.Exists("Files\\Text\\") && !ExcludedFileExtentions.Any(s => fileName.Contains(s, StringComparison.OrdinalIgnoreCase)))
 			{
 				
 				return string.Format(CultureInfo.InvariantCulture, "Files\\Text\\{0}", fileName);
@@ -625,7 +709,7 @@ namespace UniversalHandlersLibrary
 		/// The size at which a file is pruned.
 		/// </param>
 		/// <exception cref="T:System.ArgumentOutOfRangeException">
-		/// Thrown if the pruneCutOff value is less than 102400, or greater than 1000000.
+		/// Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
 		/// </exception>
 		
 		#endregion
@@ -637,12 +721,7 @@ namespace UniversalHandlersLibrary
 				
 				long fileSize = new FileInfo(fileToCheck).Length;
 				
-				if (pruneCutoff < 102400 || pruneCutoff > 1000000)
-				{
-					
-					throw new ArgumentOutOfRangeException("pruneCutoff", pruneCutoff,"UniversalHandlersLibrary: pruneCheck: prune cutoff must be between 102400 and 1000000");
-					
-				}
+				CheckParameters(pruneCutoff, "prune");
 				
 				if (fileSize < pruneCutoff)
 				{

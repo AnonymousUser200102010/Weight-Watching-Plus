@@ -1,3 +1,7 @@
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\Assets\network-connected.ico
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\Assets\network-connection-pending.ico
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\Assets\network-disconnected.ico
+C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\Assets\network-initiating-transfer.gif
 C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\WeightWatchingProgramPlus.exe.config
 C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\WeightWatchingProgramPlus.exe
 C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Debug\WeightWatchingProgramPlus.pdb

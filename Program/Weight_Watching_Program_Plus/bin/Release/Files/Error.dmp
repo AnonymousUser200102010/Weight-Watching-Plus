@@ -1,3 +1,295 @@
+May 24 04:09:34 PM:
+Exception Message:
+An unknown, invalid, or unsupported option or level was specified in a getsockopt or setsockopt call
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 24 04:09:33 PM:
+Exception Message:
+An unknown, invalid, or unsupported option or level was specified in a getsockopt or setsockopt call
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+May 24 04:09:32 PM:
+Exception Message:
+An unknown, invalid, or unsupported option or level was specified in a getsockopt or setsockopt call
+
+Exception Stack Trace:
+   at System.Net.Sockets.Socket.SetSocketOption(SocketOptionLevel optionLevel, SocketOptionName optionName, Int32 optionValue, Boolean silent)
+   at System.Net.Sockets.Socket.SetSocketOption(SocketOptionLevel optionLevel, SocketOptionName optionName, Int32 optionValue)
+   at WeightWatchingProgramPlus.NetworkOps.<StartListen>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__4(Object state)
+
+May 23 10:05:32 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 23 10:05:32 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+May 23 10:05:31 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, String registryIDKeyword, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Retrieval.GetRegistryValue(String appendedRegistryValue, String registryValue, String registryIDKeyword)
+   at WeightWatchingProgramPlus.NetworkOps.<StartListen>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__4(Object state)
+
+May 22 11:07:25 PM:
+Exception Message:
+Only one usage of each socket address (protocol/network address/port) is normally permitted
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 22 11:07:25 PM:
+Exception Message:
+Only one usage of each socket address (protocol/network address/port) is normally permitted
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+May 22 11:07:24 PM:
+Exception Message:
+Only one usage of each socket address (protocol/network address/port) is normally permitted
+
+Exception Stack Trace:
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpClient..ctor(IPEndPoint localEP)
+   at WeightWatchingProgramPlus.NetworkOps.<StartSend>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__4(Object state)
+
+May 22 10:56:33 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+May 22 10:56:28 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, String registryIDKeyword, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Retrieval.GetRegistryValue(String appendedRegistryValue, String registryValue, String registryIDKeyword)
+   at WeightWatchingProgramPlus.NetworkOps.<StartListen>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__4(Object state)
+
+May 22 10:46:47 PM:
+Exception Message:
+The operation is not allowed on non-connected sockets.
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at WeightWatchingProgramPlus.Program.Application_ThreadException(Object sender, ThreadExceptionEventArgs e)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.WndProcException(Exception e)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnThreadException(Exception e)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 22 10:46:47 PM:
+Exception Message:
+The operation is not allowed on non-connected sockets.
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at WeightWatchingProgramPlus.Program.Application_ThreadException(Object sender, ThreadExceptionEventArgs e)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+May 22 10:46:46 PM:
+Exception Message:
+The operation is not allowed on non-connected sockets.
+
+Exception Stack Trace:
+   at System.Net.Sockets.TcpClient.GetStream()
+   at WeightWatchingProgramPlus.NetworkOps.<SendOps>d__d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at WeightWatchingProgramPlus.NetworkOps.<StartSend>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__4(Object state)
+
+May 22 06:55:07 PM:
+Exception Message:
+No such host is known
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at WeightWatchingProgramPlus.Program.Application_ThreadException(Object sender, ThreadExceptionEventArgs e)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.WndProcException(Exception e)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnThreadException(Exception e)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Forms.SafeNativeMethods.MessageBox(HandleRef hWnd, String text, String caption, Int32 type)
+   at System.Windows.Forms.MessageBox.ShowCore(IWin32Window owner, String text, String caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, MessageBoxOptions options, Boolean showHelp)
+   at WeightWatchingProgramPlus.PopupHandler.CreatePopup(String message, Int32 popupCode, Boolean hasAdditionalActions, Control controlItem)
+   at WeightWatchingProgramPlus.PopupHandler.CreatePopup(String message, Int32 popupCode)
+   at WeightWatchingProgramPlus.Validation.IPAddressIsValid(IRetrieval retrieve)
+   at WeightWatchingProgramPlus.MainForm.SyncStatusChanged(Object sender, EventArgs e)
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripItem.OnTextChanged(EventArgs e)
+   at System.Windows.Forms.ToolStripControlHost.HandleTextChanged(Object sender, EventArgs e)
+   at System.Windows.Forms.Control.OnTextChanged(EventArgs e)
+   at System.Windows.Forms.TextBoxBase.OnTextChanged(EventArgs e)
+   at System.Windows.Forms.Control.set_Text(String value)
+   at System.Windows.Forms.TextBoxBase.set_Text(String value)
+   at System.Windows.Forms.TextBox.set_Text(String value)
+   at System.Windows.Forms.ToolStripControlHost.set_Text(String value)
+   at WeightWatchingProgramPlus.MainForm.set_SyncListenPort(String value)
+   at WeightWatchingProgramPlus.Retrieval.ReadRegistry(String appendedRegistryValue, String registyValue)
+   at WeightWatchingProgramPlus.Retrieval.ReadRegistry()
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid, IRetrieval retrieve)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 22 06:55:07 PM:
+Exception Message:
+No such host is known
+
+Exception Stack Trace:
+   at UniversalHandlersLibrary.Errors.Handler(Exception providedException, Boolean write, Boolean prune, Int32 pruneCutoff)
+   at WeightWatchingProgramPlus.Program.Application_ThreadException(Object sender, ThreadExceptionEventArgs e)
+   at System.Windows.Forms.Application.ThreadContext.OnThreadException(Exception t)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+May 22 06:55:06 PM:
+Exception Message:
+No such host is known
+
+Exception Stack Trace:
+   at System.Net.Dns.GetAddrInfo(String name)
+   at System.Net.Dns.InternalGetHostByName(String hostName, Boolean includeIPv6)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress)
+   at WeightWatchingProgramPlus.NetworkOps.<StartSend>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__4(Object state)
+
+May 20 08:46:57 PM:
+Exception Message:
+Could not find file 'C:\Users\Erik\Documents\GitHub\Weight_Watching_Program_Plus\Weight-Watching-Plus\Program\Weight_Watching_Program_Plus\bin\Release\Files\Backup\Version.old'.
+
+Exception Stack Trace:
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path)
+   at WeightWatchingProgramPlus.Validation.ValidateBackup(String appendedRegistryValue, String registryValue, String backupDirectory, IRetrieval retrieve)
+   at WeightWatchingProgramPlus.Retrieval.ReadRegistry(String appendedRegistryValue, String registyValue)
+   at WeightWatchingProgramPlus.Retrieval.ReadRegistry()
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid, IRetrieval retrieve)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 18 09:04:29 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, String registryIDKeyword, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRegistryValue(String appendedRegistryValue, String registryValue, IValidation valid, String registryIDKeyword)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 18 09:04:25 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, String registryIDKeyword, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRegistryValue(String appendedRegistryValue, String registryValue, IValidation valid, String registryIDKeyword)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
+May 18 09:03:35 PM:
+Exception Message:
+Object reference not set to an instance of an object.
+
+Exception Stack Trace:
+   at WeightWatchingProgramPlus.Validation.ValidateRegistryValues(String appendedRegistryValue, String registryValue, String registryIDKeyword, Boolean thoroughCheck)
+   at WeightWatchingProgramPlus.Storage.GetRegistryValue(String appendedRegistryValue, String registryValue, IValidation valid, String registryIDKeyword)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(String appendedRegistryValue, String registyValue, IValidation valid)
+   at WeightWatchingProgramPlus.Storage.ReadRegistry(IValidation valid)
+   at WeightWatchingProgramPlus.Functions.InitializeForms(IModification modification, IStorage store, IValidation valid)
+   at WeightWatchingProgramPlus.MainForm..ctor()
+   at WeightWatchingProgramPlus.Program.Main(String[] args)
+
 May 13 08:32:45 AM:
 Exception Message:
 The network path was not found.

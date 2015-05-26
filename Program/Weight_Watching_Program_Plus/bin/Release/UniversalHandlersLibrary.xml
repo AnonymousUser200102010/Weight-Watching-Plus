@@ -40,7 +40,7 @@
             The file size at which to prune the Error.dmp file. (default is 524288)
             </param>
             <exception cref="T:System.ArgumentOutOfRangeException">
-            Thrown if the pruneCutOff value is less than 102400, or greater than 1000000.
+            Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
             </exception>
         </member>
         <member name="M:UniversalHandlersLibrary.Errors.PremadeExceptions(System.String,System.String,System.Int32)">
@@ -85,7 +85,7 @@
             The file size at which to prune the Messages.txt file. (default is 102400)
             </param>
             <exception cref="T:System.ArgumentOutOfRangeException">
-            Thrown if the pruneCutOff value is less than 102400, or greater than 1000000.
+            Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
             </exception>
         </member>
         <member name="T:UniversalHandlersLibrary.BackEnd">
@@ -159,7 +159,7 @@
             "SomeDrive\\SomeRoot\\Folder1\\" is a correct value for the array. You can also use "SomeFolder\\SomeSubFolder\\" as well to indicate the root directory is the application's root directory. "SomeDrive\\SomeRoot\\Folder1" is not correct.
             </example>
         </member>
-        <member name="M:UniversalHandlersLibrary.IOHandler.CreateFolderTree(System.String[],System.String,System.Boolean,System.Boolean)">
+        <member name="M:UniversalHandlersLibrary.IOHandler.CreateFolderTree(System.String[],System.String,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Creates a folder hierarchy of your choosing using the directory hierarchy provided.
             </summary>
@@ -180,6 +180,9 @@
             </param>
             <param name="createTextFolder">
             If true the 'Files\\Text\\' folder will be marked for creation, else not. This would remove the need to add it to the directoryHeirarchy array as it is a vital folder.
+            </param>
+            <param name="createAuxiliaryFolders">
+            If true all folders considered non-essential will be marked for creation, else not. This would remove the need to add it to the directoryHeirarchy array, simply for convenience reasons.
             </param>
         </member>
         <member name="T:UniversalHandlersLibrary.SafeNativeMethods">
@@ -213,6 +216,17 @@
             <summary>
             DO NOT USE ANY OF THESE FUNCTIONS OUTSIDE THE UNIVERSALHANDLERSLIBRARY MAIN CODE.
             </summary>
+        </member>
+        <member name="M:UniversalHandlersLibrary.InternalFunctions.CheckParameters(System.Int32,System.String)">
+            <summary>
+            Depending on the parameter name provided, it makes sure the provided value is within the conditions specified within the code.
+            </summary>
+            <param name="value">
+            The value/parameter to check.
+            </param>
+            <param name="parameterName">
+            The name of the parameter you are currently checking.
+            </param>
         </member>
         <member name="M:UniversalHandlersLibrary.InternalFunctions.Writer(System.String,System.String,System.Boolean,System.Int32)">
             <summary>
@@ -264,7 +278,7 @@
             The size at which a file is pruned.
             </param>
             <exception cref="T:System.ArgumentOutOfRangeException">
-            Thrown if the pruneCutOff value is less than 102400, or greater than 1000000.
+            Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
             </exception>
         </member>
     </members>

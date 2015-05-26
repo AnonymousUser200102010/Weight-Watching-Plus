@@ -82,9 +82,19 @@ private System.Windows.Forms.ToolStripMenuItem syncEnabledToolStripMenuItem;
 private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 private System.Windows.Forms.ToolStripMenuItem serverInfoToolStripMenuItem;
 private System.Windows.Forms.ToolStripTextBox SyncPlaceToAccess;
-private System.Windows.Forms.ToolStripTextBox syncSocketTextBox;
+private System.Windows.Forms.ToolStripTextBox syncListenPort;
 private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+private System.Windows.Forms.ToolStripMenuItem syncBehaviorToolStripItem;
+private System.Windows.Forms.ToolStripMenuItem syncCopyTransferToolStripMenuItem;
+private System.Windows.Forms.ToolStripMenuItem syncIncludeFoodList;
+private System.Windows.Forms.ToolStripMenuItem syncIncludeSettings;
+private System.Windows.Forms.ToolStripMenuItem syncIncludeBackups;
+private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+private System.Windows.Forms.ToolStripMenuItem syncSendPortToolStripMenuItem;
+private System.Windows.Forms.ToolStripTextBox syncSendPort;
+private System.Windows.Forms.PictureBox syncImage;
 /// <summary>
 /// Disposes resources used by the form.
 /// </summary>
@@ -178,12 +188,22 @@ private void InitializeComponent()
 	this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 	this.SyncPlaceToAccess = new System.Windows.Forms.ToolStripTextBox();
 	this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-	this.syncSocketTextBox = new System.Windows.Forms.ToolStripTextBox();
+	this.syncListenPort = new System.Windows.Forms.ToolStripTextBox();
+	this.syncSendPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+	this.syncSendPort = new System.Windows.Forms.ToolStripTextBox();
+	this.syncBehaviorToolStripItem = new System.Windows.Forms.ToolStripMenuItem();
+	this.syncCopyTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+	this.syncIncludeFoodList = new System.Windows.Forms.ToolStripMenuItem();
+	this.syncIncludeSettings = new System.Windows.Forms.ToolStripMenuItem();
+	this.syncIncludeBackups = new System.Windows.Forms.ToolStripMenuItem();
 	this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 	this.beginnerHelp = new System.Windows.Forms.ToolStripMenuItem();
+	this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 	this.intermediateHelp = new System.Windows.Forms.ToolStripMenuItem();
+	this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 	this.advancedHelp = new System.Windows.Forms.ToolStripMenuItem();
 	this.caloriesLabel = new System.Windows.Forms.Label();
+	this.syncImage = new System.Windows.Forms.PictureBox();
 	this.planTab.SuspendLayout();
 	this.FoodListPage.SuspendLayout();
 	this.groupBox1.SuspendLayout();
@@ -208,6 +228,7 @@ private void InitializeComponent()
 	((System.ComponentModel.ISupportInitialize)(this.defaultCaloriesNumericUpDown)).BeginInit();
 	this.resetCaloriesSpecificGroupBox.SuspendLayout();
 	this.mainMenuStrip.SuspendLayout();
+	((System.ComponentModel.ISupportInitialize)(this.syncImage)).BeginInit();
 	this.SuspendLayout();
 	// 
 	// planTab
@@ -287,7 +308,6 @@ private void InitializeComponent()
 	this.exactSearchCheckBox.TabIndex = 5;
 	this.exactSearchCheckBox.Text = "Exact";
 	this.exactSearchCheckBox.UseVisualStyleBackColor = true;
-	this.exactSearchCheckBox.Click += new System.EventHandler(this.FoodListFocusChanged);
 	// 
 	// nextSearchButton
 	// 
@@ -349,7 +369,6 @@ private void InitializeComponent()
 	this.searchBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 	this.searchBar.TextChanged += new System.EventHandler(this.SearchBarTextChanged);
 	this.searchBar.Enter += new System.EventHandler(this.SearchBarFocusGranted);
-	this.searchBar.Leave += new System.EventHandler(this.ClearSearchBar);
 	// 
 	// foodList
 	// 
@@ -929,10 +948,10 @@ private void InitializeComponent()
 	// 
 	// setDecimalPlacesValueButton
 	// 
-	this.setDecimalPlacesValueButton.Location = new System.Drawing.Point(209, 22);
+	this.setDecimalPlacesValueButton.Location = new System.Drawing.Point(209, 19);
 	this.setDecimalPlacesValueButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 	this.setDecimalPlacesValueButton.Name = "setDecimalPlacesValueButton";
-	this.setDecimalPlacesValueButton.Size = new System.Drawing.Size(46, 25);
+	this.setDecimalPlacesValueButton.Size = new System.Drawing.Size(46, 28);
 	this.setDecimalPlacesValueButton.TabIndex = 2;
 	this.setDecimalPlacesValueButton.Text = "Set";
 	this.setDecimalPlacesValueButton.UseVisualStyleBackColor = true;
@@ -954,7 +973,7 @@ private void InitializeComponent()
 	// decimalPlacesNumericUpDown
 	// 
 	this.decimalPlacesNumericUpDown.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold);
-	this.decimalPlacesNumericUpDown.Location = new System.Drawing.Point(12, 20);
+	this.decimalPlacesNumericUpDown.Location = new System.Drawing.Point(12, 22);
 	this.decimalPlacesNumericUpDown.Maximum = new decimal(new int[] {
 			10,
 			0,
@@ -968,7 +987,7 @@ private void InitializeComponent()
 			0,
 			0,
 			0});
-	this.decimalPlacesNumericUpDown.ValueChanged += new System.EventHandler(this.DecimalPlacesNumericUpDownValueChanged);
+	this.decimalPlacesNumericUpDown.Click += new System.EventHandler(this.DecimalPlacesNumericUpDownValueChanged);
 	// 
 	// LicenseInfoButton
 	// 
@@ -997,7 +1016,7 @@ private void InitializeComponent()
 	// 
 	// defaultCaloriesSetButton
 	// 
-	this.defaultCaloriesSetButton.Location = new System.Drawing.Point(198, 19);
+	this.defaultCaloriesSetButton.Location = new System.Drawing.Point(198, 22);
 	this.defaultCaloriesSetButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 	this.defaultCaloriesSetButton.Name = "defaultCaloriesSetButton";
 	this.defaultCaloriesSetButton.Size = new System.Drawing.Size(65, 25);
@@ -1095,9 +1114,9 @@ private void InitializeComponent()
 	this.productVersionInfoBar.AutoEllipsis = true;
 	this.productVersionInfoBar.BackColor = System.Drawing.SystemColors.Control;
 	this.productVersionInfoBar.Font = new System.Drawing.Font("Times New Roman", 12F);
-	this.productVersionInfoBar.Location = new System.Drawing.Point(3, 679);
+	this.productVersionInfoBar.Location = new System.Drawing.Point(36, 679);
 	this.productVersionInfoBar.Name = "productVersionInfoBar";
-	this.productVersionInfoBar.Size = new System.Drawing.Size(876, 23);
+	this.productVersionInfoBar.Size = new System.Drawing.Size(843, 23);
 	this.productVersionInfoBar.TabIndex = 103;
 	this.productVersionInfoBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 	// 
@@ -1119,6 +1138,7 @@ private void InitializeComponent()
 			this.helpToolStripMenuItem});
 	this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
 	this.mainMenuStrip.Name = "mainMenuStrip";
+	this.mainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
 	this.mainMenuStrip.Size = new System.Drawing.Size(1077, 28);
 	this.mainMenuStrip.TabIndex = 105;
 	this.mainMenuStrip.Text = "Menu";
@@ -1128,72 +1148,145 @@ private void InitializeComponent()
 	this.syncToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.syncEnabledToolStripMenuItem,
 			this.toolStripSeparator1,
-			this.serverInfoToolStripMenuItem});
+			this.serverInfoToolStripMenuItem,
+			this.syncBehaviorToolStripItem});
 	this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
 	this.syncToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-	this.syncToolStripMenuItem.Text = "Sync";
+	this.syncToolStripMenuItem.Text = "&Sync";
 	// 
 	// syncEnabledToolStripMenuItem
 	// 
 	this.syncEnabledToolStripMenuItem.CheckOnClick = true;
 	this.syncEnabledToolStripMenuItem.Name = "syncEnabledToolStripMenuItem";
-	this.syncEnabledToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
-	this.syncEnabledToolStripMenuItem.Text = "Enabled";
+	this.syncEnabledToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+	this.syncEnabledToolStripMenuItem.Text = "&Enabled";
 	this.syncEnabledToolStripMenuItem.ToolTipText = "Enable the sync feature";
 	this.syncEnabledToolStripMenuItem.CheckedChanged += new System.EventHandler(this.SyncStatusChanged);
 	// 
 	// toolStripSeparator1
 	// 
 	this.toolStripSeparator1.Name = "toolStripSeparator1";
-	this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+	this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
 	// 
 	// serverInfoToolStripMenuItem
 	// 
 	this.serverInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.toolStripMenuItem1,
-			this.toolStripMenuItem2});
+			this.toolStripMenuItem2,
+			this.syncSendPortToolStripMenuItem});
 	this.serverInfoToolStripMenuItem.Enabled = false;
 	this.serverInfoToolStripMenuItem.Name = "serverInfoToolStripMenuItem";
-	this.serverInfoToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
-	this.serverInfoToolStripMenuItem.Text = "Server Information";
-	this.serverInfoToolStripMenuItem.ToolTipText = "The name of the computer you wish to sync with.";
+	this.serverInfoToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+	this.serverInfoToolStripMenuItem.Text = "Information";
+	this.serverInfoToolStripMenuItem.ToolTipText = "Information required to sync.";
 	// 
 	// toolStripMenuItem1
 	// 
 	this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.SyncPlaceToAccess});
 	this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-	this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 24);
-	this.toolStripMenuItem1.Text = "Name";
-	this.toolStripMenuItem1.ToolTipText = "The name or IP of the computer whom you wish to sync programs with.";
+	this.toolStripMenuItem1.Size = new System.Drawing.Size(147, 24);
+	this.toolStripMenuItem1.Text = "Server IP";
+	this.toolStripMenuItem1.ToolTipText = "The IP of the computer or server you will sync with.";
 	// 
 	// SyncPlaceToAccess
 	// 
 	this.SyncPlaceToAccess.Name = "SyncPlaceToAccess";
 	this.SyncPlaceToAccess.Size = new System.Drawing.Size(175, 27);
-	this.SyncPlaceToAccess.Text = "NAME OR IP HERE";
+	this.SyncPlaceToAccess.Text = "127.0.0.1";
+	this.SyncPlaceToAccess.TextChanged += new System.EventHandler(this.SyncStatusChanged);
 	// 
 	// toolStripMenuItem2
 	// 
 	this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.syncSocketTextBox});
+			this.syncListenPort});
 	this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-	this.toolStripMenuItem2.Size = new System.Drawing.Size(175, 24);
-	this.toolStripMenuItem2.Text = "Port";
-	this.toolStripMenuItem2.ToolTipText = "The port you want to connect with.";
+	this.toolStripMenuItem2.Size = new System.Drawing.Size(147, 24);
+	this.toolStripMenuItem2.Text = "Listen Port";
+	this.toolStripMenuItem2.ToolTipText = "The port you want to listen with. Must be different than the send port.";
 	// 
-	// syncSocketTextBox
+	// syncListenPort
 	// 
-	this.syncSocketTextBox.Name = "syncSocketTextBox";
-	this.syncSocketTextBox.Size = new System.Drawing.Size(100, 27);
-	this.syncSocketTextBox.Text = "5050";
-	this.syncSocketTextBox.TextChanged += new System.EventHandler(this.SyncStatusChanged);
+	this.syncListenPort.Name = "syncListenPort";
+	this.syncListenPort.Size = new System.Drawing.Size(100, 27);
+	this.syncListenPort.Text = "5050";
+	this.syncListenPort.TextChanged += new System.EventHandler(this.SyncStatusChanged);
+	// 
+	// syncSendPortToolStripMenuItem
+	// 
+	this.syncSendPortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.syncSendPort});
+	this.syncSendPortToolStripMenuItem.Name = "syncSendPortToolStripMenuItem";
+	this.syncSendPortToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
+	this.syncSendPortToolStripMenuItem.Text = "Send Port";
+	this.syncSendPortToolStripMenuItem.ToolTipText = "The port the computer you\'re syncing to is listening from. Must be different than" +
+	" the listen port.";
+	// 
+	// syncSendPort
+	// 
+	this.syncSendPort.Name = "syncSendPort";
+	this.syncSendPort.Size = new System.Drawing.Size(100, 27);
+	this.syncSendPort.Text = "5051";
+	this.syncSendPort.TextChanged += new System.EventHandler(this.SyncStatusChanged);
+	// 
+	// syncBehaviorToolStripItem
+	// 
+	this.syncBehaviorToolStripItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.syncCopyTransferToolStripMenuItem});
+	this.syncBehaviorToolStripItem.Enabled = false;
+	this.syncBehaviorToolStripItem.Name = "syncBehaviorToolStripItem";
+	this.syncBehaviorToolStripItem.Size = new System.Drawing.Size(156, 24);
+	this.syncBehaviorToolStripItem.Text = "Behavior";
+	this.syncBehaviorToolStripItem.ToolTipText = "Dictates the behavior of transfers initiated by the sync function.";
+	// 
+	// syncCopyTransferToolStripMenuItem
+	// 
+	this.syncCopyTransferToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.syncIncludeFoodList,
+			this.syncIncludeSettings,
+			this.syncIncludeBackups});
+	this.syncCopyTransferToolStripMenuItem.Name = "syncCopyTransferToolStripMenuItem";
+	this.syncCopyTransferToolStripMenuItem.Size = new System.Drawing.Size(185, 24);
+	this.syncCopyTransferToolStripMenuItem.Text = "Copy && Transfer";
+	this.syncCopyTransferToolStripMenuItem.ToolTipText = "Behavior of copy and transfer operations between the server and this program.";
+	// 
+	// syncIncludeFoodList
+	// 
+	this.syncIncludeFoodList.Checked = true;
+	this.syncIncludeFoodList.CheckOnClick = true;
+	this.syncIncludeFoodList.CheckState = System.Windows.Forms.CheckState.Checked;
+	this.syncIncludeFoodList.Name = "syncIncludeFoodList";
+	this.syncIncludeFoodList.Size = new System.Drawing.Size(189, 26);
+	this.syncIncludeFoodList.Text = "Include Food.List";
+	this.syncIncludeFoodList.ToolTipText = "Includes the food list in copy and transfer operations.";
+	// 
+	// syncIncludeSettings
+	// 
+	this.syncIncludeSettings.Checked = true;
+	this.syncIncludeSettings.CheckOnClick = true;
+	this.syncIncludeSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+	this.syncIncludeSettings.Name = "syncIncludeSettings";
+	this.syncIncludeSettings.Size = new System.Drawing.Size(189, 26);
+	this.syncIncludeSettings.Text = "Include Settings";
+	this.syncIncludeSettings.ToolTipText = "Includes settings along with the mandatory registry items to include in copy and " +
+	"transfer operations.";
+	// 
+	// syncIncludeBackups
+	// 
+	this.syncIncludeBackups.CheckOnClick = true;
+	this.syncIncludeBackups.Name = "syncIncludeBackups";
+	this.syncIncludeBackups.Size = new System.Drawing.Size(189, 26);
+	this.syncIncludeBackups.Text = "Include Backups";
+	this.syncIncludeBackups.ToolTipText = "Includes the backups of both the main and secondary (this) programs in copy and t" +
+	"ransfer operations.";
 	// 
 	// helpToolStripMenuItem
 	// 
 	this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.beginnerHelp,
+			this.toolStripSeparator2,
 			this.intermediateHelp,
+			this.toolStripSeparator3,
 			this.advancedHelp});
 	this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 	this.helpToolStripMenuItem.ShortcutKeyDisplayString = "";
@@ -1209,6 +1302,11 @@ private void InitializeComponent()
 	this.beginnerHelp.Text = "Beginner";
 	this.beginnerHelp.ToolTipText = "Here, you can get a basic idea of how the program works.";
 	// 
+	// toolStripSeparator2
+	// 
+	this.toolStripSeparator2.Name = "toolStripSeparator2";
+	this.toolStripSeparator2.Size = new System.Drawing.Size(160, 6);
+	// 
 	// intermediateHelp
 	// 
 	this.intermediateHelp.Name = "intermediateHelp";
@@ -1216,6 +1314,11 @@ private void InitializeComponent()
 	this.intermediateHelp.Text = "Intermediate";
 	this.intermediateHelp.ToolTipText = "Here, you can better understand how to manipulate the program on the most basic l" +
 	"evels.";
+	// 
+	// toolStripSeparator3
+	// 
+	this.toolStripSeparator3.Name = "toolStripSeparator3";
+	this.toolStripSeparator3.Size = new System.Drawing.Size(160, 6);
 	// 
 	// advancedHelp
 	// 
@@ -1237,6 +1340,17 @@ private void InitializeComponent()
 	this.caloriesLabel.TabIndex = 100;
 	this.caloriesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 	// 
+	// syncImage
+	// 
+	this.syncImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+	this.syncImage.Location = new System.Drawing.Point(3, 674);
+	this.syncImage.Name = "syncImage";
+	this.syncImage.Size = new System.Drawing.Size(30, 30);
+	this.syncImage.TabIndex = 106;
+	this.syncImage.TabStop = false;
+	this.syncImage.MouseLeave += new System.EventHandler(this.SyncImageMouseLeave);
+	this.syncImage.MouseHover += new System.EventHandler(this.SyncImageMouseHover);
+	// 
 	// MainForm
 	// 
 	this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1244,6 +1358,7 @@ private void InitializeComponent()
 	this.BackColor = System.Drawing.SystemColors.Control;
 	this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 	this.ClientSize = new System.Drawing.Size(1077, 704);
+	this.Controls.Add(this.syncImage);
 	this.Controls.Add(this.productBuildInfoBar);
 	this.Controls.Add(this.productVersionInfoBar);
 	this.Controls.Add(this.tabsMenu);
@@ -1290,6 +1405,7 @@ private void InitializeComponent()
 	this.resetCaloriesSpecificGroupBox.ResumeLayout(false);
 	this.mainMenuStrip.ResumeLayout(false);
 	this.mainMenuStrip.PerformLayout();
+	((System.ComponentModel.ISupportInitialize)(this.syncImage)).EndInit();
 	this.ResumeLayout(false);
 	this.PerformLayout();
 

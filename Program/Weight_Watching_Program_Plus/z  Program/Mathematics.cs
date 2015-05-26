@@ -18,14 +18,20 @@ namespace WeightWatchingProgramPlus
 	internal class Mathematics : IMathematics
 	{
 		
-		private IStorage Storage;
 		private IPopup PopupHandler;
 		
-		public Mathematics(Storage store, PopupHandler pU)
+		private IRetrieval Retrieval;
+		
+		private IMainForm MainForm;
+		
+		public Mathematics(IPopup pU, IRetrieval retrieve, IMainForm mainForm)
 		{
-			
-			this.Storage = store;
+
 			this.PopupHandler = pU;
+			
+			this.Retrieval = retrieve;
+			
+			this.MainForm = mainForm;
 			
 		}
 
@@ -72,9 +78,9 @@ namespace WeightWatchingProgramPlus
 		public double GetFinalCalories (bool add, IValidation valid)
 		{
 			
-			this.Storage.ReadRegistry(valid);
+			this.Retrieval.ReadRegistry();
 
-			var userProvidedServings = MainForm.AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? MainForm.UserProvidedServings : (decimal)(PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false)), true));
+			var userProvidedServings = MainForm.AddSubSelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? MainForm.UserProvidedServings : (decimal)(PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmeticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmeticValue(false)), true));
 			
 			double userServings = (FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * ((double)userProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2));
 			
@@ -85,7 +91,7 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			double tempDoublePenalty = GetSnackingPenalty(userServings, add, (valid as Validation));
+			double tempDoublePenalty = GetSnackingPenalty(userServings, add);
 			
 			return tempDoublePenalty > -1 ? userServings + tempDoublePenalty : 0;
 			
@@ -102,17 +108,14 @@ namespace WeightWatchingProgramPlus
 		/// <param name="add">
 		/// Are you adding calories?
 		/// </param>
-		/// <param name="Validation">
-		/// A preinitialized instance of Validation. It is not recommended to pass a new initialization of Validation.
-		/// </param>
 		/// <returns>
 		/// Returns the Eating Before Bed (Snacking) Penalty as a double.
 		/// </returns>
 		#endregion
-		private double GetSnackingPenalty (double tempDouble, bool add, Validation Validation)
+		private double GetSnackingPenalty (double tempDouble, bool add)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(Validation);
+			var registryTuple = Tuple.Create(DateTime.Parse(this.Retrieval.GetRegistryValue("reset date"), CultureInfo.InvariantCulture), double.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture));
 
 			int hour = DateTime.Now.Hour;
 
@@ -133,10 +136,10 @@ namespace WeightWatchingProgramPlus
 					midSnackPenalty = 10;
 
 				}
-				else if (midSnackPenalty > registryTuple.Item3 / 2)
+				else if (midSnackPenalty > registryTuple.Item2 / 2)
 				{
 
-					midSnackPenalty = registryTuple.Item3 / 2;
+					midSnackPenalty = registryTuple.Item2 / 2;
 
 				}
 				

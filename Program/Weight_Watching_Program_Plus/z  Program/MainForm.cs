@@ -19,8 +19,10 @@ namespace WeightWatchingProgramPlus
 	/// Main Window and all tabs.
 	/// </summary>
 	///
-	internal partial class MainForm : Form
+	internal partial class MainForm : Form, IMainForm
 	{
+		
+		private IMainForm mainForm;
 		
 		private IGeneralFunctions Functions = new Functions ();
 		
@@ -30,11 +32,17 @@ namespace WeightWatchingProgramPlus
 		
 		private IStorage Storage;
 		
+		private IRetrieval Retrieval;
+		
 		private IMathematics Mathematics;
 		
 		private IModification Modification;
-
-		private static MainForm mainForm;
+		
+		private INetOps NetworkOps;
+		
+		private ToolTip[] toolTips = {
+			new ToolTip()
+		};
 
 		internal MainForm ()
 		{
@@ -44,421 +52,382 @@ namespace WeightWatchingProgramPlus
 			InitializeComponent();
 			//
 			
-			this.Storage = new Storage ((this.PopupHandler as PopupHandler));
+			this.mainForm = (this as IMainForm);
 			
-			this.Validation = new Validation ((this.Storage as Storage), (this.PopupHandler as PopupHandler));
+			this.Storage = new Storage (this.PopupHandler, this.mainForm);
 			
-			this.Mathematics = new Mathematics ((this.Storage as Storage), (this.PopupHandler as PopupHandler));
+			this.Validation = new Validation (this.Storage, this.PopupHandler, this.mainForm);
 			
-			this.Modification = new Modification ((this.PopupHandler as PopupHandler), (this.Validation as Validation), (this.Storage as Storage), (this.Mathematics as Mathematics), (this.Functions as Functions));
-			mainForm = (this as MainForm);
+			this.Retrieval = new Retrieval (Validation as Validation, this.Storage, this.mainForm);
+			
+			this.NetworkOps = new NetworkOps(this.Retrieval, this.mainForm);
+			
+			this.Mathematics = new Mathematics (this.PopupHandler, this.Retrieval, this.mainForm);
+			
+			this.Modification = new Modification (this.PopupHandler, this.Validation, this.Storage, this.Mathematics, this.Functions, this.Retrieval, this.mainForm);
 
-			this.Functions.InitializeForms(this.Modification, this.Storage, this.Validation);
+			this.Functions.InitializeForms(this.Modification, this.Storage, this.Validation, this.Retrieval, this.NetworkOps, this.mainForm);
+			
+			
 			
 			//RegistryKey rHive = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "TESTMACHINE", RegistryView.Registry64);
 			
-			//
 		}
 
 		#region Properties
-
-		public static string MainFormVersionInfoText
+		
+		public void setMainFormState(bool paused)
 		{
 			
-			set { mainForm.productVersionInfoBar.Text = value; }
+			this.Enabled = !paused;
+			
+		}
+
+		public void MainFormVersionInfoText(string value)
+		{
+			
+			this.productVersionInfoBar.Text = value;
 			
 		}
 		
-		public static string MainFormBuildInfoText
+		public void MainFormBuildInfoText(string value)
 		{
 			
-			set { mainForm.productBuildInfoBar.Text = value; }
+			this.productBuildInfoBar.Text = value;
 			
 		}
-
-		/// <summary>
-		/// Gets or Sets the title of the application after launch.
-		/// </summary>
-		public static string MainFormTitle
+		
+		public string MainFormTitle
 		{
 			
-			get { return mainForm.Text; }
+			get { return this.Text; }
 			
-			set { mainForm.Text = value; }
+			set { this.Text = value; }
 				
 		}
 		
-		public static bool SyncEnabled
+		public bool SyncEnabled
 		{
 			
-			get { return mainForm.syncEnabledToolStripMenuItem.Checked; }
+			get { return this.syncEnabledToolStripMenuItem.Checked; }
 			
-			set { mainForm.syncEnabledToolStripMenuItem.Checked = value; }
+			set { this.syncEnabledToolStripMenuItem.Checked = value; }
 			
 		}
 		
-		public static string SyncComputerName
+		public string SyncIPAddress
 		{
 			
-			get { return mainForm.SyncPlaceToAccess.Text; }
+			get { return this.SyncPlaceToAccess.Text; }
 			
-			set { mainForm.SyncPlaceToAccess.Text = value; }
+			set { this.SyncPlaceToAccess.Text = value; }
 			
 		}
 		
-		public static string SyncComputerSocket
+		public string SyncSendPort
 		{
 			
-			get 
-			{ return mainForm.syncSocketTextBox.Text; }
+			get { return this.syncSendPort.Text; }
 			
-			set { mainForm.syncSocketTextBox.Text = value; }
+			set { this.syncSendPort.Text = value; }
 			
 		}
-
-		/// <summary>
-		/// Gets or Sets the value in the #Servings NumericUpDown.
-		/// </summary>
-		public static decimal UserProvidedServings
+		
+		public string SyncListenPort
+		{
+			
+			get { return this.syncListenPort.Text; }
+			
+			set { this.syncListenPort.Text = value; }
+			
+		}
+		
+		public void SetSyncConnectionItems()
+		{
+			
+			string[] serverConnectionMessages = {
+				"not listening",
+				"starting the listening phase",
+				"listening",
+				"recieving data"
+			};
+			
+			string[] clientConnectionMessages = {
+				"not sending data",
+				"connecting to server",
+				"connected to server",
+				"transfering data",
+			};
+			
+			Image[] connectionStateImage = {
+				Image.FromFile("Files\\Assets\\network-disconnected.ico"),
+				Image.FromFile("Files\\Assets\\network-connection-pending.ico"),
+				Image.FromFile("Files\\Assets\\network-connected.ico"),
+				Image.FromFile("Files\\Assets\\network-initiating-transfer.gif")
+			};
+			
+			int serverConnectionStatus = this.NetworkOps.ServerConnectionStatus;
+			
+			int clientConnectionStatus = this.NetworkOps.ClientConnectionStatus;
+			
+			if(serverConnectionStatus > 0 || clientConnectionStatus > 0)
+			{
+				
+				this.toolTips[0].SetToolTip(this.syncImage, string.Format(CultureInfo.CurrentCulture, "You're currently {0}{1}{2}.", serverConnectionMessages[serverConnectionStatus], " and ", clientConnectionMessages[clientConnectionStatus]));
+				
+			}
+			else
+			{
+				
+				this.toolTips[0].SetToolTip(this.syncImage, "You're no longer syncing.");
+				
+			}
+			
+			this.syncImage.BackgroundImage = serverConnectionStatus >= clientConnectionStatus ? connectionStateImage[serverConnectionStatus] : connectionStateImage[clientConnectionStatus];
+			
+		}
+		
+		public decimal UserProvidedServings
 		{
 				
 			get
 			{
 				
-				IMathematics math = (mainForm.Mathematics as Mathematics);
+				IMathematics math = (this.Mathematics as Mathematics);
 				
-				return AddSub_SelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? mainForm.userServingInputTextBox.Value : (decimal)(math.PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmaticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmaticValue(false))));
+				return AddSubSelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? this.userServingInputTextBox.Value : (decimal)(math.PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", this.GetArithmeticValue(true), this.GetArithmeticSign, this.GetArithmeticValue(false))));
 				
 			}
 				
 			set
 			{ 
 				
-				mainForm.userServingInputTextBox.Value = value;
+				this.userServingInputTextBox.Value = value;
 				
-				mainForm.arithmeticNumericUpDown_Left.Value = value;
+				this.arithmeticNumericUpDown_Left.Value = value;
 				
-				mainForm.arithmeticNumericUpDown_Right.Value = value;
+				this.arithmeticNumericUpDown_Right.Value = value;
 			
 			}
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets whether the manual time is being used or not.
-		/// </summary>
-		public static bool ManualTimeIsInitiated
+		public bool ManualTimeIsInitiated
 		{
 				
-			get{ return mainForm.resetCaloriesManualCheckBox.Checked; }
+			get{ return this.resetCaloriesManualCheckBox.Checked; }
 				
-			set{ mainForm.resetCaloriesManualCheckBox.Checked = value; }
+			set{ this.resetCaloriesManualCheckBox.Checked = value; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the Manual Reset Time.
-		/// </summary>
-		public static DateTime ManualDateTime
+		public DateTime ManualDateTime
 		{
 				
-			get { return mainForm.exactResetDatetimePicker.Value; }
+			get { return this.exactResetDatetimePicker.Value; }
 				
-			set { mainForm.exactResetDatetimePicker.Value = value; }
+			set { this.exactResetDatetimePicker.Value = value; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the main Food List ListBox's DataSource.
-		/// </summary>
-		public static object MainFoodListDataSource
+		public void MainFoodListDataSource(object value)
 		{
 				
-			set { mainForm.foodList.DataSource = value; }
+			this.foodList.DataSource = value;
 				
 		}
 
-		/// <summary>
-		/// Gets the main Food List ListBox's items.
-		/// </summary>
-		public static ListBox.ObjectCollection MainFoodListItems
+		public ListBox.ObjectCollection MainFoodListItems
 		{
 				
-			get { return mainForm.foodList.Items; }
+			get { return this.foodList.Items; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the SelectedIndex for the main Food List ListBox
-		/// </summary>
-		public static int FoodListSelected
+		public int FoodListSelectedIndex (bool setIndex, int index, bool value)
 		{
+					
+			if (setIndex)
+			{
+						
+				this.foodList.SetSelected(index, value);
 				
-			set
-			{ 
-				
-				mainForm.foodList.SelectedIndex = value;
-				
-				GlobalVariables.SelectedListItem = value;
-				
-				mainForm.howManyServingsLabel.Text = string.Format(CultureInfo.CurrentCulture, "How many {0}s do you plan on {1}?", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item4, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item5 ? "drinking" : "eating");
+				GlobalVariables.SelectedListItem = index;
 				
 				#if DEBUG
 				
-				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", mainForm.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList [mainForm.foodList.SelectedIndex].Item1));
+				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", this.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList [this.foodList.SelectedIndex].Item1));
 				
 				#endif
-				
-			}
-				
-		}
-
-		#region FoodListGet/Select Summary
-
-		/// <summary>
-		/// Gets or Sets the selection for the specified item in the main Food List ListBox.
-		/// </summary>
-		/// <param name="set">
-		/// Is this operation setting the selected value for the main Food List ListBox as well?
-		/// </param>
-		/// <param name="index">
-		/// The zero-based index of the item that determines whether it is selected.
-		/// </param>
-		/// <param name="value">
-		/// True to select the specified item; otherwise false.
-		/// </param>
-		/// <returns>
-		/// Returns a bool based on the GetSelected function for the main Food List ListBox.
-		/// </returns>
-		#endregion
-		public static bool FoodListGetOrSetSelected (bool set, int index, bool value)
-		{
-					
-			if (set)
-			{
-						
-				mainForm.foodList.SetSelected(index, value);
 						
 			}
-						
-			return mainForm.foodList.GetSelected(index);			
+
+			return this.foodList.SelectedIndex;			
 					
 		}
 
-		/// <summary>
-		/// Gets or Sets the uppermost item in the main Food List ListBox.
-		/// </summary>
-		public static int GetFoodListTopItem
+		public int GetFoodListTopItem
 		{
 				
-			get { return mainForm.foodList.TopIndex; }
+			get { return this.foodList.TopIndex; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the label which the user sees asking how many servings they are eating.
-		/// </summary>
-		public static string NumberOfServingsLabel
+		public string NumberOfServingsLabel
 		{
 				
-			set { mainForm.howManyServingsLabel.Text = value; }
+			set { this.howManyServingsLabel.Text = value; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the "Name" property box which shows the name of the currently selected food item.
-		/// </summary>
-		public static string FoodNameProperty
+		public string FoodNameProperty
 		{
 				
-			get { return mainForm.foodNameEditBox.Text; }
+			get { return this.foodNameEditBox.Text; }
 				
 			set
 			{ 
 					
-				mainForm.foodNameEditBox.Text = value;
+				this.foodNameEditBox.Text = value;
 				
-				mainForm.foodNameEditBox.TextAlign = HorizontalAlignment.Center;
+				this.foodNameEditBox.TextAlign = HorizontalAlignment.Center;
 					
 			}
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the "Definer" property box which shows the definer of the currently selected food item.
-		/// </summary>
-		public static string DefinerProperty
+		public string DefinerProperty
 		{
 				
-			get { return mainForm.definerEditBox.Text; }
+			get { return this.definerEditBox.Text; }
 				
 			set
 			{ 
 					
-				mainForm.definerEditBox.Text = value; 
+				this.definerEditBox.Text = value; 
 				
-				mainForm.definerEditBox.TextAlign = HorizontalAlignment.Center;
+				this.definerEditBox.TextAlign = HorizontalAlignment.Center;
 					
 			}
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the "Serving Size" property box which shows the serving size of the currently selected food item.
-		/// </summary>
-		public static decimal ServingSizeProperty
+		public decimal ServingSizeProperty
 		{
 				
-			get { return mainForm.servingSizeEditBox.Value; }
+			get { return this.servingSizeEditBox.Value; }
 				
 			set
 			{
 					
-				mainForm.servingSizeEditBox.Value = value; 
+				this.servingSizeEditBox.Value = value; 
 				
-				mainForm.servingSizeEditBox.TextAlign = HorizontalAlignment.Center;
+				this.servingSizeEditBox.TextAlign = HorizontalAlignment.Center;
 					
 			}
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the "Calories Per Serving" property box which shows how many calories are in each serving of the currently selected food item.
-		/// </summary>
-		public static decimal CaloriesPerServingProperty
+		public decimal CaloriesPerServingProperty
 		{
 				
-			get { return mainForm.caloriesPerServingEditBox.Value; }
+			get { return this.caloriesPerServingEditBox.Value; }
 				
 			set
 			{
 					
-				mainForm.caloriesPerServingEditBox.Value = value; 
+				this.caloriesPerServingEditBox.Value = value; 
 				
-				mainForm.caloriesPerServingEditBox.TextAlign = HorizontalAlignment.Center;
+				this.caloriesPerServingEditBox.TextAlign = HorizontalAlignment.Center;
 					
 			}
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the "Is Drink" checkbox button which indicates what food items are drinks and which are food.
-		/// </summary>
-		public static bool IsDrinkProperty
+		public bool IsDrinkProperty
 		{
 				
-			get { return mainForm.isDrinkCheckBox.Checked; }
+			get { return this.isDrinkCheckBox.Checked; }
 				
-			set { mainForm.isDrinkCheckBox.Checked = value; }
+			set { this.isDrinkCheckBox.Checked = value; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets if the user is checking the time.
-		/// </summary>
-		public static bool UserCheckingTime
+		public bool UserCheckingTime
 		{
 				
-			get { return mainForm.timeRadioButton.Checked; }
+			get { return this.timeRadioButton.Checked; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets if the user is checking their current calorie balance.
-		/// </summary>
-		public static bool UserCheckingCalories
+		public bool UserCheckingCalories
 		{
 				
-			get { return mainForm.calorieRadioButton.Checked; }
+			get { return this.calorieRadioButton.Checked; }
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the amount of calories in the NumericUpDown in the "manual" tab of the "main" tab.
-		/// </summary>
-		public static decimal UserSetCalories
+		public void UserSetCalories(decimal value)
 		{
 				
-			set { mainForm.manualCalorieEditBox.Value = value; }
+			this.manualCalorieEditBox.Value = value;
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets the amount of default calories to be applied wherever applicable.
-		/// </summary>
-		public static decimal DefaultCalories
+		public decimal DefaultCalories
 		{
 				
-			set { mainForm.defaultCaloriesNumericUpDown.Value = value; }
+			get { return this.defaultCaloriesNumericUpDown.Value; }
+			
+			set { this.defaultCaloriesNumericUpDown.Value = value; }
 				
 		}
 
-		/// <summary>
-		/// The NumericUpDown which shows, and sets, the decimal places to be used globally.
-		/// </summary>
-		public static decimal DecimalPlaces
+		public decimal DecimalPlaces
 		{
 			
-			get { return mainForm.decimalPlacesNumericUpDown.Value; }
+			get { return this.decimalPlacesNumericUpDown.Value; }
 			
-			set { mainForm.decimalPlacesNumericUpDown.Value = value; }
+			set { this.decimalPlacesNumericUpDown.Value = value; }
 			
+		}
+
+		public void DecimalExample(string value)
+		{
+			
+			this.exampleNumDecPlaceTextBox.Text = value;
+			
+		}
+
+		public bool IsCreatingNewFoodItem
+		{
+				
+			get { return this.newItemCheckbox.Checked; }
+				
+			set { this.newItemCheckbox.Checked = value; }
+				
 		}
 		
-		/// <summary>
-		/// Sets the decimal example text box.
-		/// </summary>
-		public static string DecimalExample
-		{
-			
-			set { mainForm.exampleNumDecPlaceTextBox.Text = value; }
-			
-		}
-		
-		/// <summary>
-		/// Gets or Sets the value for the "new item" checkbox.
-		/// </summary>
-		public static bool IsCreatingANewFoodItem
-		{
-				
-			get { return mainForm.newItemCheckbox.Checked; }
-				
-			set { mainForm.newItemCheckbox.Checked = value; }
-				
-		}
-
-		/// <summary>
-		/// Gets the property control box of your choice based on the contolID provided. This is to be used as a LAST RESTORT when ALL ELSE FAILS!
-		/// </summary>
-		/// <param name="controlID">
-		/// The ID of the control item you wish to use.
-		/// </param>
-		/// <returns>
-		/// Returns a property control value based on the following IDs: (ID 0): Food Name, (ID 1): Serving Size, (ID 2): Calories Per Serving, (ID 3): Definer. (ID 4): Calories Label.
-		/// </returns>
-		/// <exception cref="T:System.ArgumentOutOfRangeException">
-		/// Thrown if the ID provided does not correlate (is less or more) to any of the controls that have been explicitly exposed.
-		/// </exception>
-		public static Control ReturnPropertyControl (int controlID)
+		public Control ReturnPropertyControl (int controlID)
 		{
 				
 			switch (controlID)
 			{
 						
 				case 0:
-					return mainForm.foodNameEditBox;
+					return this.foodNameEditBox;
 						
 				case 1:
-					return mainForm.servingSizeEditBox;
+					return this.servingSizeEditBox;
 						
 				case 2:
-					return mainForm.caloriesPerServingEditBox;
+					return this.caloriesPerServingEditBox;
 						
 				case 3:
-					return mainForm.definerEditBox;
+					return this.definerEditBox;
 						
 				case 4:
-					return mainForm.caloriesLabel;
+					return this.caloriesLabel;
 						
 			}
 				
@@ -466,154 +435,128 @@ namespace WeightWatchingProgramPlus
 				
 		}
 
-		/// <summary>
-		/// Gets or Sets whether the user has chosen to write the diary portion of Food Tracking to a file.
-		/// </summary>
-		public static bool UserIsWritingDiaryToFile
+		public bool UserIsWritingDiaryToFile
 		{
 				
-			get { return mainForm.WriteToFileCheckBox.Checked; }
+			get { return this.WriteToFileCheckBox.Checked; }
 				
 		}
-
-		/// <summary>
-		/// Gets or Sets whether the user has chosen to use the diary portion of Food Tracking.
-		/// </summary>
-		public static bool DiaryIsBeingUsed
+		
+		public bool DiaryIsBeingUsed
 		{
 				
-			get { return mainForm.RecordFoodCheckBox.Checked; }
+			get { return this.RecordFoodCheckBox.Checked; }
 				
-			private set { mainForm.RecordFoodCheckBox.Checked = value; }
+			private set { this.RecordFoodCheckBox.Checked = value; }
 				
 		}
-
-		/// <summary>
-		/// Gets the "sign" for the arithmetic operation in the "arithmetic" sub-tab.
-		/// </summary>
-		public static string GetArithmeticSign
+		
+		public string GetArithmeticSign
 		{
 			
-			get { return mainForm.arithmeticSignComboBox.SelectedItem.ToString(); }
+			get { return this.arithmeticSignComboBox.SelectedItem.ToString(); }
 			
 		}
 
-		/// <summary>
-		/// Sets the "sign" for the arithmetic operation in the "arithmetic" sub-tab.
-		/// </summary>
-		public static int SetArithmeticSign
+		public int SetArithmeticSign
 		{
 			
-			set { mainForm.arithmeticSignComboBox.SelectedIndex = value; }
+			set { this.arithmeticSignComboBox.SelectedIndex = value; }
 			
 		}
 
 		
-		public static TabPage AddSub_SelectedSubTab
+		public TabPage AddSubSelectedSubTab
 		{
 			
-			get { return mainForm.AddSub_SubTabControl.SelectedTab; }
+			get { return this.AddSub_SubTabControl.SelectedTab; }
 			
-			set { mainForm.AddSub_SubTabControl.SelectedTab = value; }
+			set { this.AddSub_SubTabControl.SelectedTab = value; }
 			
 		}
 
-		/// <summary>
-		/// Gets the value from one of the NumericUpDowns in the "arithmetic" subtab.
-		/// </summary>
-		/// <param name="left">
-		/// Are you getting the value of the left NumericUpDown?
-		/// </param>
-		/// <returns>
-		/// The decimal value of the NumericUpDown as determined by <paramref name="left"></paramref>.
-		/// </returns>
-		public static decimal GetArithmaticValue (bool left)
+		public decimal GetArithmeticValue (bool left)
 		{
 			
-			return left ? mainForm.arithmeticNumericUpDown_Left.Value : mainForm.arithmeticNumericUpDown_Right.Value;
+			return left ? this.arithmeticNumericUpDown_Left.Value : this.arithmeticNumericUpDown_Right.Value;
 			
 		}
 		
-		public static int SetAllDecimalPointValues
+		public void SetAllDecimalPointValues(int value)
 		{
 			
-			set 
-			{ 
+			this.arithmeticNumericUpDown_Left.DecimalPlaces = value;
+			
+			this.defaultCaloriesNumericUpDown.DecimalPlaces = value;
+			
+			this.userServingInputTextBox.DecimalPlaces = value;
+			
+			this.caloriesPerServingEditBox.DecimalPlaces = value;
+			
+			this.manualCalorieEditBox.DecimalPlaces = value;
+			
+			double possibleMinNumber = 0.0000000000;
+			
+			possibleMinNumber = double.Parse(string.Format(CultureInfo.InvariantCulture, "{0}1", possibleMinNumber.ToString(string.Format(CultureInfo.InvariantCulture, "F{0}", (value - 1)), CultureInfo.InvariantCulture)), CultureInfo.CurrentCulture);
+			
+			this.GlobalMinimumValue = possibleMinNumber;
+			
+			if(value <= 4)
+			{
+				this.servingSizeEditBox.DecimalPlaces = value;
+				this.servingSizeEditBox.Minimum = (decimal)possibleMinNumber;
+			}
+			else if (value > 0)
+			{
 				
-				mainForm.arithmeticNumericUpDown_Left.DecimalPlaces = value;
+				this.servingSizeEditBox.DecimalPlaces = 4;
+				this.servingSizeEditBox.Minimum = (decimal)(.0001);
 				
-				mainForm.defaultCaloriesNumericUpDown.DecimalPlaces = value;
+			}
+			else
+			{
 				
-				mainForm.userServingInputTextBox.DecimalPlaces = value;
-				
-				mainForm.caloriesPerServingEditBox.DecimalPlaces = value;
-				
-				mainForm.manualCalorieEditBox.DecimalPlaces = value;
-				
-				double possibleMinNumber = 0.0000000000;
-				
-				possibleMinNumber = double.Parse(string.Format(CultureInfo.InvariantCulture, "{0}1", possibleMinNumber.ToString(string.Format(CultureInfo.InvariantCulture, "F{0}", (value - 1)), CultureInfo.InvariantCulture)), CultureInfo.CurrentCulture);
-				
-				MainForm.GlobalMinimumValue = possibleMinNumber;
-				
-				if(value <= 4)
-				{
-					mainForm.servingSizeEditBox.DecimalPlaces = value;
-					mainForm.servingSizeEditBox.Minimum = (decimal)possibleMinNumber;
-				}
-				else if (value > 0)
-				{
-					
-					mainForm.servingSizeEditBox.DecimalPlaces = 4;
-					mainForm.servingSizeEditBox.Minimum = (decimal)(.0001);
-					
-				}
-				else
-				{
-					
-					throw new InvalidCastException("Value for SetAllDecimalPointValues is out of bounds!");
-					
-				}
+				throw new InvalidCastException("Value for SetAllDecimalPointValues is out of bounds!");
 				
 			}
 			
 		}
 		
 		
-		public static decimal ServingSizeMinimumValue
+		public decimal ServingSizeMinimumValue
 		{
 			
-			get { return mainForm.servingSizeEditBox.Minimum; }
+			get { return this.servingSizeEditBox.Minimum; }
 			
 		}
 		
-		public static decimal ManualCaloriesMinimumValue
+		public decimal ManualCaloriesMinimumValue
 		{
 			
-			get { return mainForm.manualCalorieEditBox.Minimum; }
+			get { return this.manualCalorieEditBox.Minimum; }
 			
 		}
 		
-		public static double GlobalMinimumValue
+		public double GlobalMinimumValue
 		{
 			
 			set
 			{
 				
-				mainForm.arithmeticNumericUpDown_Left.Minimum = (decimal)value;
+				this.arithmeticNumericUpDown_Left.Minimum = (decimal)value;
 
-				mainForm.defaultCaloriesNumericUpDown.Minimum = (decimal)value;
+				this.defaultCaloriesNumericUpDown.Minimum = (decimal)value;
 				
-				mainForm.userServingInputTextBox.Minimum = (decimal)value;
+				this.userServingInputTextBox.Minimum = (decimal)value;
 				
-				mainForm.caloriesPerServingEditBox.Minimum = (decimal)value;
+				this.caloriesPerServingEditBox.Minimum = (decimal)value;
 
-				mainForm.manualCalorieEditBox.Minimum = -(decimal)(mainForm.Storage.GetRetrievableRegistryValues(mainForm.Validation).Item3 + value);
+				this.manualCalorieEditBox.Minimum = -(decimal)(double.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture) + value);
 				
 			}
 			
 			
-			get { return (double)mainForm.defaultCaloriesNumericUpDown.Minimum; }
+			get { return (double)this.defaultCaloriesNumericUpDown.Minimum; }
 			
 		}
 
@@ -621,16 +564,16 @@ namespace WeightWatchingProgramPlus
 
 		#region Main Tab
 		
-		void MainTabSelectedIndexChanged(object sender, EventArgs e)
+		private void MainTabSelectedIndexChanged(object sender, EventArgs e)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
+			var registryTuple = Tuple.Create(decimal.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), decimal.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture), int.Parse(this.Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
 			
-			exampleNumDecPlaceTextBox.Text = registryTuple.Item2.ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
+			exampleNumDecPlaceTextBox.Text = registryTuple.Item1.ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
 			
-			decimalPlacesNumericUpDown.Value = registryTuple.Item6;
+			decimalPlacesNumericUpDown.Value = registryTuple.Item3;
 			
-			defaultCaloriesNumericUpDown.Value = (decimal)registryTuple.Item3;
+			defaultCaloriesNumericUpDown.Value = (decimal)registryTuple.Item2;
 			
 		}
 
@@ -649,7 +592,7 @@ namespace WeightWatchingProgramPlus
 						
 				}
 					
-				Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, false, this.PopupHandler);
+				Functions.Find(0, searchBar.Text, null, exactSearchCheckBox.Checked, false, this.PopupHandler, mainForm);
 					
 				return;
 					
@@ -714,7 +657,7 @@ namespace WeightWatchingProgramPlus
 					
 			}
 				
-			this.Functions.Find(GlobalVariables.SelectedListItem, searchBar.Text, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, exactSearchCheckBox.Checked, true, this.PopupHandler);
+			this.Functions.Find(GlobalVariables.SelectedListItem, searchBar.Text, FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, exactSearchCheckBox.Checked, true, this.PopupHandler, mainForm);
 				
 		}
 
@@ -755,7 +698,7 @@ namespace WeightWatchingProgramPlus
 				
 				#if DEBUG
 				
-				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", mainForm.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList [mainForm.foodList.SelectedIndex].Item1));
+				Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Food : {0}\nGlobal Vars SI: {1}\nFood Name: {2}", this.foodList.SelectedIndex, GlobalVariables.SelectedListItem, FoodRelated.CombinedFoodList [this.foodList.SelectedIndex].Item1));
 				
 				#endif
 					
@@ -790,6 +733,7 @@ namespace WeightWatchingProgramPlus
 
 		private void DeleteFoodItemFromTable (object sender, EventArgs e)
 		{
+			
 			if(foodList.Items.Count > 1)
 			{
 				
@@ -804,7 +748,7 @@ namespace WeightWatchingProgramPlus
 						
 					this.Storage.WriteFoodTable();
 						
-					Functions.RefreshFoodList(this.Storage);
+					Functions.RefreshFoodList(this.Storage, this.Retrieval, mainForm);
 					
 					Console.WriteLine(FoodRelated.CombinedFoodList [previouslySelectedIndex < foodList.Items.Count ? previouslySelectedIndex : (foodList.Items.Count - 1)].Item1);
 						
@@ -849,7 +793,7 @@ namespace WeightWatchingProgramPlus
 		private void ResetCaloriesButtonClicked (object sender, EventArgs e)
 		{
 				
-			manualCalorieEditBox.Value = (decimal)this.Storage.GetRetrievableRegistryValues(this.Validation).Item3;
+			manualCalorieEditBox.Value = decimal.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture);
 				
 		}
 
@@ -863,9 +807,9 @@ namespace WeightWatchingProgramPlus
 		private void ManualSubmitButtonClicked (object sender, EventArgs e)
 		{
 
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
+			var registryTuple = Tuple.Create(double.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture), int.Parse(this.Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
 			
-			this.Storage.WriteRegistry((double)manualCalorieEditBox.Value, registryTuple.Item3, registryTuple.Item6, this.Validation);
+			this.Storage.WriteRegistry(manualCalorieEditBox.Value.ToString(CultureInfo.CurrentCulture), "calories left", false, this.Validation, this.Retrieval);
 				
 			this.Validation.CheckCurrentRadioButton(this.Modification);
 				
@@ -873,10 +817,8 @@ namespace WeightWatchingProgramPlus
 
 		private void ChangedTabManualAddSub (object sender, EventArgs e)
 		{
-				
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
 			
-			manualCalorieEditBox.Value = (decimal)registryTuple.Item2;
+			manualCalorieEditBox.Value = decimal.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture);
 				
 		}
 
@@ -885,7 +827,7 @@ namespace WeightWatchingProgramPlus
 		private void TimeOrCaloriesChangedWithoutEvent (object sender, EventArgs e)
 		{
 				
-			this.Storage.ReadRegistry(this.Validation);
+			this.Retrieval.ReadRegistry();
 				
 			this.Validation.CheckCurrentRadioButton(this.Modification);
 				
@@ -898,7 +840,7 @@ namespace WeightWatchingProgramPlus
 				
 			this.Modification.ModifyFoodItemProperty(Validation.EditBoxesHaveValidEntries());
 				
-			Functions.Find(0, oldtext, null, true, false, this.PopupHandler);
+			Functions.Find(0, oldtext, null, true, false, this.PopupHandler, mainForm);
 				
 		}
 
@@ -918,24 +860,21 @@ namespace WeightWatchingProgramPlus
 			
 			exactResetDatetimePicker.Enabled = resetCaloriesManualCheckBox.Checked;
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
+			var registryTuple = Tuple.Create(double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), double.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture), int.Parse(this.Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
 			
-			this.Storage.WriteRegistry(registryTuple.Item2, registryTuple.Item3, registryTuple.Item6, this.Validation);
+			this.Storage.WriteRegistry("manual time", false, this.Validation, this.Retrieval);
 			
 		}
 
 		private void ExactResetDatetimePickerValueChanged (object sender, EventArgs e)
 		{
 			
-			var registryTuple = Storage.GetRetrievableRegistryValues(this.Validation, false);
+			var registryTuple = Tuple.Create(DateTime.Parse(Retrieval.GetRegistryValue("reset date"), CultureInfo.InvariantCulture), double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), double.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture), int.Parse(this.Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
 			
 			if (resetCaloriesManualCheckBox.Checked && exactResetDatetimePicker.Value != registryTuple.Item1)
 			{
 				
-				Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, exactResetDatetimePicker.Value, registryTuple.Item2, registryTuple.Item3, registryTuple.Item6, new [] {
-					false,
-					true
-				}, this.Validation);
+				Storage.WriteRegistry(exactResetDatetimePicker.Value.ToString(), "reset date", true, this.Validation, this.Retrieval);
 				
 			}
 			
@@ -944,9 +883,9 @@ namespace WeightWatchingProgramPlus
 		private void DefaultCaloriesSetButtonClick (object sender, EventArgs e)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
+			var registryTuple = Tuple.Create(double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), int.Parse(this.Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
 			
-			this.Storage.WriteRegistry(registryTuple.Item2, (double)defaultCaloriesNumericUpDown.Value, registryTuple.Item6, this.Validation);
+			this.Storage.WriteRegistry(defaultCaloriesNumericUpDown.Value.ToString(CultureInfo.CurrentCulture), "default calories", false, this.Validation, this.Retrieval);
 			
 		}
 
@@ -960,13 +899,13 @@ namespace WeightWatchingProgramPlus
 		private void SetDecimalPlacesValueButtonClick(object sender, EventArgs e)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
+			var registryTuple = Tuple.Create(double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), double.Parse(this.Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture));
 			
-			this.Storage.WriteRegistry(registryTuple.Item2, registryTuple.Item3, (int)this.decimalPlacesNumericUpDown.Value, this.Validation);
+			this.Storage.WriteRegistry(decimalPlacesNumericUpDown.Value.ToString(CultureInfo.CurrentCulture), "decimal places", false, this.Validation, this.Retrieval);
 			
-			registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation);
+			int registryDecimalPlace = int.Parse(this.Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture);
 			
-			MainForm.SetAllDecimalPointValues = registryTuple.Item6;
+			this.SetAllDecimalPointValues(registryDecimalPlace);
 			
 			TimeOrCaloriesChangedWithoutEvent(sender, e);
 			
@@ -975,9 +914,7 @@ namespace WeightWatchingProgramPlus
 		private void DecimalPlacesNumericUpDownValueChanged(object sender, EventArgs e)
 		{
 			
-			var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
-			
-			exampleNumDecPlaceTextBox.Text = registryTuple.Item2.ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
+			exampleNumDecPlaceTextBox.Text = double.Parse(this.Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture).ToString(string.Format(CultureInfo.CurrentCulture, "F{0}", decimalPlacesNumericUpDown.Value), CultureInfo.CurrentCulture);
 			
 		}
 		#endregion
@@ -987,28 +924,68 @@ namespace WeightWatchingProgramPlus
 		private void SyncStatusChanged(object sender, EventArgs e)
 		{
 			
-			if(sender.ToString().Contains("enabled", StringComparison.OrdinalIgnoreCase))
+			string senderText = sender.ToString();
+			
+			bool @checked = syncEnabledToolStripMenuItem.Checked;
+			
+			serverInfoToolStripMenuItem.Enabled = @checked;
+				
+			syncBehaviorToolStripItem.Enabled = @checked;
+			
+			if(@checked && this.NetworkOps.ServerConnectionStatus == 0)
 			{
 				
-				bool @checked = syncEnabledToolStripMenuItem.Checked;
-			
-				serverInfoToolStripMenuItem.Enabled = @checked;
+				this.NetworkOps.StartListen(int.Parse(syncListenPort.Text, CultureInfo.InvariantCulture));
 				
-				SyncPlaceToAccess.Text = @checked ? "NAME OR IP HERE" : null;
+			}
+			else if (!@checked && this.NetworkOps.ServerConnectionStatus > 0)
+			{
+				
+				this.NetworkOps.ServerConnectionStatus = 0;
 				
 			}
 			
-			if(this.Validation.PortIsValid())
+			if(this.Validation.PortIsValid(this.Retrieval, senderText.Contains("listen")))
 			{
-				
-				var registryTuple = this.Storage.GetRetrievableRegistryValues(this.Validation, false);
 			
-				this.Storage.WriteRegistry(registryTuple.Item2, registryTuple.Item3, registryTuple.Item6, this.Validation);
+				if(string.Equals(senderText.Contains("listen") ? this.Retrieval.GetRegistryValue("sync listen socket") : this.Retrieval.GetRegistryValue("sync send socket"), senderText.Contains("listen") ? syncListenPort.Text : syncSendPort.Text))
+				{
+					
+					this.Storage.WriteRegistry(senderText.Contains("listen") ? "sync listen socket" : "sync send socket", false, this.Validation, this.Retrieval);
+					
+				}
 				
 			}
+			
+			if(this.Validation.IPAddressIsValid(this.Retrieval))
+			{
+			
+				this.Storage.WriteRegistry("sync server name", false, this.Validation, this.Retrieval);
+				
+			}
+			
+			this.Storage.WriteRegistry("sync enabled", false, this.Validation, this.Retrieval);
 			
 		}
 		#endregion
+		
+		void SyncImageMouseHover(object sender, EventArgs e)
+		{
+			
+			SetSyncConnectionItems();
+			
+		}
+		void SyncImageMouseLeave(object sender, EventArgs e)
+		{
+			
+			toolTips[0].Dispose();
+			
+			toolTips[0] = new ToolTip();
+			
+		}
+		
 	}
+	
+	
 
 }

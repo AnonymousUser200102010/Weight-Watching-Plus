@@ -86,11 +86,31 @@ namespace WeightWatchingProgramPlus
         /// </summary>
         public static bool Debug { get; set; }
         
+        public static DateTime StartTime { get; set; }
+        
+        public static bool IsClient { get; set; }
+        
+        public static bool ClientStateOverride { get; set; }
+        
 
         static GlobalVariables ()
         {
             
+            #if DEBUG
+            
             RegistryAppendedValue = "SOFTWARE\\";
+            
+            #else
+            
+            RegistryAppendedValue = "SOFTWARE\\Wow6432Node\\";
+            
+            #endif
+            
+            StartTime = DateTime.Now;
+            
+            IsClient = false;
+            
+            ClientStateOverride = false;
             
 			RegistryMainValue = string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\", WeightWatchingProgram, Environment.UserName);
             

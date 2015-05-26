@@ -28,7 +28,6 @@
     <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <Prefer32Bit>True</Prefer32Bit>
     <ApplicationIcon>..\Assets\wwp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -43,6 +42,12 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>True</Prefer32Bit>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -53,19 +58,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>WeightWatchingProgram+.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>WeightWatchingProgramPlus.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>False</Prefer32Bit>
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
@@ -102,10 +99,14 @@
     <Compile Include="z  Program\Modification.cs">
       <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
+    <Compile Include="z  Program\NetworkOps.cs">
+      <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
+    </Compile>
     <Compile Include="z  Program\PopupHandler.cs">
       <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
     <Compile Include="z  Program\Program.cs" />
+    <Compile Include="z  Program\Retrieval.cs" />
     <Compile Include="z  Program\Storage.cs">
       <DependentUpon>WeightWatchingInterfaces.cs</DependentUpon>
     </Compile>
@@ -118,6 +119,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Assets\network-connected.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\network-connected.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\network-connection-pending.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\network-connection-pending.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\network-disconnected.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\network-disconnected.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\network-initiating-transfer.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="z  Program\MainForm.resx">
@@ -125,6 +147,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MainForm.Designer1.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets" />
+    <Folder Include="Assets" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

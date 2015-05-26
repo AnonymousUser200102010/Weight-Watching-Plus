@@ -12,123 +12,23 @@ using UniversalHandlersLibrary;
 namespace WeightWatchingProgramPlus
 {
 	
+	
 	/// <summary>
-	/// Functions that relate to storage
+	/// Functions whose primary purpose is storage and writing, but who don't have a more pressing primary function.
 	/// </summary>
 	internal class Storage : IStorage
 	{
 		
 		private IPopup PopupHandler;
 		
-		public Storage(PopupHandler pU)
+		private IMainForm MainForm;
+		
+		public Storage(IPopup pU, IMainForm mainForm)
 		{
 			
 			this.PopupHandler = pU;
 			
-		}
-		
-		public void ReadFoodTable()
-		{
-			
-			ReadFoodTable("Files\\Text\\", "food.table");
-			
-		}
-
-		public void ReadFoodTable (string directory, string file)
-		{
-
-			if (File.Exists(string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file)))
-			{
-				
-				using (StreamReader sr = new StreamReader (directory + file))
-				{
-					
-					int number = 0;
-					int position = 0;
-					String line;
-					string[] combined = {
-						"placeholder",
-						"placeholder"
-					};
-					double[] tupleItemDouble = {
-						1,
-						1
-					};
-					bool tupleItemBool = false;
-					
-					while (!string.IsNullOrEmpty((line = sr.ReadLine())))
-					{
-						
-						if (line.Contains("-", StringComparison.CurrentCultureIgnoreCase))
-						{
-							
-							FoodRelated.CombinedFoodList.Add(new Tuple<string, double, double, string, bool> (combined [0], tupleItemDouble [0], tupleItemDouble [1], combined [1], tupleItemBool));
-							
-							#if DEBUG
-							
-							//Messages.Handler(string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n\n", combined [0], tupleItemDouble [0], tupleItemDouble [1], combined [1], tupleItemBool), "Weight Watching +", true, 102400);
-							
-							#endif
-							
-							position++;
-							
-							number = 0;
-							
-						}
-						else
-						{
-							
-							switch (number)
-							{
-									
-								case 1:
-								case 2:
-									
-									if (!double.TryParse(line, NumberStyles.Any, CultureInfo.InvariantCulture, out tupleItemDouble [number == 1 ? 0 : 1]))
-									{
-										
-										throw Errors.PremadeExceptions("ReadFoodTable", "tupleItemDouble", 0);
-										
-									}
-									
-									break;
-									
-								case 4:
-									
-									if (!bool.TryParse(line, out tupleItemBool))
-									{
-										
-										throw Errors.PremadeExceptions("ReadFoodTable", "tupleItemBool", 0);
-										
-									}
-									
-									break;
-									
-								default:
-									
-									combined [number == 0 ? 0 : 1] = line;
-									
-									break;
-									
-							}
-							
-							number++;
-							
-						}
-						
-					}
-					
-					sr.Close();
-					
-				}
-				
-			}
-			else
-			{
-				
-				throw new IOException (string.Format(CultureInfo.InvariantCulture, "{0}{1} does not exist", directory, file));
-				
-			}
+			this.MainForm = mainForm;
 			
 		}
 
@@ -187,7 +87,7 @@ namespace WeightWatchingProgramPlus
 				else if (GlobalVariables.Debug)
 				{
 					
-					Messages.Handler(string.Format(CultureInfo.InvariantCulture, "additionToFoodTable: one or more of your addons contained an invalid entry: \nItem 1: '{0}'\n Item 2: '{1}'\nItem 3: '{2}'\nItem 4: '{3}'\nItem 5: '{4}'\n", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5), "Weight Watching +", true, 102400);
+					Messages.Handler(string.Format(CultureInfo.InvariantCulture, "additionToFoodTable: one or more of your addons contained an invalid entry: \nItem 1: '{0}'\n Item 2: '{1}'\nItem 3: '{2}'\nItem 4: '{3}'\nItem 5: '{4}'\n", additionToFoodTable.Item1, additionToFoodTable.Item2, additionToFoodTable.Item3, additionToFoodTable.Item4, additionToFoodTable.Item5), "Weight Watching +", true, 25000);
 					
 				}
 				
@@ -196,189 +96,230 @@ namespace WeightWatchingProgramPlus
 			File.SetAttributes(directory + file, FileAttributes.Compressed);
 			
 		}
-
-		public void ReadRegistry(IValidation valid)
+		
+		#region WriteRegistry Overrides
+		
+		public void WriteRegistry(string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
 		{
 			
-			ReadRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid);
+			string objectToSave = null;
+			
+			if(registryIDKeyword.Contains("time", StringComparison.OrdinalIgnoreCase))
+			{
+				
+				objectToSave = MainForm.ManualTimeIsInitiated.ToString();
+					
+			}
+			else if(registryIDKeyword.Contains("sync", StringComparison.OrdinalIgnoreCase))
+			{
+				
+				if(registryIDKeyword.Contains("enabled", StringComparison.OrdinalIgnoreCase))
+				{
+						
+					objectToSave = MainForm.SyncEnabled.ToString();
+						
+				}
+				else if(registryIDKeyword.Contains("socket", StringComparison.OrdinalIgnoreCase))
+				{
+						
+					if(registryIDKeyword.Contains("l", StringComparison.OrdinalIgnoreCase))
+					{
+							
+						objectToSave = MainForm.SyncListenPort;
+							
+					}
+					else if(registryIDKeyword.Contains("s", StringComparison.OrdinalIgnoreCase))
+					{
+							
+						objectToSave = MainForm.SyncSendPort;
+							
+					}
+						
+				}
+				else if(registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
+				{
+					
+					objectToSave = MainForm.SyncIPAddress;
+					
+				}
+				else
+				{
+					
+					throw new ArgumentException("WriteRegistry: registryIDKeyword: This value did not produce any desireable result.");
+					
+				}
+				
+			}
+			else
+			{
+				
+				throw new ArgumentException("WriteRegistry: registryIDKeyword: This value did not produce any desireable result.");
+				
+			}
+			
+			WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, objectToSave, registryIDKeyword, reset, valid, retrieve);
 			
 		}
-
-		public void ReadRegistry (string appendedRegistryValue, string registyValue, IValidation valid)
+		
+		public void WriteRegistry(string objectToSave, string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
+		{
+			
+			WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, objectToSave, registryIDKeyword, reset, valid, retrieve);
+			
+		}
+		
+		public void WriteRegistry (string appendedRegistryValue, string registyValue, string objectToSave, string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
 		{
 			
 			Validation Validation = (valid as Validation);
 			
-			if (Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue) == null)
-			{
-				Registry.LocalMachine.CreateSubKey(appendedRegistryValue + registyValue);
-			}
-				
-			if (appendedRegistryValue.Equals(GlobalVariables.RegistryAppendedValue))
-			{
-				
-				var registryTuple = GetRetrievableRegistryValues(valid);
-				
-				MainForm.ManualTimeIsInitiated = registryTuple.Item4;
-				
-				MainForm.SyncEnabled = registryTuple.Item7.Item1;
-				
-				if(MainForm.SyncEnabled)
-				{
-					
-					MainForm.SyncComputerName = registryTuple.Item7.Item2;
-					
-					MainForm.SyncComputerSocket = registryTuple.Item7.Item3.ToString(CultureInfo.CurrentCulture);
-					
-				}
-				
-				MainForm.DecimalPlaces = (decimal)registryTuple.Item6;
-				
-				if (Validation.ValidateBackup(appendedRegistryValue, registyValue) && GlobalVariables.CreateBackups)
-				{
-					
-					Backup("Files//Text//", "Files//Backup//", registryTuple.Item5, GetRetrievableRegistryValues(valid).Item5);
-					
-				}
-				
-			}
-			else if (registyValue.Contains("Diary", StringComparison.OrdinalIgnoreCase))
-			{
-				//Do nothing...yet
-			}
-				
-			Validation.CheckDateValidity();
-		}
-
-		public void WriteRegistry(double calories, double defaultCalories, int decimalPlaces, IValidation valid)
-		{
+			Retrieval Retrieval = (retrieve as Retrieval);
 			
-			WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, DateTime.Now, calories, defaultCalories, decimalPlaces, new []{ false, false }, valid);
-			
-		}
-
-		public void WriteRegistry (string appendedRegistryValue, string registyValue, DateTime date, double calories, double defaultCalories, int decimalPlaces, System.Collections.Generic.IList<bool> reset, IValidation valid)
-		{
-			
-			Validation Validation = (valid as Validation);
-			
-			double tempDouble = calories;
+			var registryNameLiteral = Retrieval.ParseRegistryKeyById(registryIDKeyword);
 			
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue, true))
 			{
 				
-				var registryTuple = GetRetrievableRegistryValues(Validation, false);
-				
-				if (reset [0])
+				if(registryIDKeyword.Contains("calories"))
 				{
 					
-					if (calories > 0)
+					if(registryIDKeyword.Contains("left"))
 					{
-					
-						tempDouble += registryTuple.Item3;
+						
+						var registryDefaultCalories = double.Parse(Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture);
+						
+						var calories = double.Parse(objectToSave, CultureInfo.CurrentCulture);
+						
+						double tempDouble = calories;
+						
+						if (reset)
+						{
+							
+							if (calories > 0)
+							{
+							
+								tempDouble += registryDefaultCalories;
+								
+							}
+							else if (calories < 0)
+							{
+								
+								tempDouble = registryDefaultCalories + calories;
+								
+							}
+							else
+							{
+								
+								tempDouble = registryDefaultCalories;
+								
+							}
+							
+							if (tempDouble > (registryDefaultCalories * 2))
+							{
+									
+								tempDouble = (registryDefaultCalories * 2);
+									
+									
+								this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have more than double your daily allowance. As a result, your calories have only been set to {0}.", tempDouble), 6);
+									
+							}
+							else if (tempDouble < 1200f)
+							{
+									
+								tempDouble = 1200f;
+									
+								this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have less than 1200 calories per day, as that is considered the lowest point before starving. As a result, your calories have only been set to {0}.", 1200), 6);
+							}
+							
+						}
+						
+						tempKey.SetValue(registryNameLiteral, tempDouble.ToString(CultureInfo.CurrentCulture));
 						
 					}
-					else if (calories < 0)
+					else if(registryIDKeyword.Contains("default"))
 					{
 						
-						tempDouble = registryTuple.Item3 + calories;
+						tempKey.SetValue(registryNameLiteral, objectToSave);
 						
-					}
-					else
-					{
-						
-						tempDouble = registryTuple.Item3;
-						
-					}
-					
-					if (tempDouble > (registryTuple.Item3 * 2))
-					{
-							
-						tempDouble = (registryTuple.Item3 * 2);
-							
-							
-						this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have more than double your daily allowance. As a result, your calories have only been set to {0}.", tempDouble), 6);
-							
-					}
-					else if (tempDouble < 1200f)
-					{
-							
-						tempDouble = 1200f;
-							
-						this.PopupHandler.CreatePopup(string.Format(CultureInfo.CurrentCulture, "The program cannot allow you to have less than 1200 calories per day, as that is considered the lowest point before starving. As a result, your calories have only been set to {0}.", 1200), 6);
 					}
 					
 				}
-				
-				if (reset [1])
+				else if(registryIDKeyword.Contains("date", StringComparison.OrdinalIgnoreCase))
 				{
 					
-					tempKey.SetValue("Next Reset Date", date.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
-					
+					DateTime date = DateTime.Parse(objectToSave, CultureInfo.CurrentCulture);
+						
+					tempKey.SetValue(registryNameLiteral, date.ToString("yyyy MMMMM dd hh:mm:ss tt", CultureInfo.InvariantCulture));
+						
 					MainForm.ManualDateTime = date;
+						
+				}	
+				else if(registryIDKeyword.Contains("time", StringComparison.OrdinalIgnoreCase))
+				{
+					
+					tempKey.SetValue(registryNameLiteral, MainForm.ManualTimeIsInitiated.ToString());
+						
+				}
+				else if(registryIDKeyword.Contains("sync", StringComparison.OrdinalIgnoreCase))
+				{
+					
+					if(registryIDKeyword.Contains("enabled", StringComparison.OrdinalIgnoreCase))
+					{
+							
+						tempKey.SetValue(registryNameLiteral, MainForm.SyncEnabled);
+							
+					}
+					else if(registryIDKeyword.Contains("socket", StringComparison.OrdinalIgnoreCase))
+					{
+							
+						if(registryIDKeyword.Contains("l", StringComparison.OrdinalIgnoreCase))
+						{
+								
+							tempKey.SetValue(registryNameLiteral, MainForm.SyncListenPort);
+								
+						}
+						else if(registryIDKeyword.Contains("s", StringComparison.OrdinalIgnoreCase))
+						{
+								
+							tempKey.SetValue(registryNameLiteral, MainForm.SyncSendPort);
+								
+						}
+							
+					}
+					else if(registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
+					{
+						
+						tempKey.SetValue(registryNameLiteral, MainForm.SyncIPAddress);
+						
+					}
 					
 				}
-				
-				tempKey.SetValue("Calories Left for the Day", tempDouble.ToString(CultureInfo.CurrentCulture));
-				tempKey.SetValue("Default Calories Per Day", defaultCalories.ToString(CultureInfo.CurrentCulture));
-				tempKey.SetValue("Manual Time", MainForm.ManualTimeIsInitiated.ToString());
-				tempKey.SetValue("Sync", MainForm.SyncEnabled);
-				tempKey.SetValue("Synced Computer Name", MainForm.SyncComputerName);
-				tempKey.SetValue("Sync Socket", MainForm.SyncComputerSocket.ToString(CultureInfo.CurrentCulture));
-				tempKey.SetValue("Dec. Places", decimalPlaces.ToString(CultureInfo.CurrentCulture));
+				else if(registryIDKeyword.Contains("dec", StringComparison.OrdinalIgnoreCase))
+				{
+					
+					tempKey.SetValue(registryNameLiteral, objectToSave);
+						
+				}
 				
 			}
-		}
-
-		public Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid)
-		{
-			
-			return GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid, true);
 			
 		}
 		
-		public Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues(IValidation valid, bool roundCaloriesLeftForDay)
+		#endregion
+
+		public void WriteFoodEaten(bool add, IValidation valid, IRetrieval retrieve)
 		{
 			
-			return GetRetrievableRegistryValues(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, valid, roundCaloriesLeftForDay);
+			WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add, valid, retrieve);
 			
 		}
 
-		public Tuple<DateTime, double, double, bool, string, int, Tuple<bool, string, int>> GetRetrievableRegistryValues (string appendedRegistryValue, string registryValue, IValidation valid, bool roundCaloriesLeftForDay)
+		public void WriteFoodEaten (string directory, string file, bool add, IValidation valid, IRetrieval retrieve)
 		{
 			
 			Validation Validation = (valid as Validation);
 			
-			string[] tempString = {
-				null,
-				null
-			};
-			
-			var validationTuple = Validation.ValidateRegistryValues(appendedRegistryValue, registryValue, GlobalVariables.Debug);
-			
-			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
-			{
-				
-				tempString[0] = (string)tempKey.GetValue("Last WWP+ Version");
-				tempString[1] = (string)tempKey.GetValue("Synced Computer Name");
-				
-			}
-			
-			return Tuple.Create(validationTuple.Item1, roundCaloriesLeftForDay ? (double)Math.Round(validationTuple.Item2, validationTuple.Item5) : validationTuple.Item2, (double)Math.Round(validationTuple.Item3, validationTuple.Item5), validationTuple.Item4, tempString[0], validationTuple.Item5, Tuple.Create(validationTuple.Item6, tempString[1], validationTuple.Item7));
-			
-		}
-
-		public void WriteFoodEaten(bool add, IValidation valid)
-		{
-			
-			WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add, valid);
-			
-		}
-
-		public void WriteFoodEaten (string directory, string file, bool add, IValidation valid)
-		{
-			
-			Validation Validation = (valid as Validation);
+			Retrieval Retrieval = (retrieve as Retrieval);
 			
 			string finalstring = null;
 			const string seperator = "-";
@@ -409,10 +350,8 @@ namespace WeightWatchingProgramPlus
 					double tempcalval = FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * (double)MainForm.UserProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2;
 					
 					finalstring += string.Format(CultureInfo.CurrentCulture, " of '{0}'.\nWhich is {1} servings, or {2} calories of '{0}'. ", FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, tempserval, Math.Round(tempcalval, 4, MidpointRounding.AwayFromZero));
-					
-					var registryTuple = GetRetrievableRegistryValues(Validation);
-					
-					finalstring += string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", registryTuple.Item2, seperator);
+
+					finalstring += string.Format(CultureInfo.CurrentCulture, "You had {0} calories left for the day.\n{1}\n", Retrieval.GetRegistryValue("calories left"), seperator);
 					
 					if (File.Exists(directory + file))
 					{
@@ -448,13 +387,17 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		private static void Backup (string originalDirectory, string backupDirectory, string oldVersion, string newVersion)
+		public void Backup (string originalDirectory, string backupDirectory, string oldVersion, string newVersion, IRetrieval retrieve)
 		{
 			
 			string[] passoverDocumentKeywords = {
 				"readme",
 				"diary"
 			};
+			
+			Retrieval Retrieval = (retrieve as Retrieval);
+			
+			string backupVersionFileVersion = Retrieval.BackupVersionFileInfo(backupDirectory);
 			
 			if (!Directory.Exists(backupDirectory))
 			{
@@ -481,7 +424,9 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			File.WriteAllText(string.Format(CultureInfo.CurrentCulture, "{0}Backup.log", backupDirectory), string.Format(CultureInfo.CurrentCulture, "Files backed up on {0} at {1}.\nFrom version {2} to version {3}.", DateTime.Now.ToString("MMMMM dd yyyy", CultureInfo.CurrentCulture), DateTime.Now.ToString("hh:mm:ss tt", CultureInfo.CurrentCulture), oldVersion, newVersion));
+			File.WriteAllText(string.Format(CultureInfo.CurrentCulture, "{0}Backup.log", backupDirectory), string.Format(CultureInfo.CurrentCulture, "Files backed up on {0} at {1}.\nFrom version {2} to version {3}.", DateTime.Now.ToString("MMMMM dd yyyy", CultureInfo.CurrentCulture), DateTime.Now.ToString("hh:mm tt", CultureInfo.CurrentCulture), !string.Equals(oldVersion, newVersion, StringComparison.OrdinalIgnoreCase) ? oldVersion : backupVersionFileVersion, newVersion));
+			
+			File.WriteAllText(string.Format(CultureInfo.CurrentCulture, "{0}Version.old", backupDirectory), string.Format(CultureInfo.CurrentCulture, "{0}", newVersion));
 			
 		}
 		
