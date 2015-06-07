@@ -24,11 +24,11 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		private IPopup PopupHandler;
-		
+
 		private IStorage Storage;
-		
+
 		private IMainForm MainForm;
-		
+
 		public Validation (IStorage store, IPopup pU, IMainForm mainForm)
 		{
 			
@@ -52,7 +52,7 @@ namespace WeightWatchingProgramPlus
 				
 				var manualTimeIsInitiated = MainForm.ManualTimeIsInitiated;
 				
-				DateTime tempDate = manualTimeIsInitiated ? new DateTime (registryTuple.Item1.Year, registryTuple.Item1.Month, DateTime.Now.Day + 1, registryTuple.Item1.Hour, registryTuple.Item1.Minute, registryTuple.Item1.Second, registryTuple.Item1.Millisecond, DateTimeKind.Local) : DateTime.Now.AddDays(1);
+				DateTime tempDate = manualTimeIsInitiated ? new DateTime (registryTuple.Item1.Year >= DateTime.Now.Year ? registryTuple.Item1.Year : DateTime.Now.Year, registryTuple.Item1.Month >= DateTime.Now.Month ? registryTuple.Item1.Month : DateTime.Now.Month, DateTime.Now.Day + 1, registryTuple.Item1.Hour, registryTuple.Item1.Minute, registryTuple.Item1.Second, registryTuple.Item1.Millisecond, DateTimeKind.Local) : DateTime.Now.AddDays(1);
 				
 				this.Storage.WriteRegistry(registryTuple.Item2, "calories left", true, this, Retrieval);
 				
@@ -153,7 +153,7 @@ namespace WeightWatchingProgramPlus
 		private static bool AlreadyExists (string text)
 		{
 			
-			return (FoodRelated.CombinedFoodList.Where(item => !item.Item1.Equals(FoodRelated.CombinedFoodList[GlobalVariables.SelectedListItem].Item1, StringComparison.OrdinalIgnoreCase)).Select(item => item.Item1)).Any(s => text.Contains(s, StringComparison.OrdinalIgnoreCase));
+			return (FoodRelated.CombinedFoodList.Where(item => !item.Item1.Equals(FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item1, StringComparison.OrdinalIgnoreCase)).Select(item => item.Item1)).Any(s => text.Contains(s, StringComparison.OrdinalIgnoreCase));
 			
 		}
 
@@ -165,7 +165,7 @@ namespace WeightWatchingProgramPlus
 			return validCharacters.IsMatch(text);
 			
 		}
-		
+
 		public bool PortIsValid (IRetrieval retrieve, bool listenPort)
 		{
 			
@@ -173,10 +173,10 @@ namespace WeightWatchingProgramPlus
 			
 			var syncSocketVar = listenPort ? Retrieval.GetRegistryValue("sync listen socket") : Retrieval.GetRegistryValue("sync send socket");
 			
-			if(!HasOnlyNumbers(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, null))
+			if (!HasOnlyNumbers(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, null))
 			{
 				
-				if(listenPort)
+				if (listenPort)
 				{
 					
 					MainForm.SyncListenPort = syncSocketVar;
@@ -195,10 +195,10 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			if(string.IsNullOrWhiteSpace(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort) || int.Parse(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, CultureInfo.InvariantCulture) <= IPEndPoint.MinPort || int.Parse(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, CultureInfo.InvariantCulture) >= IPEndPoint.MaxPort)
+			if (string.IsNullOrWhiteSpace(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort) || int.Parse(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, CultureInfo.InvariantCulture) <= IPEndPoint.MinPort || int.Parse(listenPort ? MainForm.SyncListenPort : MainForm.SyncSendPort, CultureInfo.InvariantCulture) >= IPEndPoint.MaxPort)
 			{
 				
-				if(listenPort)
+				if (listenPort)
 				{
 					
 					MainForm.SyncListenPort = syncSocketVar;
@@ -220,7 +220,7 @@ namespace WeightWatchingProgramPlus
 			return true;
 			
 		}
-		
+
 		public bool IPAddressIsValid (IRetrieval retrieve)
 		{
 			
@@ -228,7 +228,7 @@ namespace WeightWatchingProgramPlus
 			
 			var syncIPAVar = Retrieval.GetRegistryValue("sync server name");
 			
-			if(!HasOnlyNumbers(MainForm.SyncIPAddress, "."))
+			if (!HasOnlyNumbers(MainForm.SyncIPAddress, "."))
 			{
 				
 				MainForm.SyncIPAddress = syncIPAVar;
@@ -244,37 +244,37 @@ namespace WeightWatchingProgramPlus
 				0
 			};
 			
-			if(MainForm.SyncIPAddress.Length < 15)
+			if (MainForm.SyncIPAddress.Length < 15)
 			{
 				
-				foreach(char character in MainForm.SyncIPAddress.Substring(0))
+				foreach (char character in MainForm.SyncIPAddress.Substring(0))
 				{
 					
 					string characterString = character.ToString();
 					
-					if(count[0] > 3 || count[1] > 3)
+					if (count [0] > 3 || count [1] > 3)
 					{
 							
 						MainForm.SyncIPAddress = syncIPAVar;
 					
-						PopupHandler.CreatePopup("The IP Address' format is wrong, the normal format is xxx.xxx.xxx.xxx " + count[0] + count[1], 4);
+						PopupHandler.CreatePopup("The IP Address' format is wrong, the normal format is xxx.xxx.xxx.xxx " + count [0] + count [1], 4);
 							
 						return false;
 							
 					}
 					
-					if(characterString.Equals(".", StringComparison.OrdinalIgnoreCase))
+					if (characterString.Equals(".", StringComparison.OrdinalIgnoreCase))
 					{
 						
-						count[0] = 0;
+						count [0] = 0;
 						
-						count[1]++;
+						count [1]++;
 						
 					}
 					else
 					{
 						
-						count[0]++;
+						count [0]++;
 						
 					}
 					
@@ -295,9 +295,7 @@ namespace WeightWatchingProgramPlus
 			return true;
 			
 		}
-		
-		#region HasOnlyNumbers Summary
-		
+
 		/// <summary>
 		/// Checks the given text for any character beside a number.
 		/// </summary>
@@ -310,11 +308,10 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// True if it only contains numbers; otherwise, false.
 		/// </returns>
-		#endregion
 		private static bool HasOnlyNumbers (string text, string whitelistedCharacters)
 		{
 			
-			Regex validCharacters = new Regex(string.Format(CultureInfo.InvariantCulture, "[^0-9 {0}]", whitelistedCharacters));
+			Regex validCharacters = new Regex (string.Format(CultureInfo.InvariantCulture, "[^0-9 {0}]", whitelistedCharacters));
 			
 			return !validCharacters.IsMatch(text);
 			
@@ -343,7 +340,7 @@ namespace WeightWatchingProgramPlus
 							
 				}
 				
-				if(!string.Equals(fileBackupVersion, fvi.FileVersion, StringComparison.OrdinalIgnoreCase))
+				if (!string.Equals(fileBackupVersion, fvi.FileVersion, StringComparison.OrdinalIgnoreCase))
 				{
 					
 					return true;
@@ -355,8 +352,8 @@ namespace WeightWatchingProgramPlus
 			return false;
 			
 		}
-		
-		public bool RegistryValueDoesNotExist(string appendedRegistryValue, string registryValue, string registryIDKeyword, IRetrieval retrieve)
+
+		public bool RegistryValueDoesNotExist (string appendedRegistryValue, string registryValue, string registryIDKeyword, IRetrieval retrieve)
 		{
 			
 			Retrieval Retrieval = (retrieve as Retrieval);
@@ -374,8 +371,6 @@ namespace WeightWatchingProgramPlus
 
 		public string ValidateRegistryValues (string appendedRegistryValue, string registryValue, string registryIDKeyword, IRetrieval retrieve)
 		{
-			
-			Console.WriteLine("RAN");
 			
 			#region variables
 			
@@ -403,11 +398,12 @@ namespace WeightWatchingProgramPlus
 			
 			string[] tempString = {
 				"0.0.0.0",
-				"127.0.0.1"
+				"127.0.0.1",
+				"USER"
 			};
 			
 			//Name, Type, Array Position.
-			var list = new List<Tuple<string, string, int>>();
+			var list = new List<Tuple<string, string, int>> ();
 			
 			list.Add(Tuple.Create("Next Reset Date", "datetime", 0));
 			list.Add(Tuple.Create("Calories Left for the Day", "double", 0));
@@ -419,6 +415,7 @@ namespace WeightWatchingProgramPlus
 			list.Add(Tuple.Create("Sync Send Socket", "int", 2));
 			list.Add(Tuple.Create("Last WWP+ Version", "string", 0));
 			list.Add(Tuple.Create("Synced Computer Name", "string", 1));
+			list.Add(Tuple.Create("Custom User Name", "string", 2));
 			
 			var registryValueList = list;
 			#endregion
@@ -426,7 +423,7 @@ namespace WeightWatchingProgramPlus
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registryValue, true))
 			{
 				
-				foreach(Tuple<string, string, int> registryValueTuple in registryValueList)
+				foreach (Tuple<string, string, int> registryValueTuple in registryValueList)
 				{
 					
 					if (string.IsNullOrWhiteSpace((string)tempKey.GetValue(registryValueTuple.Item1)))
@@ -472,13 +469,13 @@ namespace WeightWatchingProgramPlus
 					if (registryValueTuple.Item2.Equals("double", StringComparison.OrdinalIgnoreCase))
 					{
 						
-						failedParse |= !double.TryParse(registryValueLiteral, NumberStyles.Number, CultureInfo.InvariantCulture, out tempDouble[registryValueTuple.Item3]);
+						failedParse |= !double.TryParse(registryValueLiteral, NumberStyles.Number, CultureInfo.InvariantCulture, out tempDouble [registryValueTuple.Item3]);
 						
 					}
 					else if (registryValueTuple.Item2.Equals("bool", StringComparison.OrdinalIgnoreCase))
 					{
 						
-						failedParse |= !bool.TryParse(registryValueLiteral, out tempBool[registryValueTuple.Item3]);
+						failedParse |= !bool.TryParse(registryValueLiteral, out tempBool [registryValueTuple.Item3]);
 							
 					}
 					else if (registryValueTuple.Item2.Equals("datetime", StringComparison.OrdinalIgnoreCase))
@@ -486,13 +483,13 @@ namespace WeightWatchingProgramPlus
 						
 						failedParse |= !DateTime.TryParseExact(registryValueLiteral, new[] {
 							"yyyy MMMMM dd hh:mm:ss tt"
-						}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate[registryValueTuple.Item3]);
+						}, CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDate [registryValueTuple.Item3]);
 						
 					}
 					else if (registryValueTuple.Item2.Equals("int", StringComparison.OrdinalIgnoreCase))
 					{
 						
-						failedParse |= !int.TryParse(registryValueLiteral, NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt[registryValueTuple.Item3]);
+						failedParse |= !int.TryParse(registryValueLiteral, NumberStyles.Integer, CultureInfo.InvariantCulture, out tempInt [registryValueTuple.Item3]);
 							
 					}
 					else if (!registryValueTuple.Item2.Equals("string", StringComparison.OrdinalIgnoreCase))
@@ -513,7 +510,7 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			foreach(Tuple<string, string, int> currentItem in registryValueList.Where(value => value.Item1.Equals(Retrieval.ParseRegistryKeyById(registryIDKeyword), StringComparison.OrdinalIgnoreCase)))
+			foreach (Tuple<string, string, int> currentItem in registryValueList.Where(value => value.Item1.Equals(Retrieval.ParseRegistryKeyById(registryIDKeyword), StringComparison.OrdinalIgnoreCase)))
 			{
 				
 				if (currentItem.Item2.Equals("double", StringComparison.OrdinalIgnoreCase))
@@ -541,13 +538,6 @@ namespace WeightWatchingProgramPlus
 				{
 								
 					return tempInt [currentItem.Item3].ToString(CultureInfo.InvariantCulture);
-					
-				}
-				
-				if(currentItem.Item2.Equals("string", StringComparison.OrdinalIgnoreCase))
-				{
-					
-					throw new InvalidOperationException("ValidateRegistryValues: This method does not allow the return of strings.");
 					
 				}
 				

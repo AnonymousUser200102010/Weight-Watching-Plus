@@ -24,7 +24,7 @@ namespace WeightWatchingProgramPlus
 		/// 
 		
 		private static bool Explain = true;
-		
+
 		private static bool MultiTask = false;
 
 		[STAThread]
@@ -64,7 +64,7 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			if(Process.GetProcessesByName (Path.GetFileNameWithoutExtension (Application.ProductName)).Count() <= 1 || MultiTask)
+			if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Application.ProductName)).Count() <= 1 || MultiTask)
 			{
 				
 				Application.Run(new MainForm ());
@@ -82,6 +82,7 @@ namespace WeightWatchingProgramPlus
 		}
 
 		#region Find Files Summary
+
 		/// <summary>
 		/// Looks for any and all text files and verifies if they exist.
 		/// </summary>
@@ -140,7 +141,7 @@ namespace WeightWatchingProgramPlus
 			
 			string dosanddonts = string.Format(CultureInfo.InvariantCulture, "{0}\n", "You're allowed to use all normal characters, upper and lower case; numbers and letters\nYou're forbidden from using special characters by design. Using them caused too much trouble and so they are disallowed for the time being.");
 			
-			string explaination = string.Format(CultureInfo.InvariantCulture, "The format for the food.table is like so:\n{0}Name of food\nServing size of food\nCalories per serving of food\ndefiner of food\n{0}\n{1}\n", seperator, dosanddonts);
+			string explaination = string.Format(CultureInfo.InvariantCulture, "The format for the food.table is like so:\n{0}Name of food.\nServing size of food.\nCalories per serving of food.\ndefiner of food.\nDrink value associated with this food item (Is drink? Then true, else false)).\n{0}\n{1}\n", seperator, dosanddonts);
 			
 			if (!File.Exists(textFilesfoodtableExplainationtxt) && explain)
 			{
@@ -152,19 +153,19 @@ namespace WeightWatchingProgramPlus
 			}
 			
 		}
-		
-		private static void MoveLooseFolders()
+
+		private static void MoveLooseFolders ()
 		{
 			
-			foreach(string fullFolder in Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory).Where(folderName => !folderName.Contains("Files", StringComparison.OrdinalIgnoreCase)))
+			foreach (string fullFolder in Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory).Where(folderName => folderName.Contains("asset", StringComparison.OrdinalIgnoreCase)))
 			{
 				
 				string folder = fullFolder.Remove(0, AppDomain.CurrentDomain.BaseDirectory.Length);
 				
-				if(Directory.Exists(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder)))
+				if (Directory.Exists(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder)))
 				{
 					
-					foreach(string file in Directory.GetFiles(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder)))
+					foreach (string file in Directory.GetFiles(string.Format(CultureInfo.InvariantCulture, "Files\\{0}", folder)))
 					{
 						
 						File.Delete(file);

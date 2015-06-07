@@ -1,8 +1,19 @@
-﻿<Properties>
+﻿<Properties StartupItem="Weight_Watching_Program_Plus\Weight_Watching_Program_Plus.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Weight_Watching_Program_Plus\z  Program\Modification.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Weight_Watching_Program_Plus\z  Program\WeightWatchingInterfaces.cs">
     <Files>
-      <File FileName="Weight_Watching_Program_Plus\z  Program\Modification.cs" Line="32" Column="32" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\WeightWatchingInterfaces.cs" Line="46" Column="52" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\NetworkOps.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Modification.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Functions.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\GlobalVariables.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\MainForm.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Mathematics.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\PopupHandler.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Program.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Retrieval.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Storage.cs" Line="1" Column="1" />
+      <File FileName="Weight_Watching_Program_Plus\z  Program\Validation.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

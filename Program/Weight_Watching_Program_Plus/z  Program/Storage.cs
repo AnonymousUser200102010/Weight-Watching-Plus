@@ -1,6 +1,7 @@
 ﻿#region Using Directives
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ using UniversalHandlersLibrary;
 
 namespace WeightWatchingProgramPlus
 {
-	
+
 	
 	/// <summary>
 	/// Functions whose primary purpose is storage and writing, but who don't have a more pressing primary function.
@@ -20,10 +21,10 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		private IPopup PopupHandler;
-		
+
 		private IMainForm MainForm;
-		
-		public Storage(IPopup pU, IMainForm mainForm)
+
+		public Storage (IPopup pU, IMainForm mainForm)
 		{
 			
 			this.PopupHandler = pU;
@@ -32,14 +33,14 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		public void WriteFoodTable()
+		public void WriteFoodTable ()
 		{
 			
-			WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, double, double, string, bool>(null, 0, 0, null, false));
+			WriteFoodTable("Files\\Text\\", "food.table", new Tuple<string, double, double, string, bool> (null, 0, 0, null, false));
 			
 		}
-		
-		public void WriteFoodTable(Tuple<string, double, double, string, bool> additionToFoodTable)
+
+		public void WriteFoodTable (Tuple<string, double, double, string, bool> additionToFoodTable)
 		{
 			
 			WriteFoodTable("Files\\Text\\", "food.table", additionToFoodTable);
@@ -49,7 +50,11 @@ namespace WeightWatchingProgramPlus
 		public void WriteFoodTable (string directory, string file, Tuple<string, double, double, string, bool> additionToFoodTable)
 		{
 			
-			FoodRelated.CombinedFoodList.Sort();
+			List<Tuple<string, double, double, string, bool>> tempList = FoodRelated.CombinedFoodList.ToList();
+			
+			tempList.Sort();
+			
+			tempList.ToArray().CopyTo(FoodRelated.CombinedFoodList.ToArray(), 0);
 			
 			string fileToUseLiteral = string.Format(CultureInfo.InvariantCulture, "{0}{1}", directory, file);
 			
@@ -68,7 +73,7 @@ namespace WeightWatchingProgramPlus
 			
 			const string seperator = "-------------------------------------------------------------------------\n";
 			
-			using (StreamWriter outfile = new StreamWriter(fileToUseLiteral))
+			using (StreamWriter outfile = new StreamWriter (fileToUseLiteral))
 			{
 				
 				for (int i = 0, FoodRelatedCombinedFoodListCount = FoodRelated.CombinedFoodList.Count; i < FoodRelatedCombinedFoodListCount; i++)
@@ -96,39 +101,39 @@ namespace WeightWatchingProgramPlus
 			File.SetAttributes(directory + file, FileAttributes.Compressed);
 			
 		}
-		
+
 		#region WriteRegistry Overrides
-		
-		public void WriteRegistry(string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
+
+		public void WriteRegistry (string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
 		{
 			
 			string objectToSave = null;
 			
-			if(registryIDKeyword.Contains("time", StringComparison.OrdinalIgnoreCase))
+			if (registryIDKeyword.Contains("time", StringComparison.OrdinalIgnoreCase))
 			{
 				
 				objectToSave = MainForm.ManualTimeIsInitiated.ToString();
 					
 			}
-			else if(registryIDKeyword.Contains("sync", StringComparison.OrdinalIgnoreCase))
+			else if (registryIDKeyword.Contains("sync", StringComparison.OrdinalIgnoreCase))
 			{
 				
-				if(registryIDKeyword.Contains("enabled", StringComparison.OrdinalIgnoreCase))
+				if (registryIDKeyword.Contains("enabled", StringComparison.OrdinalIgnoreCase))
 				{
 						
 					objectToSave = MainForm.SyncEnabled.ToString();
 						
 				}
-				else if(registryIDKeyword.Contains("socket", StringComparison.OrdinalIgnoreCase))
+				else if (registryIDKeyword.Contains("socket", StringComparison.OrdinalIgnoreCase))
 				{
 						
-					if(registryIDKeyword.Contains("l", StringComparison.OrdinalIgnoreCase))
+					if (registryIDKeyword.Contains("l", StringComparison.OrdinalIgnoreCase))
 					{
 							
 						objectToSave = MainForm.SyncListenPort;
 							
 					}
-					else if(registryIDKeyword.Contains("s", StringComparison.OrdinalIgnoreCase))
+					else if (registryIDKeyword.Contains("s", StringComparison.OrdinalIgnoreCase))
 					{
 							
 						objectToSave = MainForm.SyncSendPort;
@@ -136,7 +141,7 @@ namespace WeightWatchingProgramPlus
 					}
 						
 				}
-				else if(registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
+				else if (registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
 				{
 					
 					objectToSave = MainForm.SyncIPAddress;
@@ -145,7 +150,7 @@ namespace WeightWatchingProgramPlus
 				else
 				{
 					
-					throw new ArgumentException("WriteRegistry: registryIDKeyword: This value did not produce any desireable result.");
+					throw new ArgumentException ("WriteRegistry: registryIDKeyword: This value did not produce any desireable result.");
 					
 				}
 				
@@ -153,21 +158,21 @@ namespace WeightWatchingProgramPlus
 			else
 			{
 				
-				throw new ArgumentException("WriteRegistry: registryIDKeyword: This value did not produce any desireable result.");
+				throw new ArgumentException ("WriteRegistry: registryIDKeyword: This value did not produce any desireable result.");
 				
 			}
 			
 			WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, objectToSave, registryIDKeyword, reset, valid, retrieve);
 			
 		}
-		
-		public void WriteRegistry(string objectToSave, string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
+
+		public void WriteRegistry (string objectToSave, string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
 		{
 			
 			WriteRegistry(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, objectToSave, registryIDKeyword, reset, valid, retrieve);
 			
 		}
-		
+
 		public void WriteRegistry (string appendedRegistryValue, string registyValue, string objectToSave, string registryIDKeyword, bool reset, IValidation valid, IRetrieval retrieve)
 		{
 			
@@ -180,10 +185,10 @@ namespace WeightWatchingProgramPlus
 			using (RegistryKey tempKey = Registry.LocalMachine.OpenSubKey(appendedRegistryValue + registyValue, true))
 			{
 				
-				if(registryIDKeyword.Contains("calories"))
+				if (registryIDKeyword.Contains("calories"))
 				{
 					
-					if(registryIDKeyword.Contains("left"))
+					if (registryIDKeyword.Contains("left"))
 					{
 						
 						var registryDefaultCalories = double.Parse(Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture);
@@ -236,7 +241,7 @@ namespace WeightWatchingProgramPlus
 						tempKey.SetValue(registryNameLiteral, tempDouble.ToString(CultureInfo.CurrentCulture));
 						
 					}
-					else if(registryIDKeyword.Contains("default"))
+					else if (registryIDKeyword.Contains("default"))
 					{
 						
 						tempKey.SetValue(registryNameLiteral, objectToSave);
@@ -244,7 +249,7 @@ namespace WeightWatchingProgramPlus
 					}
 					
 				}
-				else if(registryIDKeyword.Contains("date", StringComparison.OrdinalIgnoreCase))
+				else if (registryIDKeyword.Contains("date", StringComparison.OrdinalIgnoreCase))
 				{
 					
 					DateTime date = DateTime.Parse(objectToSave, CultureInfo.CurrentCulture);
@@ -253,32 +258,32 @@ namespace WeightWatchingProgramPlus
 						
 					MainForm.ManualDateTime = date;
 						
-				}	
-				else if(registryIDKeyword.Contains("time", StringComparison.OrdinalIgnoreCase))
+				}
+				else if (registryIDKeyword.Contains("time", StringComparison.OrdinalIgnoreCase))
 				{
 					
 					tempKey.SetValue(registryNameLiteral, MainForm.ManualTimeIsInitiated.ToString());
 						
 				}
-				else if(registryIDKeyword.Contains("sync", StringComparison.OrdinalIgnoreCase))
+				else if (registryIDKeyword.Contains("sync", StringComparison.OrdinalIgnoreCase))
 				{
 					
-					if(registryIDKeyword.Contains("enabled", StringComparison.OrdinalIgnoreCase))
+					if (registryIDKeyword.Contains("enabled", StringComparison.OrdinalIgnoreCase))
 					{
 							
 						tempKey.SetValue(registryNameLiteral, MainForm.SyncEnabled);
 							
 					}
-					else if(registryIDKeyword.Contains("socket", StringComparison.OrdinalIgnoreCase))
+					else if (registryIDKeyword.Contains("socket", StringComparison.OrdinalIgnoreCase))
 					{
 							
-						if(registryIDKeyword.Contains("l", StringComparison.OrdinalIgnoreCase))
+						if (registryIDKeyword.Contains("l", StringComparison.OrdinalIgnoreCase))
 						{
 								
 							tempKey.SetValue(registryNameLiteral, MainForm.SyncListenPort);
 								
 						}
-						else if(registryIDKeyword.Contains("s", StringComparison.OrdinalIgnoreCase))
+						else if (registryIDKeyword.Contains("s", StringComparison.OrdinalIgnoreCase))
 						{
 								
 							tempKey.SetValue(registryNameLiteral, MainForm.SyncSendPort);
@@ -286,7 +291,7 @@ namespace WeightWatchingProgramPlus
 						}
 							
 					}
-					else if(registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
+					else if (registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
 					{
 						
 						tempKey.SetValue(registryNameLiteral, MainForm.SyncIPAddress);
@@ -294,9 +299,15 @@ namespace WeightWatchingProgramPlus
 					}
 					
 				}
-				else if(registryIDKeyword.Contains("dec", StringComparison.OrdinalIgnoreCase))
+				else if (registryIDKeyword.Contains("dec", StringComparison.OrdinalIgnoreCase))
 				{
 					
+					tempKey.SetValue(registryNameLiteral, objectToSave);
+						
+				}
+				else if (registryIDKeyword.Contains("name", StringComparison.OrdinalIgnoreCase))
+				{
+						
 					tempKey.SetValue(registryNameLiteral, objectToSave);
 						
 				}
@@ -304,10 +315,10 @@ namespace WeightWatchingProgramPlus
 			}
 			
 		}
-		
+
 		#endregion
 
-		public void WriteFoodEaten(bool add, IValidation valid, IRetrieval retrieve)
+		public void WriteFoodEaten (bool add, IValidation valid, IRetrieval retrieve)
 		{
 			
 			WriteFoodEaten("Files\\Text\\", "Food Diary.txt", add, valid, retrieve);

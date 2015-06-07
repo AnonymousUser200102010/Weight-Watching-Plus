@@ -19,12 +19,12 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		private IPopup PopupHandler;
-		
+
 		private IRetrieval Retrieval;
-		
+
 		private IMainForm MainForm;
-		
-		public Mathematics(IPopup pU, IRetrieval retrieve, IMainForm mainForm)
+
+		public Mathematics (IPopup pU, IRetrieval retrieve, IMainForm mainForm)
 		{
 
 			this.PopupHandler = pU;
@@ -35,13 +35,13 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		public double PerformArithmeticOperation(string equation)
+		public double PerformArithmeticOperation (string equation)
 		{
 			
 			return PerformArithmeticOperation(equation, false);
 			
 		}
-		
+
 		public double PerformArithmeticOperation (string equation, bool allowPopups)
 		{
 			
@@ -80,7 +80,7 @@ namespace WeightWatchingProgramPlus
 			
 			this.Retrieval.ReadRegistry();
 
-			var userProvidedServings = MainForm.AddSubSelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? MainForm.UserProvidedServings : (decimal)(PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.GetArithmeticValue(true), MainForm.GetArithmeticSign, MainForm.GetArithmeticValue(false)), true));
+			var userProvidedServings = MainForm.AddSubSelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? MainForm.UserProvidedServings : (decimal)(PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", MainForm.ArithmeticValue(true), MainForm.GetArithmeticSign, MainForm.ArithmeticValue(false)), true));
 			
 			double userServings = (FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item3 * ((double)userProvidedServings / FoodRelated.CombinedFoodList [GlobalVariables.SelectedListItem].Item2));
 			

@@ -10,78 +10,94 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using UniversalHandlersLibrary;
+
 #endregion
 
 namespace WeightWatchingProgramPlus
 {
+
 	/// <summary>
 	/// Functions whose primary purpose is networking and internet operations, but who don't have a more pressing primary function.
 	/// </summary>
 	internal class NetworkOps : INetOps
 	{
 		
-		private IRetrieval Retrieval;
-		
-		private IMainForm MainForm;
-		
-		private TcpListener server;
-		
-		private delegate void SLDelegate(int portNum);
-		
-		private void DisconnectServerGracefully()
+		private readonly IMainForm MainForm;
+
+		private TcpListener server = new TcpListener (IPAddress.Any, IPEndPoint.MinPort);
+
+		private delegate void SLDelegate (int portNum);
+
+		public NetworkOps (IMainForm mainForm)
 		{
-				
-			server.Stop();
-			
-			server.Server.Dispose();
-				
-			#if DEBUG
-							
-			Console.WriteLine("Server successfully shutdown and will no longer accept requests.");
-								
-			#endif
+
+			this.MainForm = mainForm;
 			
 		}
-		
-		public int ServerConnectionStatus 
+
+		public int ServerConnectionStatus
 		{ 
 			
-			get { return OperationalPhase[0]; } 
+			get { return OperationalPhase [0]; } 
 			
-			set 
+			set
 			{ 
 				
-				if(value == 0)
+				if (value == 0 && OperationalPhase [0] != 0)
 				{
 					
-					DisconnectServerGracefully();
+					DisconnectServerGracefully(0);
 					
 				}
 				
-				OperationalPhase[0] = value; 
+				OperationalPhase [0] = value; 
 			
 				MainForm.SetSyncConnectionItems();
 				
 			}
 			
 		}
-		
-		public int ClientConnectionStatus 
+
+		private void DisconnectServerGracefully (int hashCode)
+		{
+			
+			if (server.Server.IsBound && (server.GetHashCode() == hashCode || hashCode == 0))
+			{
+			
+				server.Server.Close();
+				
+				server.Server.Dispose();
+						
+				server.Stop();
+				
+				ServerConnectionStatus = 0;
+					
+				#if DEBUG
+								
+				Console.WriteLine("Server successfully shutdown and will no longer accept requests.");
+									
+				#endif
+				
+			}
+			
+		}
+
+		public int ClientConnectionStatus
 		{ 
 			
-			get { return OperationalPhase[1]; } 
+			get { return OperationalPhase [1]; } 
 			
-			set 
+			set
 			{
 				
-				OperationalPhase[1] = value;
+				OperationalPhase [1] = value;
 			
 				MainForm.SetSyncConnectionItems();
 				
 			}
 		
 		}
-		
+
 		/// <summary>
 		/// Operational phase of [0] = server/[1] = client.
 		/// </summary>
@@ -95,175 +111,173 @@ namespace WeightWatchingProgramPlus
 			0,
 			0
 		};
-		
-		public NetworkOps(IRetrieval retrieve, IMainForm mainForm)
+
+		public void StartListen (int port)
 		{
 			
-			this.Retrieval = retrieve;
-			
-			this.MainForm = mainForm;
-			
-		}
-		
-		public void StartListen(int port)
-		{
-			
-			var tempDelegate = new SLDelegate(StartListenAsync);
-			
-			tempDelegate.BeginInvoke(port, null, null);
-			
-		}
-		
-		private async void StartListenAsync(int port)
-		{
-				
-			server = new TcpListener(IPAddress.Any, port);
-			
-			server.Server.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.AcceptConnection, 1);
-			
-			if(MainForm.SyncEnabled)
+			if (!server.Server.IsBound && MainForm.SyncEnabled)
 			{
+			
+				var tempDelegate = new SLDelegate (StartListenAsync);
 				
-				ServerConnectionStatus = 1;
-						
-				server.Start();
-					
-				#if DEBUG
-						
-				Console.WriteLine("Program is listening for connections. (Server listen successful)");
-						
-				#endif
-				
-				while(server.Server.IsBound)
-				{
-						
-					ServerConnectionStatus = 2;
-					
-					#if DEBUG
-						
-					Console.WriteLine("Program is waiting for connection attempts.");
-							
-					#endif
-					
-					try
-					{
-						while (!server.Pending())
-					    {
-							
-					         Thread.Sleep(1000);
-					         
-					    }
-					}
-					catch(InvalidOperationException) {}
-					
-					if(MainForm.SyncEnabled && server.Server.IsBound)
-					{
-						
-						using(TcpClient client = server.AcceptTcpClient())
-						{
-							
-							ServerConnectionStatus = 3;
-							
-							#if DEBUG
-								
-							Console.WriteLine(string.Format("You ({0}) have successfully accepted a connection from {1}", server.Server.LocalEndPoint, client.Client.LocalEndPoint));
-									
-							#endif
-								
-							string message = null;
-							
-							string directory = null;
-									
-							string fileName = null;
-							
-							using(StreamReader stream = new StreamReader(client.GetStream()))
-								{
-									
-									message = stream.ReadLineAsync().Result;
-									
-									directory = stream.ReadLineAsync().Result;
-									
-									fileName = stream.ReadLineAsync().Result;
-									
-									if(message.Contains("send", StringComparison.OrdinalIgnoreCase))
-									{
-											
-										await RecieveOps(client, message, directory, fileName);
-											
-									}
-									else if (message.Contains("file", StringComparison.OrdinalIgnoreCase))
-									{
-											
-										StartSend(MainForm.SyncIPAddress, int.Parse(MainForm.SyncSendPort, CultureInfo.InvariantCulture), "send file", directory, fileName, string.Format(CultureInfo.InvariantCulture, "{0}\\{1}", directory, fileName));
-												
-									}
-									else if (message.Contains("uptime", StringComparison.OrdinalIgnoreCase))
-									{
-											
-										StartSend(MainForm.SyncIPAddress, int.Parse(MainForm.SyncSendPort, CultureInfo.InvariantCulture), "send time", GlobalVariables.StartTime.ToString(), null, null);
-											
-									}
-									
-								}
-							
-							client.GetStream().Close();
-								
-						}
-						
-						#if DEBUG
-							
-						Console.WriteLine("Client tasks successfully handled.");
-										
-						#endif
-						
-					}
-						
-				}
-				
-				#if DEBUG
-						
-				Console.WriteLine("Server finalizing shutdown....");
-							
-				#endif
-				
-				if(server.Server.IsBound)
-				{
-					
-					ServerConnectionStatus = 0;
-					
-					DisconnectServerGracefully();
-					
-				}
-				
-				Thread.CurrentThread.Abort();
-				
+				tempDelegate.BeginInvoke(port, null, null);
+			
 			}
 			
 		}
-		
-//		public async void ListenOps(TcpListener server)
-//		{
-//			
-//			
-//			
-//			#if DEBUG
-//					
-//			Console.WriteLine("Listener successfully shutdown.");
-//								
-//			#endif
-//			
-//		}
-		
-		public async void StartSend(string ipAddress, int port, string message, string additionalInfo, string fileName, string pathToFile)
+
+		private async void StartListenAsync (int port)
+		{
+			
+			ServerConnectionStatus = 1;
+			
+			server = new TcpListener (IPAddress.Any, port);
+			
+			int serverCurrentHashCode = 0;
+				
+			server.Server.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.AcceptConnection, 1);
+					
+			server.Start();
+			
+			serverCurrentHashCode = server.GetHashCode();
+				
+			#if DEBUG
+					
+			Console.WriteLine("Program is listening for connections. (Server listen successful)");
+					
+			#endif
+			
+			while (true)
+			{
+				
+				if (!server.Server.IsBound)
+				{
+					
+					break;
+					
+				}
+					
+				ServerConnectionStatus = 2;
+				
+				#if DEBUG
+					
+				Console.WriteLine("Program is waiting for connection attempts.");
+						
+				#endif
+				
+				try
+				{
+					
+					while (!server.Pending())
+					{
+						
+						Thread.Sleep(1000);
+				         
+					}
+					
+				}
+				catch (InvalidOperationException)
+				{
+				}
+				
+				if (MainForm.SyncEnabled && server.Server.IsBound)
+				{
+					
+					using (TcpClient client = server.AcceptTcpClient())
+					{
+						
+						ServerConnectionStatus = 3;
+						
+						#if DEBUG
+							
+						Console.WriteLine(string.Format("You ({0}) have successfully accepted a connection from {1}", server.Server.LocalEndPoint, client.Client.LocalEndPoint));
+									
+						#endif
+							
+						string message = null;
+						
+						string directory = null;
+								
+						string fileName = null;
+						
+						using (StreamReader stream = new StreamReader (client.GetStream()))
+						{
+							
+							message = stream.ReadLineAsync().Result;
+							
+							directory = stream.ReadLineAsync().Result;
+							
+							fileName = stream.ReadLineAsync().Result;
+							
+							if (message.Contains("send", StringComparison.OrdinalIgnoreCase))
+							{
+									
+								await RecieveOps(client, message, directory, fileName);
+									
+							}
+							else if (message.Contains("file", StringComparison.OrdinalIgnoreCase))
+							{
+									
+								StartSend(MainForm.SyncIPAddress, int.Parse(MainForm.SyncSendPort, CultureInfo.InvariantCulture), "send file", directory, fileName, string.Format(CultureInfo.InvariantCulture, "{0}\\{1}", directory, fileName));
+												
+							}
+							else if (message.Contains("uptime", StringComparison.OrdinalIgnoreCase))
+							{
+											
+								StartSend(MainForm.SyncIPAddress, int.Parse(MainForm.SyncSendPort, CultureInfo.InvariantCulture), "send time", GlobalVariables.StartTime.ToString(), null, null);
+											
+							}
+							
+						}
+						
+						client.GetStream().Close();
+						
+					}
+					
+					#if DEBUG
+						
+					Console.WriteLine("Client tasks successfully handled.");
+									
+					#endif
+					
+				}
+				else
+				{
+						
+					break;
+						
+				}
+						
+			}
+			
+			#if DEBUG
+						
+			Console.WriteLine("Server finalizing shutdown....");
+							
+			#endif
+			
+			DisconnectServerGracefully(serverCurrentHashCode);
+			
+			#if DEBUG
+						
+			Console.WriteLine("Server shut down successfully.");
+							
+			#endif
+				
+			Thread.CurrentThread.Abort();
+			
+		}
+
+		public async void StartSend (string ipAddress, int port, string message, string additionalInfo, string fileName, string pathToFile)
 		{
 			
 			ClientConnectionStatus = 1;
 			
 			IPAddress[] tempIPAddress = Dns.GetHostAddresses(ipAddress);
 			
-			IPEndPoint ipEnd = new IPEndPoint(tempIPAddress[0], port);
+			IPEndPoint ipEnd = new IPEndPoint (tempIPAddress [0], port);
 					
-			TcpClient client = new TcpClient(ipEnd);
+			TcpClient client = new TcpClient (ipEnd);
 					
 			client.Connect(ipAddress, int.Parse(MainForm.SyncListenPort));
 					
@@ -281,13 +295,13 @@ namespace WeightWatchingProgramPlus
 			
 			
 		}
-		
-		private async Task SendOps(TcpClient client, string message, string additionalInfo, string fileName, string pathToFile)
+
+		private async Task SendOps (TcpClient client, string message, string additionalInfo, string fileName, string pathToFile)
 		{
 			
 			ClientConnectionStatus = 3;
 			
-			StreamWriter messageStream = new StreamWriter(client.GetStream());
+			StreamWriter messageStream = new StreamWriter (client.GetStream());
 				
 			await messageStream.WriteAsync(string.Format("{0}\n", message));
 			
@@ -297,10 +311,10 @@ namespace WeightWatchingProgramPlus
 				
 			await messageStream.FlushAsync();
 			
-			if(!message.Contains("request", StringComparison.InvariantCultureIgnoreCase) && !message.Contains("receive", StringComparison.InvariantCultureIgnoreCase))
+			if (!message.Contains("request", StringComparison.InvariantCultureIgnoreCase) && !message.Contains("receive", StringComparison.InvariantCultureIgnoreCase))
 			{
 				
-				MainForm.setMainFormState(true);
+				MainForm.MainFormState(true);
 			
 				byte[] buffer = new byte[1];
 				
@@ -334,45 +348,45 @@ namespace WeightWatchingProgramPlus
 				
 			#endif
 				
-			MainForm.setMainFormState(false);
+			MainForm.MainFormState(false);
 			
 			Thread.CurrentThread.Abort();
 			
 		}
-		
-		private async Task RecieveOps(TcpClient client, string message, string additionalInfo, string fileName)
+
+		private async Task RecieveOps (TcpClient client, string message, string additionalInfo, string fileName)
 		{
 			
-			if(message.Contains("file", StringComparison.OrdinalIgnoreCase))
+			if (message.Contains("file", StringComparison.OrdinalIgnoreCase))
 			{
 				
-				MainForm.setMainFormState(true);
+				MainForm.MainFormState(true);
 			
 				string filePath = string.Format("{0}\\{1}\\{2}", AppDomain.CurrentDomain.BaseDirectory, additionalInfo, fileName);
 				
-				if(File.Exists(filePath))
+				if (File.Exists(filePath))
 				{
 					
 					File.Delete(filePath);
 					
 				}
 				
-				using(var networkStream = client.GetStream())
+				using (var networkStream = client.GetStream())
 				{
 					
-					using(Stream fileStream = File.OpenWrite(filePath))
+					using (Stream fileStream = File.OpenWrite(filePath))
 					{
 							
 						byte[] buffer = new byte[8192];
 						
-				        int bytesRead;
+						int bytesRead;
 				        
-				        while ((bytesRead = await networkStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-				        {
+						while ((bytesRead = await networkStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+						{
 				        	
-				        	await fileStream.WriteAsync(buffer, 0, bytesRead);
+							await fileStream.WriteAsync(buffer, 0, bytesRead);
 				        	
-				    	}
+						}
 							
 					}
 					
@@ -385,14 +399,14 @@ namespace WeightWatchingProgramPlus
 				#endif
 				
 			}
-			else if(message.Contains("uptime", StringComparison.OrdinalIgnoreCase) && !GlobalVariables.ClientStateOverride)
+			else if (message.Contains("uptime", StringComparison.OrdinalIgnoreCase) && !GlobalVariables.ClientStateOverride)
 			{
 				
 				GlobalVariables.IsClient = DateTime.Compare(DateTime.Parse(additionalInfo), GlobalVariables.StartTime) < 0;
 							
 			}
 				
-			MainForm.setMainFormState(false);
+			MainForm.MainFormState(false);
 			
 			Thread.CurrentThread.Abort();
 			

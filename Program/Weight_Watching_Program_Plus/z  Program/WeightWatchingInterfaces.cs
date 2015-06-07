@@ -3,33 +3,60 @@ using System.Windows.Forms;
 
 namespace WeightWatchingProgramPlus
 {
-	
+
 	/// <summary>
 	/// Interface for the MainForm class so it doesn't need to be accessed directly.
 	/// </summary>
 	public interface IMainForm
 	{
 		
-		void setMainFormState(bool paused);
+		string CustomUser { get; set; }
 
-		void MainFormVersionInfoText(string value);
-		
-		void MainFormBuildInfoText(string value);
+		/// <summary>
+		/// Enables or disables the mainform.
+		/// </summary>
+		/// <param name="paused">
+		/// If true, disables the mainform; else it enables it.
+		/// </param>
+		void MainFormState (bool paused);
+
+		/// <summary>
+		/// Sets the text of the "version" information bar located at the bottom of the program.
+		/// </summary>
+		/// <param name="value">
+		/// The text to set.
+		/// </param>
+		void MainFormVersionInfoText (string value);
+
+		/// <summary>
+		/// Sets the text of the "build" information bar located at the bottom of the program.
+		/// </summary>
+		/// <example>
+		/// Release/Development "Build"
+		/// </example>
+		/// <param name="value">
+		/// The text to set.
+		/// </param>
+		void MainFormBuildInfoText (string value);
 
 		/// <summary>
 		/// Gets or Sets the title of the application after launch.
 		/// </summary>
 		string MainFormTitle { get; set; }
-		
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="WeightWatchingProgramPlus.IMainForm"/> sync enabled.
+		/// </summary>
+		/// <value><c>true</c> if sync is enabled; otherwise, <c>false</c>.</value>
 		bool SyncEnabled { get; set; }
-		
+
 		string SyncIPAddress { get; set; }
-	
+
 		string SyncSendPort { get; set; }
-		
+
 		string SyncListenPort { get; set; }
-		
-		void SetSyncConnectionItems();
+
+		void SetSyncConnectionItems ();
 
 		/// <summary>
 		/// Gets or Sets the value in the #Servings NumericUpDown.
@@ -49,14 +76,12 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Gets or Sets the main Food List ListBox's DataSource.
 		/// </summary>
-		void MainFoodListDataSource(object value);
+		void MainFoodListDataSource (object value);
 
 		/// <summary>
 		/// Gets the main Food List ListBox's items.
 		/// </summary>
 		ListBox.ObjectCollection MainFoodListItems { get; }
-
-		#region FoodListGet/Select Summary
 
 		/// <summary>
 		/// Gets or Sets the selection for the specified item in the main Food List ListBox.
@@ -73,18 +98,17 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns the currently selected item.
 		/// </returns>
-		#endregion
 		int FoodListSelectedIndex (bool setIndex, int index, bool value);
 
 		/// <summary>
 		/// Gets or Sets the uppermost item in the main Food List ListBox.
 		/// </summary>
-		int GetFoodListTopItem { get; }
+		int FoodListTopItem { get; }
 
 		/// <summary>
 		/// Gets or Sets the label which the user sees asking how many servings they are eating.
 		/// </summary>
-		string NumberOfServingsLabel { set; }
+		void NumberOfServingsLabel (string value);
 
 		/// <summary>
 		/// Gets or Sets the "Name" property box which shows the name of the currently selected food item.
@@ -124,7 +148,7 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Gets or Sets the amount of calories in the NumericUpDown in the "manual" tab of the "main" tab.
 		/// </summary>
-		void UserSetCalories(decimal value);
+		void UserSetCalories (decimal value);
 
 		/// <summary>
 		/// Gets or Sets the amount of default calories to be applied wherever applicable.
@@ -135,12 +159,12 @@ namespace WeightWatchingProgramPlus
 		/// The NumericUpDown which shows, and sets, the decimal places to be used globally.
 		/// </summary>
 		decimal DecimalPlaces { get; set; }
-		
+
 		/// <summary>
 		/// Sets the decimal example text box.
 		/// </summary>
-		void DecimalExample(string value);
-		
+		void DecimalExample (string value);
+
 		/// <summary>
 		/// Gets or Sets the value for the "new item" checkbox.
 		/// </summary>
@@ -149,7 +173,7 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Gets the property control box of your choice based on the contolID provided. This is to be used as a LAST RESTORT when ALL ELSE FAILS!
 		/// </summary>
-		/// <param name="controlID">
+		/// <param name="controlId">
 		/// The ID of the control item you wish to use.
 		/// </param>
 		/// <returns>
@@ -158,7 +182,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.ArgumentOutOfRangeException">
 		/// Thrown if the ID provided does not correlate (is less or more) to any of the controls that have been explicitly exposed.
 		/// </exception>
-		Control ReturnPropertyControl (int controlID);
+		Control ReturnPropertyControl (int controlId);
 
 		/// <summary>
 		/// Gets or Sets whether the user has chosen to write the diary portion of Food Tracking to a file.
@@ -178,12 +202,10 @@ namespace WeightWatchingProgramPlus
 		/// <summary>
 		/// Sets the "sign" for the arithmetic operation in the "arithmetic" sub-tab.
 		/// </summary>
-		int SetArithmeticSign { set; }
+		void SetArithmeticSign (int value);
 
 		TabPage AddSubSelectedSubTab { get; set; }
 
-		#region Get Arithmatic Number Summary
-		
 		/// <summary>
 		/// Gets the value from one of the NumericUpDowns in the "arithmetic" subtab.
 		/// </summary>
@@ -193,27 +215,23 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// The decimal value of the NumericUpDown as determined by <paramref name="left"></paramref>.
 		/// </returns>
-		#endregion
-		decimal GetArithmeticValue (bool left);
-		
+		decimal ArithmeticValue (bool left);
+
 		void SetAllDecimalPointValues (int value);
-		 	
+
 		decimal ServingSizeMinimumValue { get; }
-		
+
 		decimal ManualCaloriesMinimumValue { get; }
-		
+
 		double GlobalMinimumValue { get; set; }
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the Popup Handler sub-class so it doesn't need to be accessed directly.
 	/// </summary>
 	public interface IPopup
 	{
-		
-		#region Create Popup Only Override Summary
-
 		/// <summary>
 		/// Handles the creation of popup messageboxes.
 		/// </summary>
@@ -226,10 +244,7 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
 		/// </returns>
-		#endregion
 		DialogResult CreatePopup (string message, int popupCode);
-
-		#region Create Popup Additional Actions Override Summary
 
 		/// <summary>
 		/// Handles the creation of popup messageboxes.
@@ -246,11 +261,10 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns a DialogResult variable based on the actions taken by the user with regards to the popup created herein.
 		/// </returns>
-		#endregion
 		DialogResult CreatePopup (string message, int popupCode, Control controlItem);
 			
 	}
-	
+
 	/// <summary>
 	/// Interface for the General Functions sub-class so it doesn't need to be accessed directly.
 	/// </summary>
@@ -279,7 +293,7 @@ namespace WeightWatchingProgramPlus
 		/// A preinitialized instance of IMainForm. It is not recommended to pass a new initialization of IMainForm.
 		/// </param>
 		void InitializeForms (IModification modification, IStorage store, IValidation valid, IRetrieval retrieve, INetOps netOps, IMainForm mainForm);
-		
+
 		/// <summary>
 		/// Clears and reloads the food table into the food listbox
 		/// </summary>
@@ -290,8 +304,6 @@ namespace WeightWatchingProgramPlus
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
 		void RefreshFoodList (IStorage store, IRetrieval retrieve, IMainForm mainForm);
-		
-		#region Find Item Summary
 
 		/// <summary>
 		/// Finds an item within the food list and selects it.
@@ -314,19 +326,15 @@ namespace WeightWatchingProgramPlus
 		/// <param name="popup">
 		/// A preinitialized instance of IPopup. It is not recommended to pass a new initialization of IPopup.
 		/// </param>
-		#endregion
 		void Find (int offset, string valueToFind, string valueToAvoid, bool exactSearch, bool searchForNextValue, IPopup popup, IMainForm mainForm);
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the Mathematics sub-class so it doesn't need to be accessed directly.
 	/// </summary>
 	public interface IMathematics
 	{
-		
-		#region Perform Arithmetic Operation No Popups Override Summary
-
 		/// <summary>
 		/// Performs an arithmetic operation on an equation which has been converted to it's logical string counterpart.
 		/// </summary>
@@ -339,10 +347,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
-		#endregion
 		double PerformArithmeticOperation (string equation);
-		
-		#region Perform Arithmetic Operation Summary
 
 		/// <summary>
 		/// Performs an arithmetic operation on an equation which has been converted to it's logical string counterpart.
@@ -359,10 +364,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
-		#endregion
 		double PerformArithmeticOperation (string equation, bool allowPopupWindows);
-		
-		#region Get Final Calories Summary
 
 		/// <summary>
 		/// Sub-logic handler for modification of calories. Simply to reduce code bloat and make understanding the final processes easier.
@@ -376,25 +378,20 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// Returns the calorie value after the logical operations have been finished.
 		/// </returns>
-		#endregion
 		double GetFinalCalories (bool add, IValidation valid);
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the Retrieval sub-class so it doesn't need to be accessed directly.
 	/// </summary>
 	public interface IRetrieval
 	{
-		
-		#region Read Food Table Default Override Summary
+
 		/// <summary>
 		/// This function reads the food table file and parses the results into their logical values. This default override reads from the GlobalVariable values.
 		/// </summary>
-		#endregion
-		void ReadFoodTable();
-		
-		#region Read Food Table Summary
+		void ReadFoodTable ();
 
 		/// <summary>
 		/// This function reads the food table file and parses the results into their logical values.
@@ -411,20 +408,15 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.IO.IOException">
 		/// Thrown if the provided file, in the provided directory, does not exist.
 		/// </exception>
-		#endregion
 		void ReadFoodTable (string directory, string file);
-		
-		#region Read Registry Default Override Summary
+
 		/// <summary>
 		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date. This override reads from the registry as dictated by the GlobalVariable values.
 		/// </summary>
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
-		#endregion
-		void ReadRegistry();
-		
-		#region Read Registy Summary
+		void ReadRegistry ();
 
 		/// <summary>
 		/// Reads the registry and parses all values into their logical counterparts. Also checks to make sure the reset date is later than the current date.
@@ -438,10 +430,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a local value that requires a parsable registry value cannot parse it.
 		/// </exception>
-		#endregion
 		void ReadRegistry (string appendedRegistryValue, string registryValue);
-		
-		#region Get Registry Values Default Override Summary
 
 		/// <summary>
 		/// Gets the registry value requested through the keyword provided.
@@ -458,50 +447,39 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.ArgumentException">
 		/// Thrown if the registry keyword fails to produce results.
 		/// </exception>
-		#endregion
 		string GetRegistryValue (string registryIdKeyword);
-		
-		string ParseRegistryKeyById(string registryIdKeyword);
-		
-		string GetRegistryValueFromRegistry(string appendedRegistryValue, string registryValue, string registryIdKeyword);
-		
-		#region Backup Summary
-		
+
+		string ParseRegistryKeyById (string registryIdKeyword);
+
+		string GetRegistryValueFromRegistry (string appendedRegistryValue, string registryValue, string registryIdKeyword);
+
 		/// <summary>
 		/// Initiates the backup of all files without any "passover keywords".
 		/// </summary>
 		/// <param name="backupDirectory">
 		/// The directory where the backup will reside.
 		/// </param>
-		#endregion
-		string BackupVersionFileInfo(string backupDirectory);
+		string BackupVersionFileInfo (string backupDirectory);
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the Storage sub-class so it doesn't need to be accessed directly.
 	/// </summary>
 	public interface IStorage
 	{
-		
-		#region Write Food Table Default Override Summary
 		/// <summary>
 		/// Parses the logical values back into a readable format and writes them to the food table. This default override writes to the GlobalVariable values and does not add any values.
 		/// </summary>
-		#endregion
-		void WriteFoodTable();
-		
-		#region Write Food Table Default Add Summary
+		void WriteFoodTable ();
+
 		/// <summary>
 		/// Parses the logical values back into a readable format and writes them to the food table. This default override writes to the GlobalVariable values.
 		/// </summary>
 		/// <param name="additionToFoodTable">
 		/// A Tuple containing ONE additional food item which will be added to the food list.
 		/// </param>
-		#endregion
-		void WriteFoodTable(Tuple<string, double, double, string, bool> additionToFoodTable);
-		
-		#region Write To Food Table Summary
+		void WriteFoodTable (Tuple<string, double, double, string, bool> additionToFoodTable);
 
 		/// <summary>
 		/// Parses the logical values back into a readable format and writes them to the food table.
@@ -518,10 +496,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.IO.IOException">
 		/// Thrown if the provided file, in the provided directory, does not exist.
 		/// </exception>
-		#endregion
 		void WriteFoodTable (string directory, string file, Tuple<string, double, double, string, bool> additionToFoodTable);
-			
-		#region Write To Registry Default Overload Summary
 
 		/// <summary>
 		/// Writes the currently supplied object to the registry as a string.
@@ -541,10 +516,7 @@ namespace WeightWatchingProgramPlus
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
 		void WriteRegistry (string objectToSave, string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
-		
-		#region Write To Registry No Obj Overload Summary
 
 		/// <summary>
 		/// Writes the currently supplied object to the registry as a string.
@@ -561,11 +533,8 @@ namespace WeightWatchingProgramPlus
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
-		void WriteRegistry(string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
-		
-		#region Write To Registry Summary
-		
+		void WriteRegistry (string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
+
 		/// <summary>
 		/// Writes the currently supplied values to the registry.
 		/// </summary>
@@ -590,11 +559,8 @@ namespace WeightWatchingProgramPlus
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
 		void WriteRegistry (string appendedRegistryValue, string registryValue, string objectToSave, string registryIdKeyword, bool reset, IValidation valid, IRetrieval retrieve);
-		
-		#region Food Tracking Diary Default Override Summary
-		
+
 		/// <summary>
 		/// Food Tracking Function 1: Diary: Writes to file what food you've eaten and when. This override writes to the default directory and file.
 		/// </summary>
@@ -607,10 +573,7 @@ namespace WeightWatchingProgramPlus
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
-		void WriteFoodEaten(bool add, IValidation valid, IRetrieval retrieve);
-		
-		#region Food Tracking Diary Summary
+		void WriteFoodEaten (bool add, IValidation valid, IRetrieval retrieve);
 
 		/// <summary>
 		/// Food Tracking Function 1: Diary: Writes to file what food you've eaten and when.
@@ -630,11 +593,8 @@ namespace WeightWatchingProgramPlus
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
 		void WriteFoodEaten (string directory, string file, bool add, IValidation valid, IRetrieval retrieve);
-		
-		#region Backup Summary
-		
+
 		/// <summary>
 		/// Initiates the backup of all files without any "passover keywords".
 		/// </summary>
@@ -653,29 +613,22 @@ namespace WeightWatchingProgramPlus
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
 		void Backup (string originalDirectory, string backupDirectory, string oldVersion, string newVersion, IRetrieval retrieve);
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the Validation sub-class so it does not need to be directly accessed.
 	/// </summary>
 	public interface IValidation
 	{
-		
-		#region Check Date Summary
-
 		/// <summary>
 		/// Checks to see if the reset date is earlier or later than the checked date.
 		/// </summary>
 		/// <param name="retrieve">
 		/// A preinitialized instance of IRetrieval. It is not recommended to pass a new initialization of IRetrieval.
 		/// </param>
-		#endregion
 		void CheckDateValidity (IRetrieval retrieve);
-
-		#region Check Radio Button Summary
 
 		/// <summary>
 		/// Checks to see which radio button is currently active.
@@ -683,10 +636,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.InvalidOperationException">
 		/// Thrown if, for some reason, the user is not checking any value, as explicitly state in this function. in the main title textbox of the program.
 		/// </exception>
-		#endregion
 		void CheckCurrentRadioButton (IModification modification);
-
-		#region Edit Box Validity Summary
 
 		/// <summary>
 		/// Checks to see if the food item property setting boxes have values that are within acceptable parameters.
@@ -694,10 +644,7 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// True if the name box is not an exact duplicate of another food name, all TextBoxes are not void or white space and contain valid characters, and all NumericUpDowns have values >= 0; else returns false.
 		/// </returns>
-		#endregion
 		bool EditBoxesHaveValidEntries ();
-
-		#region Validate Backup Summary
 
 		/// <summary>
 		/// Checks whether a backup needs to be made.
@@ -717,13 +664,26 @@ namespace WeightWatchingProgramPlus
 		/// <returns>
 		/// True if current version number is greater than previous, no registry value exists or has a value, or the backed up version file contains a different version number than the program; else false.
 		/// </returns>
-		#endregion
 		bool ValidateBackup (string appendedRegistryValue, string registryValue, string backupDirectory, IRetrieval retrieve);
-		
-		bool RegistryValueDoesNotExist(string appendedRegistryValue, string registryValue, string registryIdKeyword, IRetrieval retrieve);
 
-		#region Validate Registry Values Summary
-		
+		/// <summary>
+		/// Checks the existence of a registry value, under the assumption the value will NOT exist.
+		/// </summary>
+		/// <returns><c>true</c>, if the registry value being searched for does not exist, <c>false</c> otherwise.</returns>
+		/// <param name="appendedRegistryValue">
+		/// Registry value that comes first after LOCAL_MACHINE
+		/// </param>
+		/// <param name="registryValue">
+		/// Registry value that is added after the appended value.
+		/// </param>
+		/// <param name="registryIdKeyword">
+		/// The keyword that most closely relates to the registry item you're seeking.
+		/// </param>
+		/// <param name="retrieve">
+		/// A preinitialized instance of <c>IRetrieval</c>. It is not recommended to pass a new initialization of IRetrieval.
+		/// </param>
+		bool RegistryValueDoesNotExist (string appendedRegistryValue, string registryValue, string registryIdKeyword, IRetrieval retrieve);
+
 		/// <summary>
 		/// Validates registry items before passing one on if needed. The one to be passed on would be the one which contains the registry keyword provided.
 		/// </summary>
@@ -745,9 +705,8 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.Exception">
 		/// Thrown if a registry value cannot be parsed.
 		/// </exception>
-		#endregion
 		string ValidateRegistryValues (string appendedRegistryValue, string registryValue, string registryIdKeyword, IRetrieval retrieve);
-		
+
 		/// <summary>
 		/// Checks if the sync port is valid.
 		/// </summary>
@@ -761,7 +720,7 @@ namespace WeightWatchingProgramPlus
 		/// True if sync port is valid; else, false.
 		///</returns>
 		bool PortIsValid (IRetrieval retrieve, bool listenPort);
-		
+
 		/// <summary>
 		/// Checks if the sync IP address is valid.
 		/// </summary>
@@ -774,25 +733,19 @@ namespace WeightWatchingProgramPlus
 		bool IPAddressIsValid (IRetrieval retrieve);
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the Modifcation sub-class so it does not need to be directly accessed.
 	/// </summary>
 	public interface IModification
 	{
-		
-		#region Modify Calories Summary
-
 		/// <summary>
 		/// Performs the main operation when modifying the user's calorie balance.
 		/// </summary>
 		/// <param name="sender">
 		/// Who or what triggered this function.
 		/// </param>
-		#endregion
 		void ModifyCalories (object sender);
-
-		#region Write To Label Override Summary
 
 		/// <summary>
 		/// A lightweight modular text changer for use on a variety of objects.
@@ -806,10 +759,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.InvalidCastException">
 		/// Thrown when attempting to use an object type that is not yet supported.
 		/// </exception>
-		#endregion
 		void WriteToObject (Label labelToChange, int objectNumber);
-
-		#region Write To TextBox Override Summary
 
 		/// <summary>
 		/// A lightweight modular text changer for use on a variety of objects.
@@ -823,10 +773,7 @@ namespace WeightWatchingProgramPlus
 		/// <exception cref="T:System.InvalidCastException">
 		/// Thrown when attempting to use an object type that is not yet supported.
 		/// </exception>
-		#endregion
 		void WriteToObject (TextBox textBoxToChange, int objectNumber);
-
-		#region Food Item Modification Summary
 
 		/// <summary>
 		/// Changes the property of an existing food item or creates a new food item.
@@ -834,18 +781,12 @@ namespace WeightWatchingProgramPlus
 		/// <param name="allValidEntries">
 		/// All property entries are valid.
 		/// </param>
-		#endregion
 		void ModifyFoodItemProperty (bool allValidEntries);
-
-		#region Clear Food Property Boxes Override Summary
 
 		/// <summary>
 		/// Clears the property settings boxes.
 		/// </summary>
-		#endregion
 		void ModifyFoodPropertiesList ();
-
-		#region Modify Food Properties Boxes By Default Override Summary
 
 		/// <summary>
 		/// Modifies the property settings boxes.
@@ -859,24 +800,68 @@ namespace WeightWatchingProgramPlus
 		/// <param name="conditionProperties">
 		/// Contains the bool values for all properties that require them. So far, in order, these properties are counted: IsDrinkCheckBox.
 		/// </param>
-		#endregion
 		void ModifyFoodPropertiesList (string[] wordProperties, decimal[] numberProperties, bool[] conditionProperties);
 		
 	}
-	
+
 	/// <summary>
 	/// Interface for the NetworkOps sub-class so it does not need to be directly accessed.
 	/// </summary>
 	public interface INetOps
 	{
-		
+		/// <summary>
+		/// Gets or sets the server connection status.
+		/// </summary>
+		/// <value>
+		/// The server connection status.
+		/// </value>
 		int ServerConnectionStatus { get; set; }
-		
+
+		/// <summary>
+		/// Gets or sets the client connection status.
+		/// </summary>
+		/// <value>
+		/// The client connection status.
+		/// </value>
 		int ClientConnectionStatus { get; set; }
-		
-		void StartListen(int port);
-		
-		void StartSend(string ipAddress, int port, string message, string additionalInfo, string fileName, string pathToFile);
+
+		/// <summary>
+		/// Initializes server.
+		/// </summary>
+		/// <param name="port">
+		/// The port chosen that the server will bind to when listening for connections.
+		/// </param>
+		void StartListen (int port);
+
+		/// <summary>
+		/// Starts the process of sending a file or other information.
+		/// </summary>
+		/// <param name="ipAddress">
+		/// The IP address of the host server.
+		/// </param>
+		/// <param name="port">
+		/// The port of the host server.
+		/// </param>
+		/// <param name="message">
+		/// The "message" that indicates the nature of this transaction.
+		/// </param>
+		/// <example>
+		/// "send" would indicate a file is being SENT. "uptime" would indicate the server (you) is being requested for the uptime of the program. And so on. 
+		/// Mostly, you'll only need to worry about using simple phrases or words, and any of the more complicated or convoluted commands are handled code-side.
+		/// </example>
+		/// <param name="additionalInfo">
+		/// Additional information generally refering to the directory the client wishes the server to save the file under. 
+		/// However, this can also refer to any number of variables currently supported for sending operations. 
+		/// View the source code for more information.
+		/// </param>
+		/// <param name="fileName">
+		/// If this is currently a file I/O operation, this field refers to the name of the file being sent/requested. Otherwise the field will be ignored by the server.
+		/// </param>
+		/// <param name="pathToFile">
+		/// If this is currently a file I/O operation, this field refers to the actual file's path. 
+		/// This reference will be used to grab and stream the desired file information to the server.
+		/// </param>
+		void StartSend (string ipAddress, int port, string message, string additionalInfo, string fileName, string pathToFile);
 		
 	}
 	

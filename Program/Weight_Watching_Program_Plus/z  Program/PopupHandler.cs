@@ -17,7 +17,8 @@ namespace WeightWatchingProgramPlus
 			"Confirm Deletion",
 			"Calorie Reset Error",
 			"Copyright Information",
-			"Search Term Not Found"
+			"Search Term Not Found",
+			"Error: Crashed Recently"
 		};
 		
 		public DialogResult CreatePopup (string message, int popupCode)
@@ -90,6 +91,10 @@ namespace WeightWatchingProgramPlus
 					
 				case 8:
 					messageBoxIcon = MessageBoxIcon.Exclamation;
+					break;
+					
+				case 9:
+					messageBoxIcon = MessageBoxIcon.Error;
 					break;
 					
 			}

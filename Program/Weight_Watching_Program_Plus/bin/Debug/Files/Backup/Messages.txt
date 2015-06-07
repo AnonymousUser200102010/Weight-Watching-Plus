@@ -4,7 +4,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:14 AM
+ Time: 06-07-15 08:06 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -12,7 +12,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:14 AM
+ Time: 06-07-15 08:05 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -20,7 +20,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:13 AM
+ Time: 06-07-15 08:03 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -28,7 +28,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 08:00 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 08:00 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -36,7 +38,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 08:00 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 08:00 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -44,7 +48,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 08:00 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 08:00 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -52,7 +58,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 08:00 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 08:00 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -60,7 +68,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 07:59 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:59 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -68,7 +78,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 07:58 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:58 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -76,7 +88,11 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 07:57 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:57 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:54 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -84,7 +100,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 07:54 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:54 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -92,7 +110,11 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:12 AM
+ Time: 06-07-15 07:53 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:53 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:41 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -100,7 +122,9 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:11 AM
+ Time: 06-07-15 07:41 AM
+
+Weight Watching Program +: The program has detected a recent crash! Therefore no backup can be made, and no attempt to make a backup has been made. Time: 06-07-15 07:39 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -108,7 +132,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:09 AM
+ Time: 06-07-15 07:31 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -116,7 +140,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:09 AM
+ Time: 06-07-15 07:28 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -124,7 +148,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:06 AM
+ Time: 06-07-15 07:27 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -132,7 +156,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:05 AM
+ Time: 06-07-15 07:26 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -140,7 +164,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:02 AM
+ Time: 06-07-15 07:24 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -148,7 +172,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:02 AM
+ Time: 06-07-15 07:20 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -156,7 +180,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:01 AM
+ Time: 06-07-15 07:17 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -164,7 +188,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-26-15 12:00 AM
+ Time: 06-07-15 07:16 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -172,7 +196,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:59 PM
+ Time: 06-07-15 07:11 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -180,7 +204,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:54 PM
+ Time: 06-07-15 07:10 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -188,7 +212,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:53 PM
+ Time: 06-07-15 07:08 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -196,7 +220,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:52 PM
+ Time: 06-07-15 07:06 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -204,7 +228,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:51 PM
+ Time: 06-07-15 07:03 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -212,7 +236,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:51 PM
+ Time: 06-07-15 06:47 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -220,7 +244,7 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:50 PM
+ Time: 06-07-15 06:24 AM
 
 Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
 Item 1: ''
@@ -228,93 +252,5 @@ Item 1: ''
 Item 3: '0'
 Item 4: ''
 Item 5: 'False'
- Time: 05-25-15 11:49 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:48 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:48 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:48 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:47 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:46 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:45 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:45 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:45 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:44 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:43 PM
-
-Weight Watching +: additionToFoodTable: one or more of your addons contained an invalid entry: 
-Item 1: ''
- Item 2: '0'
-Item 3: '0'
-Item 4: ''
-Item 5: 'False'
- Time: 05-25-15 11:42 PM
+ Time: 06-07-15 06:24 AM
 

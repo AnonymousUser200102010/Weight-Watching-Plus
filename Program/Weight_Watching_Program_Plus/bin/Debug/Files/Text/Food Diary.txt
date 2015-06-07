@@ -1,3 +1,36 @@
+At 07:54:24 AM (on: June 07, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333333 calories left for the day.
+-
+At 07:32:28 AM (on: June 07, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 07:32:26 AM (on: June 07, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333333 calories left for the day.
+-
+At 07:11:35 AM (on: June 07, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 07:11:33 AM (on: June 07, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333333 calories left for the day.
+-
+At 07:09:17 AM (on: June 07, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 07:09:07 AM (on: June 07, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333333 calories left for the day.
+-
+At 06:37:29 PM (on: May 26, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 06:37:28 PM (on: May 26, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333333 calories left for the day.
+-
+At 05:04:02 PM (on: May 26, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
+At 05:04:01 PM (on: May 26, 2015): You drank 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2128.33333333333 calories left for the day.
+-
 At 12:22:15 AM (on: May 26, 2015): You added back to your calorie count 1 fluid ounce of '7up'.
 Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
 -

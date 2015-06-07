@@ -1,3 +1,6 @@
+At 04:08:16 PM (on: May 26, 2015): You ate 1 fluid ounce of '7up'.
+Which is 0.0833333333333333 servings, or 11.6667 calories of '7up'. You had 2140 calories left for the day.
+-
 At 09:39:49 PM (on: May 19, 2015): You added back to your calorie count 1 packet of 'beef top ramen'.
 Which is 1 servings, or 380 calories of 'beef top ramen'. You had 2140 calories left for the day.
 -

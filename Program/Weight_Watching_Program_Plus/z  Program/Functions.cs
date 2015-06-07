@@ -12,13 +12,12 @@ using UniversalHandlersLibrary;
 
 namespace WeightWatchingProgramPlus
 {
-	
+
 	/// <summary>
-	/// Misc general functions
+	/// General functions.
 	/// </summary>
 	internal class Functions : IGeneralFunctions
 	{
-		
 		public void InitializeForms (IModification modification, IStorage store, IValidation valid, IRetrieval retrieve, INetOps netOps, IMainForm mainForm)
 		{
 			
@@ -36,7 +35,7 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.SetSyncConnectionItems();
 			
-			if(!Validation.RegistryValueDoesNotExist(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, "sync enabled", retrieve) || !bool.Parse(Retrieval.GetRegistryValue("sync enabled")))
+			if (!Validation.RegistryValueDoesNotExist(GlobalVariables.RegistryAppendedValue, GlobalVariables.RegistryMainValue, "sync enabled", retrieve) || !bool.Parse(Retrieval.GetRegistryValue("sync enabled")))
 			{
 				
 				NetworkOps.StartListen(int.Parse(MainForm.SyncListenPort, CultureInfo.InvariantCulture));
@@ -46,6 +45,8 @@ namespace WeightWatchingProgramPlus
 			Retrieval.ReadRegistry();
 			
 			var registryTuple = Tuple.Create(DateTime.Parse(Retrieval.GetRegistryValue("reset date"), CultureInfo.InvariantCulture), decimal.Parse(Retrieval.GetRegistryValue("calories left"), CultureInfo.InvariantCulture), decimal.Parse(Retrieval.GetRegistryValue("default calories"), CultureInfo.InvariantCulture), bool.Parse(Retrieval.GetRegistryValue("manual time enabled")), int.Parse(Retrieval.GetRegistryValue("decimal places"), CultureInfo.InvariantCulture));
+			
+			MainForm.CustomUser = Retrieval.GetRegistryValueFromRegistry(GlobalVariables.RegistryAppendedValue, string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\", GlobalVariables.WeightWatchingProgram, GlobalVariables.CurLoggedUser), "user name");
 			
 			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 			
@@ -65,12 +66,12 @@ namespace WeightWatchingProgramPlus
 			
 			RefreshFoodList(store, retrieve, mainForm);
 			
-			MainForm.FoodListSelectedIndex(true, MainForm.GetFoodListTopItem, true);
+			MainForm.FoodListSelectedIndex(true, MainForm.FoodListTopItem, true);
 			
 			GlobalVariables.SelectedListItem = 0;
 			
 			Modification.ModifyFoodPropertiesList(new[] {
-				MainForm.MainFoodListItems [MainForm.GetFoodListTopItem].ToString(),
+				MainForm.MainFoodListItems [MainForm.FoodListTopItem].ToString(),
 				FoodRelated.CombinedFoodList [0].Item4
 			}, new[] {
 				(decimal)FoodRelated.CombinedFoodList [0].Item2,
@@ -91,17 +92,17 @@ namespace WeightWatchingProgramPlus
 			
 			MainForm.DefaultCalories = registryTuple.Item3;
 			
-			MainForm.SetArithmeticSign = 0;
+			MainForm.SetArithmeticSign(0);
 			
 		}
-		
-		private static string FindSymbol(int numberToCheck)
+
+		private static string FindSymbol (int numberToCheck)
 		{
 			
 			return numberToCheck <= 5 ? "α" : numberToCheck <= 10 ? "β" : numberToCheck <= 20 ? "Δ" : numberToCheck <= 30 ? "ζ" : numberToCheck <= 40 ? "η" : numberToCheck <= 50 ? "Θ" : numberToCheck <= 60 ? "Λ" : numberToCheck <= 70 ? "Σ" : "Ω";
 			
 		}
-		
+
 		public void RefreshFoodList (IStorage store, IRetrieval retrieve, IMainForm mainForm)
 		{
 			
@@ -135,7 +136,7 @@ namespace WeightWatchingProgramPlus
 			foreach (var foodItem in MainForm.MainFoodListItems.OfType<string>().Where(searchResult => ((!exactSearch ? searchResult.Contains(stringToFind, StringComparison.OrdinalIgnoreCase) : searchResult.Equals(stringToFind, StringComparison.OrdinalIgnoreCase)) && !searchResult.Equals(stringToAvoid, StringComparison.OrdinalIgnoreCase) && (MainForm.MainFoodListItems.IndexOf(searchResult) > offset || (MainForm.MainFoodListItems.IndexOf(searchResult) == 0 && offset == 0 && !next) && MainForm.MainFoodListItems.IndexOf(searchResult) != -1))).Select(searchResult => MainForm.MainFoodListItems.IndexOf(searchResult)))
 			{
 				
-				MainForm.FoodListSelectedIndex(true , foodItem, true);
+				MainForm.FoodListSelectedIndex(true, foodItem, true);
 				
 				return;
 				

@@ -19,20 +19,20 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		private IPopup PopupHandler;
-			
+
 		private IValidation Validation;
-			
+
 		private IStorage Storage;
-			
+
 		private IMathematics Mathematics;
-			
+
 		private IGeneralFunctions Functions;
-		
+
 		private IRetrieval Retrieval;
-		
+
 		private IMainForm MainForm;
-		
-		public Modification(IPopup pH, IValidation validation, IStorage storage, IMathematics math, IGeneralFunctions _func, IRetrieval retrieve, IMainForm mainForm)
+
+		public Modification (IPopup pH, IValidation validation, IStorage storage, IMathematics math, IGeneralFunctions _func, IRetrieval retrieve, IMainForm mainForm)
 		{
 			
 			this.PopupHandler = pH;
@@ -88,7 +88,7 @@ namespace WeightWatchingProgramPlus
 				
 			}
 			
-			if(GlobalVariables.Debug)
+			if (GlobalVariables.Debug)
 			{
 				
 				Console.WriteLine(((double)MainForm.DefaultCalories + (double)MainForm.GlobalMinimumValue));

@@ -23,25 +23,28 @@ namespace WeightWatchingProgramPlus
 	{
 		
 		private IMainForm mainForm;
-		
+
 		private IGeneralFunctions Functions = new Functions ();
-		
+
 		private IPopup PopupHandler = new PopupHandler ();
-		
+
 		private IValidation Validation;
-		
+
 		private IStorage Storage;
-		
+
 		private IRetrieval Retrieval;
-		
+
 		private IMathematics Mathematics;
-		
+
 		private IModification Modification;
-		
+
 		private INetOps NetworkOps;
-		
-		private ToolTip[] toolTips = {
-			new ToolTip()
+
+		private readonly Image[] connectionStateImage = {
+			Image.FromFile("Files\\Assets\\network-disconnected.ico"),
+			Image.FromFile("Files\\Assets\\network-connection-pending.ico"),
+			Image.FromFile("Files\\Assets\\network-connected.ico"),
+			Image.FromFile("Files\\Assets\\network-initiating-transfer.gif")
 		};
 
 		internal MainForm ()
@@ -58,9 +61,38 @@ namespace WeightWatchingProgramPlus
 			
 			this.Validation = new Validation (this.Storage, this.PopupHandler, this.mainForm);
 			
-			this.Retrieval = new Retrieval (Validation as Validation, this.Storage, this.mainForm);
+			this.Retrieval = new Retrieval (Validation as Validation, this.Storage, this.mainForm, this.PopupHandler);
 			
-			this.NetworkOps = new NetworkOps(this.Retrieval, this.mainForm);
+			string regValueParsed = this.Retrieval.GetRegistryValueFromRegistry(GlobalVariables.RegistryAppendedValue, string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\", GlobalVariables.WeightWatchingProgram, GlobalVariables.CurLoggedUser), "user name");
+			
+			if(!string.IsNullOrEmpty(regValueParsed))
+			{
+				
+				if (!regValueParsed.Equals("USER"))
+				{
+								
+					GlobalVariables.RegistryMainValue = string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\Custom Users\\{2}\\", GlobalVariables.WeightWatchingProgram, GlobalVariables.CurLoggedUser, regValueParsed);
+					
+					if (Microsoft.Win32.Registry.LocalMachine.OpenSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue) == null)
+					{
+						
+						Microsoft.Win32.Registry.LocalMachine.CreateSubKey(GlobalVariables.RegistryAppendedValue + GlobalVariables.RegistryMainValue);
+						
+					}
+							
+				}
+				
+			}
+			else
+			{
+				
+				this.Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\", GlobalVariables.WeightWatchingProgram, GlobalVariables.CurLoggedUser), this.CustomUser, "user name", false, this.Validation, this.Retrieval);
+				
+			}
+								
+			Console.WriteLine(GlobalVariables.RegistryMainValue);
+			
+			this.NetworkOps = new NetworkOps(this.mainForm);
 			
 			this.Mathematics = new Mathematics (this.PopupHandler, this.Retrieval, this.mainForm);
 			
@@ -68,15 +100,22 @@ namespace WeightWatchingProgramPlus
 
 			this.Functions.InitializeForms(this.Modification, this.Storage, this.Validation, this.Retrieval, this.NetworkOps, this.mainForm);
 			
-			
-			
 			//RegistryKey rHive = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "TESTMACHINE", RegistryView.Registry64);
 			
 		}
 
 		#region Properties
 		
-		public void setMainFormState(bool paused)
+		public string CustomUser
+		{
+			
+			get { return this.userNameTextBox.Text; }
+			
+			set { this.userNameTextBox.Text = value; }
+			
+		}
+		
+		public void MainFormState(bool paused)
 		{
 			
 			this.Enabled = !paused;
@@ -159,13 +198,6 @@ namespace WeightWatchingProgramPlus
 				"transfering data",
 			};
 			
-			Image[] connectionStateImage = {
-				Image.FromFile("Files\\Assets\\network-disconnected.ico"),
-				Image.FromFile("Files\\Assets\\network-connection-pending.ico"),
-				Image.FromFile("Files\\Assets\\network-connected.ico"),
-				Image.FromFile("Files\\Assets\\network-initiating-transfer.gif")
-			};
-			
 			int serverConnectionStatus = this.NetworkOps.ServerConnectionStatus;
 			
 			int clientConnectionStatus = this.NetworkOps.ClientConnectionStatus;
@@ -173,17 +205,17 @@ namespace WeightWatchingProgramPlus
 			if(serverConnectionStatus > 0 || clientConnectionStatus > 0)
 			{
 				
-				this.toolTips[0].SetToolTip(this.syncImage, string.Format(CultureInfo.CurrentCulture, "You're currently {0}{1}{2}.", serverConnectionMessages[serverConnectionStatus], " and ", clientConnectionMessages[clientConnectionStatus]));
+				this.syncImage.ToolTipText = string.Format(CultureInfo.CurrentCulture, "You're currently {0}{1}{2}.", serverConnectionMessages[serverConnectionStatus], " and ", clientConnectionMessages[clientConnectionStatus]);
 				
 			}
 			else
 			{
 				
-				this.toolTips[0].SetToolTip(this.syncImage, "You're no longer syncing.");
+				this.syncImage.ToolTipText = "You're no longer syncing.";
 				
 			}
 			
-			this.syncImage.BackgroundImage = serverConnectionStatus >= clientConnectionStatus ? connectionStateImage[serverConnectionStatus] : connectionStateImage[clientConnectionStatus];
+			this.syncImage.Image = serverConnectionStatus >= clientConnectionStatus ? connectionStateImage[serverConnectionStatus] : connectionStateImage[clientConnectionStatus];
 			
 		}
 		
@@ -195,7 +227,7 @@ namespace WeightWatchingProgramPlus
 				
 				IMathematics math = (this.Mathematics as Mathematics);
 				
-				return AddSubSelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? this.userServingInputTextBox.Value : (decimal)(math.PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", this.GetArithmeticValue(true), this.GetArithmeticSign, this.GetArithmeticValue(false))));
+				return AddSubSelectedSubTab.Text.Contains("explicit", StringComparison.OrdinalIgnoreCase) ? this.userServingInputTextBox.Value : (decimal)(math.PerformArithmeticOperation(string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", this.ArithmeticValue(true), this.GetArithmeticSign, this.ArithmeticValue(false))));
 				
 			}
 				
@@ -266,17 +298,17 @@ namespace WeightWatchingProgramPlus
 					
 		}
 
-		public int GetFoodListTopItem
+		public int FoodListTopItem
 		{
 				
 			get { return this.foodList.TopIndex; }
 				
 		}
 
-		public string NumberOfServingsLabel
+		public void NumberOfServingsLabel (string value)
 		{
 				
-			set { this.howManyServingsLabel.Text = value; }
+			 this.howManyServingsLabel.Text = value;
 				
 		}
 
@@ -458,10 +490,10 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		public int SetArithmeticSign
+		public void SetArithmeticSign (int value)
 		{
 			
-			set { this.arithmeticSignComboBox.SelectedIndex = value; }
+			this.arithmeticSignComboBox.SelectedIndex = value;
 			
 		}
 
@@ -475,7 +507,7 @@ namespace WeightWatchingProgramPlus
 			
 		}
 
-		public decimal GetArithmeticValue (bool left)
+		public decimal ArithmeticValue (bool left)
 		{
 			
 			return left ? this.arithmeticNumericUpDown_Left.Value : this.arithmeticNumericUpDown_Right.Value;
@@ -967,6 +999,16 @@ namespace WeightWatchingProgramPlus
 			this.Storage.WriteRegistry("sync enabled", false, this.Validation, this.Retrieval);
 			
 		}
+		
+		private void UserNameTextBoxTextChanged(object sender, EventArgs e)
+		{
+			
+			this.Storage.WriteRegistry(GlobalVariables.RegistryAppendedValue, string.Format(CultureInfo.CurrentCulture, "{0}\\{1}\\", GlobalVariables.WeightWatchingProgram, GlobalVariables.CurLoggedUser), this.CustomUser, "user name", false, this.Validation, this.Retrieval);
+			
+			this.Storage.WriteRegistry(this.CustomUser, "user name", false, this.Validation, this.Retrieval);
+			
+		}
+		
 		#endregion
 		
 		void SyncImageMouseHover(object sender, EventArgs e)
@@ -975,17 +1017,7 @@ namespace WeightWatchingProgramPlus
 			SetSyncConnectionItems();
 			
 		}
-		void SyncImageMouseLeave(object sender, EventArgs e)
-		{
-			
-			toolTips[0].Dispose();
-			
-			toolTips[0] = new ToolTip();
-			
-		}
 		
 	}
-	
-	
 
 }

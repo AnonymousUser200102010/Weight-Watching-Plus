@@ -1,3 +1,19 @@
+May 26 02:02:52 PM:
+Exception Message:
+Only one usage of each socket address (protocol/network address/port) is normally permitted
+
+Exception Stack Trace:
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   at WeightWatchingProgramPlus.NetworkOps.<StartListenAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.<ThrowAsync>b__5(Object state)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.QueueUserWorkItemCallback.System.Threading.IThreadPoolWorkItem.ExecuteWorkItem()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+
 May 24 04:09:34 PM:
 Exception Message:
 An unknown, invalid, or unsupported option or level was specified in a getsockopt or setsockopt call

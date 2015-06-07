@@ -4,6 +4,11 @@
         <name>UniversalHandlersLibrary</name>
     </assembly>
     <members>
+        <member name="T:UniversalHandlersLibrary.ConstParameters">
+            <summary>
+            Contains all parameters whose values are and must remain constant.
+            </summary>
+        </member>
         <member name="T:UniversalHandlersLibrary.Errors">
             <summary>
             Errors handler entry point.
@@ -40,7 +45,8 @@
             The file size at which to prune the Error.dmp file. (default is 524288)
             </param>
             <exception cref="T:System.ArgumentOutOfRangeException">
-            Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
+            Thrown if the pruneCutOff value is less than <see cref="F:UniversalHandlersLibrary.ConstParameters.minPruneVal"/>, 
+            or greater than <see cref="F:UniversalHandlersLibrary.ConstParameters.maxPruneVal"/>.
             </exception>
         </member>
         <member name="M:UniversalHandlersLibrary.Errors.PremadeExceptions(System.String,System.String,System.Int32)">
@@ -85,7 +91,8 @@
             The file size at which to prune the Messages.txt file. (default is 102400)
             </param>
             <exception cref="T:System.ArgumentOutOfRangeException">
-            Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
+            Thrown if the pruneCutOff value is less than <see cref="F:UniversalHandlersLibrary.ConstParameters.minPruneVal"/>, 
+            or greater than <see cref="F:UniversalHandlersLibrary.ConstParameters.maxPruneVal"/>.
             </exception>
         </member>
         <member name="T:UniversalHandlersLibrary.BackEnd">
@@ -278,7 +285,8 @@
             The size at which a file is pruned.
             </param>
             <exception cref="T:System.ArgumentOutOfRangeException">
-            Thrown if the pruneCutOff value is less than 25000, or greater than 26214400.
+            Thrown if the pruneCutOff value is less than <see cref="F:UniversalHandlersLibrary.ConstParameters.minPruneVal"/>, 
+            or greater than <see cref="F:UniversalHandlersLibrary.ConstParameters.maxPruneVal"/>.
             </exception>
         </member>
     </members>

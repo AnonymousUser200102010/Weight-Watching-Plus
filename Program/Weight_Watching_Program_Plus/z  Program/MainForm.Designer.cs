@@ -70,8 +70,6 @@ private System.Windows.Forms.GroupBox numberOfDecimalPlacesGroupBox;
 private System.Windows.Forms.TextBox exampleNumDecPlaceTextBox;
 private System.Windows.Forms.NumericUpDown decimalPlacesNumericUpDown;
 private System.Windows.Forms.Button setDecimalPlacesValueButton;
-private System.Windows.Forms.Label productVersionInfoBar;
-private System.Windows.Forms.Label productBuildInfoBar;
 private System.Windows.Forms.MenuStrip mainMenuStrip;
 private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 private System.Windows.Forms.ToolStripMenuItem beginnerHelp;
@@ -94,7 +92,11 @@ private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 private System.Windows.Forms.ToolStripMenuItem syncSendPortToolStripMenuItem;
 private System.Windows.Forms.ToolStripTextBox syncSendPort;
-private System.Windows.Forms.PictureBox syncImage;
+private System.Windows.Forms.StatusStrip statusStrip1;
+private System.Windows.Forms.ToolStripStatusLabel syncImage;
+private System.Windows.Forms.ToolStripStatusLabel productVersionInfoBar;
+private System.Windows.Forms.ToolStripStatusLabel productBuildInfoBar;
+private System.Windows.Forms.ToolStripTextBox userNameTextBox;
 /// <summary>
 /// Disposes resources used by the form.
 /// </summary>
@@ -178,9 +180,8 @@ private void InitializeComponent()
 	this.resetCaloriesManualCheckBox = new System.Windows.Forms.CheckBox();
 	this.label3 = new System.Windows.Forms.Label();
 	this.Seperator5 = new System.Windows.Forms.Label();
-	this.productVersionInfoBar = new System.Windows.Forms.Label();
-	this.productBuildInfoBar = new System.Windows.Forms.Label();
 	this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+	this.userNameTextBox = new System.Windows.Forms.ToolStripTextBox();
 	this.syncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 	this.syncEnabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 	this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -203,7 +204,10 @@ private void InitializeComponent()
 	this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 	this.advancedHelp = new System.Windows.Forms.ToolStripMenuItem();
 	this.caloriesLabel = new System.Windows.Forms.Label();
-	this.syncImage = new System.Windows.Forms.PictureBox();
+	this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+	this.syncImage = new System.Windows.Forms.ToolStripStatusLabel();
+	this.productVersionInfoBar = new System.Windows.Forms.ToolStripStatusLabel();
+	this.productBuildInfoBar = new System.Windows.Forms.ToolStripStatusLabel();
 	this.planTab.SuspendLayout();
 	this.FoodListPage.SuspendLayout();
 	this.groupBox1.SuspendLayout();
@@ -228,7 +232,7 @@ private void InitializeComponent()
 	((System.ComponentModel.ISupportInitialize)(this.defaultCaloriesNumericUpDown)).BeginInit();
 	this.resetCaloriesSpecificGroupBox.SuspendLayout();
 	this.mainMenuStrip.SuspendLayout();
-	((System.ComponentModel.ISupportInitialize)(this.syncImage)).BeginInit();
+	this.statusStrip1.SuspendLayout();
 	this.SuspendLayout();
 	// 
 	// planTab
@@ -1109,39 +1113,30 @@ private void InitializeComponent()
 	this.Seperator5.TabIndex = 33;
 	this.Seperator5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 	// 
-	// productVersionInfoBar
-	// 
-	this.productVersionInfoBar.AutoEllipsis = true;
-	this.productVersionInfoBar.BackColor = System.Drawing.SystemColors.Control;
-	this.productVersionInfoBar.Font = new System.Drawing.Font("Times New Roman", 12F);
-	this.productVersionInfoBar.Location = new System.Drawing.Point(36, 679);
-	this.productVersionInfoBar.Name = "productVersionInfoBar";
-	this.productVersionInfoBar.Size = new System.Drawing.Size(843, 23);
-	this.productVersionInfoBar.TabIndex = 103;
-	this.productVersionInfoBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-	// 
-	// productBuildInfoBar
-	// 
-	this.productBuildInfoBar.AutoEllipsis = true;
-	this.productBuildInfoBar.Font = new System.Drawing.Font("Times New Roman", 12F);
-	this.productBuildInfoBar.Location = new System.Drawing.Point(885, 679);
-	this.productBuildInfoBar.Name = "productBuildInfoBar";
-	this.productBuildInfoBar.Size = new System.Drawing.Size(188, 23);
-	this.productBuildInfoBar.TabIndex = 104;
-	this.productBuildInfoBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-	// 
 	// mainMenuStrip
 	// 
 	this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 	this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.userNameTextBox,
 			this.syncToolStripMenuItem,
 			this.helpToolStripMenuItem});
 	this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
 	this.mainMenuStrip.Name = "mainMenuStrip";
 	this.mainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-	this.mainMenuStrip.Size = new System.Drawing.Size(1077, 28);
+	this.mainMenuStrip.ShowItemToolTips = true;
+	this.mainMenuStrip.Size = new System.Drawing.Size(1077, 31);
 	this.mainMenuStrip.TabIndex = 105;
 	this.mainMenuStrip.Text = "Menu";
+	// 
+	// userNameTextBox
+	// 
+	this.userNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+	this.userNameTextBox.MaxLength = 16;
+	this.userNameTextBox.Name = "userNameTextBox";
+	this.userNameTextBox.Size = new System.Drawing.Size(150, 27);
+	this.userNameTextBox.Text = "USER";
+	this.userNameTextBox.ToolTipText = resources.GetString("userNameTextBox.ToolTipText");
+	this.userNameTextBox.TextChanged += new System.EventHandler(this.UserNameTextBoxTextChanged);
 	// 
 	// syncToolStripMenuItem
 	// 
@@ -1151,7 +1146,7 @@ private void InitializeComponent()
 			this.serverInfoToolStripMenuItem,
 			this.syncBehaviorToolStripItem});
 	this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-	this.syncToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+	this.syncToolStripMenuItem.Size = new System.Drawing.Size(51, 27);
 	this.syncToolStripMenuItem.Text = "&Sync";
 	// 
 	// syncEnabledToolStripMenuItem
@@ -1291,7 +1286,7 @@ private void InitializeComponent()
 	this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 	this.helpToolStripMenuItem.ShortcutKeyDisplayString = "";
 	this.helpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
-	this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+	this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 27);
 	this.helpToolStripMenuItem.Text = "&Help";
 	this.helpToolStripMenuItem.ToolTipText = "Helps you figure out the program more easily.";
 	// 
@@ -1340,27 +1335,58 @@ private void InitializeComponent()
 	this.caloriesLabel.TabIndex = 100;
 	this.caloriesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 	// 
+	// statusStrip1
+	// 
+	this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+	this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.syncImage,
+			this.productVersionInfoBar,
+			this.productBuildInfoBar});
+	this.statusStrip1.Location = new System.Drawing.Point(0, 679);
+	this.statusStrip1.Name = "statusStrip1";
+	this.statusStrip1.ShowItemToolTips = true;
+	this.statusStrip1.Size = new System.Drawing.Size(1077, 25);
+	this.statusStrip1.SizingGrip = false;
+	this.statusStrip1.Stretch = false;
+	this.statusStrip1.TabIndex = 107;
+	// 
 	// syncImage
 	// 
 	this.syncImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-	this.syncImage.Location = new System.Drawing.Point(3, 674);
+	this.syncImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+	this.syncImage.Image = ((System.Drawing.Image)(resources.GetObject("syncImage.Image")));
 	this.syncImage.Name = "syncImage";
-	this.syncImage.Size = new System.Drawing.Size(30, 30);
-	this.syncImage.TabIndex = 106;
-	this.syncImage.TabStop = false;
-	this.syncImage.MouseLeave += new System.EventHandler(this.SyncImageMouseLeave);
-	this.syncImage.MouseHover += new System.EventHandler(this.SyncImageMouseHover);
+	this.syncImage.Size = new System.Drawing.Size(20, 20);
+	this.syncImage.Text = "NETWORKPIC";
+	this.syncImage.ToolTipText = "PLACEHOLDER TOOLTIP";
+	// 
+	// productVersionInfoBar
+	// 
+	this.productVersionInfoBar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+	this.productVersionInfoBar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+	this.productVersionInfoBar.Name = "productVersionInfoBar";
+	this.productVersionInfoBar.Size = new System.Drawing.Size(934, 20);
+	this.productVersionInfoBar.Spring = true;
+	this.productVersionInfoBar.Text = "PLACEHOLDER";
+	this.productVersionInfoBar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+	// 
+	// productBuildInfoBar
+	// 
+	this.productBuildInfoBar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+	this.productBuildInfoBar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+	this.productBuildInfoBar.Name = "productBuildInfoBar";
+	this.productBuildInfoBar.Size = new System.Drawing.Size(108, 20);
+	this.productBuildInfoBar.Text = "PLACEHOLDER";
+	this.productBuildInfoBar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
 	// 
 	// MainForm
 	// 
-	this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+	this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 	this.BackColor = System.Drawing.SystemColors.Control;
 	this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 	this.ClientSize = new System.Drawing.Size(1077, 704);
-	this.Controls.Add(this.syncImage);
-	this.Controls.Add(this.productBuildInfoBar);
-	this.Controls.Add(this.productVersionInfoBar);
+	this.Controls.Add(this.statusStrip1);
 	this.Controls.Add(this.tabsMenu);
 	this.Controls.Add(this.calorieRadioButton);
 	this.Controls.Add(this.caloriesLabel);
@@ -1405,7 +1431,8 @@ private void InitializeComponent()
 	this.resetCaloriesSpecificGroupBox.ResumeLayout(false);
 	this.mainMenuStrip.ResumeLayout(false);
 	this.mainMenuStrip.PerformLayout();
-	((System.ComponentModel.ISupportInitialize)(this.syncImage)).EndInit();
+	this.statusStrip1.ResumeLayout(false);
+	this.statusStrip1.PerformLayout();
 	this.ResumeLayout(false);
 	this.PerformLayout();
 
